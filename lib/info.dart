@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'main.dart';
 import 'oncampus.dart';
 
-//캠퍼스와 일상생활 정보를 보여주는 첫 페이지
+//on-campus, around-campus 정보를 보여주는 첫 페이지
 class Info extends StatefulWidget {
   const Info({Key? key}) : super(key: key);
 

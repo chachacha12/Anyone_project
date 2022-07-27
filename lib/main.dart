@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'info.dart';
 
+
 void main() {
-  runApp(
+  runApp( 
       MultiProvider(providers: [        //store를 여러개 등록해둘 수 있음
         ChangeNotifierProvider(create: (c) => Store1()),
         ChangeNotifierProvider(create: (c) =>  Store1()),
