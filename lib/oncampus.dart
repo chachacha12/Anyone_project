@@ -12,118 +12,157 @@ class OnCampus extends StatefulWidget {
 class _OnCampusState extends State<OnCampus> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-
-      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-      child: Row(      //캠퍼스 정보를 보여주는 아이콘들을 담고 있는 박스같은 존재
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return GridView.count(
+        crossAxisCount: 4,
         children: [
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Column(              //첫번째 가로줄
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('official site')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Academic'"\n"'calender')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Campus'"\n"'Map')
-                  ],
-                ),
-              ],
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('official site',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Column(              //첫번째 가로줄
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('OIA')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('GuideBook')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('clubs')
-                  ],
-                ),
-              ],
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('OIA',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0 , 0, 0),
-            child: Column(                           //두번째 가로줄
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Dormitory')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Library')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Tips'),
-                  ],
-                ),
-              ],
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Dormitory',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-            child: Column(                           //세번째 가로줄
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Language'"\n"'Institution')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('School'"\n"'Contact')
-                  ],
-                ),
-                Column(
-                  children: [
-                    Icon(Icons.star),
-                    Text('Helplines')
-                  ],
-                ),
-              ],
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Language'"\n"'Institution',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Academic'"\n"'Calender',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('GuideBook',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Library',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('School'"\n"'Contact',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Campus'"\n"'Map',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Clubs',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Tips',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
+            ),
+          ),
+          Container(
+            color: Colors.transparent,
+            margin: EdgeInsets.all(10.0),
+            child: GridTile(
+              child:  Icon(Icons.star),
+              footer: GridTileBar(
+                title: Text('Helplines',textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black
+                )),
+              ),
             ),
           ),
         ],
-      ),
+
     );
   }
 }
+
+

@@ -1,6 +1,8 @@
+import 'package:anyone/aroundcampus.dart';
 import 'package:flutter/material.dart';
 import 'main.dart';
 import 'oncampus.dart';
+import 'aroundcampus.dart';
 
 //on-campus, around-campus 정보를 보여주는 첫 페이지
 class Info extends StatefulWidget {
@@ -55,7 +57,7 @@ class _InfoState extends State<Info>  {
             },
             body: TabBarView(
               children: <Widget>[
-                OnCampus(), Text('일상생활관련/n'),
+                OnCampus(), AroundCampus(),
               ],
             ),
           )),
