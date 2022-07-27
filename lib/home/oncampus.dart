@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 
 //on-campus 관련 정보들을 다 담고있는 박스위젯
 class OnCampus extends StatefulWidget {

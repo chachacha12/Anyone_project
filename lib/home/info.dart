@@ -1,6 +1,6 @@
-import 'package:anyone/aroundcampus.dart';
+import 'package:anyone/home/aroundcampus.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
+import '../main.dart';
 import 'oncampus.dart';
 import 'aroundcampus.dart';
 

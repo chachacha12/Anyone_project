@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'info.dart';
-
+import 'home/info.dart';
+import 'my/my.dart';
 
 void main() {
   runApp( 
@@ -51,11 +51,3 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class My extends StatelessWidget {
-  const My({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Text('내정보');
-  }
-}
