@@ -26,11 +26,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('Grocery'"\n"'shopping',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('Grocery'"\n"'shopping',
+                              textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -38,11 +39,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('Fashion'"\n"'&beauty',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('Fashion'"\n"'&beauty',
+                              textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -50,11 +52,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('cafe',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('cafe', textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -62,11 +65,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('pub',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('pub', textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -74,11 +78,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('Finance',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('Finance', textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -86,11 +91,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('Hospital',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('Hospital', textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -98,11 +104,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('Facilities',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('Facilities', textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -110,11 +117,12 @@ class _AroundCampusState extends State<AroundCampus> {
                       color: Colors.transparent,
                       margin: EdgeInsets.all(10.0),
                       child: GridTile(
-                        child:  Icon(Icons.star),
+                        child: Icon(Icons.star),
                         footer: GridTileBar(
-                          title: Text('Discount',textAlign: TextAlign.center, style: TextStyle(
-                              color: Colors.black
-                          )),
+                          title: Text('Discount', textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black
+                              )),
                         ),
                       ),
                     ),
@@ -125,8 +133,33 @@ class _AroundCampusState extends State<AroundCampus> {
 
             SliverToBoxAdapter(
               child: Container(
-                height: 150.0,
-                child: Text('aa')
+                  height: 80.0,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
+                    child: Row(
+                      children: [
+                        Text('KU students'"'"''"\n"'go-to Restaurant',
+                            style: TextStyle(fontSize: 20)),
+                        Text(' 🍔', style: TextStyle(fontSize: 35)),
+                        Expanded(child: Container(
+                          margin: EdgeInsets.fromLTRB(0, 0, 30, 0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(onPressed: () {
+
+                              }, child: Text('more'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.black,
+                                    onPrimary: Colors.white),
+                              ),
+                            ],
+                          ),
+                        ))
+
+                      ],
+                    ),
+                  )
               ),
             ),
 
