@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 //around-campus 관련 정보들을 다 담고있는 박스위젯
 class AroundCampus extends StatefulWidget {
@@ -14,11 +15,10 @@ class _AroundCampusState extends State<AroundCampus> {
     return Scaffold(
         body: CustomScrollView(
           slivers: <Widget>[
-
             //아이콘들 보여줌
             SliverToBoxAdapter(
               child: Container(
-                height: 300.0,
+                height: 300.0.h,
                 child: GridView.count(
                   crossAxisCount: 4,
                   children: [
@@ -133,14 +133,14 @@ class _AroundCampusState extends State<AroundCampus> {
 
             SliverToBoxAdapter(
               child: Container(
-                  height: 80.0,
+                  height: 80.0.h,
                   child: Container(
                     margin: EdgeInsets.fromLTRB(30, 0, 0, 0),
                     child: Row(
                       children: [
                         Text('KU students'"'"''"\n"'go-to Restaurant',
-                            style: TextStyle(fontSize: 20)),
-                        Text(' 🍔', style: TextStyle(fontSize: 35)),
+                            style: TextStyle(fontSize: 20.sp)),
+                        Text(' 🍔', style: TextStyle(fontSize: 35.sp)),
                         Expanded(child: Container(
                           margin: EdgeInsets.fromLTRB(0, 0, 30, 0),
                           child: Row(
@@ -167,13 +167,13 @@ class _AroundCampusState extends State<AroundCampus> {
             //맛집목록들 수평리스트로 보여줌
             SliverToBoxAdapter(
               child: Container(
-                height: 150.0,
+                height: 150.0.h,
                 child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: 10,
                     itemBuilder: (context, index) {
                       return Container(
-                        width: 150.0,
+                        width: 150.0.w,
                         child: Card(
                           child: Text('data'),
                         ),

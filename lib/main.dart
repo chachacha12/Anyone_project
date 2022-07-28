@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'home/info.dart';
 import 'my/my.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp( 
@@ -9,7 +10,14 @@ void main() {
         ChangeNotifierProvider(create: (c) => Store1()),
         ChangeNotifierProvider(create: (c) =>  Store1()),
       ],
-        child: MaterialApp(home: MyApp()),
+        child:  ScreenUtilInit(   //화면 반응형앱을 위한 패키지로 만든 위젯
+            designSize: Size(360,690),
+          builder: (BuildContext context, Widget? child) {
+              return  MaterialApp( home: MyApp());
+          },
+
+
+        )
       ));
 }
 
@@ -25,6 +33,8 @@ class Store1 extends ChangeNotifier{
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+
 
   @override
   Widget build(BuildContext context) {

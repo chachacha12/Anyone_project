@@ -1,5 +1,6 @@
 import 'package:anyone/home/aroundcampus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../main.dart';
 import 'oncampus.dart';
 import 'aroundcampus.dart';
@@ -32,7 +33,7 @@ class _InfoState extends State<Info>  {
                   actions: [IconButton(onPressed: (){
 
                   }, icon: Icon(Icons.settings),
-                  iconSize: 30,)
+                  iconSize: 27.h,)
                   ],
                   title: Text('Anyone'),
                   pinned: true,
@@ -48,9 +49,9 @@ class _InfoState extends State<Info>  {
                     indicatorColor: Colors.white,
                     unselectedLabelColor: Color(0xFFDDDDDD),
                     labelColor: Colors.white,
-                    unselectedLabelStyle: TextStyle(color: Colors.pinkAccent, fontSize: 15),
+                    unselectedLabelStyle: TextStyle(color: Colors.pinkAccent, fontSize: 15.sp),
                     labelStyle: TextStyle(
-                        color: Colors.amber, fontSize:23, fontWeight: FontWeight.bold),
+                        color: Colors.amber, fontSize:23.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
               ];
