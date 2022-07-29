@@ -24,7 +24,7 @@ class _AroundCampusState extends State<AroundCampus> {
                   children: [
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -37,7 +37,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -50,7 +50,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -63,7 +63,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -76,7 +76,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -89,7 +89,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -102,7 +102,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(
@@ -115,7 +115,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     ),
                     Container(
                       color: Colors.transparent,
-                      margin: EdgeInsets.all(10.0),
+                      margin: EdgeInsets.all(0.h),
                       child: GridTile(
                         child: Icon(Icons.star),
                         footer: GridTileBar(

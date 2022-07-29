@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 //유저정보 보여주는 페이지
 class My extends StatefulWidget {
@@ -10,6 +11,36 @@ class My extends StatefulWidget {
 }
 
 class _MyState extends State<My> {
+
+/* DatePicker 띄우기 */
+  showDatePickerPop() {
+    Future<DateTime?> selectedDate = showDatePicker(
+      context: context,
+      initialDate: DateTime.now(), //초기값
+      firstDate: DateTime(2022), //시작일
+      lastDate: DateTime(2025), //마지막일
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.dark(), //다크 테마
+          child: child!,
+        );
+      },
+    );
+
+    selectedDate.then((dateTime) {      //날짜 선택 직후에 할일
+      //토스트메시지 띄우기
+      Fluttertoast.showToast(
+        msg: dateTime.toString(),
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        //fontSize: 20,
+        //textColor: Colors.white,
+        //backgroundColor: Colors.redAccent
+      );
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -74,18 +105,33 @@ class _MyState extends State<My> {
 
         SliverToBoxAdapter(
           child: Container(
-            color: Colors.pinkAccent,
             alignment: Alignment.center,
-            height: 150.w,
+            height: 300.h,
             width: 100.0.w,
             child: Container(
+              alignment: Alignment.center,
               color: Colors.yellow,
-              height: 150.0.w,
-              width: 40.w,
-              child: Text('aa'),
+              height: 300.0.h,
+              width: 250.w,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text('D - 000'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Departure Date:     '),
+                      TextButton(onPressed: (){
+                        showDatePickerPop();
+                      }, child: Text('날짜 선택하기'))
+                    ],
+                  ),
+
+                ],
+              ),
               ),
           ),
-        )
+        ),
 
       ],
 

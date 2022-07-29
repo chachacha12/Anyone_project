@@ -14,18 +14,18 @@ class _OnCampusState extends State<OnCampus> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300.0.h,
-      width: double.infinity.w,
+      height: 500.0.h,
+      //width: double.infinity.w,
       child: GridView.count(
           crossAxisCount: 4,
           children: [
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
-                  title: Text('official site',textAlign: TextAlign.center, style: TextStyle(
+                  title: Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
                       color: Colors.black
                   )),
                 ),
@@ -33,7 +33,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -45,7 +45,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -57,7 +57,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -69,7 +69,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -81,7 +81,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -93,7 +93,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -105,7 +105,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -117,7 +117,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -129,7 +129,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -141,7 +141,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
@@ -153,7 +153,7 @@ class _OnCampusState extends State<OnCampus> {
             ),
             Container(
               color: Colors.transparent,
-              margin: EdgeInsets.all(10.0),
+              margin: EdgeInsets.all(0.h),
               child: GridTile(
                 child:  Icon(Icons.star),
                 footer: GridTileBar(
