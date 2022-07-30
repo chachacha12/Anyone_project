@@ -16,7 +16,6 @@ void main() {
               return  MaterialApp( home: MyApp());
           },
 
-
         )
       ));
 }
@@ -29,6 +28,23 @@ class Store1 extends ChangeNotifier{
     tab = i;
     notifyListeners();
   }
+
+  //my.dart에서 보여줄 출국날짜값
+  var date = '날짜선택하기';
+  ChangeDate(i){
+    date = i;
+    notifyListeners();
+  }
+
+  //my.dart에서 보여줄 d-day값
+  var dday = '- 000';
+  ChangeDday(i){
+    dday = i;
+    notifyListeners();
+  }
+
+
+
 }
 
 class MyApp extends StatelessWidget {

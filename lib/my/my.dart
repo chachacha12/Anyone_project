@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import '../main.dart';
+import 'package:intl/intl.dart';
 
 //유저정보 보여주는 페이지
 class My extends StatefulWidget {
@@ -12,32 +15,63 @@ class My extends StatefulWidget {
 
 class _MyState extends State<My> {
 
-/* DatePicker 띄우기 */
+  /* DatePicker 띄우기 */
   showDatePickerPop() {
     Future<DateTime?> selectedDate = showDatePicker(
       context: context,
       initialDate: DateTime.now(), //초기값
       firstDate: DateTime(2022), //시작일
-      lastDate: DateTime(2025), //마지막일
+      lastDate: DateTime(2030), //마지막일
       builder: (BuildContext context, Widget? child) {
         return Theme(
-          data: ThemeData.dark(), //다크 테마
+          data: ThemeData.light(), //다크 테마
           child: child!,
         );
       },
     );
 
     selectedDate.then((dateTime) {      //날짜 선택 직후에 할일
-      //토스트메시지 띄우기
-      Fluttertoast.showToast(
-        msg: dateTime.toString(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        //fontSize: 20,
-        //textColor: Colors.white,
-        //backgroundColor: Colors.redAccent
-      );
+      //유저가 cancel안하고 특정날짜를 선택했을때
+      if(dateTime != null){
+        var formatter = DateFormat('yyyy-MM-dd');
+        var formatDate = formatter.format(dateTime);  //스트링타입으로 만들어진 유저가 선택한 날짜값
+        var date = formatter.parse(formatDate);  //유저가 선택한 날짜값을 Date타입으로. 두 날짜 빼기 해야해서
+        //날짜 State를 선택한 String 날짜값으로 변경해줌
+        context.read<Store1>().ChangeDate(formatDate.toString());
+
+        //특정 날짜와 날짜 사이의 디데이를 계산
+        var difference = date.difference(getToday() ).inDays;
+        var result ='';
+        if(difference > 0){
+          result = '- '+difference.toString();
+        }else if(difference < 0){
+          difference = -difference;    //부호를 +로 변경시켜주기위함
+          result = '+ '+difference.toString();
+        }else{      //디데이일때
+          result = '- day';
+        }
+        //디데이 계산결과값 스트링을 state에 넘겨줌
+        context.read<Store1>().ChangeDday(result);
+
+        //토스트메시지 띄우기
+        Fluttertoast.showToast(
+          msg: difference.toString(),
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          //fontSize: 20,
+          //textColor: Colors.white,
+          //backgroundColor: Colors.redAccent
+        );
+      }
     });
+  }
+
+  //오늘 날짜 가져오기
+  getToday() {
+    var now = DateTime.now();
+    var formatter = DateFormat('yyyy-MM-dd');
+    var dateTime = formatter.parse(formatter.format(now));
+    return dateTime;
   }
 
 
@@ -116,14 +150,15 @@ class _MyState extends State<My> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('D - 000'),
+                  Text('D '+context.watch<Store1>().dday),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text('Departure Date:     '),
                       TextButton(onPressed: (){
-                        showDatePickerPop();
-                      }, child: Text('날짜 선택하기'))
+                        showDatePickerPop();  //날짜픽업위젯보여줌
+                      }, child: Text(context.watch<Store1>().date)
+                      )
                     ],
                   ),
 
