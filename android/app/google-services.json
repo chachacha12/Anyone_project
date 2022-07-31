@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "29791646039",
+    "project_id": "anyone-f99a5",
+    "storage_bucket": "anyone-f99a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29791646039:android:c0c120bf5d862939cb0e12",
+        "android_client_info": {
+          "package_name": "com.leecha.anyone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "29791646039-n6lr8t1f49q0dagmtobk0mb3t8ek5qsi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdHcXosg19NmxUJlmgPN5NieJpM8qR5uY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "29791646039-n6lr8t1f49q0dagmtobk0mb3t8ek5qsi.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "29791646039-r6aq56117kdrrdldu0a13ledtbf1posc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.leecha.anyone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -3,8 +3,16 @@ import 'package:provider/provider.dart';
 import 'home/info.dart';
 import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp( 
       MultiProvider(providers: [        //store를 여러개 등록해둘 수 있음
         ChangeNotifierProvider(create: (c) => Store1()),
