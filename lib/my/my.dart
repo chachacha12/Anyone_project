@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../main.dart';
 import 'package:intl/intl.dart';
 
-//유저정보 보여주는 페이지
+//회원가입 및 로그인한 유저의 정보를 보여주는 페이지
 class My extends StatefulWidget {
   const My({Key? key}) : super(key: key);
 
@@ -173,3 +173,43 @@ class _MyState extends State<My> {
     );
   }
 }
+
+/*로그인버튼
+GestureDetector(
+              onTap: () async {
+                try {
+                  UserCredential userCredential = await FirebaseAuth.instance
+                      .signInWithEmailAndPassword(
+                          email: idController.text,
+                          password: pwdController.text) //아이디와 비밀번호로 로그인 시도
+                      .then((value) {
+                    print(value);
+                    value.user!.emailVerified == true //이메일 인증 여부
+                        ? Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => FirstView()))
+                        : print('이메일 확인 안댐');
+                    return value;
+                  });
+                } on FirebaseAuthException catch (e) {
+                  //로그인 예외처리
+                  if (e.code == 'user-not-found') {
+                    print('등록되지 않은 이메일입니다');
+                  } else if (e.code == 'wrong-password') {
+                    print('비밀번호가 틀렸습니다');
+                  } else {
+                    print(e.code);
+                  }
+                }
+              },
+              child: Container(
+                child: Center(
+                  child: Text(
+                    '로그인',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                width: 100,
+                height: 50,
+                color: Colors.black,
+              )),
+ */

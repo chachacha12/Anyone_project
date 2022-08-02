@@ -5,6 +5,8 @@ import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'my/auth.dart';
+
 
 void main() async {
 
@@ -65,7 +67,7 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       //리스트안에 페이지들을 넣어서 유저가 바텀탭 누를때마다 각각을 붙여줌
       body: [
-        Info(), My()
+        Info(), authentic()
       ][context.watch<Store1>().tab],  //Store1안의 state를 가져옴
 
       bottomNavigationBar: BottomNavigationBar(
