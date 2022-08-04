@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'checkvalidate.dart';
 import 'signup.dart';
-//로그인과 회원가입을 담당하는 두 화면이 있음
 
 //유저인증기능
 final auth = FirebaseAuth.instance;
@@ -24,7 +23,7 @@ Textfieldstyle(icon, labeltext){
   );
 }
 
-//로그인 시켜주는 화면
+//로그인 화면
 class authentic extends StatefulWidget {
   const authentic({Key? key}) : super(key: key);
 
@@ -91,11 +90,11 @@ class _authenticState extends State<authentic> {
                         keyboardType: TextInputType.emailAddress, //이메일형식으로 키보드
                         onSaved: (value){
                           setState((){
-                            email = value!;     //유저가 친 이메일 값을 저장해줌
+                            email = value!.trim();     //유저가 친 이메일 값을 저장해줌. 앞뒤공백잘라서
                           });
                         },
                         validator: (value) => CheckValidate().validateEmail(
-                            _emailFocusNode, value!),
+                            _emailFocusNode, value!.trim()),
                           autovalidateMode: AutovalidateMode.always,
 
                           //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
@@ -111,13 +110,15 @@ class _authenticState extends State<authentic> {
                   Padding( //두번째 padding <- LIstview에 속함.
                       padding: EdgeInsets.all(16.0.h),
                       child: TextFormField(
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: true,  //비번적을때 *로 나오게 하는것
                           onSaved: (value){
                             setState((){
-                              password = value!;  //유저가 친 비번 값을 저장해줌
+                              password = value!.trim();  //유저가 친 비번 값을 저장해줌
                             });
                           },
                           validator: (value) => CheckValidate().validatePassword(
-                              _passwordFocusNode, value!),
+                              _passwordFocusNode, value!.trim()),
                           autovalidateMode: AutovalidateMode.always,
                           //textInputAction: TextInputAction.next,
                           focusNode: _passwordFocusNode,
