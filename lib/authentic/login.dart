@@ -1,27 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../home/info.dart';
+import '../main.dart';
 import 'checkvalidate.dart';
 import 'signup.dart';
+import 'package:flutter/cupertino.dart';
 
-//유저인증기능
-final auth = FirebaseAuth.instance;
-
-//각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
-Textfieldstyle(icon, labeltext){
-
-  return InputDecoration(
-    prefixIcon: icon,
-    labelText: labeltext,
-    helperStyle: TextStyle(color: Colors.red),
-
-    border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
-
-    ),
-
-  );
-}
 
 //로그인 화면
 class authentic extends StatefulWidget {
@@ -45,6 +29,52 @@ class _authenticState extends State<authentic> {
   //사용자가 친 이메일과 비번을 저장할 state임
   var email='';
   var password='';
+
+  //각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
+  Textfieldstyle(icon, labeltext){
+    return InputDecoration(
+      prefixIcon: icon,
+      labelText: labeltext,
+      helperStyle: TextStyle(color: Colors.red),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
+  //스낵바 띄우기
+  ShowSnackBar(text){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text), // 필수!
+        // Icon 위젯도 가능해용
+        duration: Duration(seconds: 3), // 얼마큼 띄울지
+        // Duration 으로 시간을 정할 수 있어요
+        backgroundColor: Colors.blue, // 색상 지정
+      ),
+    );
+  }
+
+  //로그인해주는 로직
+  LogIn(var email, var pwd) async {
+    try {
+      await auth.signInWithEmailAndPassword(
+          email: email,
+          password: pwd
+      );
+      ShowSnackBar('로그인 성공');
+       Navigator.pop(context);
+
+      //메인창으로 페이지 이동
+      Navigator.push(context,
+          CupertinoPageRoute(builder: (c) => Main())
+      );
+    } catch (e) {
+      print(e);
+      ShowSnackBar('로그인 실패');
+    }
+  }
+
 
   //focusnode들은 state가 사라질때도 남아있는다. 그래서 따로 없애는 처리 해줘야함.
   @override
@@ -139,16 +169,14 @@ class _authenticState extends State<authentic> {
                           style: style.copyWith(
                             color: Colors.white,),
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           //Form내부에 있는 textformfield들의 유효성 결과에 따라 성공이면 true 리턴.
                           if(formKey.currentState!.validate()){
                             // validation 이 성공하면 true 가 리턴돼요!
-
                             // validation 이 성공하면 폼 저장하기
                             formKey.currentState?.save();
-
-                            Scaffold.of(context).showSnackBar(SnackBar(content:
-                            Text('로그인 성공')));
+                            //로그인 로직시작
+                            LogIn(email, password);
                           }
                         },
                       ),
@@ -185,7 +213,6 @@ class _authenticState extends State<authentic> {
                     ),
                   ),
                   SizedBox(height: 20.h),
-
                 ],
               ),
           ),

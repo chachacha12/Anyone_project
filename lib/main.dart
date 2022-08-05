@@ -5,7 +5,7 @@ import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'my/auth.dart';
+import 'authentic/login.dart';
 
 
 void main() async {
@@ -52,22 +52,35 @@ class Store1 extends ChangeNotifier{
     dday = i;
     notifyListeners();
   }
-
-
-
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  @override
+  Widget build(BuildContext context) {
+    return authentic();
+  }
+}
 
 
+
+//로그인해서 들어왔을때 처음 메인화면임. 정보공유와 내정보 탭 둘다 볼 수 있는곳
+class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
+
+  @override
+  State<Main> createState() => _MainState();
+}
+
+class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //리스트안에 페이지들을 넣어서 유저가 바텀탭 누를때마다 각각을 붙여줌
       body: [
-        Info(), authentic()
+        Info(), My()
       ][context.watch<Store1>().tab],  //Store1안의 state를 가져옴
 
       bottomNavigationBar: BottomNavigationBar(
@@ -86,4 +99,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 

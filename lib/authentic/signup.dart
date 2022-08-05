@@ -1,23 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'checkvalidate.dart';
 
+//파베 유저인증기능에 필요한 객체
+final auth = FirebaseAuth.instance;
 
-//각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
-Textfieldstyle(icon, labeltext){
-
-  return InputDecoration(
-    prefixIcon: icon,
-    labelText: labeltext,
-    helperStyle: TextStyle(color: Colors.red),
-
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-  );
-}
 
 /// 회원가입 화면
 class SignUpPage extends StatefulWidget {
@@ -44,6 +32,53 @@ class _SignUpPageState extends State<SignUpPage> {
   var password = '';
   var passwordcheck = '';
   var controller = TextEditingController();  //비번입력값 != 비번확인입력값 일때 비번확인 textformfield 다 지워주기위해필요
+
+  //각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
+  Textfieldstyle(icon, labeltext){
+
+    return InputDecoration(
+      prefixIcon: icon,
+      labelText: labeltext,
+      helperStyle: TextStyle(color: Colors.red),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
+  //스낵바 띄우기
+  ShowSnackBar(text){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text), // 필수!
+        // Icon 위젯도 가능해용
+        duration: Duration(seconds: 3), // 얼마큼 띄울지
+        // Duration 으로 시간을 정할 수 있어요
+        backgroundColor: Colors.blue, // 색상 지정
+      ),
+    );
+  }
+
+  //파이어베이스 회원가입시켜주는 로직
+  SignUp(var email, var name, var pwd) async {
+    try {
+      var result = await auth.createUserWithEmailAndPassword(
+        email: email.toString(),
+        password: pwd.toString(),
+      );
+      result.user?.updateDisplayName(name.toString());
+      print('파베에 회원가입성공');
+      ShowSnackBar('회원가입 성공');
+      //현재 회원가입창은 꺼주기
+      Navigator.pop(context);
+
+    } catch (e) {
+      print(e);
+      ShowSnackBar('회원가입 실패');
+    }
+  }
+
+
 
   //focusnode들은 state가 사라질때도 남아있는다. 그래서 따로 없애는 처리 해줘야함.
   @override
@@ -166,20 +201,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       validator: (value) =>
                           CheckValidate().validatePassword(
                               _passwordcheckFocusNode, value!.trim()),
-                      /*
-                      validator: (value){
-                        if(value!.isEmpty){
-                          return '비밀번호를 입력하세요.';
-                        }else{
-                          if(passwordcheck != password){
-                            return 'Passwords are not the same';
-                          }else{
-                            return null;
-                          }
-                        }
-                      },
-                       */
-
                       autovalidateMode: AutovalidateMode.always,
                       //textInputAction: TextInputAction.next,
                       focusNode: _passwordcheckFocusNode,
@@ -203,27 +224,21 @@ class _SignUpPageState extends State<SignUpPage> {
                           color: Colors.white,),
                       ),
 
-                      onPressed: () async {
-
+                      onPressed: () {
                         //Form내부에 있는 textformfield들의 유효성 결과에 따라 성공이면 true 리턴.
                         if (formKey2.currentState!.validate()) {
                           // validation 이 성공하면 폼 저장하기
                           formKey2.currentState?.save();
-
                           //비번이랑 비번확인이랑 같은지 확인
                          if(password != passwordcheck){
-                           _passwordcheckFocusNode.requestFocus();
-                           controller.clear();
-                           print('비번이랑 비번확인이 다름. 다시입력요청하기');
-                          }else{
+                           _passwordcheckFocusNode.requestFocus();  //textfield에 포커스주기
+                           controller.clear(); //입력 지우기
+                           ShowSnackBar('비밀번호와 비밀번호확인 입력값이 다릅니다.');
+                          }else{                          //회원가입 성공로직
                            print('비번이랑 비번확인이 같음');
-                           print(email);
-                           print(password);
+                           //파베 회원가입 해주는 로직
+                           SignUp(email, name, password);
                          }
-                          /*   이상하게 여기서만 Scaffold쓰면 에러남..이거 쓰지말기
-                           Scaffold.of(context).showSnackBar(SnackBar(content:
-                          Text('회원가입 성공')));
-                           */
                         }
                       },
                     ),
