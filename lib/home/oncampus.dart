@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'oncampus_content/School_contact.dart';
 import 'webView.dart';
-import 'aroundcampus_content/academic_calender.dart';
+import 'oncampus_content/academic_calender.dart';
 
 //on-campus 관련 정보들을 다 담고있는 박스위젯
 class OnCampus extends StatefulWidget {
@@ -126,7 +127,7 @@ class _OnCampusState extends State<OnCampus> {
                 onTap: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Calender())        //Calender 커스텀위젯을 보여줌
+                      MaterialPageRoute(builder: (context) => Calender())    //Calender 커스텀위젯을 보여줌
                   );
                 },
               ),
@@ -186,7 +187,7 @@ class _OnCampusState extends State<OnCampus> {
                 onTap: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                      MaterialPageRoute(builder: (context) => Contact()  )
                   );
                 },
               ),

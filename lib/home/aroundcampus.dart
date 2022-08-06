@@ -166,7 +166,6 @@ class _AroundCampusState extends State<AroundCampus> {
               ),
             ),
 
-
             //맛집목록들 수평리스트로 보여줌
             SliverToBoxAdapter(
               child: Container(
@@ -184,15 +183,7 @@ class _AroundCampusState extends State<AroundCampus> {
                     }),
               ),
             ),
-            /*
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                      (context, index) => ListTile(
-                    title: Text('Item #$index'),
-                  ),
-                  childCount: 10),
-            ),
-             */
+
           ],
         ));
   }
