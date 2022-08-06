@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:webview_flutter/platform_interface.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 import 'webView.dart';
 
 //on-campus 관련 정보들을 다 담고있는 박스위젯
@@ -11,7 +9,6 @@ class OnCampus extends StatefulWidget {
   @override
   State<OnCampus> createState() => _OnCampusState();
 }
-
 class _OnCampusState extends State<OnCampus> {
 
   //웹뷰띄울 링크들 리스트
@@ -24,8 +21,6 @@ class _OnCampusState extends State<OnCampus> {
     'https://library.konkuk.ac.kr/en/#/', //Library
     'https://sites.google.com/view/ku-student-guidebook/helpful-information/around-campus?authuser=0', //campusmap
   ];
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +45,7 @@ class _OnCampusState extends State<OnCampus> {
                 onTap: (){
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => MyWebView() )
+                    MaterialPageRoute(builder: (context) => MyWebView(link: linkList[0], appbartext: 'official site'),)
                   );
                 }
               )
@@ -68,35 +63,54 @@ class _OnCampusState extends State<OnCampus> {
                   ),
                 ),
                 onTap: (){
-
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[1], appbartext: 'OIA') )
+                  );
                 },
               ),
             ),
-            Container(
+            Container(                 //dormitory
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Dormitory',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Dormitory',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[2], appbartext: 'Dormitory') )
+                  );
+                },
               ),
             ),
-            Container(
+            Container(          //language institution
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Language'"\n"'Institution',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Language'"\n"'Institution',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                  );
+                },
               ),
             ),
-            Container(
+            Container(           //academic calender
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
               child: GridTile(
@@ -108,31 +122,47 @@ class _OnCampusState extends State<OnCampus> {
                 ),
               ),
             ),
-            Container(
+            Container(                   //GuideBook
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('GuideBook',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Guide'"\n"'Book',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[4], appbartext: 'GuideBook') )
+                  );
+                },
               ),
             ),
-            Container(
+            Container(                      //Library
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Library',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Library',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[5], appbartext: 'Library') )
+                  );
+                },
               ),
             ),
-            Container(
+            Container(                 //school contact
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
               child: GridTile(
@@ -144,19 +174,27 @@ class _OnCampusState extends State<OnCampus> {
                 ),
               ),
             ),
-            Container(
+            Container(                    //Campus map
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Campus'"\n"'Map',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Campus'"\n"'Map',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[6], appbartext: 'Campus Map') )
+                  );
+                },
               ),
             ),
-            Container(
+            Container(                    //clubs
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
               child: GridTile(
@@ -168,7 +206,7 @@ class _OnCampusState extends State<OnCampus> {
                 ),
               ),
             ),
-            Container(
+            Container(                //tips
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
               child: GridTile(
@@ -180,7 +218,7 @@ class _OnCampusState extends State<OnCampus> {
                 ),
               ),
             ),
-            Container(
+            Container(               //helplines
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
               child: GridTile(

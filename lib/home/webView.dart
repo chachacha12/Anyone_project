@@ -2,16 +2,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
-//웹뷰 띄워주는 위젯 만듬
-class MyWebView extends StatefulWidget {
-  const MyWebView({Key? key}) : super(key: key);
-
-  @override
-  State<MyWebView> createState() => _MyWebViewState();
-}
-
-class _MyWebViewState extends State<MyWebView> {
+//링크값과 앱바title문구 보낸걸 받아서 웹뷰로 띄워주는 커스텀위젯임
+class MyWebView extends StatelessWidget {
+  MyWebView({Key? key, this.link, this.appbartext}) : super(key: key);
+  final link;   //웹뷰 띄워줄 링크
+  final appbartext;  //appbartitle로 사용될 문구
 
   //웹뷰의 뒤로가기버튼을 위한 컨트롤러객체
   //final Completer<WebViewController> _controller = Completer<WebViewController>();
@@ -25,14 +20,14 @@ class _MyWebViewState extends State<MyWebView> {
         appBar: AppBar(
           //뒤로가기버튼 색변경
           iconTheme: IconThemeData(
-            color: Colors.black
+              color: Colors.black
           ),
-          title: Text('웹뷰', style: TextStyle(color: Colors.black)),
+          title: Text(appbartext, style: TextStyle(color: Colors.black)),
           backgroundColor: Colors.transparent,
           elevation: 0.0,  //그림자 농도 설정임. 0넣어서 제거
         ),
         body: WebView(
-          initialUrl: "https://m.naver.com",
+          initialUrl: link,
           javascriptMode: JavascriptMode.unrestricted,
           //뒤로가기버튼을위한것
           onWebViewCreated: (var webViewController){
@@ -56,4 +51,5 @@ class _MyWebViewState extends State<MyWebView> {
     );
   }
 }
+
 
