@@ -37,6 +37,7 @@ dependencies:
   # add flutter_screenutil
   flutter_screenutil: 5.5.3+2
   intl: ^0.17.0
+  webview_flutter: 3.0.4
 
   firebase_core: ^1.10.6
   firebase_auth: ^3.3.4

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../main.dart';
+import 'package:webview_flutter/platform_interface.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+import 'webView.dart';
 
 //on-campus 관련 정보들을 다 담고있는 박스위젯
 class OnCampus extends StatefulWidget {
@@ -11,6 +13,20 @@ class OnCampus extends StatefulWidget {
 }
 
 class _OnCampusState extends State<OnCampus> {
+
+  //웹뷰띄울 링크들 리스트
+  var linkList = [
+    'https://www.konkuk.ac.kr/do/Eng/Index.do',  //official site
+    'http://abroad.konkuk.ac.kr/',  //OIA
+    'https://kulhouse.konkuk.ac.kr/home/lan/eng/e_index_01.asp', //dormitory
+    'http://kli.konkuk.ac.kr/', //language institution
+    'https://sites.google.com/view/ku-student-guidebook/home', //Guide book
+    'https://library.konkuk.ac.kr/en/#/', //Library
+    'https://sites.google.com/view/ku-student-guidebook/helpful-information/around-campus?authuser=0', //campusmap
+  ];
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,28 +35,41 @@ class _OnCampusState extends State<OnCampus> {
       child: GridView.count(
           crossAxisCount: 4,
           children: [
-            Container(
+            Container(         //official site
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(   //터치기능을 넣기위해 감싸줌
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
-              ),
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => MyWebView() )
+                  );
+                }
+              )
             ),
-            Container(
+            Container(                  //OIA
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('OIA',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('OIA',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+
+                },
               ),
             ),
             Container(

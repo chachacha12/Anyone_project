@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:io';
+import 'package:webview_flutter/webview_flutter.dart';
+
 
 //around-campus 관련 정보들을 다 담고있는 박스위젯
 class AroundCampus extends StatefulWidget {
