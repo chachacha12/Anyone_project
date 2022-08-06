@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'webView.dart';
+import 'aroundcampus_content/academic_calender.dart';
 
 //on-campus 관련 정보들을 다 담고있는 박스위젯
 class OnCampus extends StatefulWidget {
@@ -113,13 +114,21 @@ class _OnCampusState extends State<OnCampus> {
             Container(           //academic calender
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Academic'"\n"'Calender',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Academic'"\n"'Calender',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Calender())        //Calender 커스텀위젯을 보여줌
+                  );
+                },
               ),
             ),
             Container(                   //GuideBook
@@ -165,13 +174,21 @@ class _OnCampusState extends State<OnCampus> {
             Container(                 //school contact
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('School'"\n"'Contact',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('School'"\n"'Contact',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                  );
+                },
               ),
             ),
             Container(                    //Campus map
@@ -197,37 +214,61 @@ class _OnCampusState extends State<OnCampus> {
             Container(                    //clubs
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Clubs',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Clubs',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                  );
+                },
               ),
             ),
             Container(                //tips
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Tips',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Tips',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                  );
+                },
               ),
             ),
             Container(               //helplines
               color: Colors.transparent,
               margin: EdgeInsets.all(0.h),
-              child: GridTile(
-                child:  Icon(Icons.star),
-                footer: GridTileBar(
-                  title: Text('Helplines',textAlign: TextAlign.center, style: TextStyle(
-                      color: Colors.black
-                  )),
+              child: GestureDetector(
+                child: GridTile(
+                  child:  Icon(Icons.star),
+                  footer: GridTileBar(
+                    title: Text('Helplines',textAlign: TextAlign.center, style: TextStyle(
+                        color: Colors.black
+                    )),
+                  ),
                 ),
+                onTap: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                  );
+                },
               ),
             ),
           ],

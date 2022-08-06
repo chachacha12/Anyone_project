@@ -1,24 +1,10 @@
-import 'package:anyone/home/aroundcampus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'oncampus.dart';
-import 'aroundcampus.dart';
+import 'package:photo_view/photo_view.dart';
 
-//on-campus, around-campus 아이콘들을 스와이프 하면서 보여주는 첫 페이지
-class Info extends StatefulWidget {
-  const Info({Key? key}) : super(key: key);
-
-  @override
-  State<Info> createState() => _InfoState();
-}
-
-
-class _InfoState extends State<Info>  {
-
-  @override
-  void initState() {
-    super.initState();
-  }
+//academic calender를 보려고 클릭시 띄워줄 커스텀 위젯.  이미지 2개 보여줄거임
+class Calender extends StatelessWidget {
+  const Calender({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +14,17 @@ class _InfoState extends State<Info>  {
           body: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                 SliverAppBar(
-                  actions: [IconButton(onPressed: (){
+                SliverAppBar(
+                  collapsedHeight: 50.h,
 
-                  }, icon: Icon(Icons.settings),
-                  iconSize: 27.h,)
-                  ],
-                  title: Text('Anyone'),
+                  title: Text('Academic Calender'),
                   pinned: true,
                   floating: true,
                   bottom: TabBar(
                     isScrollable: true,
                     tabs: [
-                      Tab(text: 'On-Campus',),
-                      Tab(text: 'Around-Campus',)
+                      Tab(text: 'Version 1',),
+                      Tab(text: 'Version 2',)
                     ],
                     indicatorSize: TabBarIndicatorSize.label,
                     indicatorWeight: 1,
@@ -57,11 +40,19 @@ class _InfoState extends State<Info>  {
             },
             body: TabBarView(
               children: <Widget>[
-                OnCampus(), AroundCampus(),
+                Container(
+                    child: PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
+                      imageProvider: AssetImage("assets/Calender_version_1.png"),
+                    )
+                ),
+                Container(
+                    child: PhotoView(
+                      imageProvider: AssetImage("assets/Calender_version_2.png"),
+                    )
+                ),
               ],
             ),
           )),
     );
   }
 }
-
