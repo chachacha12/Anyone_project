@@ -1,3 +1,4 @@
+import 'package:anyone/home/oncampus_content/CampusMap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'oncampus_content/School_contact.dart';
@@ -207,7 +208,7 @@ class _OnCampusState extends State<OnCampus> {
                 onTap: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[6], appbartext: 'Campus Map') )
+                      MaterialPageRoute(builder: (context) => CampusMap() )
                   );
                 },
               ),

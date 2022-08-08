@@ -42,12 +42,14 @@ class Calender extends StatelessWidget {
               children: <Widget>[
                 Container(
                     child: PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
-                      imageProvider: AssetImage("assets/Calender_version_1.png"),
+                      imageProvider: AssetImage("assets/academic_calender/Calender_version_1.png"),
+                      initialScale: PhotoViewComputedScale.contained,
                     )
                 ),
                 Container(
                     child: PhotoView(
-                      imageProvider: AssetImage("assets/Calender_version_2.png"),
+                      imageProvider: AssetImage("assets/academic_calender/Calender_version_2.png"),
+                      initialScale: PhotoViewComputedScale.contained,
                     )
                 ),
               ],

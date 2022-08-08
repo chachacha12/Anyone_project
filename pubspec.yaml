@@ -72,6 +72,10 @@ flutter:
   assets:
     - assets/Calender_version_1.png
     - assets/Calender_version_2.png
+    - assets/campusmap_number.png
+    - assets/campusmap.jpeg
+    - assets/Facilities_aroundcampus_dining.png
+    - assets/Facilities_aroundcampus_others.png
 
 
 
