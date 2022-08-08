@@ -10,10 +10,10 @@ class Contact extends StatelessWidget {
 
    //학교 연락망들을 리스트속에 리스트로 저장.
   var contact_list =[
-      ['국제교류협력팀','02-2049-6212'],
-      ['외국인학생센터', '02-2049-6213'],
-      ['language institution','02-450-3075~6'],
-      ['KUL:HOUSE(Dormitory)','82-2-2024-5000~5003'],
+      ['국제교류협력팀','02-2049-6212', '02-2049-6212'],
+      ['외국인학생센터', '02-2049-6213', '02-2049-6213'],
+      ['language institution','02-450-3075~6', '02-450-3075'],
+      ['KUL:HOUSE(Dormitory)','82-2-2024-5000~5003', '82-2-2024-5000'],
   ];
 
     //이메일 보내기 위한 작업
@@ -86,7 +86,7 @@ class Contact extends StatelessWidget {
                         subtitle: Text(contact_list[index][1], ),
                         trailing: Icon(Icons.phone_forwarded),
                         onTap: ()  {
-                          _makePhoneCall(contact_list[index][1]);
+                          _makePhoneCall(contact_list[index][2]);
 
                         },
                       ),
