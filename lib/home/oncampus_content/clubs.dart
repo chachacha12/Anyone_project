@@ -2,11 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+//파베 파이어스토어 사용을 위한 객체
+final firestore = FirebaseFirestore.instance;
 
 
-
-class Clubs extends StatelessWidget {
+class Clubs extends StatefulWidget {
   const Clubs({Key? key}) : super(key: key);
+
+  @override
+  State<Clubs> createState() => _ClubsState();
+}
+
+class _ClubsState extends State<Clubs> {
+
+  var clubs_collection;  //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
+  var count=0;
+
+  getData() async {
+    var result = await firestore.collection('clubs').get();
+
+    setState(() {
+      clubs_collection = result.docs;   //컬랙션안의 문서리스트를 저장
+      count = result.size;  //컬랙션안의 문서갯수를 가져옴
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,18 +89,17 @@ class Clubs extends StatelessWidget {
                     Card(        //리스트 속 각각의 객체 하나하나임
                       elevation: 5,
                       margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-                      /*
+
                       child: ListTile(
-                        title: Text(contact_list[index][0], style: Theme.of(context).textTheme.titleMedium),
-                        subtitle: Text(contact_list[index][1], ),
-                        trailing: Icon(Icons.phone_forwarded),
+                        title: Text(clubs_collection[index]['name'], style: Theme.of(context).textTheme.titleMedium),
+                        subtitle: Text(clubs_collection[index]['english'], ),
+                        trailing: Text('Contact: '+clubs_collection[index]['contact']),
                         onTap: ()  {
-                          _makePhoneCall(contact_list[index][1]);
+                          //_makePhoneCall(contact_list[index][1]);
                         },
                       ),
-                       */
                     ),
-                childCount: 4),
+                childCount: count),
           ),
 
         ],
