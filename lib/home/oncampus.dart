@@ -3,6 +3,7 @@ import 'package:anyone/home/oncampus_content/Helplines.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'oncampus_content/School_contact.dart';
+import 'oncampus_content/Tips.dart';
 import 'oncampus_content/clubs.dart';
 import 'webView.dart';
 import 'oncampus_content/academic_calender.dart';
@@ -250,7 +251,7 @@ class _OnCampusState extends State<OnCampus> {
                 onTap: (){
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => MyWebView(link: linkList[3], appbartext: 'Language Institution') )
+                      MaterialPageRoute(builder: (context) => Tips() )
                   );
                 },
               ),
