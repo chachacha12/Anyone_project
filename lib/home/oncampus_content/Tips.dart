@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:photo_view/photo_view.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'Tips_hero_second.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
@@ -18,15 +16,17 @@ class Tips extends StatefulWidget {
 
 class _TipsState extends State<Tips> {
 
-  var tips_collection;  //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
-  var count=0;
+  var tips_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
+  var count = 0;
+  //hero위젯을 통해 전환될 페이지로 보내줄 팁컨텐츠 문서 하나임. 타입을 dynamic으로해야 어떤 타입이든 받을 수 있어서 이렇게함
+  dynamic tips_document;
 
   getData() async {
     var result = await firestore.collection('tips').get();
 
     setState(() {
-      tips_collection = result.docs;   //컬랙션안의 문서리스트를 저장
-      count = result.size;  //컬랙션안의 문서갯수를 가져옴
+      tips_collection = result.docs; //컬랙션안의 문서리스트를 저장
+      count = result.size; //컬랙션안의 문서갯수를 가져옴
     });
   }
 
@@ -35,8 +35,6 @@ class _TipsState extends State<Tips> {
     super.initState();
     getData();
   }
-
-
 
 
   @override
@@ -55,21 +53,33 @@ class _TipsState extends State<Tips> {
               crossAxisCount: 2,
               crossAxisSpacing: 0.h,
               mainAxisSpacing: 0.h,
-              childAspectRatio: 0.6.h,   //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
+              childAspectRatio: 0.6
+                  .h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
             ),
 
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-
-                return Container(
+                return Container(                       //팁에 사용되는 이미지사진
                   margin: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0.h),
                   child: Column(
                     children: [
                       Container(
-                        child: Image.network(tips_collection[index]['imagepath'][0], fit: BoxFit.fill),  //첫번째 이미지만 가져와서 보여줌
+                        child: GestureDetector(
+                          child: Hero(
+                            tag: tips_collection[index]['title'],
+                            child: Image.network(
+                                tips_collection[index]['imagepath'][0],
+                                fit: BoxFit.fill),
+                          ),
+                          onTap: (){
+                            tips_document = tips_collection[index];  //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
+                            //이미지사진 클릭했을시 hero위젯을 통해 페이지전환 / 선택한 컨텐츠 문서 하나 전체를 두번째 페이지에 보내줌
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => Tips_hero_second(tips_document)));
+                          },
+                        ), //첫번째 이미지만 가져와서 보여줌
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.transparent),
-                            borderRadius: BorderRadius.circular(10)
+                            border: Border.all(color: Colors.black45, width: 3.w),
+                            //borderRadius: BorderRadius.circular(10)
                         ),
                         height: 150.h,
                         width: 150.h,
@@ -77,19 +87,21 @@ class _TipsState extends State<Tips> {
                       //Spacer(flex: 2,),
                       Container(
                         margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                        child: Text(tips_collection[index]['title'],  textAlign: TextAlign.center),
+                        child: Text(tips_collection[index]['title'],
+                            textAlign: TextAlign.center),
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.grey, width: 1.w),
                             borderRadius: BorderRadius.circular(5)
                         ),
                         width: 150.h,
                         height: 20.h,
                       ),
                       Container(
-                        child: Text(tips_collection[index]['tag'], textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 12.sp),),
+                        child: Text(tips_collection[index]['tag'],
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 12.sp),),
                         decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
+                            border: Border.all(color: Colors.grey, width: 1.w),
                             borderRadius: BorderRadius.circular(5)
                         ),
                         width: 150.h,
@@ -102,7 +114,6 @@ class _TipsState extends State<Tips> {
               childCount: count,
             ),
           ),
-
         ],
       ),
     );
