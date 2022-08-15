@@ -85,7 +85,7 @@ class _TipsState extends State<Tips> {
                         width: 150.h,
                       ),
                       //Spacer(flex: 2,),
-                      Container(
+                      Container( 
                         margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
                         child: Text(tips_collection[index]['title'],
                             textAlign: TextAlign.center),

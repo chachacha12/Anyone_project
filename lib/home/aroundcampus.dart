@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import 'aroundcampus_content/GroceryShop.dart';
+
 
 //around-campus 관련 정보들을 다 담고있는 박스위젯
 class AroundCampus extends StatefulWidget {
@@ -28,105 +30,148 @@ class _AroundCampusState extends State<AroundCampus> {
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('Grocery'"\n"'shopping',
-                              textAlign: TextAlign.center, style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('Grocery'"\n"'shopping',
+                                textAlign: TextAlign.center, style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => GroceryShop() )
+                          );
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('Fashion'"\n"'&beauty',
-                              textAlign: TextAlign.center, style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('Fashion'"\n"'&beauty',
+                                textAlign: TextAlign.center, style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('cafe', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('cafe', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('pub', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('pub', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('Finance', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('Finance', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('Hospital', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('Hospital', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('Facilities', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('Facilities', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                     Container(
                       color: Colors.transparent,
                       margin: EdgeInsets.all(0.h),
-                      child: GridTile(
-                        child: Icon(Icons.star),
-                        footer: GridTileBar(
-                          title: Text('Discount', textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black
-                              )),
+                      child: GestureDetector(
+                        child: GridTile(
+                          child: Icon(Icons.star),
+                          footer: GridTileBar(
+                            title: Text('Discount', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ),
                         ),
+                        onTap: (){
+
+                        },
                       ),
                     ),
                   ],

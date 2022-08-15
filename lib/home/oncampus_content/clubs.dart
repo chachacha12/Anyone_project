@@ -82,7 +82,7 @@ class _ClubsState extends State<Clubs> {
             ),
           ),
 
-          //학교연락망들 보여주는 리스트
+          //동아리 보여주는 리스트
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
