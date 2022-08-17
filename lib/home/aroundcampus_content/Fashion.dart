@@ -86,6 +86,33 @@ class _FashionState extends State<Fashion> {
                                 Flexible(
                                   flex: 1,
                                   child: OutlinedButton(onPressed: () {
+                                    //다이얼로그 띄우기
+                                    showDialog(context: context, builder: (context){
+                                      return AlertDialog(
+                                          title: Text(fashion_collection[index]['name']),
+                                        content: SingleChildScrollView(
+                                          child: ListBody(
+                                            children: [
+                                              richtext(Icon(Icons.access_time, size: 15.h),
+                                                  fashion_collection[index]['time']),
+                                              richtext(Icon(Icons.location_on_outlined, size: 15.h),
+                                                  fashion_collection[index]['address']),
+                                              richtext(Icon(Icons.phone, size: 15.h),
+                                                  fashion_collection[index]['call']),
+                                              richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
+                                                  fashion_collection[index]['contact']),
+                                              richtext(Icon(Icons.wb_incandescent_outlined, size: 15.h),
+                                                  fashion_collection[index]['others']),
+                                            ],
+                                          ),
+                                        ),
+                                        actions: [
+                                          TextButton(onPressed: (){
+                                            Navigator.of(context).pop();
+                                          }, child: Text('close'))
+                                        ],
+                                      ) ;
+                                    });
 
                                   }, child: Text('more'),),
                                 )
@@ -136,12 +163,35 @@ class _FashionState extends State<Fashion> {
               height: 40.h,
             ),
           ),
-
-
-
         ],
       ),
     );
   }
+}
+
+//RichText위젯을 반환해주는 메소드 - 여러스타일 문자를 하나의 Text위젯에 넣을때 사용
+richtext(icon, text2){
+
+  return RichText(
+    text: TextSpan(
+      children: [
+        WidgetSpan(
+          child: Container(
+              margin: EdgeInsets.fromLTRB(3.w, 0.w, 3.w, 0.w),
+              child: icon
+          ),
+        ),
+        TextSpan(
+          text: text2,
+          style: TextStyle(
+            color: Colors.purple,
+            fontWeight: FontWeight.normal,
+            fontSize: 14.sp,
+            letterSpacing: -0.3.w,
+          ),
+        ),
+      ],
+    ),
+  );
 }
 
