@@ -74,7 +74,6 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
     ))
         .toList();
 
-
     return Scaffold(
       body: CustomScrollView(
         slivers: [

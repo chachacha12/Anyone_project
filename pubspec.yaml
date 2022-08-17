@@ -78,6 +78,7 @@ flutter:
     - assets/Facilities_aroundcampus_dining.png
     - assets/Facilities_aroundcampus_others.png
     - assets/groceryshopping_background.jpg
+    - assets/fashion_background.jpg
 
 
   # The following line ensures that the Material Icons font is

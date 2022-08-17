@@ -8,7 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 final firestore = FirebaseFirestore.instance;
 
 
-
 //마트, 식료품점 정보
 class GroceryShop extends StatefulWidget {
   const GroceryShop({Key? key}) : super(key: key);

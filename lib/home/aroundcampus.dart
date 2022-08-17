@@ -1,3 +1,4 @@
+import 'package:anyone/home/aroundcampus_content/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
@@ -62,7 +63,10 @@ class _AroundCampusState extends State<AroundCampus> {
                           ),
                         ),
                         onTap: (){
-
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Fashion() )
+                          );
                         },
                       ),
                     ),
