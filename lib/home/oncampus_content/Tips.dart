@@ -18,6 +18,7 @@ class _TipsState extends State<Tips> {
 
   var tips_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
+
   //hero위젯을 통해 전환될 페이지로 보내줄 팁컨텐츠 문서 하나임. 타입을 dynamic으로해야 어떤 타입이든 받을 수 있어서 이렇게함
   dynamic tips_document;
 
@@ -59,56 +60,63 @@ class _TipsState extends State<Tips> {
 
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                return Container(                       //팁에 사용되는 이미지사진
-                  margin: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0.h),
-                  child: Column(
-                    children: [
-                      Container(
-                        child: GestureDetector(
+                return GestureDetector(
+                  child: Container( //팁에 사용되는 이미지사진
+                    margin: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0.h),
+                    child: Column(
+                      children: [
+                        Container(
                           child: Hero(
                             tag: tips_collection[index]['title'],
                             child: Image.network(
                                 tips_collection[index]['imagepath'][0],
                                 fit: BoxFit.fill),
                           ),
-                          onTap: (){
-                            tips_document = tips_collection[index];  //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
-                            //이미지사진 클릭했을시 hero위젯을 통해 페이지전환 / 선택한 컨텐츠 문서 하나 전체를 두번째 페이지에 보내줌
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => Tips_hero_second(tips_document)));
-                          },
-                        ), //첫번째 이미지만 가져와서 보여줌
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black45, width: 3.w),
+
+                          //첫번째 이미지만 가져와서 보여줌
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black45, width: 3.w),
                             //borderRadius: BorderRadius.circular(10)
+                          ),
+                          height: 150.h,
+                          width: 150.h,
                         ),
-                        height: 150.h,
-                        width: 150.h,
-                      ),
-                      //Spacer(flex: 2,),
-                      Container( 
-                        margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                        child: Text(tips_collection[index]['title'],
-                            textAlign: TextAlign.center),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1.w),
-                            borderRadius: BorderRadius.circular(5)
+                        //Spacer(flex: 2,),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
+                          child: Text(tips_collection[index]['title'],
+                              textAlign: TextAlign.center),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.grey, width: 1.w),
+                              borderRadius: BorderRadius.circular(5)
+                          ),
+                          width: 150.h,
+                          height: 20.h,
                         ),
-                        width: 150.h,
-                        height: 20.h,
-                      ),
-                      Container(
-                        child: Text(tips_collection[index]['tag'],
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 12.sp),),
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey, width: 1.w),
-                            borderRadius: BorderRadius.circular(5)
+                        Container(
+                          child: Text(tips_collection[index]['tag'],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12.sp),),
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.grey, width: 1.w),
+                              borderRadius: BorderRadius.circular(5)
+                          ),
+                          width: 150.h,
+                          height: 30.h,
                         ),
-                        width: 150.h,
-                        height: 30.h,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+                  onTap: () {             //누르면 히어로위젯 작동하며 페이지이동
+                    tips_document =
+                    tips_collection[index]; //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
+                    //이미지사진 클릭했을시 hero위젯을 통해 페이지전환 / 선택한 컨텐츠 문서 하나 전체를 두번째 페이지에 보내줌
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => Tips_hero_second(tips_document)));
+                  },
                 );
               },
               childCount: count,
