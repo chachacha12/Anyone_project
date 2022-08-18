@@ -61,51 +61,51 @@ class _TipsState extends State<Tips> {
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                 return GestureDetector(
-                  child: Container( //팁에 사용되는 이미지사진
+                  child: Container( //팁에 사용되는 구간임- 이미지랑 텍스트들
                     margin: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0.h),
                     child: Column(
                       children: [
-                        Container(
-                          child: Hero(
-                            tag: tips_collection[index]['title'],
-                            child: Image.network(
-                                tips_collection[index]['imagepath'][0],
-                                fit: BoxFit.fill),
+                        Card(
+                          elevation: 5.h,
+                          child: SizedBox(
+                            child: Hero(
+                              tag: tips_collection[index]['title'],
+                              child: Image.network(
+                                  tips_collection[index]['imagepath'][0],
+                                  fit: BoxFit.fill),
+                            ),
+                            /*
+                            //첫번째 이미지만 가져와서 보여줌
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                  color: Colors.black45, width: 3.w),
+                              //borderRadius: BorderRadius.circular(10)
+                            ),
+                             */
+                            height: 150.h,
+                            width: 150.h,
                           ),
-
-                          //첫번째 이미지만 가져와서 보여줌
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                color: Colors.black45, width: 3.w),
-                            //borderRadius: BorderRadius.circular(10)
-                          ),
-                          height: 150.h,
-                          width: 150.h,
                         ),
                         //Spacer(flex: 2,),
-                        Container(
+                        Card(
+                          elevation: 3.h,
                           margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                          child: Text(tips_collection[index]['title'],
-                              textAlign: TextAlign.center),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.grey, width: 1.w),
-                              borderRadius: BorderRadius.circular(5)
+                          child: SizedBox(
+                            width: 150.h,
+                            height: 20.h,
+                            child: Text(tips_collection[index]['title'],
+                                textAlign: TextAlign.center),
                           ),
-                          width: 150.h,
-                          height: 20.h,
                         ),
-                        Container(
-                          child: Text(tips_collection[index]['tag'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 12.sp),),
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.grey, width: 1.w),
-                              borderRadius: BorderRadius.circular(5)
-                          ),
-                          width: 150.h,
-                          height: 30.h,
+                        Card(
+                          elevation: 3.h,
+                          margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
+                          child: SizedBox(
+                            width: 150.h,
+                            height: 30.h,
+                            child:Text(tips_collection[index]['tag'],
+                                textAlign: TextAlign.center),
+                          ),             //Text(tips_collection[index]['tag']
                         ),
                       ],
                     ),
