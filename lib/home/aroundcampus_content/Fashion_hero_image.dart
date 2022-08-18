@@ -7,11 +7,9 @@ class Fashion_hero_image extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: PhotoView(
-        heroAttributes: PhotoViewHeroAttributes(tag: Imagepath),
-        imageProvider: NetworkImage(Imagepath),
-      ),
+    return PhotoView(
+      heroAttributes: PhotoViewHeroAttributes(tag: Imagepath),
+      imageProvider: NetworkImage(Imagepath),
     );
   }
 }
