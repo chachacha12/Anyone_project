@@ -78,8 +78,11 @@ class _GroceryShopState extends State<GroceryShop> {
                                   mainAxisAlignment: MainAxisAlignment
                                       .spaceEvenly, //스토어명, 영업시간, 주소, 휴무일정보
                                   children: [
-                                    richtext(Icon(Icons.storefront, size: 15.h),
-                                        grocery_collection[index]['name']),
+                                    Text(' '+grocery_collection[index]['name']+'\n',
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                    )),
                                     richtext(
                                         Icon(Icons.access_time, size: 15.h),
                                         grocery_collection[index]['time']),

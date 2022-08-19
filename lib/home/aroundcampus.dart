@@ -122,7 +122,7 @@ class _AroundCampusState extends State<AroundCampus> {
                         child: GridTile(
                           child: Icon(Icons.star),
                           footer: GridTileBar(
-                            title: Text('Finance', textAlign: TextAlign.center,
+                            title: Text('Culture', textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.black
                                 )),
@@ -140,25 +140,7 @@ class _AroundCampusState extends State<AroundCampus> {
                         child: GridTile(
                           child: Icon(Icons.star),
                           footer: GridTileBar(
-                            title: Text('Hospital', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
-                          ),
-                        ),
-                        onTap: (){
-
-                        },
-                      ),
-                    ),
-                    Container(
-                      color: Colors.transparent,
-                      margin: EdgeInsets.all(0.h),
-                      child: GestureDetector(
-                        child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('Facilities', textAlign: TextAlign.center,
+                            title: Text('Entertainment', textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.black
                                 )),

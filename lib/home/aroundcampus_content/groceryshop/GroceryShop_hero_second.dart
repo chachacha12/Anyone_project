@@ -66,22 +66,12 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text('Time:  ' + widget.grocery_document['time'],
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                    ),),
-                  Text('Address:  ' + widget.grocery_document['address'],
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                    ),),
-                  Text('day off:  ' + widget.grocery_document['holiday'],
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                    ),),
-
+                  richtext(Icon(Icons.access_time, size: 15.h),
+                      widget.grocery_document['time']),
+                  richtext(Icon(Icons.location_on_outlined, size: 15.h),
+                      widget.grocery_document['address']),
+                  richtext(Icon(Icons.block, size: 15.h),
+                      widget.grocery_document['holiday']),
                 ],
               ),
             ),
