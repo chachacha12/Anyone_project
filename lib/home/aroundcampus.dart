@@ -6,6 +6,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'aroundcampus_content/cafe/Cafe.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
+import 'aroundcampus_content/pub/Pub.dart';
 
 
 //around-campus 관련 정보들을 다 담고있는 박스위젯
@@ -106,6 +107,10 @@ class _AroundCampusState extends State<AroundCampus> {
                           ),
                         ),
                         onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Pub() )
+                          );
 
                         },
                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../various_widget.dart';
 import 'Cafe_hero_image.dart';
 import 'Cafe_more.dart';
 
@@ -67,6 +68,7 @@ class _CafeState extends State<Cafe> {
                       margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row( //가게명과 물음표 상세보기 버튼
                               children: [
@@ -94,13 +96,25 @@ class _CafeState extends State<Cafe> {
                               ],
                             ),
 
-                            Text(Cafe_collection[index]['tag'],
-                            style: TextStyle(
-                              fontSize: 14.sp
-                            ),),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.w),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(Cafe_collection[index]['tag'
+                                  ],
+                                    style: TextStyle(
+                                        fontSize: 15.sp
+                                    ),),
+                                  richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
+                                      Cafe_collection[index]['price']),
+                                ],
+                              )
+                            ),
 
                             Container(
-                              margin: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 0.w),
+                              margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
                               height: 150.0.h,
                               child: ListView.builder( //이미지들 수평리스트로 보여줌
                                   scrollDirection: Axis.horizontal,
@@ -143,30 +157,3 @@ class _CafeState extends State<Cafe> {
     );
   }
 }
-
-//RichText위젯을 반환해주는 메소드 - 여러스타일 문자를 하나의 Text위젯에 넣을때 사용
-richtext(icon, text2){
-
-  return RichText(
-    text: TextSpan(
-      children: [
-        WidgetSpan(
-          child: Container(
-              margin: EdgeInsets.fromLTRB(3.w, 0.w, 3.w, 0.w),
-              child: icon
-          ),
-        ),
-        TextSpan(
-          text: text2,
-          style: TextStyle(
-            color: Colors.purple,
-            fontWeight: FontWeight.normal,
-            fontSize: 14.sp,
-            letterSpacing: -0.3.w,
-          ),
-        ),
-      ],
-    ),
-  );
-}
-

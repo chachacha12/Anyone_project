@@ -56,7 +56,7 @@ richtext(icon, text2){
       children: [
         WidgetSpan(
           child: Container(
-              margin: EdgeInsets.fromLTRB(3.w, 0.w, 3.w, 0.w),
+              margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
               child: icon
           ),
         ),

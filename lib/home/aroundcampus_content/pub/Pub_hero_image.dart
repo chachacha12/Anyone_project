@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
-class Cafe_hero_image extends StatelessWidget {
-  Cafe_hero_image(this.Imagepath, {Key? key}) : super(key: key);
+class Pub_hero_image extends StatelessWidget {
+  Pub_hero_image(this.Imagepath, {Key? key}) : super(key: key);
   final Imagepath;
 
   @override

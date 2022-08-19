@@ -4,15 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../various_widget.dart';
 
 
-class Cafe_more extends StatefulWidget {
-   Cafe_more(this.cafe_document, {Key? key}) : super(key: key);
-   final cafe_document;
+class Pub_more extends StatefulWidget {
+  Pub_more(this.pub_document, {Key? key}) : super(key: key);
+   final pub_document;
 
   @override
-  State<Cafe_more> createState() => _Cafe_moreState();
+  State<Pub_more> createState() => _Pub_moreState();
 }
 
-class _Cafe_moreState extends State<Cafe_more> {
+class _Pub_moreState extends State<Pub_more> {
 
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
 
@@ -20,12 +20,12 @@ class _Cafe_moreState extends State<Cafe_more> {
   Widget build(BuildContext context) {
 
     //Cafe.dart에서 가져온 이미지 리스트들을 imgList에 저장. - 타입을 리스트타입으로 바꿔주기 위해
-    for (var img in widget.cafe_document['imagepath']) {
+    for (var img in widget.pub_document['imagepath']) {
       imgList.add(img);
     }
 
     //부가설명해주는 텍스트 - 줄바꿈이 파베 firestore에선 되지않아서 여기서 줄바꿈을 해준후 보여주기위함.
-    var text = widget.cafe_document['text'].toString().replaceAll(
+    var text = widget.pub_document['text'].toString().replaceAll(
         "\\n", "\n");
 
     //various_widget.dart에 있는 캐러셀슬라이더위젯에 필요한 imageSliders옵션값(이미지리스트)
@@ -35,7 +35,7 @@ class _Cafe_moreState extends State<Cafe_more> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.cafe_document['name'],
+            widget.pub_document['name'],
           ),
               //backgroundColor: Colors.transparent,
               centerTitle: true,
@@ -64,22 +64,22 @@ class _Cafe_moreState extends State<Cafe_more> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   richtext(null,
-                      widget.cafe_document['tag']),
+                      widget.pub_document['tag']),
 
                   richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
-                      widget.cafe_document['price']),
+                      widget.pub_document['price']),
 
                   richtext(Icon(Icons.access_time, size: 15.h),
-                      widget.cafe_document['time']),
+                      widget.pub_document['time']),
 
                   richtext(Icon(Icons.block, size: 15.h),
-                      widget.cafe_document['holiday']),
+                      widget.pub_document['holiday']),
 
                   richtext(Icon(Icons.location_on_outlined, size: 15.h),
-                      widget.cafe_document['address']),
+                      widget.pub_document['address']),
 
                   richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
-                      widget.cafe_document['contact']),
+                      widget.pub_document['contact']),
                 ],
               ),
             ),

@@ -119,13 +119,23 @@ class _FashionState extends State<Fashion> {
                               ],
                             ),
 
-                            Text(fashion_collection[index]['tag'],
-                            style: TextStyle(
-                              fontSize: 14.sp
-                            ),),
+                            Container(
+                                margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.w),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(fashion_collection[index]['tag'
+                                    ],
+                                      style: TextStyle(
+                                          fontSize: 15.sp
+                                      ),),
+                                  ],
+                                )
+                            ),
 
                             Container(
-                              margin: EdgeInsets.fromLTRB(0.w, 10.h, 0.w, 0.w),
+                              margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
                               height: 150.0.h,
                               child: ListView.builder( //이미지들 수평리스트로 보여줌
                                   scrollDirection: Axis.horizontal,
