@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../various_widget.dart';
 
 
 class GroceryShop_hero_second extends StatefulWidget {
@@ -27,43 +28,8 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
     var text = widget.grocery_document['text'].toString().replaceAll(
         "\\n", "\n");
 
-
-    //캐러셀슬라이더에 넣어줄 items옵션값임.  - 슬라이드해서 보여줄 이미지들과 텍스트값들임
-    final List<Widget> imageSliders = imgList //이미지리스트를 넣어줌
-        .map((item) =>
-        Container( //item하나하나가 string으로된 사진주소 문자열 하나임.
-          child: Container(
-            margin: EdgeInsets.all(5.0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                child: Stack( //위젯들을 겹치게 배치가능. 여기선 이미지위젯과 텍스트위젯을 겹치게 배치
-                  children: <Widget>[
-                    Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                    Positioned(
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-
-                        ),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        child: Text( //슬라이드이미지들 밑에 뜰 텍스트
-                          '', //No. ${imgList.indexOf(item)} image
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontSize: 10.0,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-          ),
-        ))
-        .toList();
+    //various_widget.dart에 있는 캐러셀슬라이더위젯에 필요한 imageSliders옵션값(이미지리스트)
+    var imageSliders = Make_imagesliders(imgList);
 
     return Scaffold(
       body: CustomScrollView(

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../various_widget.dart';
+
 class Tips_hero_second extends StatefulWidget {
    Tips_hero_second(this.tips_document, {Key? key}) : super(key: key);
   final tips_document ;   //팁 컨텐츠 문서 하나
@@ -27,53 +29,8 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
     //팁 부가설명해주는 텍스트 - 줄바꿈이 파베에선 되지않아서 여기서 줄바꿈을 해준후 보여주기위함.
     var text = widget.tips_document['text'].toString().replaceAll("\\n", "\n");
 
-
-    //캐러셀슬라이더에 넣어줄 items옵션값임.  - 슬라이드해서 보여줄 이미지들과 텍스트값들임
-    final List<Widget> imageSliders = imgList   //이미지리스트를 넣어줌
-        .map((item) => Container(        //item하나하나가 string으로된 사진주소 문자열임.
-      child: Container(
-        margin: EdgeInsets.all(5.0),
-        child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(5.0)),
-            child: Stack(       //위젯들을 겹치게 배치가능. 여기선 이미지위젯과 텍스트위젯을 겹치게 배치
-              children: <Widget>[
-                Image.network(item, fit: BoxFit.cover, width: 1000.0),
-                Positioned(
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Container(
-                    decoration: BoxDecoration(
-
-                      /*
-                      gradient: LinearGradient(  //Stack위젯에서 밑의 텍스트위젯에 그라데이션 색깔 넣어주는 옵션
-                        colors: [
-                          Color.fromARGB(200, 0, 0, 0),
-                          Color.fromARGB(0, 0, 0, 0)
-                        ],
-                        begin: Alignment.bottomCenter,
-                        end: Alignment.topCenter,
-                      ),
-                       */
-                    ),
-                    padding: EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 20.0),
-                    child: Text(                  //슬라이드이미지들 밑에 뜰 텍스트
-                      '',  //No. ${imgList.indexOf(item)} image
-                      style: TextStyle(
-                        color: Colors.black45,
-                        fontSize: 10.0,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )),
-      ),
-    ))
-        .toList();
-
+    //various_widget.dart에 있는 캐러셀슬라이더위젯에 필요한 imageSliders옵션값(이미지리스트)
+    List<Widget> imageSliders = Make_imagesliders(imgList);
 
     return Scaffold(
       body: CustomScrollView(

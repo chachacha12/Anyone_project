@@ -1,8 +1,9 @@
-import 'package:anyone/home/aroundcampus_content/GroceryShop_hero_second.dart';
 import 'package:anyone/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../various_widget.dart';
+import 'GroceryShop_hero_second.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
@@ -98,7 +99,6 @@ class _GroceryShopState extends State<GroceryShop> {
                                       child: Image.network(
                                         grocery_collection[index]['imagepath'][0],
                                         fit: BoxFit.cover,)),
-
                                 )
                               ],
                             )
@@ -113,8 +113,6 @@ class _GroceryShopState extends State<GroceryShop> {
                     ),
                 childCount: count),
           ),
-
-
         ],
       ),
     );
@@ -123,28 +121,3 @@ class _GroceryShopState extends State<GroceryShop> {
 
 
 
-//RichText위젯을 반환해주는 메소드 - 여러스타일 문자를 하나의 Text위젯에 넣을때 사용
-richtext(icon, text2){
-
-  return RichText(
-    text: TextSpan(
-      children: [
-        WidgetSpan(
-          child: Container(
-            margin: EdgeInsets.fromLTRB(3.w, 0.w, 3.w, 0.w),
-            child: icon
-          ),
-        ),
-        TextSpan(
-          text: text2,
-          style: TextStyle(
-            color: Colors.purple,
-            fontWeight: FontWeight.normal,
-            fontSize: 14.sp,
-            letterSpacing: -0.3.w,
-          ),
-        ),
-      ],
-    ),
-  );
-}

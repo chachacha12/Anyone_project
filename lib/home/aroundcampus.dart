@@ -1,10 +1,11 @@
-import 'package:anyone/home/aroundcampus_content/Fashion.dart';
+import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'aroundcampus_content/GroceryShop.dart';
+import 'aroundcampus_content/cafe/Cafe.dart';
+import 'aroundcampus_content/groceryshop/GroceryShop.dart';
 
 
 //around-campus 관련 정보들을 다 담고있는 박스위젯
@@ -84,7 +85,10 @@ class _AroundCampusState extends State<AroundCampus> {
                           ),
                         ),
                         onTap: (){
-
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Cafe() )
+                          );
                         },
                       ),
                     ),

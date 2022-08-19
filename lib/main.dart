@@ -54,7 +54,6 @@ class Store1 extends ChangeNotifier{
   }
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -64,7 +63,6 @@ class MyApp extends StatelessWidget {
     //return authentic();
   }
 }
-
 
 
 //로그인해서 들어왔을때 처음 메인화면임. 정보공유와 내정보 탭 둘다 볼 수 있는곳
