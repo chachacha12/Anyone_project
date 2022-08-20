@@ -51,6 +51,7 @@ class _CafeState extends State<Cafe> {
             pinned: true,
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
               title: Text('KU students'"'"'\nfavorite Cafes' ,
                   textAlign: TextAlign.start),
               background: Image.asset(

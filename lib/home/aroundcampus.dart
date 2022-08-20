@@ -1,3 +1,4 @@
+import 'package:anyone/home/aroundcampus_content/entertainment/Entertainment.dart';
 import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -5,6 +6,7 @@ import 'dart:io';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import 'aroundcampus_content/cafe/Cafe.dart';
+import 'aroundcampus_content/culture/Culture.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
 import 'aroundcampus_content/pub/Pub.dart';
 
@@ -129,7 +131,10 @@ class _AroundCampusState extends State<AroundCampus> {
                           ),
                         ),
                         onTap: (){
-
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Culture() )
+                          );
                         },
                       ),
                     ),
@@ -147,7 +152,10 @@ class _AroundCampusState extends State<AroundCampus> {
                           ),
                         ),
                         onTap: (){
-
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Entertainment() )
+                          );
                         },
                       ),
                     ),

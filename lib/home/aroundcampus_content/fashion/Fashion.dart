@@ -52,6 +52,7 @@ class _FashionState extends State<Fashion> {
             pinned: true,
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
               title: Text('Find your style',
                   textAlign: TextAlign.end),
               background: Image.asset(

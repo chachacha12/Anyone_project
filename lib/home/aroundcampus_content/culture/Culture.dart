@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Tips_hero_second.dart';
+import 'Culture_hero_second.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
 
-class Tips extends StatefulWidget {
-   Tips({Key? key}) : super(key: key);
+class Culture extends StatefulWidget {
+  Culture({Key? key}) : super(key: key);
 
   @override
-  State<Tips> createState() => _TipsState();
+  State<Culture> createState() => _CultureState();
 }
 
-class _TipsState extends State<Tips> {
+class _CultureState extends State<Culture> {
 
-  var tips_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
+  var culture_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
 
   //hero위젯을 통해 전환될 페이지로 보내줄 팁컨텐츠 문서 하나임. 타입을 dynamic으로해야 어떤 타입이든 받을 수 있어서 이렇게함
-  dynamic tips_document;
+  dynamic culture_document;
 
   getData() async {
-    var result = await firestore.collection('tips').get();
+    var result = await firestore.collection('culture').get();
 
     setState(() {
-      tips_collection = result.docs; //컬랙션안의 문서리스트를 저장
+      culture_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴
     });
   }
@@ -44,7 +44,7 @@ class _TipsState extends State<Tips> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            'Tips',
+            'Culture',
           ),
           ),
 
@@ -69,9 +69,9 @@ class _TipsState extends State<Tips> {
                           elevation: 5.h,
                           child: SizedBox(
                             child: Hero(
-                              tag: tips_collection[index]['title'],
+                              tag: culture_collection[index]['title'],
                               child: Image.network(
-                                  tips_collection[index]['imagepath'][0],
+                                  culture_collection[index]['imagepath'],
                                   fit: BoxFit.cover),
                             ),
                             /*
@@ -93,7 +93,7 @@ class _TipsState extends State<Tips> {
                           child: SizedBox(
                             width: 150.h,
                             height: 20.h,
-                            child: Text(tips_collection[index]['title'],
+                            child: Text(culture_collection[index]['title'],
                                 textAlign: TextAlign.center),
                           ),
                         ),
@@ -103,7 +103,7 @@ class _TipsState extends State<Tips> {
                           child: SizedBox(
                             width: 150.h,
                             height: 30.h,
-                            child:Text(tips_collection[index]['tag'],
+                            child:Text(culture_collection[index]['tag'],
                                 textAlign: TextAlign.center),
                           ),             //Text(tips_collection[index]['tag']
                         ),
@@ -111,11 +111,11 @@ class _TipsState extends State<Tips> {
                     ),
                   ),
                   onTap: () {             //누르면 히어로위젯 작동하며 페이지이동
-                    tips_document =
-                    tips_collection[index]; //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
+                    culture_document =
+                    culture_collection[index]; //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
                     //이미지사진 클릭했을시 hero위젯을 통해 페이지전환 / 선택한 컨텐츠 문서 하나 전체를 두번째 페이지에 보내줌
                     Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => Tips_hero_second(tips_document)));
+                        builder: (context) => Culture_hero_second(culture_document)));
                   },
                 );
               },

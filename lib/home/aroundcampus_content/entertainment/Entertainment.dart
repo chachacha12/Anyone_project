@@ -2,38 +2,38 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../various_widget.dart';
-import 'Pub_hero_image.dart';
-import 'Pub_more.dart';
+import 'Entertainment_hero_image.dart';
+import 'Entertainment_more.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
 
-class Pub extends StatefulWidget {
-  Pub({Key? key}) : super(key: key);
+class Entertainment extends StatefulWidget {
+  Entertainment({Key? key}) : super(key: key);
 
   @override
-  State<Pub> createState() => _PubState();
+  State<Entertainment> createState() => _EntertainmentState();
 }
 
 
-class _PubState extends State<Pub> {
+class _EntertainmentState extends State<Entertainment> {
 
-  var Pub_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
+  var Entertainment_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
-  dynamic pub_document; //Cafe_more에 보내줄 카페 컨텐츠 문서 하나
+  dynamic entertainment_document;  //Cafe_more에 보내줄 카페 컨텐츠 문서 하나
 
   getData() async {
-    var result = await firestore.collection('pub').get();
+    var result = await firestore.collection('entertainment').get();
 
     setState(() {
-      Pub_collection = result.docs; //컬랙션안의 문서리스트를 저장
+      Entertainment_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴
     });
 
     //부가설명해주는 텍스트 - 줄바꿈이 파베 firestore에선 되지않아서 여기서 줄바꿈을 해준후 보여주기위함.
-    var text = Pub_collection['text'].toString().replaceAll("\\n", "\n");
+   // var text = Entertainment_collection['text'].toString().replaceAll("\\n", "\n");
   }
 
   @override
@@ -51,71 +51,66 @@ class _PubState extends State<Pub> {
             pinned: true,
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Text('Recommended by\nLocal KU students',
-                  textAlign: TextAlign.start),
+              centerTitle:true,
+              title: Text('Enjoy your Korean Life', textAlign: TextAlign.start),
               background: Image.asset(
-                'assets/Pub/pub_background.jpg',
+                'assets/Entertainment/enter_background.jpg',
                 fit: BoxFit.cover,),
             ),
           ),
 
-          //술집가게 리스트 보여줌
+          //리스트 보여줌
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
 
                     Container( //컨텐츠 하나하나
-                        margin: EdgeInsets.symmetric(
-                            vertical: 20.h, horizontal: 10.w),
+                      margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row( //가게명과 물음표 상세보기 버튼
                               children: [
                                 Flexible(
                                     fit: FlexFit.tight,
                                     flex: 4,
-                                    child: Text('   ' +
-                                        Pub_collection[index]['name'],
-                                      style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold
-                                      ),)
+                                    child: Text('   '+
+                                        Entertainment_collection[index]['title'],
+                                    style: TextStyle(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold
+                                    ),)
                                 ),
                                 Flexible(
                                   flex: 1,
                                   child: OutlinedButton(onPressed: () {
-                                    pub_document = Pub_collection[index];
+                                    entertainment_document = Entertainment_collection[index];
                                     //페이지 이동
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (context) =>
-                                            Pub_more(pub_document)));
+                                            Entertainment_more( entertainment_document )));
+
                                   }, child: Text('more'),),
                                 )
                               ],
                             ),
 
                             Container(
-                              width: double.infinity,
-                                margin: EdgeInsets.fromLTRB(
-                                    10.w, 0.h, 10.w, 0.w),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(Pub_collection[index]['tag'
-                                    ],
-                                      style: TextStyle(
-                                          fontSize: 15.sp
-                                      ),),
-                                    richtext(Icon(
-                                        Icons.monetization_on_outlined,
-                                        size: 15.h),
-                                        Pub_collection[index]['price']),
+                              margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.w),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(Entertainment_collection[index]['category'
                                   ],
-                                )
+                                    style: TextStyle(
+                                        fontSize: 15.sp
+                                    ),),
+                                  richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
+                                      Entertainment_collection[index]['time']),
+                                ],
+                              )
                             ),
 
                             Container(
@@ -123,25 +118,23 @@ class _PubState extends State<Pub> {
                               height: 150.0.h,
                               child: ListView.builder( //이미지들 수평리스트로 보여줌
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: Pub_collection[index]['imagepath']
+                                  itemCount: Entertainment_collection[index]['imagepath']
                                       .length,
                                   itemBuilder: (context, index2) {
                                     return SizedBox(
                                       width: 150.0.w,
                                       child: Card(
-                                        child: GestureDetector( //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                                        child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
                                           child: Hero(
-                                            tag: Pub_collection[index]['imagepath'][index2],
+                                           tag: Entertainment_collection[index]['imagepath'][index2],
                                             child: Image.network(
-                                              Pub_collection[index]['imagepath'][index2],
+                                              Entertainment_collection[index]['imagepath'][index2],
                                               fit: BoxFit.cover,),
                                           ),
-                                          onTap: () {
-                                            Navigator.push(
-                                                context, MaterialPageRoute(
+                                          onTap: (){
+                                            Navigator.push(context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Pub_hero_image(
-                                                        Pub_collection[index]['imagepath'][index2])));
+                                                    Entertainment_hero_image(Entertainment_collection[index]['imagepath'][index2])));
                                           },
                                         ),
                                       ),
@@ -164,4 +157,3 @@ class _PubState extends State<Pub> {
     );
   }
 }
-
