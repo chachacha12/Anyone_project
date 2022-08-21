@@ -33,8 +33,6 @@ class _FashionState extends State<Fashion> {
       count = result.size; //컬랙션안의 문서갯수를 가져옴
     });
 
-    //부가설명해주는 텍스트 - 줄바꿈이 파베 firestore에선 되지않아서 여기서 줄바꿈을 해준후 보여주기위함.
-    var text = fashion_collection['text'].toString().replaceAll("\\n", "\n");
   }
 
   @override
