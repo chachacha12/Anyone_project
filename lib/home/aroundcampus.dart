@@ -21,7 +21,7 @@ class AroundCampus extends StatefulWidget {
   State<AroundCampus> createState() => _AroundCampusState();
 }
 
-class _AroundCampusState extends State<AroundCampus> {
+class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClientMixin {
 
   var restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
@@ -43,8 +43,8 @@ class _AroundCampusState extends State<AroundCampus> {
     for(int i=0; i<restaurant_collection.length; i++){
       restaurant_random_list.add(i);
     }
-    restaurant_random_list.shuffle();
-    print('restaurant_random_list: $restaurant_random_list!!');
+    restaurant_random_list.shuffle(); //리스트를 랜덤하게 섞어줌
+
 
   }
 
@@ -285,5 +285,8 @@ class _AroundCampusState extends State<AroundCampus> {
           ],
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 

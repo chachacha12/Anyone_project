@@ -1,3 +1,4 @@
+
 import 'package:anyone/home/oncampus_content/CampusMap.dart';
 import 'package:anyone/home/oncampus_content/Helplines.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ class OnCampus extends StatefulWidget {
   @override
   State<OnCampus> createState() => _OnCampusState();
 }
-class _OnCampusState extends State<OnCampus> {
+class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
 
   //웹뷰띄울 링크들 리스트
   var linkList = [
@@ -41,7 +42,7 @@ class _OnCampusState extends State<OnCampus> {
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(   //터치기능을 넣기위해 감싸줌
                 child: GridTile(
-                  child:  Icon(Icons.star),
+                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 001.png'),           //Icon(Icons.star),
                   footer: GridTileBar(
                     title: Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
                         color: Colors.black
@@ -61,7 +62,7 @@ class _OnCampusState extends State<OnCampus> {
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
+                  child:   Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 002.png', fit: BoxFit.cover),//Icon(Icons.star),
                   footer: GridTileBar(
                     title: Text('OIA',textAlign: TextAlign.center, style: TextStyle(
                         color: Colors.black
@@ -81,7 +82,7 @@ class _OnCampusState extends State<OnCampus> {
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
+                  child:   Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 003.png'),//Icon(Icons.star),
                   footer: GridTileBar(
                     title: Text('Dormitory',textAlign: TextAlign.center, style: TextStyle(
                         color: Colors.black
@@ -101,7 +102,7 @@ class _OnCampusState extends State<OnCampus> {
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
+                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-24 004.png'),//Icon(Icons.star),
                   footer: GridTileBar(
                     title: Text('Language'"\n"'Institution',textAlign: TextAlign.center, style: TextStyle(
                         color: Colors.black
@@ -121,7 +122,7 @@ class _OnCampusState extends State<OnCampus> {
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
+                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-24 005.png'),//Icon(Icons.star),
                   footer: GridTileBar(
                     title: Text('Academic'"\n"'Calender',textAlign: TextAlign.center, style: TextStyle(
                         color: Colors.black
@@ -141,7 +142,7 @@ class _OnCampusState extends State<OnCampus> {
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
+                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-24 006.png'),//Icon(Icons.star),
                   footer: GridTileBar(
                     title: Text('Guide'"\n"'Book',textAlign: TextAlign.center, style: TextStyle(
                         color: Colors.black
@@ -281,6 +282,10 @@ class _OnCampusState extends State<OnCampus> {
       ),
     );
   }
+
+  //이 페이지 상태유지를 위한 함수
+  @override
+  bool get wantKeepAlive => true;
 }
 
 
