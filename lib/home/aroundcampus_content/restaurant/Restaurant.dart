@@ -2,37 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../various_widget.dart';
-import 'Cafe_hero_image.dart';
-import 'Cafe_more.dart';
+import '../cafe/Cafe_hero_image.dart';
+import '../cafe/Cafe_more.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
-class Cafe extends StatefulWidget {
-  Cafe({Key? key}) : super(key: key);
+class Restaurant extends StatefulWidget {
+  Restaurant({Key? key}) : super(key: key);
 
   @override
-  State<Cafe> createState() => _CafeState();
+  State<Restaurant> createState() => _RestaurantState();
 }
 
 
-class _CafeState extends State<Cafe>  {
+class _RestaurantState extends State<Restaurant>  {
 
-  var Cafe_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임. 이건 식당이 될수도 있고 카페될수도
+  var Restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임.
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
-  dynamic cafe_document;  //Cafe_more에 보내줄 카페 컨텐츠 문서 하나
+  dynamic restaurant_document;  //Cafe_more에 보내줄 식당 컨텐츠 문서 하나. - more은
 
   getData() async {
-    var result = await firestore.collection('cafe').get();
+    var result = await firestore.collection('restaurant').get();
     setState(() {
-      Cafe_collection = result.docs; //컬랙션안의 문서리스트를 저장
+      Restaurant_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴
-
     });
 
     //부가설명해주는 텍스트 - 줄바꿈이 파베 firestore에선 되지않아서 여기서 줄바꿈을 해준후 보여주기위함.
-    var text = Cafe_collection['text'].toString().replaceAll("\\n", "\n");
+    var text = Restaurant_collection['text'].toString().replaceAll("\\n", "\n");
   }
 
   @override
@@ -52,9 +51,9 @@ class _CafeState extends State<Cafe>  {
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Text('KU students'"'"'\nfavorite Cafes' , textAlign: TextAlign.start),
+              title: Text('KU students'"'"''"\n"'go-to Restaurant', textAlign: TextAlign.start),
               background: Image.asset(
-                  'assets/Cafe/cafe_background.jpg',
+                  'assets/Restaurant/restaurant_background.jpg',
                   fit: BoxFit.cover),
             ),
           ),
@@ -76,7 +75,7 @@ class _CafeState extends State<Cafe>  {
                                     fit: FlexFit.tight,
                                     flex: 4,
                                     child: Text('   '+
-                                        Cafe_collection[index]['name'],
+                                        Restaurant_collection[index]['name'],
                                     style: TextStyle(
                                       fontSize: 16.sp,
                                       fontWeight: FontWeight.bold
@@ -85,11 +84,11 @@ class _CafeState extends State<Cafe>  {
                                 Flexible(
                                   flex: 1,
                                   child: OutlinedButton(onPressed: () {
-                                    cafe_document = Cafe_collection[index];
+                                    restaurant_document = Restaurant_collection[index];
                                     //페이지 이동
                                     Navigator.push(context, MaterialPageRoute(
                                         builder: (context) =>
-                                            Cafe_more( cafe_document )));
+                                            Cafe_more( restaurant_document )));
 
                                   }, child: Text('more'),),
                                 )
@@ -102,13 +101,13 @@ class _CafeState extends State<Cafe>  {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(Cafe_collection[index]['tag'
+                                  Text(Restaurant_collection[index]['tag'
                                   ],
                                     style: TextStyle(
                                         fontSize: 15.sp
                                     ),),
                                   richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
-                                      Cafe_collection[index]['price']),
+                                      Restaurant_collection[index]['price']),
                                 ],
                               )
                             ),
@@ -118,7 +117,7 @@ class _CafeState extends State<Cafe>  {
                               height: 150.0.h,
                               child: ListView.builder( //이미지들 수평리스트로 보여줌
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: Cafe_collection[index]['imagepath']
+                                  itemCount: Restaurant_collection[index]['imagepath']
                                       .length,
                                   itemBuilder: (context, index2) {
                                     return SizedBox(
@@ -126,15 +125,15 @@ class _CafeState extends State<Cafe>  {
                                       child: Card(
                                         child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
                                           child: Hero(
-                                           tag: Cafe_collection[index]['imagepath'][index2],
+                                           tag: Restaurant_collection[index]['imagepath'][index2],
                                             child: Image.network(
-                                              Cafe_collection[index]['imagepath'][index2],
+                                              Restaurant_collection[index]['imagepath'][index2],
                                               fit: BoxFit.cover,),
                                           ),
                                           onTap: (){
                                             Navigator.push(context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Cafe_hero_image(Cafe_collection[index]['imagepath'][index2])));
+                                                    Cafe_hero_image(Restaurant_collection[index]['imagepath'][index2])));
                                           },
                                         ),
                                       ),

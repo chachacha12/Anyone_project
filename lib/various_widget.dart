@@ -61,7 +61,7 @@ richtext(icon, text2){
           ),
         ),
         TextSpan(
-          text: text2,
+          text: ' '+text2,
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.normal,

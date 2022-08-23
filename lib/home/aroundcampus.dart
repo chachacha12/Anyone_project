@@ -1,19 +1,24 @@
+import 'package:anyone/home/aroundcampus_content/cafe/Cafe_more.dart';
 import 'package:anyone/home/aroundcampus_content/entertainment/Entertainment.dart';
 import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'aroundcampus_content/cafe/Cafe.dart';
 import 'aroundcampus_content/culture/Culture.dart';
+import 'aroundcampus_content/fashion/Fashion_hero_image.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
 import 'aroundcampus_content/pub/Pub.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'dart:math';
+import 'package:logger/logger.dart';
+
+import 'aroundcampus_content/restaurant/Restaurant.dart';
+
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
 
-//around-campus 관련 정보들을 다 담고있는 박스위젯 + 식당 컬렉션 문서들을 다 가져옴
+//around-campus 관련 정보들을 다 담고있는 박스위젯 + 식당 컬렉션 문서들을 다 가져와서 보여줌
 class AroundCampus extends StatefulWidget {
   const AroundCampus({Key? key}) : super(key: key);
 
@@ -21,6 +26,7 @@ class AroundCampus extends StatefulWidget {
   State<AroundCampus> createState() => _AroundCampusState();
 }
 
+//AutomaticKeepAliveClientMixin 덕분에 식당데이터 가져온것들 oncampus탭으로 갔다올때마다 다시 요청하지 않고 상태유지함
 class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClientMixin {
 
   var restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
@@ -45,18 +51,17 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
     }
     restaurant_random_list.shuffle(); //리스트를 랜덤하게 섞어줌
 
-
   }
 
   @override
   void initState() {
     super.initState();
     getData();
-
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: CustomScrollView(
           slivers: <Widget>[
@@ -125,7 +130,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                         onTap: (){
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Cafe() )
+                              MaterialPageRoute(builder: (context) => Cafe()  ) //식당정보더보기도 이 Cafe()커스텀위젯 쓸거라, 컬렉션 네임 각각 보내줌
                           );
                         },
                       ),
@@ -232,7 +237,11 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              ElevatedButton(onPressed: () {
+                              ElevatedButton(onPressed: () {              //식당정보 더 보기 버튼
+                                Navigator.push(context, MaterialPageRoute(
+                                    builder: (context) =>
+                                    //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                                    Restaurant()   ));
 
                               }, child: Text('more'),
                                 style: ElevatedButton.styleFrom(
@@ -262,19 +271,26 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                         width: 150.0.w,
                         child: Card(
                           child: GestureDetector(   //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                            child: Hero(
-                              tag: restaurant_collection[0]['imagepath'][0],  //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
-                              child: Image.network(
-                                restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
-                                fit: BoxFit.cover,),
+                            child: Stack(  //이미지와 텍스트를 겹치게 할때 주로 사용
+                              fit: StackFit.expand,
+                              children: [
+                                Hero(
+                                  tag: restaurant_collection[restaurant_random_list[index]]['imagepath'][0],  //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
+                                  child: Image.network(
+                                    restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
+                                    fit: BoxFit.cover,),
+                                ),
+                                Positioned(child: Text(restaurant_collection[restaurant_random_list[index]]['name'],
+                                style: TextStyle(color: Colors.white, fontSize: 12.sp, fontWeight: FontWeight.bold),),
+                                bottom: 3.h,)
+                              ],
                             ),
-                            /*
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(
                                   builder: (context) =>
-                                      Fashion_hero_image(restaurant_collection[index]['imagepath'][index2])));
+                                  //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                                  Cafe_more(restaurant_collection[restaurant_random_list[index]] )  ));
                             },
-                             */
                           ),
                         ),
                       );

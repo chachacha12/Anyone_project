@@ -18,7 +18,6 @@ class _Cafe_moreState extends State<Cafe_more> {
 
   @override
   Widget build(BuildContext context) {
-
     //Cafe.dart에서 가져온 이미지 리스트들을 imgList에 저장. - 타입을 리스트타입으로 바꿔주기 위해
     for (var img in widget.cafe_document['imagepath']) {
       imgList.add(img);
@@ -46,13 +45,13 @@ class _Cafe_moreState extends State<Cafe_more> {
             child: Container(
               margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
               child: CarouselSlider( //이미지슬라이드 해주는 위젯
-                  options: CarouselOptions(
-                    //autoPlay: true,
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
-                  ),
-                  items: imageSliders,
+                options: CarouselOptions(
+                  //autoPlay: true,
+                  aspectRatio: 2.0,
+                  enlargeCenterPage: true,
                 ),
+                items: imageSliders,
+              ),
             ),
           ),
 
@@ -78,7 +77,16 @@ class _Cafe_moreState extends State<Cafe_more> {
                   richtext(Icon(Icons.location_on_outlined, size: 15.h),
                       widget.cafe_document['address']),
 
-                  richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
+                  /*
+                   richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
+                      widget.cafe_document['contact']),
+                   */
+                  richtext(Container(
+                      //color: Colors.red,
+                      width: 20.w, height: 20.w,
+                      margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+                      child: Image.asset(
+                    'assets/instagram_logo.png', fit: BoxFit.fill, )),
                       widget.cafe_document['contact']),
                 ],
               ),

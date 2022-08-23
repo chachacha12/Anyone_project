@@ -42,11 +42,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(   //터치기능을 넣기위해 감싸줌
                 child: GridTile(
-                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 001.png'),           //Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 001.png', width: 40.w, height: 40.w,),
+                      Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
