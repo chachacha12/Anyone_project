@@ -1,4 +1,5 @@
 import 'package:anyone/home/aroundcampus_content/cafe/Cafe_more.dart';
+import 'package:anyone/home/aroundcampus_content/discount/Discount.dart';
 import 'package:anyone/home/aroundcampus_content/entertainment/Entertainment.dart';
 import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
   var restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
-  var show_restaurant_num=2;  //수평리스트에서 보여줄 음식점 사진 갯수
+  var show_restaurant_num=6;  //수평리스트에서 보여줄 음식점 사진 갯수
   var restaurant_random_list = []; //db에 있는 식당의 갯수에 맞춰서 0부터 n까지 값을 랜덤하게 저장해둘 리스트
   var i=0;
 
@@ -46,7 +47,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
     });
 
     //식당 문서들 갯수만큼의 값을 갖는 리스트를 만들어준 후 숫자를 랜덤하게 섞어둘거임
-    for(int i=0; i<restaurant_collection.length; i++){
+    for(int i=0; i<count; i++){
       restaurant_random_list.add(i);
     }
     restaurant_random_list.shuffle(); //리스트를 랜덤하게 섞어줌
@@ -213,6 +214,10 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                           ),
                         ),
                         onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                              //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                              Discount()   ));
 
                         },
                       ),

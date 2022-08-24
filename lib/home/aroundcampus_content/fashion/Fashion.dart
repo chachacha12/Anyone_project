@@ -94,6 +94,8 @@ class _FashionState extends State<Fashion> {
                                             children: [
                                               richtext(Icon(Icons.access_time, size: 15.h),
                                                   fashion_collection[index]['time']),
+                                              richtext(Icon(Icons.block, size: 15.h),
+                                                  fashion_collection[index]['holiday']),
                                               richtext(Icon(Icons.location_on_outlined, size: 15.h),
                                                   fashion_collection[index]['address']),
                                               richtext(Icon(Icons.phone, size: 15.h),
@@ -119,6 +121,7 @@ class _FashionState extends State<Fashion> {
                             ),
 
                             Container(
+                                width: double.infinity,
                                 margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.w),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -126,6 +129,7 @@ class _FashionState extends State<Fashion> {
                                   children: [
                                     Text(fashion_collection[index]['tag'
                                     ],
+                                      //textAlign: TextAlign.start,
                                       style: TextStyle(
                                           fontSize: 15.sp
                                       ),),

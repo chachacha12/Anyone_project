@@ -52,7 +52,7 @@ class _EntertainmentState extends State<Entertainment> {
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle:true,
-              title: Text('Enjoy your Korean Life', textAlign: TextAlign.start),
+              title: Text('Enjoy Korean Life', textAlign: TextAlign.start),
               background: Image.asset(
                 'assets/Entertainment/enter_background.jpg',
                 fit: BoxFit.cover,),

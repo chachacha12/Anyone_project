@@ -15,10 +15,10 @@ class Culture_hero_second extends StatefulWidget {
 
 class _Culture_hero_secondState extends State<Culture_hero_second> {
 
+
   @override
   Widget build(BuildContext context) {
 
-    
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -70,7 +70,10 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
                               ),),
+
+                            //이미지 없으면 그냥 박스만 넣어줄거임
                             Image.network(widget.culture_document['sub'][index]['image']),
+
                             Text(widget.culture_document['sub'][index]['text'])
                           ],
                           

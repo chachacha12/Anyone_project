@@ -16,6 +16,7 @@ class Entertainment_more extends StatefulWidget {
 class _Entertainment_moreState extends State<Entertainment_more> {
 
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
+  var textimagebox;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,33 @@ class _Entertainment_moreState extends State<Entertainment_more> {
 
     //various_widget.dart에 있는 캐러셀슬라이더위젯에 필요한 imageSliders옵션값(이미지리스트)
     List<Widget> imageSliders = Make_imagesliders(imgList);
+
+
+    if(widget.entertainment_document['textimage'] !=''){
+       textimagebox = SizedBox(
+         width: double.infinity,
+         child: Card(
+           child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+             child: Hero(
+               tag: widget.entertainment_document['textimage'],
+               child: Image.network(
+                 widget.entertainment_document['textimage'],
+                 fit: BoxFit.cover,),
+             ),
+             onTap: (){
+               Navigator.push(context, MaterialPageRoute(
+                   builder: (context) =>
+                       Entertainment_hero_image(widget.entertainment_document['textimage'])));
+             },
+           ),
+         ),
+       );
+    }else{
+      textimagebox = SizedBox(
+        height: 0.h,
+      );
+    }
+
 
     return Scaffold(
       body: CustomScrollView(
@@ -76,24 +104,7 @@ class _Entertainment_moreState extends State<Entertainment_more> {
                   richtext(Icon(Icons.block, size: 15.h),
                       widget.entertainment_document['holiday']),
 
-                  SizedBox(
-                    width: double.infinity,
-                    child: Card(
-                      child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                        child: Hero(
-                          tag: widget.entertainment_document['textimage'],
-                          child: Image.network(
-                            widget.entertainment_document['textimage'],
-                            fit: BoxFit.cover,),
-                        ),
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) =>
-                                  Entertainment_hero_image(widget.entertainment_document['textimage'])));
-                        },
-                      ),
-                    ),
-                  )
+                  textimagebox,
                 ],
               ),
             ),
