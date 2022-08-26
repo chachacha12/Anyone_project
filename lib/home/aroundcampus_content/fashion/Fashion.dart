@@ -100,7 +100,12 @@ class _FashionState extends State<Fashion> {
                                                   fashion_collection[index]['address']),
                                               richtext(Icon(Icons.phone, size: 15.h),
                                                   fashion_collection[index]['call']),
-                                              richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
+                                              richtext( Container(
+                                                //color: Colors.red,
+                                                  width: 14.w, height: 14.w,
+                                                  margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+                                                  child: Image.asset(
+                                                    'assets/Instagram.png', fit: BoxFit.fill, )),
                                                   fashion_collection[index]['contact']),
                                               richtext(Icon(Icons.wb_incandescent_outlined, size: 15.h),
                                                   fashion_collection[index]['others']),

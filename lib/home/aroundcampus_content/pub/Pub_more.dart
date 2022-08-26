@@ -78,7 +78,12 @@ class _Pub_moreState extends State<Pub_more> {
                   richtext(Icon(Icons.location_on_outlined, size: 15.h),
                       widget.pub_document['address']),
 
-                  richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
+                  richtext(Container(
+                    //color: Colors.red,
+                      width: 14.w, height: 14.w,
+                      margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+                      child: Image.asset(
+                        'assets/Instagram.png', fit: BoxFit.fill, )),
                       widget.pub_document['contact']),
                 ],
               ),

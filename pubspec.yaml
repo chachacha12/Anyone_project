@@ -84,15 +84,31 @@ flutter:
     - assets/pub_background.jpg
     - assets/enter_background.jpg
     - assets/restaurant_background.jpg
-    - assets/instagram_logo.png
+    - assets/Instagram.png
 
 
-    - assets/KakaoTalk_Photo_2022-08-22-11-57-23 001.png
-    - assets/KakaoTalk_Photo_2022-08-22-11-57-23 002.png
-    - assets/KakaoTalk_Photo_2022-08-22-11-57-23 003.png
-    - assets/KakaoTalk_Photo_2022-08-22-11-57-24 004.png
-    - assets/KakaoTalk_Photo_2022-08-22-11-57-24 005.png
-    - assets/KakaoTalk_Photo_2022-08-22-11-57-24 006.png
+    # oncampus ion
+    - assets/Academic calendar 2.png
+    - assets/Campus Map.png
+    - assets/Clubs.png
+    - assets/Contact.png
+    - assets/dormitory.png
+    - assets/Guidebook.png
+    - assets/Helplines.png
+    - assets/Language Institution.png
+    - assets/Library.png
+    - assets/Official Site.png
+    - assets/OIA.png
+    - assets/Tips.png
+    # aroundcampus ion
+    - assets/Cafe.png
+    - assets/Culture.png
+    - assets/Discount.png
+    - assets/Entertainment.png
+    - assets/Fashion&Beauty.png
+    - assets/Grocery shopping.png
+    - assets/Pub.png
+
 
 
 

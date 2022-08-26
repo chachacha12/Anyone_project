@@ -16,6 +16,15 @@ class Culture_hero_second extends StatefulWidget {
 class _Culture_hero_secondState extends State<Culture_hero_second> {
 
 
+  //파베 db에 이미지가 '' 이렇게 비어있는 필드일때를 위한 메소드
+  get_TextImageBox(imagepath) {
+    if(imagepath != ''){   //소주제의 이미지가 비어있지않다면
+      return Image.network(imagepath);
+    }else{
+      return SizedBox(height: 0.h);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -44,7 +53,7 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
             child: Container(
               width: double.infinity,
               alignment: Alignment.center,
-              margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
+              margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 30.h),
               child: Text(widget.culture_document['tag'], style: TextStyle(
                 fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
@@ -59,29 +68,29 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
                     (context, index) =>
  
                     Container( //컨텐츠 하나하나
-                        margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+                        margin: EdgeInsets.symmetric(vertical: 0.h, horizontal: 10.w),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           //소주제 제목, 사진, 텍스트 순으로 넣어줌
                           children: [
-                            Text('${index+1}'+'. '+widget.culture_document['sub'][index]['title']+'\n',
+                            Text(widget.culture_document['sub'][index]['title'],
                               style: TextStyle(
                                   fontSize: 16.sp,
                                   fontWeight: FontWeight.bold,
                               ),),
 
-                            //이미지 없으면 그냥 박스만 넣어줄거임
-                            Image.network(widget.culture_document['sub'][index]['image']),
+                            //소주제의 이미지가 있다면 이미지 보여줌.
+                            get_TextImageBox(widget.culture_document['sub'][index]['image']),
 
-                            Text(widget.culture_document['sub'][index]['text'])
+                            //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
+                            Text(widget.culture_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),)
                           ],
                           
                         )
                     ),
                 childCount: widget.culture_document['sub'].length),
           ),
-
 
         ],
       ),

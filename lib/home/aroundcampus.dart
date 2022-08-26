@@ -78,12 +78,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('Grocery'"\n"'shopping',
-                                textAlign: TextAlign.center, style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Grocery shopping.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('Grocery'"\n"'shopping',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){
@@ -99,12 +101,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('Fashion'"\n"'&beauty',
-                                textAlign: TextAlign.center, style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Fashion&Beauty.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('Fashion'"\n"'&beauty',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){
@@ -120,12 +124,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('cafe', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Cafe.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('cafe',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){
@@ -141,12 +147,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('pub', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Pub.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('pub',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){
@@ -163,12 +171,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('Culture', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Culture.png', width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('Culture',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){
@@ -184,12 +194,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('Entertainment', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Entertainment.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('Entertainment',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){
@@ -205,12 +217,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                       margin: EdgeInsets.all(0.h),
                       child: GestureDetector(
                         child: GridTile(
-                          child: Icon(Icons.star),
-                          footer: GridTileBar(
-                            title: Text('Discount', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset('assets/Aroundcampus_icon/Discount.png', width: 35.w, height: 35.w,),//Icon(Icons.star),
+                              Text('Discount',textAlign: TextAlign.center, style: TextStyle(
+                                  color: Colors.black
+                              )),
+                            ],
                           ),
                         ),
                         onTap: (){

@@ -83,10 +83,10 @@ class _Cafe_moreState extends State<Cafe_more> {
                    */
                   richtext(Container(
                       //color: Colors.red,
-                      width: 20.w, height: 20.w,
+                      width: 14.w, height: 14.w,
                       margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
                       child: Image.asset(
-                    'assets/instagram_logo.png', fit: BoxFit.fill, )),
+                    'assets/Instagram.png', fit: BoxFit.fill, )),
                       widget.cafe_document['contact']),
                 ],
               ),

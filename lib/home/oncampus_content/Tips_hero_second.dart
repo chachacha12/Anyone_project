@@ -27,7 +27,7 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
     }
 
     //팁 부가설명해주는 텍스트 - 줄바꿈이 파베에선 되지않아서 여기서 줄바꿈을 해준후 보여주기위함.
-    var text = widget.tips_document['text'].toString().replaceAll("\\n", "\n");
+    //var text = widget.tips_document['text'].toString().replaceAll("\\n", "\n");
 
     //various_widget.dart에 있는 캐러셀슬라이더위젯에 필요한 imageSliders옵션값(이미지리스트)
     List<Widget> imageSliders = Make_imagesliders(imgList);
@@ -71,20 +71,33 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
             ),
           ),
 
-          SliverToBoxAdapter(
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: Colors.tealAccent
-              ),
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
-              padding: EdgeInsets.all(15.w),
-              child: Text(text, style: TextStyle(
-                fontSize: 15.sp
-              ),),
-            ),
-          )
 
+          //소주제들 리스트 하나씩 보여줌
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+                    (context, index) =>
+
+                    Container( //컨텐츠 하나하나
+                        margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          //소주제 제목, 사진, 텍스트 순으로 넣어줌
+                          children: [
+                            Text('${index+1}'+'. '+widget.tips_document['sub'][index]['title']+'\n',
+                              style: TextStyle(
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.bold,
+                              ),),
+
+                            //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
+                            Text(widget.tips_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"))
+                          ],
+
+                        )
+                    ),
+                childCount: widget.tips_document['sub'].length),
+          ),
 
         ],
       ),

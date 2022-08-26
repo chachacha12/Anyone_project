@@ -45,7 +45,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 001.png', width: 40.w, height: 40.w,),
+                      Image.asset('assets/Oncampus_icon/Official Site.png', width: 35.w, height: 35.w,),
                       Text('official'"\n"'site',textAlign: TextAlign.center, style: TextStyle(
                           color: Colors.black
                       )),
@@ -65,12 +65,16 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:   Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 002.png', fit: BoxFit.cover),//Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('OIA',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/OIA.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('OIA',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
+
                 ),
                 onTap: (){
                   Navigator.push(
@@ -85,11 +89,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:   Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-23 003.png'),//Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Dormitory',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:   Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/dormitory.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Dormitory',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -105,11 +112,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-24 004.png'),//Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Language'"\n"'Institution',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Language Institution.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Language'"\n"'Institution',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -125,11 +135,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-24 005.png'),//Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Academic'"\n"'Calender',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Academic calendar 2.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Academic'"\n"'Calender',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -145,11 +158,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Image.asset('assets/KakaoTalk_Photo_2022-08-22-11-57-24 006.png'),//Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Guide'"\n"'Book',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Guidebook.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Guide'"\n"'Book',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -165,11 +181,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Library',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Library.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Library',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -185,11 +204,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('School'"\n"'Contact',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Contact.png', width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('School'"\n"'Contact',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -205,11 +227,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Campus'"\n"'Map',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Campus Map.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Campus'"\n"'Map',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -225,11 +250,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Clubs',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Clubs.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Clubs',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -245,11 +273,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Tips',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Tips.png',  width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Tips',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
@@ -265,11 +296,14 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               margin: EdgeInsets.all(0.h),
               child: GestureDetector(
                 child: GridTile(
-                  child:  Icon(Icons.star),
-                  footer: GridTileBar(
-                    title: Text('Helplines',textAlign: TextAlign.center, style: TextStyle(
-                        color: Colors.black
-                    )),
+                  child:  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.asset('assets/Oncampus_icon/Helplines.png', width: 35.w, height: 35.w,),//Icon(Icons.star),
+                      Text('Helplines',textAlign: TextAlign.center, style: TextStyle(
+                          color: Colors.black
+                      )),
+                    ],
                   ),
                 ),
                 onTap: (){
