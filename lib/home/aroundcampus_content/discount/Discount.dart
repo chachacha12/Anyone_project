@@ -69,15 +69,19 @@ class _DiscountState extends State<Discount>  {
           body: NestedScrollView(
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
-                 SliverAppBar(
-                  actions: [IconButton(onPressed: (){
 
-                  }, icon: Icon(Icons.settings),
-                  iconSize: 27.h,)
-                  ],
-                  title: Text('Discount'),
+                SliverAppBar(
                   pinned: true,
-                  floating: true,
+                  expandedHeight: 200.0.h,
+                  flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: true,
+                    title: Text('Show your student ID, Get discount !\n\n',
+                        textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.black),),
+                    background: Image.asset(
+                      'assets/Discount/Discount_background.jpg',
+                      fit: BoxFit.cover,),
+                  ),
                   bottom: TabBar(
                     isScrollable: true,
                     tabs: [
@@ -95,6 +99,7 @@ class _DiscountState extends State<Discount>  {
                         color: Colors.amber, fontSize:23.sp, fontWeight: FontWeight.bold),
                   ),
                 ),
+
               ];
             },
             body: TabBarView(
