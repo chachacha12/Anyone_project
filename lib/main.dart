@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'authentic/signup.dart';
 import 'home/info.dart';
 import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'authentic/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 
 void main() async {
@@ -32,6 +36,14 @@ void main() async {
 
 //state 보관하는 클래스
 class Store1 extends ChangeNotifier{
+
+  //sharedpref에서 가져온 유저이름 저장
+  var username;
+  ChangeUserName(i){
+    username = i;
+    notifyListeners();
+  }
+
   var tab =0;  //바텀바에서 유저가 누를때 페이지전환 시켜주기위한 state
   //tab값 변경함수
   ChangeTab(i){
@@ -40,7 +52,7 @@ class Store1 extends ChangeNotifier{
   }
 
   //my.dart에서 보여줄 출국날짜값
-  var date = '날짜선택하기';
+  var date = 'Pick';
   ChangeDate(i){
     date = i;
     notifyListeners();
@@ -74,6 +86,53 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
+
+  //shared pref에 저장된 유저정보있는지보고 없으면 회원가입창으로 이동
+  getData() async {
+
+    var storage = await SharedPreferences.getInstance();
+    String? name = storage.getString('name');
+    //store에 있는 state를 변경해주는 메소드
+    context.read<Store1>().ChangeUserName(name);
+
+    //만약 sharedpref에 유저이름정보 없으면 로그인화면으로감
+    if(name ==null){   //sharedpref에 유저이름이 저장된값이 없다면
+      Navigator.pop(context);
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) =>
+          authentic() ));
+    }else{    //저장된값있으면 자동 로그인
+      Fluttertoast.showToast(
+        msg: 'Hello, $name !',
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        //fontSize: 20,
+        //textColor: Colors.white,
+        //backgroundColor: Colors.redAccent
+      );
+    }
+  }
+
+  //스낵바 띄우기
+  ShowSnackBar(text){
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(text), // 필수!
+        // Icon 위젯도 가능해용
+        duration: Duration(seconds: 3), // 얼마큼 띄울지
+        // Duration 으로 시간을 정할 수 있어요
+        backgroundColor: Colors.blue, // 색상 지정
+      ),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

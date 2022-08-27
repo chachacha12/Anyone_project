@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'checkvalidate.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+
+import 'login.dart';
 
 //파베 유저인증기능에 필요한 객체
 final auth = FirebaseAuth.instance;
@@ -33,9 +38,9 @@ class _SignUpPageState extends State<SignUpPage> {
   var passwordcheck = '';
   var controller = TextEditingController();  //비번입력값 != 비번확인입력값 일때 비번확인 textformfield 다 지워주기위해필요
 
+
   //각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
   Textfieldstyle(icon, labeltext){
-
     return InputDecoration(
       prefixIcon: icon,
       labelText: labeltext,
@@ -68,13 +73,13 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       result.user?.updateDisplayName(name.toString());
       print('파베에 회원가입성공');
-      ShowSnackBar('회원가입 성공');
+      ShowSnackBar('Sign Up Successful');
       //현재 회원가입창은 꺼주기
       Navigator.pop(context);
 
     } catch (e) {
       print(e);
-      ShowSnackBar('회원가입 실패');
+      ShowSnackBar('SignUp faile');
     }
   }
 
@@ -94,7 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("회원가입하기"),
+        title: Text("Sign Up"),
       ),
       body: Form(
         key: formKey2,
@@ -125,10 +130,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
                         FocusScope.of(context).requestFocus(_nameFocusNode);
                       },
-
                       decoration: Textfieldstyle(Icon(Icons.email), 'E-mail')
                   )
-
               ),
 
               //이름적는 칸
@@ -219,7 +222,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 40.h,
                     child: ElevatedButton(
                       child: Text(
-                        "회원가입하기",
+                        "Sign Up",
                         style: style.copyWith(
                           color: Colors.white,),
                       ),
@@ -238,12 +241,34 @@ class _SignUpPageState extends State<SignUpPage> {
                            print('비번이랑 비번확인이 같음');
                            //파베 회원가입 해주는 로직
                            SignUp(email, name, password);
+
+                           //shared pref에 유저 정보 저장
+                           //saveData(name, email);
                          }
                         }
                       },
                     ),
                   )
               ),
+
+              //로그인페이지 이동 버튼
+              GestureDetector(
+                child: Text(
+                  'move Sign In', textAlign: TextAlign.center,
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.blueAccent,
+                    fontSize: 14.sp,
+                  ),
+                ),
+                onTap: (){           //로그인페이지 이동
+                  //Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(
+                      builder: (context) =>
+                          authentic() ));
+                },
+              ),
+
               SizedBox(height: 40.h),
             ],
           ),

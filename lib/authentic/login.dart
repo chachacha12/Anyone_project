@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../home/info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import 'checkvalidate.dart';
 import 'signup.dart';
 import 'package:flutter/cupertino.dart';
+
 
 
 //로그인 화면
@@ -29,6 +31,18 @@ class _authenticState extends State<authentic> {
   //사용자가 친 이메일과 비번을 저장할 state임
   var email='';
   var password='';
+
+  //sharedpref에 유저정보 저장
+  saveData(name, email) async {
+    var storage = await SharedPreferences.getInstance();
+    storage.setString('name', name);
+    storage.setString('email', email);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   //각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
   Textfieldstyle(icon, labeltext){
@@ -62,8 +76,16 @@ class _authenticState extends State<authentic> {
           email: email,
           password: pwd
       );
-      ShowSnackBar('로그인 성공');
-       Navigator.pop(context);
+      //로그인 성공시
+
+       //현재 로그인된 사용자가 있다면
+      var currentUser = FirebaseAuth.instance.currentUser;
+      if (currentUser != null) {
+        //sharedprfe에 유저정보 저장
+        saveData(currentUser.displayName, currentUser.email);
+      }
+      ShowSnackBar('Login Successful');
+      Navigator.pop(context);
 
       //메인창으로 페이지 이동
       Navigator.push(context,
@@ -71,7 +93,7 @@ class _authenticState extends State<authentic> {
       );
     } catch (e) {
       print(e);
-      ShowSnackBar('로그인 실패');
+      ShowSnackBar('Login failed');
     }
   }
 
@@ -90,7 +112,7 @@ class _authenticState extends State<authentic> {
     return Scaffold(
 
       appBar: AppBar(
-        title: Text('로그인'), //APP BAR 만들기
+        title: Text('Sign In'), //APP BAR 만들기
         actions: <Widget>[
           IconButton(
             onPressed: () {
@@ -165,7 +187,7 @@ class _authenticState extends State<authentic> {
                       height: 40.h,
                       child: ElevatedButton(
                         child: Text(
-                          "Email 로그인",
+                          "Login",
                           style: style.copyWith(
                             color: Colors.white,),
                         ),
