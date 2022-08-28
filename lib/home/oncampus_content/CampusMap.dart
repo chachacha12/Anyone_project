@@ -2,8 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 
+import 'asset_hero_image.dart';
+
 class CampusMap extends StatelessWidget {
-  const CampusMap({Key? key}) : super(key: key);
+   CampusMap({Key? key}) : super(key: key);
+
+   //띄워줄 asset이미지들
+  var ImageList = [
+    'assets/Campusmap/campusmap_number.png',
+    'assets/Campusmap/campusmap.jpeg',
+    'assets/Campusmap/Facilities_aroundcampus_dining.png',
+    'assets/Campusmap/Facilities_aroundcampus_others.png',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +46,18 @@ class CampusMap extends StatelessWidget {
                   Container(
                     width: 400.w,
                     height: 200.h,
-                    child:  PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
-                      imageProvider: AssetImage("assets/Campusmap/campusmap_number.png"), //
-                      initialScale: PhotoViewComputedScale.covered,
+                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Hero(
+                        tag: ImageList[0],
+                        child: Image.asset(ImageList[0]
+                          ,
+                          fit: BoxFit.fill,),
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Asset_hero_image(ImageList[0])  ));
+                      },
                     ),
                   ),
 
@@ -50,9 +69,18 @@ class CampusMap extends StatelessWidget {
                   Container(
                     width: 400.w,
                     height:400.h,
-                    child:  PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
-                      imageProvider: AssetImage("assets/Campusmap/campusmap.jpeg"), //
-                      initialScale: PhotoViewComputedScale.covered,
+                    child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Hero(
+                        tag: ImageList[1],
+                        child: Image.asset(ImageList[1]
+                          ,
+                          fit: BoxFit.cover,),
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Asset_hero_image(ImageList[1])  ));
+                      },
                     ),
                   ),
 
@@ -69,9 +97,18 @@ class CampusMap extends StatelessWidget {
                   Container(
                     width: 400.w,
                     height: 400.h,
-                    child:  PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
-                      imageProvider: AssetImage("assets/Campusmap/Facilities_aroundcampus_dining.png"), //
-                      initialScale: PhotoViewComputedScale.covered,
+                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Hero(
+                        tag: ImageList[2],
+                        child: Image.asset(ImageList[2]
+                          ,
+                          fit: BoxFit.fill,),
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Asset_hero_image(ImageList[2])  ));
+                      },
                     ),
                   ),
 
@@ -82,9 +119,18 @@ class CampusMap extends StatelessWidget {
                   Container(
                     width: 400.w,
                     height: 400.w,
-                    child:  PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
-                      imageProvider: AssetImage("assets/Campusmap/Facilities_aroundcampus_others.png"), //
-                      initialScale: PhotoViewComputedScale.covered,
+                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Hero(
+                        tag: ImageList[3],
+                        child: Image.asset(ImageList[3]
+                          ,
+                          fit: BoxFit.fill,),
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Asset_hero_image(ImageList[3])  ));
+                      },
                     ),
                   ),
 
