@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 
+import 'asset_hero_image.dart';
+
 //academic calender를 보려고 클릭시 띄워줄 커스텀 위젯.  이미지 2개 보여줄거임
 class Calender extends StatelessWidget {
-  const Calender({Key? key}) : super(key: key);
+   Calender({Key? key}) : super(key: key);
+
+  var ImageList =[
+    'assets/academic_calender/Calender_version_1.png',
+    'assets/academic_calender/Calender_version_2.png'
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +23,6 @@ class Calender extends StatelessWidget {
               return <Widget>[
                 SliverAppBar(
                   collapsedHeight: 50.h,
-
                   title: Text('Academic Calender'),
                   pinned: true,
                   floating: true,
@@ -41,16 +47,36 @@ class Calender extends StatelessWidget {
             body: TabBarView(
               children: <Widget>[
                 Container(
-                    child: PhotoView(      //이미지를 줌인줌아웃 해주는 패키지로 만든 위젯
-                      imageProvider: AssetImage("assets/academic_calender/Calender_version_1.png"),
-                      initialScale: PhotoViewComputedScale.contained,
-                    )
+                  margin: EdgeInsets.all(5.w),
+                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Hero(
+                        tag: ImageList[0],
+                        child: Image.asset(ImageList[0]
+                          ,
+                          fit: BoxFit.fill,),
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Asset_hero_image(ImageList[0])  ));
+                      },
+                    ),
                 ),
                 Container(
-                    child: PhotoView(
-                      imageProvider: AssetImage("assets/academic_calender/Calender_version_2.png"),
-                      initialScale: PhotoViewComputedScale.contained,
-                    )
+                    margin: EdgeInsets.all(5.w),
+                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Hero(
+                        tag: ImageList[0],
+                        child: Image.asset(ImageList[1]
+                          ,
+                          fit: BoxFit.fill,),
+                      ),
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                Asset_hero_image(ImageList[1])  ));
+                      },
+                    ),
                 ),
               ],
             ),
