@@ -28,126 +28,123 @@ class CampusMap extends StatelessWidget {
           //contactus와 애니원메일버튼, schoolcontact. 즉 3개 박스 들어감
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Finding your way'"\n"'around campus', style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25.sp
-                  )),
-                  Text("\n"' - Konkuk University uses a numbering system to easily identify the various buildings on campus.'
-                      "\n\n"' - Please refer to the graph below to see where your classes are held.'"\n", style: TextStyle(
-                      color: Colors.black54,
-                      fontSize: 15.sp
-                  )),
+              color: Colors.white,
+              child: Container(
+                color: Colors.white,
+                margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 30.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Finding your way'"\n"'around campus', style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25.sp
+                    )),
+                    Text("\n"' - Konkuk University uses a numbering system to easily identify the various buildings on campus.'
+                        "\n\n"' - Please refer to the graph below to see where your classes are held.'"\n", style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: 15.sp
+                    )),
 
-                  //이미지 1
-                  Container(
-                    width: 400.w,
-                    height: 200.h,
-                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                      child: Hero(
-                        tag: ImageList[0],
-                        child: Image.asset(ImageList[0]
-                          ,
-                          fit: BoxFit.fill,),
+                    //이미지 1
+                    SizedBox(
+                      width: 400.w,
+                      height: 200.h,
+                      child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                        child: Hero(
+                          tag: ImageList[0],
+                          child: Image.asset(ImageList[0]
+                            ,
+                            fit: BoxFit.fill,),
+                        ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  Asset_hero_image(ImageList[0])  ));
+                        },
                       ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Asset_hero_image(ImageList[0])  ));
-                      },
                     ),
-                  ),
 
-                  SizedBox(
-                    height: 20.h,
-                  ),
+                    SizedBox(
+                      height: 20.h,
+                    ),
 
-                  //이미지 2
-                  Container(
-                    width: 400.w,
-                    height:400.h,
-                    child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                      child: Hero(
-                        tag: ImageList[1],
-                        child: Image.asset(ImageList[1]
-                          ,
-                          fit: BoxFit.cover,),
+                    //이미지 2
+                    SizedBox(
+                      width: 400.w,
+                      height:400.h,
+                      child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                        child: Hero(
+                          tag: ImageList[1],
+                          child: Image.asset(ImageList[1]
+                            ,
+                            fit: BoxFit.cover,),
+                        ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  Asset_hero_image(ImageList[1])  ));
+                        },
                       ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Asset_hero_image(ImageList[1])  ));
-                      },
                     ),
-                  ),
 
-                  Text("\n"'Facilites', style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25.sp
-                  )),
+                    Text("\n"'Facilites', style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25.sp
+                    )),
 
-                  SizedBox(
-                    height: 10.h,
-                  ),
+                    SizedBox(
+                      height: 10.h,
+                    ),
 
-                  //이미지 3
-                  Container(
-                    width: 400.w,
-                    height: 400.h,
-                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                      child: Hero(
-                        tag: ImageList[2],
-                        child: Image.asset(ImageList[2]
-                          ,
-                          fit: BoxFit.fill,),
+                    //이미지 3
+                    SizedBox(
+                      width: 400.w,
+                      height: 400.h,
+                      child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                        child: Hero(
+                          tag: ImageList[2],
+                          child: Image.asset(ImageList[2]
+                            ,
+                            fit: BoxFit.fill,),
+                        ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  Asset_hero_image(ImageList[2])  ));
+                        },
                       ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Asset_hero_image(ImageList[2])  ));
-                      },
                     ),
-                  ),
 
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  //이미지 4
-                  Container(
-                    width: 400.w,
-                    height: 400.w,
-                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                      child: Hero(
-                        tag: ImageList[3],
-                        child: Image.asset(ImageList[3]
-                          ,
-                          fit: BoxFit.fill,),
+                    SizedBox(
+                      height: 20.h,
+                    ),
+                    //이미지 4
+                    SizedBox(
+                      width: 400.w,
+                      height: 400.w,
+                      child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                        child: Hero(
+                          tag: ImageList[3],
+                          child: Image.asset(ImageList[3]
+                            ,
+                            fit: BoxFit.fill,),
+                        ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  Asset_hero_image(ImageList[3])  ));
+                        },
                       ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Asset_hero_image(ImageList[3])  ));
-                      },
                     ),
-                  ),
 
-                  SizedBox(
-                    height: 40.h,
-                  ),
-
-
-                ],
+                    SizedBox(
+                      height: 40.h,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-
-
-
-
-
 
         ],
       ),

@@ -55,7 +55,8 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
               alignment: Alignment.center,
               margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 30.h),
               child: Text(widget.culture_document['tag'], style: TextStyle(
-                fontSize: 20.sp,
+                color: Colors.black45,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,),
@@ -76,7 +77,7 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
                           children: [
                             Text(widget.culture_document['sub'][index]['title'],
                               style: TextStyle(
-                                  fontSize: 16.sp,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.bold,
                               ),),
 
@@ -84,7 +85,11 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
                             get_TextImageBox(widget.culture_document['sub'][index]['image']),
 
                             //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
-                            Text(widget.culture_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),)
+                            Text(widget.culture_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.normal,
+                              ),)
                           ],
                           
                         )

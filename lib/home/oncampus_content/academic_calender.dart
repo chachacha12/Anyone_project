@@ -32,53 +32,58 @@ class Calender extends StatelessWidget {
                       Tab(text: 'Version 1',),
                       Tab(text: 'Version 2',)
                     ],
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicatorWeight: 1,
-                    indicatorColor: Colors.white,
-                    unselectedLabelColor: Color(0xFFDDDDDD),
-                    labelColor: Colors.white,
-                    unselectedLabelStyle: TextStyle(color: Colors.pinkAccent, fontSize: 15.sp),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorWeight: 2,
+                    indicatorColor: Colors.green,
+                    unselectedLabelColor: Colors.grey,
+                    labelColor: Colors.black,
+                    unselectedLabelStyle: TextStyle(fontSize: 15.sp),
                     labelStyle: TextStyle(
-                        color: Colors.amber, fontSize:23.sp, fontWeight: FontWeight.bold),
-                  ),
+                        fontSize:21.sp, fontWeight: FontWeight.w700),
+
+                    ),
                 ),
               ];
             },
-            body: TabBarView(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.all(5.w),
-                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                      child: Hero(
-                        tag: ImageList[0],
-                        child: Image.asset(ImageList[0]
-                          ,
-                          fit: BoxFit.fill,),
-                      ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Asset_hero_image(ImageList[0])  ));
-                      },
-                    ),
-                ),
-                Container(
+            body: Container(
+              color: Colors.white,
+              child: TabBarView(
+                children: <Widget>[
+                  Container(
+                    color: Colors.white,
                     margin: EdgeInsets.all(5.w),
-                    child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                      child: Hero(
-                        tag: ImageList[0],
-                        child: Image.asset(ImageList[1]
-                          ,
-                          fit: BoxFit.fill,),
+                      child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                        child: Hero(
+                          tag: ImageList[0],
+                          child: Image.asset(ImageList[0],
+                            fit: BoxFit.fill,),
+                        ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  Asset_hero_image(ImageList[0])  ));
+                        },
                       ),
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) =>
-                                Asset_hero_image(ImageList[1])  ));
-                      },
-                    ),
-                ),
-              ],
+                  ),
+                  Container(
+                    color: Colors.white,
+                      margin: EdgeInsets.all(5.w),
+                      child:  GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                        child: Hero(
+                          tag: ImageList[0],
+                          child: Image.asset(ImageList[1]
+                            ,
+                            fit: BoxFit.fill,),
+                        ),
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(
+                              builder: (context) =>
+                                  Asset_hero_image(ImageList[1])  ));
+                        },
+                      ),
+                  ),
+                ],
+              ),
             ),
           )),
     );

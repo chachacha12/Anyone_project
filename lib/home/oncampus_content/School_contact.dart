@@ -44,32 +44,36 @@ class Contact extends StatelessWidget {
           //contactus와 애니원메일버튼, schoolcontact. 즉 3개 박스 들어감
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Contact Us', style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25.sp
-                  )),
-                  Card(
-                    elevation: 5,
-                    margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
-                    child: ListTile(
-                      title: Text('Team <ANYONE>', style: Theme.of(context).textTheme.titleMedium),
-                      subtitle: Text('exchangestudents0906@gmail.com'),
-                      trailing: Icon(Icons.email),
-                      onTap: (){
-                        launchUrl(emailLaunchUri);    //이메일보내기
-                      },
+              color: Colors.white,
+              child: Container(
+                color: Colors.white,
+                margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Contact Us', style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 23.sp
+                    )),
+                    Card(
+                      elevation: 2,
+                      margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
+                      child: ListTile(
+                        title: Text('< Anyone >', style: Theme.of(context).textTheme.titleMedium),
+                        subtitle: Text('exchangestudents0906@gmail.com'),
+                        trailing: Icon(Icons.email),
+                        onTap: (){
+                          launchUrl(emailLaunchUri);    //이메일보내기
+                        },
+                      ),
                     ),
-                  ),
 
-                  Text("\n"'School Contact', style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25.sp
-                  )),
-                ],
+                    Text("\n"'School Contact', style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 23.sp
+                    )),
+                  ],
+                ),
               ),
             ),
           ),
@@ -79,7 +83,7 @@ class Contact extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
                     Card(        //리스트 속 각각의 객체 하나하나임
-                      elevation: 5,
+                      elevation: 2,
                       margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
                       child: ListTile(
                         title: Text(contact_list[index][0], style: Theme.of(context).textTheme.titleMedium),

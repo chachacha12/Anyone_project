@@ -10,7 +10,8 @@ class ShimmerLoadingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
+      alignment: Alignment.center,
+      margin: EdgeInsets.all(5.w),
       height: 200.0.h,
       child: ListView.builder( //이미지들 수평리스트로 보여줌
           scrollDirection: Axis.horizontal,

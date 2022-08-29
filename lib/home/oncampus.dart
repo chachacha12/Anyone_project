@@ -32,8 +32,8 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 500.0.h,
-      //width: double.infinity.w,
+      //height: 100.0.h,
+      color: Colors.white,
       child: GridView.count(
           crossAxisCount: 4,
           children: [

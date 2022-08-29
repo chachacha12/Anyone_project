@@ -29,11 +29,7 @@ class _InfoState extends State<Info>  {
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                  SliverAppBar(
-                  actions: [IconButton(onPressed: (){
 
-                  }, icon: Icon(Icons.settings),
-                  iconSize: 27.h,)
-                  ],
                   title: Text('Anyone'),
                   pinned: true,
                   floating: true,
@@ -43,14 +39,14 @@ class _InfoState extends State<Info>  {
                       Tab(text: 'On-Campus',),
                       Tab(text: 'Around-Campus',)
                     ],
-                    indicatorSize: TabBarIndicatorSize.label,
-                    indicatorWeight: 1,
-                    indicatorColor: Colors.white,
-                    unselectedLabelColor: Color(0xFFDDDDDD),
-                    labelColor: Colors.white,
-                    unselectedLabelStyle: TextStyle(color: Colors.pinkAccent, fontSize: 15.sp),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorWeight: 2,
+                    indicatorColor: Colors.green,
+                    unselectedLabelColor: Colors.grey,
+                    labelColor: Colors.black,
+                    unselectedLabelStyle: TextStyle(fontSize: 15.sp),
                     labelStyle: TextStyle(
-                        color: Colors.amber, fontSize:23.sp, fontWeight: FontWeight.bold),
+                        fontSize:21.sp, fontWeight: FontWeight.w700),
                   ),
                 ),
               ];

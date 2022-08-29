@@ -45,13 +45,14 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
 
           SliverToBoxAdapter(
             child: Container(
-                  margin: EdgeInsets.fromLTRB(0, 20.h, 0, 0),
+              color: Colors.white,
+                  padding: EdgeInsets.fromLTRB(0, 20.h, 0, 0),
                   child: Hero(        //Hero위젯
                     tag: widget.tips_document['title'],
                     child: CarouselSlider(         //이미지슬라이드 해주는 위젯
                       options: CarouselOptions(
                         //autoPlay: true,
-                        aspectRatio: 2.0,
+                        aspectRatio: 2.0.w,
                         enlargeCenterPage: true,
                       ),
                       items: imageSliders,
@@ -62,23 +63,24 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
 
           SliverToBoxAdapter(
             child: Container(
+              color: Colors.white,
               alignment: Alignment.center,
-              margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
+              padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
               child: Text(widget.tips_document['tag'], style: TextStyle(
-                fontSize: 20.sp,
+                color: Colors.black45,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),),
             ),
           ),
 
-
           //소주제들 리스트 하나씩 보여줌
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
-
                     Container( //컨텐츠 하나하나
-                        margin: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+                        color: Colors.white,
+                        padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,14 +88,17 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
                           children: [
                             Text('${index+1}'+'. '+widget.tips_document['sub'][index]['title']+'\n',
                               style: TextStyle(
-                                fontSize: 16.sp,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.bold,
                               ),),
 
                             //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
-                            Text(widget.tips_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"))
+                            Text(widget.tips_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.normal,
+                              ),)
                           ],
-
                         )
                     ),
                 childCount: widget.tips_document['sub'].length),

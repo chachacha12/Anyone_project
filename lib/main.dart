@@ -1,7 +1,7 @@
+import 'package:anyone/Style.dart' as style;
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'authentic/signup.dart';
 import 'home/info.dart';
 import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'authentic/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
+
 
 
 void main() async {
@@ -27,7 +27,9 @@ void main() async {
         child:  ScreenUtilInit(   //화면 반응형앱을 위한 패키지로 만든 위젯
             designSize: Size(360,690),
           builder: (BuildContext context, Widget? child) {
-              return  MaterialApp( home: MyApp());
+              return  MaterialApp(
+                  theme: style.theme, //Style.dart에 따로 빼둔 변수값을 가져와서 디자인에 씀
+                  home: MyApp());
           },
 
         )
@@ -142,8 +144,20 @@ class _MainState extends State<Main> {
       ][context.watch<Store1>().tab],  //Store1안의 state를 가져옴
 
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: context.watch<Store1>().tab,
+
         showSelectedLabels: false,
-        showUnselectedLabels: false,
+        showUnselectedLabels:false,
+        iconSize: 25.sp,
+        selectedIconTheme: IconThemeData(
+          color: Colors.green
+        ),
+        unselectedIconTheme: IconThemeData(
+          color: Colors.grey
+        ),
+        elevation: 0,
+        //selectedFontSize: 14, //선택된 아이템의 폰트사이즈
+        //unselectedFontSize: 14, //선택 안된 아이템의 폰트사이즈
         items: [
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined), label: ' Info'),
@@ -151,7 +165,7 @@ class _MainState extends State<Main> {
               icon: Icon(Icons.account_circle_rounded), label: ' My'),
         ],
         onTap: (i){    //i는 바텀네비게이션에서 누르는 버튼 순서번호임. 첫번째 버튼 누르면 i는 0이됨.
-          context.read<Store1>().ChangeTab(i);
+          setState(() => context.read<Store1>().ChangeTab(i));
         },
       ),
     );

@@ -54,57 +54,60 @@ class _CultureState extends State<Culture> {
               crossAxisCount: 2,
               crossAxisSpacing: 0.h,
               mainAxisSpacing: 0.h,
-              childAspectRatio: 0.6
-                  .h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
+              childAspectRatio: 0.5.h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
             ),
 
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                 return GestureDetector(
                   child: Container( //팁에 사용되는 구간임- 이미지랑 텍스트들
-                    margin: EdgeInsets.fromLTRB(20.w, 20.h, 20.w, 0.h),
+                    color: Colors.white,
+                    padding: EdgeInsets.fromLTRB(15.w, 20.h, 15.w, 0.h),
                     child: Column(
                       children: [
-                        Card(
-                          elevation: 5.h,
-                          child: SizedBox(
-                            child: Hero(
-                              tag: culture_collection[index]['title'],
-                              child: Image.network(
-                                  culture_collection[index]['imagepath'],
-                                  fit: BoxFit.cover),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black,
+                                  width: 2.w),
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(
+                                      5.w))),
+                          child: Card(
+                            elevation: 2.h,
+                            child: SizedBox(
+                              child: Hero(
+                                tag: culture_collection[index]['title'],
+                                child: Image.network(
+                                    culture_collection[index]['imagepath'],
+                                    fit: BoxFit.cover),
+                              ),
+                              height: 150.h,
+                              width: 150.h,
                             ),
-                            /*
-                            //첫번째 이미지만 가져와서 보여줌
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Colors.black45, width: 3.w),
-                              //borderRadius: BorderRadius.circular(10)
-                            ),
-                             */
-                            height: 150.h,
-                            width: 150.h,
                           ),
                         ),
                         //Spacer(flex: 2,),
                         Card(
-                          elevation: 3.h,
+                          elevation: 2.h,
                           margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
                           child: SizedBox(
                             width: 150.h,
-                            height: 20.h,
+                            height: 30.h,
                             child: Text(culture_collection[index]['title'],
-                                textAlign: TextAlign.center),
+                                textAlign: TextAlign.center,),
                           ),
                         ),
                         Card(
-                          elevation: 3.h,
+                          elevation: 2.h,
                           margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
                           child: SizedBox(
                             width: 150.h,
                             height: 30.h,
                             child:Text(culture_collection[index]['tag'],
-                                textAlign: TextAlign.center),
+                                textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black45
+                            ),),
                           ),             //Text(tips_collection[index]['tag']
                         ),
                       ],

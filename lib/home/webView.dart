@@ -23,7 +23,7 @@ class MyWebView extends StatelessWidget {
               color: Colors.black
           ),
           title: Text(appbartext, style: TextStyle(color: Colors.black)),
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           elevation: 0.0,  //그림자 농도 설정임. 0넣어서 제거
         ),
         body: WebView(

@@ -61,46 +61,31 @@ class Helplines extends StatelessWidget {
           ),
           ),
 
-          //contactus와 애니원메일버튼, schoolcontact. 즉 3개 박스 들어감
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Helplines', style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25.sp
-                  )),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                ],
-              ),
-            ),
-          ),
-
           //학교연락망들 보여주는 리스트
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
-                    Card( //리스트 속 각각의 객체 하나하나임
-                      elevation: 5,
-                      margin: EdgeInsets.symmetric(
-                          vertical: 10.h, horizontal: 20.w),
-                      child: ListTile(
-                        title: Text(contact_list[index][0], style: TextStyle(
-                          fontSize: 20.sp,
-                          fontWeight: FontWeight.w400,
-                        )),
-                        subtitle: Text(contact_list[index][1], style: TextStyle(
-                            fontSize: 15.sp
-                        ),),
-                          trailing: Icon(Icons.phone_forwarded),
-                        onTap: () {
-                          _makePhoneCall(contact_list[index][2]);
-                        },
+                    Container(
+                      color: Colors.white,
+                      child: Card( //리스트 속 각각의 객체 하나하나임
+                        elevation: 2,
+                        margin: EdgeInsets.symmetric(
+                            vertical: 10.h, horizontal: 20.w),
+                        child: ListTile(
+                          title: Text(contact_list[index][0], style: TextStyle(
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                          )),
+                          subtitle: Text(contact_list[index][1], style: TextStyle(
+                              fontSize: 15.sp,
+                            color: Colors.black45
+                          ),),
+                            trailing: Icon(Icons.phone_forwarded),
+                          onTap: () {
+                            _makePhoneCall(contact_list[index][2]);
+                          },
 
+                        ),
                       ),
                     ),
                 childCount: 9),

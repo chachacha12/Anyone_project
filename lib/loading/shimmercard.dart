@@ -11,7 +11,7 @@ class ShimmerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.all(16.0.h),
+      padding:  EdgeInsets.fromLTRB(5.w, 0.h, 0.w, 0.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -21,7 +21,7 @@ class ShimmerCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ShimmerComponent.rectangular(height: 150.h, width: 150.w),
+              ShimmerComponent.rectangular(height: 140.h, width: 140.w),
 
               /*
                ShimmerComponent.circular(width: 50.w, height: 50.h),
