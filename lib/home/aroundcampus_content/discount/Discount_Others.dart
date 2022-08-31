@@ -38,7 +38,7 @@ class _Discount_OthersState extends State<Discount_Others> {
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
                     Card( //리스트 속 각각의 객체 하나하나임
-                          elevation: 5,
+                          elevation: 3,
                           margin: EdgeInsets.symmetric(
                               vertical: 10.h, horizontal: 15.w),
                           child: Padding(
@@ -61,12 +61,12 @@ class _Discount_OthersState extends State<Discount_Others> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('- Discount contents -', style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 15.sp,
-                                          ),),
-                                          Text(widget.collection[index]['contents'])
+                                          Text(widget.collection[index]['contents'],
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14.sp,
+                                            ),)
                                         ],
                                       )
                                     ],

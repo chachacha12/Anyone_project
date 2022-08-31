@@ -56,7 +56,7 @@ richtext(icon, text2){
       children: [
         WidgetSpan(
           child: Container(
-              margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+              //margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
               child: icon
           ),
         ),
@@ -64,11 +64,12 @@ richtext(icon, text2){
           text: ' '+text2,
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.normal,
-            fontSize: 15.sp,
-            letterSpacing: -0.1.w,
+            fontWeight: FontWeight.w400,
+            fontSize: 14.sp,
           ),
         ),
+
+
       ],
     ),
   );

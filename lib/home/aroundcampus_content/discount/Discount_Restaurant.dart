@@ -62,12 +62,12 @@ class _Discount_RestaurantState extends State<Discount_Restaurant> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text('- Discount contents -', style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 15.sp,
-                                          ),),
-                                          Text(widget.collection[index]['contents'])
+                                          Text(widget.collection[index]['contents'],
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.normal,
+                                              fontSize: 14.sp,
+                                            ),)
                                         ],
                                       )
 

@@ -120,8 +120,6 @@ class _MyState extends State<My> {
         SliverAppBar(
           //SliverAppBar의 높이 설정
           toolbarHeight: 50.0.h,
-          //SliverAppBar의 backgroundcolor
-          backgroundColor: Colors.transparent,
           //하단 List를 최상단으로 올렸을때의 SliverAppBar의 Default height
           //expandedHeight를 사용하면 스크롤을 내리면 toolbarheight높이까지 줄어든다.
           expandedHeight: 0.0.h,
@@ -135,49 +133,51 @@ class _MyState extends State<My> {
           // List를 최상단으로 올렸을 때만 나와야 한다. -> false
           floating: true,
         ),
-
-
+        
         //이름 보여줌
         SliverToBoxAdapter(
-            child: Card(
-              margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 0.h),
-              elevation: 3,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 40.w),
-                    child: Text(
-                        'The time left before ${context.watch<Store1>().username} leaves for home country !',
-                        textAlign: TextAlign.start,
-                        style: TextStyle(color: Colors.black, fontSize: 16.sp)),
-                  ),
+            child: Container(
+              color: Colors.white,
+              child: Card(
+                margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 0.h),
+                elevation: 1,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 40.w),
+                      child: Text(
+                          'The time left before ${context.watch<Store1>().username} leaves for home country !',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(color: Colors.black, fontSize: 16.sp)),
+                    ),
 
-                  SizedBox(
-                    height: 50.h,
-                    child: Text('D ' + context
-                        .watch<Store1>()
-                        .dday, style: TextStyle(fontSize: 25.sp,),),
-                  ),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text('Departure Date: ', style: TextStyle(
-                        fontSize: 18.sp
-                      )),
-                      TextButton(onPressed: () {
-                        showDatePickerPop(); //날짜픽업위젯보여줌
-                      }, child: Text(context
+                    SizedBox(
+                      height: 50.h,
+                      child: Text('D ' + context
                           .watch<Store1>()
-                          .date,
-                          style: TextStyle(
-                              fontSize: 18.sp
-                          ))
-                      )
-                    ],
-                  ),
-                ],
+                          .dday, style: TextStyle(fontSize: 25.sp,),),
+                    ),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Departure Date: ', style: TextStyle(
+                          fontSize: 18.sp
+                        )),
+                        TextButton(onPressed: () {
+                          showDatePickerPop(); //날짜픽업위젯보여줌
+                        }, child: Text(context
+                            .watch<Store1>()
+                            .date,
+                            style: TextStyle(
+                                fontSize: 18.sp
+                            ))
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
             )
         ),

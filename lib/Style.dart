@@ -6,6 +6,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 var theme = ThemeData(
     ///앱바스타일
     appBarTheme: AppBarTheme(
+        elevation: 1,
+        centerTitle: true,
         titleTextStyle: TextStyle(
             color: Colors.black,
             fontSize: 20.sp,

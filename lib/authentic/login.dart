@@ -51,7 +51,7 @@ class _authenticState extends State<authentic> {
       labelText: labeltext,
       helperStyle: TextStyle(color: Colors.red),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.w),
       ),
     );
   }
@@ -84,7 +84,7 @@ class _authenticState extends State<authentic> {
         //sharedprfe에 유저정보 저장
         saveData(currentUser.displayName, currentUser.email);
       }
-      ShowSnackBar('Login Successful');
+      ShowSnackBar('Sign In Successful');
       Navigator.pop(context);
 
       //메인창으로 페이지 이동
@@ -93,7 +93,7 @@ class _authenticState extends State<authentic> {
       );
     } catch (e) {
       print(e);
-      ShowSnackBar('Login failed');
+      ShowSnackBar('Sign In failed');
     }
   }
 
@@ -113,130 +113,127 @@ class _authenticState extends State<authentic> {
 
       appBar: AppBar(
         title: Text('Sign In'), //APP BAR 만들기
-        actions: <Widget>[
-          IconButton(
-            onPressed: () {
 
-            },
-            icon: Icon(Icons.star),
-          ),
-        ],
       ),
 
 
-      body: Form(  //textformfield를 사용하기위함
-        key: formKey,  //textformfield를 사용하기위
-        child: Padding( //body는 appbar아래 화면을 지정.
-          padding: EdgeInsets.all(8.0.h),
-          child: Center( //가운데로 지정
-            child: ListView( //ListView - children으로 여러개 padding설정
-                shrinkWrap: true,
-                children: <Widget>[
+      body: Container(
+        color: Colors.white,
+        child: Form(  //textformfield를 사용하기위함
+          key: formKey,  //textformfield를 사용하기위
+          child: Padding( //body는 appbar아래 화면을 지정.
+            padding: EdgeInsets.all(8.0.h),
+            child: Center( //가운데로 지정
+              child: ListView( //ListView - children으로 여러개 padding설정
+                  shrinkWrap: true,
+                  children: <Widget>[
 
-                  //이메일을 입력하는 칸
-                  Padding(
-                      padding:  EdgeInsets.all(16.0.h),
-                      child: TextFormField(
-                        autofocus: true,
-                        focusNode: _emailFocusNode,
-                        keyboardType: TextInputType.emailAddress, //이메일형식으로 키보드
-                        onSaved: (value){
-                          setState((){
-                            email = value!.trim();     //유저가 친 이메일 값을 저장해줌. 앞뒤공백잘라서
-                          });
-                        },
-                        validator: (value) => CheckValidate().validateEmail(
-                            _emailFocusNode, value!.trim()),
-                          autovalidateMode: AutovalidateMode.always,
-
-                          //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
-                          onFieldSubmitted: (_){  //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
-                          FocusScope.of(context).requestFocus(_passwordFocusNode);
-                          },
-
-                          decoration:Textfieldstyle(Icon(Icons.email), 'E-mail')
-                      )
-                  ),
-
-                  //비밀번호 입려칸
-                  Padding( //두번째 padding <- LIstview에 속함.
-                      padding: EdgeInsets.all(16.0.h),
-                      child: TextFormField(
-                          keyboardType: TextInputType.visiblePassword,
-                          obscureText: true,  //비번적을때 *로 나오게 하는것
+                    //이메일을 입력하는 칸
+                    Padding(
+                        padding:  EdgeInsets.all(16.0.h),
+                        child: TextFormField(
+                          //autofocus: true,
+                          focusNode: _emailFocusNode,
+                          keyboardType: TextInputType.emailAddress, //이메일형식으로 키보드
                           onSaved: (value){
                             setState((){
-                              password = value!.trim();  //유저가 친 비번 값을 저장해줌
+                              email = value!.trim();     //유저가 친 이메일 값을 저장해줌. 앞뒤공백잘라서
                             });
                           },
-                          validator: (value) => CheckValidate().validatePassword(
-                              _passwordFocusNode, value!.trim()),
-                          autovalidateMode: AutovalidateMode.always,
-                          //textInputAction: TextInputAction.next,
-                          focusNode: _passwordFocusNode,
+                          validator: (value) => CheckValidate().validateEmail(
+                              _emailFocusNode, value!.trim()),
+                             autovalidateMode: AutovalidateMode.always,
 
-                          decoration: Textfieldstyle(Icon(Icons.lock), 'password')
-                      )
-                  ),
+                            //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
+                            onFieldSubmitted: (_){  //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
+                            FocusScope.of(context).requestFocus(_passwordFocusNode);
+                            },
 
-                  //로그인 버튼
-                  Container( //세번째 padding
-                    margin: EdgeInsets.fromLTRB(0.h, 15.h, 0.h, 7.h),
-                    padding:  EdgeInsets.symmetric(horizontal: 60.0.h),
-                    child: SizedBox(
-                      height: 40.h,
-                      child: ElevatedButton(
-                        child: Text(
-                          "Login",
-                          style: style.copyWith(
-                            color: Colors.white,),
+                            decoration:Textfieldstyle(Icon(Icons.email), 'E-mail')
+                        )
+                    ),
+
+                    //비밀번호 입려칸
+                    Padding( //두번째 padding <- LIstview에 속함.
+                        padding: EdgeInsets.all(16.0.h),
+                        child: TextFormField(
+                            keyboardType: TextInputType.visiblePassword,
+                            obscureText: true,  //비번적을때 *로 나오게 하는것
+                            onSaved: (value){
+                              setState((){
+                                password = value!.trim();  //유저가 친 비번 값을 저장해줌
+                              });
+                            },
+                            validator: (value) => CheckValidate().validatePassword(
+                                _passwordFocusNode, value!.trim()),
+                            autovalidateMode: AutovalidateMode.always,
+                            //textInputAction: TextInputAction.next,
+                            focusNode: _passwordFocusNode,
+
+                            decoration: Textfieldstyle(Icon(Icons.lock), 'password')
+                        )
+                    ),
+
+                    //로그인 버튼
+                    Container( //세번째 padding
+                      margin: EdgeInsets.fromLTRB(0.h, 15.h, 0.h, 7.h),
+                      padding:  EdgeInsets.symmetric(horizontal: 60.0.h),
+                      child: SizedBox(
+                        height: 40.h,
+                        child: ElevatedButton(
+                          child: Text(
+                            "Sign In",
+                            style: style.copyWith(
+                              color: Colors.white,),
+                          ),
+                          onPressed: () {
+                            //Form내부에 있는 textformfield들의 유효성 결과에 따라 성공이면 true 리턴.
+                            if(formKey.currentState!.validate()){
+                              // validation 이 성공하면 true 가 리턴돼요!
+                              // validation 이 성공하면 폼 저장하기
+                              formKey.currentState?.save();
+                              //로그인 로직시작
+                              LogIn(email, password);
+                            }
+                          },
                         ),
-                        onPressed: () {
-                          //Form내부에 있는 textformfield들의 유효성 결과에 따라 성공이면 true 리턴.
-                          if(formKey.currentState!.validate()){
-                            // validation 이 성공하면 true 가 리턴돼요!
-                            // validation 이 성공하면 폼 저장하기
-                            formKey.currentState?.save();
-                            //로그인 로직시작
-                            LogIn(email, password);
-                          }
+                      )
+                    ),
+                    SizedBox(height: 10.h), //View같은 역할 중간에 띄는 역할
+                    Center( //Center <- Listview
+                      child: InkWell( //InkWell을 사용 -- onTap이 가능한 이유임.
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'first time to visit "Anyone"?  ',
+                              style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.w400
+                              ),
+                            ),
+                            Text(
+                              'Register',
+                              style: TextStyle(
+                                //decoration: TextDecoration.underline,
+                                color: Colors.blueAccent,
+                                fontSize: 14.sp,
+                              ),
+                            ),
+                          ],
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignUpPage()),
+                          );
                         },
                       ),
-                    )
-                  ),
-                  SizedBox(height: 10.h), //View같은 역할 중간에 띄는 역할
-                  Center( //Center <- Listview
-                    child: InkWell( //InkWell을 사용 -- onTap이 가능한 이유임.
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'first time to do "Anyone"?  ',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                          Text(
-                            'Register',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.blueAccent,
-                              fontSize: 14.sp,
-                            ),
-                          ),
-                        ],
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => SignUpPage()),
-                        );
-                      },
                     ),
-                  ),
-                  SizedBox(height: 20.h),
-                ],
-              ),
+                    SizedBox(height: 20.h),
+                  ],
+                ),
+            ),
           ),
         ),
       ),

@@ -91,7 +91,6 @@ class _MainState extends State<Main> {
 
   //shared pref에 저장된 유저정보있는지보고 없으면 회원가입창으로 이동
   getData() async {
-
     var storage = await SharedPreferences.getInstance();
     String? name = storage.getString('name');
     //store에 있는 state를 변경해주는 메소드
@@ -132,7 +131,6 @@ class _MainState extends State<Main> {
   void initState() {
     super.initState();
     getData();
-
   }
 
   @override

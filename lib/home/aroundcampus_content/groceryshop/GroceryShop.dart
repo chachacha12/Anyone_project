@@ -59,20 +59,20 @@ class _GroceryShopState extends State<GroceryShop> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
-                    Container(
-                      child: GestureDetector(
-                        child: Card( //리스트 속 각각의 객체 하나하나임
-                            elevation: 5,
-                            margin: EdgeInsets.symmetric(
-                                vertical: 10.h, horizontal: 20.w),
+                    GestureDetector(
+                      child: Card( //리스트 속 각각의 객체 하나하나임
+                          elevation: 3,
+                          margin: EdgeInsets.symmetric(
+                              vertical: 10.h, horizontal: 20.w),
 
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              SizedBox(
+                                width: 180.w,
+                                child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .spaceEvenly, //스토어명, 영업시간, 주소, 휴무일정보
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, //스토어명, 영업시간, 주소, 휴무일정보
                                   children: [
                                     Text(' ' +
                                         grocery_collection[index]['name'] +
@@ -91,26 +91,26 @@ class _GroceryShopState extends State<GroceryShop> {
                                         grocery_collection[index]['holiday']),
                                   ],
                                 ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(0, 5.h, 3.h, 5.h),
-                                  width: 90.w,
-                                  height: 90.w, //이미지
-                                  child: Hero(
-                                      tag: grocery_collection[index]['name'],
-                                      child: Image.network(
-                                        grocery_collection[index]['imagepath'][0],
-                                        fit: BoxFit.cover,)),
-                                )
-                              ],
-                            )
-                        ),
-                        onTap: () {
-                          grocery_document = grocery_collection[index];
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) =>
-                                  GroceryShop_hero_second(grocery_document)));
-                        },
+                              ),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(0.w, 3.h, 3.h, 3.h),
+                                width: 110.w,
+                                height: 110.w, //이미지
+                                child: Hero(
+                                    tag: grocery_collection[index]['name'],
+                                    child: Image.network(
+                                      grocery_collection[index]['imagepath'][0],
+                                      fit: BoxFit.cover,)),
+                              )
+                            ],
+                          )
                       ),
+                      onTap: () {
+                        grocery_document = grocery_collection[index];
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                                GroceryShop_hero_second(grocery_document)));
+                      },
                     ),
                 childCount: count),
           )

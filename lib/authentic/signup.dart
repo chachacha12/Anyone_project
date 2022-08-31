@@ -46,7 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
       labelText: labeltext,
       helperStyle: TextStyle(color: Colors.red),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.w),
       ),
     );
   }
@@ -73,13 +73,13 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       result.user?.updateDisplayName(name.toString());
       print('파베에 회원가입성공');
-      ShowSnackBar('Sign Up Successful');
+      ShowSnackBar('Register Successful');
       //현재 회원가입창은 꺼주기
       Navigator.pop(context);
 
     } catch (e) {
       print(e);
-      ShowSnackBar('SignUp faile');
+      ShowSnackBar('Register failed');
     }
   }
 
@@ -99,178 +99,181 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Sign Up"),
+        title: Text("Register"),
       ),
-      body: Form(
-        key: formKey2,
-        child: Center(
-          child: ListView(
-            shrinkWrap: true,
-            children: <Widget>[
+      body: Container(
+        color: Colors.white,
+        child: Form(
+          key: formKey2,
+          child: Center(
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
 
-              //이메일적는 칸
-              Padding(
-                  padding: EdgeInsets.all(16.0.h),
-                  child: TextFormField(
-                      autofocus: true,
-                      focusNode: _emailFocusNode,
-                      keyboardType: TextInputType.emailAddress,
-                      //이메일형식으로 키보드
-                      onSaved: (value) {
-                        setState(() {
-                          email = value!.trim(); //유저가 친 이메일 값을 저장해줌
-                        });
-                      },
-                      validator: (value) =>
-                          CheckValidate().validateEmail(
-                              _emailFocusNode, value!.trim()),
-                      autovalidateMode: AutovalidateMode.always,
+                //이메일적는 칸
+                Padding(
+                    padding: EdgeInsets.all(16.0.h),
+                    child: TextFormField(
+                        //autofocus: true,
+                        focusNode: _emailFocusNode,
+                        keyboardType: TextInputType.emailAddress,
+                        //이메일형식으로 키보드
+                        onSaved: (value) {
+                          setState(() {
+                            email = value!.trim(); //유저가 친 이메일 값을 저장해줌
+                          });
+                        },
+                        validator: (value) =>
+                            CheckValidate().validateEmail(
+                                _emailFocusNode, value!.trim()),
+                        autovalidateMode: AutovalidateMode.always,
 
-                      //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
-                      onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
-                        FocusScope.of(context).requestFocus(_nameFocusNode);
-                      },
-                      decoration: Textfieldstyle(Icon(Icons.email), 'E-mail')
-                  )
-              ),
-
-              //이름적는 칸
-              Padding(
-                  padding: EdgeInsets.all(16.0.h),
-                  child: TextFormField(
-                      autofocus: true,
-                      keyboardType: TextInputType.name,
-                      //이름형식으로 키보드
-                      onSaved: (value) {
-                        setState(() {
-                          name = value!.trim(); //유저가 친 이메일 값을 저장해줌
-                        });
-                      },
-                      validator: (value) =>
-                          CheckValidate().validateName(_nameFocusNode, value!.trim()),
-
-                      autovalidateMode: AutovalidateMode.always,
-
-                      //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
-                      onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
-                        FocusScope.of(context).requestFocus(_passwordFocusNode);
-                      },
-
-                      decoration: Textfieldstyle(
-                          Icon(Icons.account_circle_sharp), 'Name')
-                  )
-
-              ),
-
-
-              //비밀번호 적는칸
-              Padding(
-                  padding: EdgeInsets.all(16.0.h),
-                  child: TextFormField(
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,  //비번적을때 *로 나오게 하는것
-                      onSaved: (value) {
-                        setState(() {
-                          password = value!.trim(); //유저가 친 비번 값을 저장해줌
-                        });
-                      },
-                      validator: (value) =>
-                          CheckValidate().validatePassword(
-                              _passwordFocusNode, value!.trim()),
-                      autovalidateMode: AutovalidateMode.always,
-
-                      onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
-                        FocusScope.of(context).requestFocus(
-                            _passwordcheckFocusNode);
-                      },
-                      //textInputAction: TextInputAction.next,
-                      focusNode: _passwordFocusNode,
-
-                      decoration: Textfieldstyle(Icon(Icons.lock), 'password')
-                  )
-              ),
-              //비밀번호 확인 적는칸
-              Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: TextFormField(
-                      controller: controller,  //유저가 가입버튼 눌렀을때 만약 비번과 비번확인 문자가 다르면 비번확인칸 다 지워주기위해필요
-                      keyboardType: TextInputType.visiblePassword,
-                      obscureText: true,  //비번적을때 *로 나오게 하는것
-                      onSaved: (value) {
-                        setState(() {
-                          passwordcheck = value!.trim(); //유저가 친 비번 값을 저장해줌
-                        });
-                      },
-                      validator: (value) =>
-                          CheckValidate().validatePassword(
-                              _passwordcheckFocusNode, value!.trim()),
-                      autovalidateMode: AutovalidateMode.always,
-                      //textInputAction: TextInputAction.next,
-                      focusNode: _passwordcheckFocusNode,
-
-                      decoration: Textfieldstyle(
-                          Icon(Icons.lock), 'password check')
-                  )
-              ),
-
-
-              //회원가입 버튼
-              Container(
-                  margin: EdgeInsets.fromLTRB(0.h, 15.h, 0.h, 7.h),
-                  padding: EdgeInsets.symmetric(horizontal: 60.0.h),
-                  child: SizedBox(
-                    height: 40.h,
-                    child: ElevatedButton(
-                      child: Text(
-                        "Sign Up",
-                        style: style.copyWith(
-                          color: Colors.white,),
-                      ),
-
-                      onPressed: () {
-                        //Form내부에 있는 textformfield들의 유효성 결과에 따라 성공이면 true 리턴.
-                        if (formKey2.currentState!.validate()) {
-                          // validation 이 성공하면 폼 저장하기
-                          formKey2.currentState?.save();
-                          //비번이랑 비번확인이랑 같은지 확인
-                         if(password != passwordcheck){
-                           _passwordcheckFocusNode.requestFocus();  //textfield에 포커스주기
-                           controller.clear(); //입력 지우기
-                           ShowSnackBar('비밀번호와 비밀번호확인 입력값이 다릅니다.');
-                          }else{                          //회원가입 성공로직
-                           print('비번이랑 비번확인이 같음');
-                           //파베 회원가입 해주는 로직
-                           SignUp(email, name, password);
-
-                           //shared pref에 유저 정보 저장
-                           //saveData(name, email);
-                         }
-                        }
-                      },
-                    ),
-                  )
-              ),
-
-              //로그인페이지 이동 버튼
-              GestureDetector(
-                child: Text(
-                  'move Sign In', textAlign: TextAlign.center,
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    color: Colors.blueAccent,
-                    fontSize: 14.sp,
-                  ),
+                        //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
+                        onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
+                          FocusScope.of(context).requestFocus(_nameFocusNode);
+                        },
+                        decoration: Textfieldstyle(Icon(Icons.email), 'E-mail')
+                    )
                 ),
-                onTap: (){           //로그인페이지 이동
-                  //Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) =>
-                          authentic() ));
-                },
-              ),
 
-              SizedBox(height: 40.h),
-            ],
+                //이름적는 칸
+                Padding(
+                    padding: EdgeInsets.all(16.0.h),
+                    child: TextFormField(
+                        //autofocus: true,
+                        keyboardType: TextInputType.name,
+                        //이름형식으로 키보드
+                        onSaved: (value) {
+                          setState(() {
+                            name = value!.trim(); //유저가 친 이메일 값을 저장해줌
+                          });
+                        },
+                        validator: (value) =>
+                            CheckValidate().validateName(_nameFocusNode, value!.trim()),
+
+                        autovalidateMode: AutovalidateMode.always,
+
+                        //textInputAction: TextInputAction.next,  //해당칸을 다 입력하면 다음칸으로 바로갈수있는 버튼생성
+                        onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
+                          FocusScope.of(context).requestFocus(_passwordFocusNode);
+                        },
+
+                        decoration: Textfieldstyle(
+                            Icon(Icons.account_circle_sharp), 'Name')
+                    )
+
+                ),
+
+
+                //비밀번호 적는칸
+                Padding(
+                    padding: EdgeInsets.all(16.0.h),
+                    child: TextFormField(
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,  //비번적을때 *로 나오게 하는것
+                        onSaved: (value) {
+                          setState(() {
+                            password = value!.trim(); //유저가 친 비번 값을 저장해줌
+                          });
+                        },
+                        validator: (value) =>
+                            CheckValidate().validatePassword(
+                                _passwordFocusNode, value!.trim()),
+                        autovalidateMode: AutovalidateMode.always,
+
+                        onFieldSubmitted: (_) { //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
+                          FocusScope.of(context).requestFocus(
+                              _passwordcheckFocusNode);
+                        },
+                        //textInputAction: TextInputAction.next,
+                        focusNode: _passwordFocusNode,
+
+                        decoration: Textfieldstyle(Icon(Icons.lock), 'password')
+                    )
+                ),
+                //비밀번호 확인 적는칸
+                Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: TextFormField(
+                        controller: controller,  //유저가 가입버튼 눌렀을때 만약 비번과 비번확인 문자가 다르면 비번확인칸 다 지워주기위해필요
+                        keyboardType: TextInputType.visiblePassword,
+                        obscureText: true,  //비번적을때 *로 나오게 하는것
+                        onSaved: (value) {
+                          setState(() {
+                            passwordcheck = value!.trim(); //유저가 친 비번 값을 저장해줌
+                          });
+                        },
+                        validator: (value) =>
+                            CheckValidate().validatePassword(
+                                _passwordcheckFocusNode, value!.trim()),
+                        autovalidateMode: AutovalidateMode.always,
+                        //textInputAction: TextInputAction.next,
+                        focusNode: _passwordcheckFocusNode,
+
+                        decoration: Textfieldstyle(
+                            Icon(Icons.lock), 'password check')
+                    )
+                ),
+
+
+                //회원가입 버튼
+                Container(
+                    margin: EdgeInsets.fromLTRB(0.h, 15.h, 0.h, 10.h),
+                    padding: EdgeInsets.symmetric(horizontal: 60.0.h),
+                    child: SizedBox(
+                      height: 40.h,
+                      child: ElevatedButton(
+                        child: Text(
+                          "Register",
+                          style: style.copyWith(
+                            color: Colors.white,),
+                        ),
+
+                        onPressed: () {
+                          //Form내부에 있는 textformfield들의 유효성 결과에 따라 성공이면 true 리턴.
+                          if (formKey2.currentState!.validate()) {
+                            // validation 이 성공하면 폼 저장하기
+                            formKey2.currentState?.save();
+                            //비번이랑 비번확인이랑 같은지 확인
+                           if(password != passwordcheck){
+                             _passwordcheckFocusNode.requestFocus();  //textfield에 포커스주기
+                             controller.clear(); //입력 지우기
+                             ShowSnackBar('Password and password check input are different.');
+                            }else{                          //회원가입 성공로직
+                             print('비번이랑 비번확인이 같음');
+                             //파베 회원가입 해주는 로직
+                             SignUp(email, name, password);
+
+                             //shared pref에 유저 정보 저장
+                             //saveData(name, email);
+                           }
+                          }
+                        },
+                      ),
+                    )
+                ),
+
+                //로그인페이지 이동 버튼
+                GestureDetector(
+                  child: Text(
+                    'Go to Sign In', textAlign: TextAlign.center,
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: Colors.blueAccent,
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                  onTap: (){           //로그인페이지 이동
+                    //Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(
+                        builder: (context) =>
+                            authentic() ));
+                  },
+                ),
+
+                SizedBox(height: 40.h),
+              ],
+            ),
           ),
         ),
       ),
