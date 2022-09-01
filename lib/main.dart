@@ -153,7 +153,8 @@ class _MainState extends State<Main> {
         unselectedIconTheme: IconThemeData(
           color: Colors.grey
         ),
-        elevation: 0,
+        elevation: 2,
+        backgroundColor: Colors.white,
         //selectedFontSize: 14, //선택된 아이템의 폰트사이즈
         //unselectedFontSize: 14, //선택 안된 아이템의 폰트사이즈
         items: [

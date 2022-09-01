@@ -44,9 +44,9 @@ class _InfoState extends State<Info>  {
                     indicatorColor: Colors.green,
                     unselectedLabelColor: Colors.grey,
                     labelColor: Colors.black,
-                    unselectedLabelStyle: TextStyle(fontSize: 15.sp),
+                    unselectedLabelStyle: TextStyle(fontSize: 14.sp),
                     labelStyle: TextStyle(
-                        fontSize:21.sp, fontWeight: FontWeight.w700),
+                        fontSize:18.sp, fontWeight: FontWeight.w500),
                   ),
                 ),
               ];

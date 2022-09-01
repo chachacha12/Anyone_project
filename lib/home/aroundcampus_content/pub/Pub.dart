@@ -52,8 +52,22 @@ class _PubState extends State<Pub> {
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Text('Recommended by\nLocal KU students',
-                  textAlign: TextAlign.start),
+              title: Container(
+                //width: 200.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.w),
+                  ),
+                ),
+                padding: EdgeInsets.fromLTRB(10.w,2.h, 10.w, 2.h),
+                child: Text('Recommended by\nLocal KU students',
+                  textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                  ),),
+              ),
               background: Image.asset(
                 'assets/Pub/pub_background.jpg',
                 fit: BoxFit.cover,),

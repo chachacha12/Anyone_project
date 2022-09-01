@@ -75,7 +75,8 @@ class _DiscountState extends State<Discount>  {
                   expandedHeight: 200.0.h,
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
-                    title: Text('Show your student ID, Get discount !\n\n',
+                    title:
+                    Text('Show your student ID,\nGet discount !\n\n',
                         textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.black),),
                     background: Image.asset(

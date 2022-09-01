@@ -48,8 +48,24 @@ class _GroceryShopState extends State<GroceryShop> {
             pinned: true,
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text('Choose a store regarding your needs',
-                  textAlign: TextAlign.start),
+              centerTitle: true,
+              title: Container(
+                width: 200.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.w),
+                  ),
+                ),
+                padding: EdgeInsets.fromLTRB(10.w,2.h, 10.w, 2.h),
+                child: Text('Choose a store regarding your needs',
+                  textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                  ),),
+              ),
+
               background: Image.asset(
                 'assets/GroceryShop/groceryshopping_background.jpg',
                 fit: BoxFit.cover,),

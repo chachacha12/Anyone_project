@@ -10,7 +10,7 @@ var theme = ThemeData(
         centerTitle: true,
         titleTextStyle: TextStyle(
             color: Colors.black,
-            fontSize: 20.sp,
+            fontSize: 18.sp,
             fontWeight: FontWeight.bold,
         ),
         color: Colors.white,
@@ -25,7 +25,7 @@ var theme = ThemeData(
     textTheme: TextTheme(
         bodyText2: TextStyle(
             color: Colors.black,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w400,
         )
     ),
     textButtonTheme: TextButtonThemeData(

@@ -137,9 +137,9 @@ class _MyState extends State<My> {
         //이름 보여줌
         SliverToBoxAdapter(
             child: Container(
-              color: Colors.white,
+              //color: Colors.white,
               child: Card(
-                margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 0.h),
+                margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 20.h),
                 elevation: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,

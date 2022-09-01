@@ -52,7 +52,23 @@ class _EntertainmentState extends State<Entertainment> {
             expandedHeight: 250.0.h,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle:true,
-              title: Text('Enjoy Korean Life', textAlign: TextAlign.start),
+              title: Container(
+                //width: 200.w,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(5.w),
+                  ),
+                ),
+                padding: EdgeInsets.fromLTRB(10.w,2.h, 10.w, 2.h),
+                child: Text('Enjoy Korean Life',
+                  textAlign: TextAlign.center, style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 15.sp,
+                    fontWeight: FontWeight.w500,
+                  ),),
+              ),
+
               background: Image.asset(
                 'assets/Entertainment/enter_background.jpg',
                 fit: BoxFit.cover,),
