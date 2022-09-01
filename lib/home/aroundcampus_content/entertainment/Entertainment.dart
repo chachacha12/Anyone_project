@@ -91,12 +91,15 @@ class _EntertainmentState extends State<Entertainment> {
                                 Flexible(
                                     fit: FlexFit.tight,
                                     flex: 4,
-                                    child: Text('   '+
-                                        Entertainment_collection[index]['title'],
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold
-                                    ),)
+                                    child: Container(
+                                      margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.h),
+                                      child: Text(
+                                          Entertainment_collection[index]['title'],
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.bold
+                                      ),),
+                                    )
                                 ),
                                 Flexible(
                                   flex: 1,
@@ -123,7 +126,7 @@ class _EntertainmentState extends State<Entertainment> {
                                     style: TextStyle(
                                         fontSize: 15.sp
                                     ),),
-                                  richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
+                                  richtext(Icon(Icons.access_time_outlined, size: 15.h),
                                       Entertainment_collection[index]['time']),
                                 ],
                               )

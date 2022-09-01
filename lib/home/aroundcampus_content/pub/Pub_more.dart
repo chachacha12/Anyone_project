@@ -35,7 +35,7 @@ class _Pub_moreState extends State<Pub_more> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.pub_document['name'],
+            widget.pub_document['name'], maxLines: 3,
           ),
               //backgroundColor: Colors.transparent,
               centerTitle: true,
@@ -81,7 +81,7 @@ class _Pub_moreState extends State<Pub_more> {
                   richtext(Container(
                     //color: Colors.red,
                       width: 14.w, height: 14.w,
-                      margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+                      margin: EdgeInsets.fromLTRB(1.5.w, 0.w, 0.w, 0.w),
                       child: Image.asset(
                         'assets/Instagram.png', fit: BoxFit.fill, )),
                       widget.pub_document['contact']),
@@ -94,7 +94,7 @@ class _Pub_moreState extends State<Pub_more> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Colors.tealAccent
+                  //color: Colors.tealAccent
               ),
               margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
               padding: EdgeInsets.all(15.w),

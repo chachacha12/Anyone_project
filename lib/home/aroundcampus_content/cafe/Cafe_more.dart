@@ -34,7 +34,7 @@ class _Cafe_moreState extends State<Cafe_more> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.cafe_document['name'],
+            widget.cafe_document['name'], maxLines: 3,
           ),
               //backgroundColor: Colors.transparent,
               centerTitle: true,
@@ -84,7 +84,7 @@ class _Cafe_moreState extends State<Cafe_more> {
                   richtext(Container(
                       //color: Colors.red,
                       width: 14.w, height: 14.w,
-                      margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+                      margin: EdgeInsets.fromLTRB(1.5.w, 0.w, 0.w, 0.w),
                       child: Image.asset(
                     'assets/Instagram.png', fit: BoxFit.fill, )),
                       widget.cafe_document['contact']),
@@ -97,7 +97,7 @@ class _Cafe_moreState extends State<Cafe_more> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Colors.tealAccent
+                  //color: Colors.white
               ),
               margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
               padding: EdgeInsets.all(15.w),

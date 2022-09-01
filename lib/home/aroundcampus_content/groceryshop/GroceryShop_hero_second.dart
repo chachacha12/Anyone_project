@@ -81,7 +81,7 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Colors.tealAccent
+                  //color: Colors.white
               ),
               margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
               padding: EdgeInsets.all(15.w),

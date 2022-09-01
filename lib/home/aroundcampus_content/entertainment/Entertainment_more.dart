@@ -114,7 +114,7 @@ class _Entertainment_moreState extends State<Entertainment_more> {
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Colors.tealAccent
+                  //color: Colors.tealAccent
               ),
               margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
               padding: EdgeInsets.all(15.w),

@@ -90,12 +90,15 @@ class _PubState extends State<Pub> {
                                 Flexible(
                                     fit: FlexFit.tight,
                                     flex: 4,
-                                    child: Text('   ' +
-                                        Pub_collection[index]['name'],
-                                      style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold
-                                      ),)
+                                    child: Container(
+                                      margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.h),
+                                      child: Text(
+                                          Pub_collection[index]['name'],
+                                        style: TextStyle(
+                                            fontSize: 16.sp,
+                                            fontWeight: FontWeight.bold
+                                        ),),
+                                    )
                                 ),
                                 Flexible(
                                   flex: 1,

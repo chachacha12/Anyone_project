@@ -32,10 +32,10 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.culture_document['title'],
+            widget.culture_document['title'], maxLines: 3,textAlign: TextAlign.center,
           ),
             //backgroundColor: Colors.transparent,
-            centerTitle: true,
+              centerTitle: true,
               floating: true  //밑으로 스크롤시 앱바 사라짐
           ),
 
@@ -56,8 +56,8 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
               margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 30.h),
               child: Text(widget.culture_document['tag'], style: TextStyle(
                 color: Colors.black45,
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
+                fontSize: 16.sp,
+                fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,),
             ),
@@ -77,7 +77,7 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
                           children: [
                             Text(widget.culture_document['sub'][index]['title'],
                               style: TextStyle(
-                                  fontSize: 18.sp,
+                                  fontSize: 17.sp,
                                   fontWeight: FontWeight.bold,
                               ),),
 

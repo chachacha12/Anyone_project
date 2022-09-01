@@ -106,7 +106,7 @@ class _CultureState extends State<Culture> {
                             child:Text(culture_collection[index]['tag'],
                                 textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.black45
+                              color: Colors.black54
                             ),),
                           ),             //Text(tips_collection[index]['tag']
                         ),

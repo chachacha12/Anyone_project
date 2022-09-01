@@ -54,7 +54,7 @@ _loadData() {
 
 
   getData() async {
-    _isLoading = true;  //여기서 로딩변수 초기화
+    _isLoading = true; //여기서 로딩변수 초기화
     var result = await firestore.collection('restaurant').get();
     setState(() {
       _isLoading = false; //데이터받기 끝나면 로딩화면 꺼줌
@@ -74,7 +74,7 @@ _loadData() {
   void initState() {
     super.initState();
     //_loadData();
-     getData();
+    getData();
   }
 
   @override
@@ -84,6 +84,7 @@ _loadData() {
         color: Colors.white,
         child: Column(
           children: [
+
             ///1번째
             Container(
               height: 200.0.h,
@@ -112,7 +113,8 @@ _loadData() {
                       onTap: () {
                         Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => GroceryShop())
+                            MaterialPageRoute(builder: (context) =>
+                                GroceryShop())
                         );
                       },
                     ),
@@ -205,7 +207,8 @@ _loadData() {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Image.asset(
-                              'assets/Aroundcampus_icon/Culture.png', width: 35.w,
+                              'assets/Aroundcampus_icon/Culture.png',
+                              width: 35.w,
                               height: 35.w,), //Icon(Icons.star),
                             Text('Culture', textAlign: TextAlign.center,
                                 style: TextStyle(
@@ -302,15 +305,18 @@ _loadData() {
                             //mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 1.h),
-                                child: Text('more', textAlign: TextAlign.end ,style: TextStyle(
-                                  fontSize: 15.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                ),),
+                                padding: EdgeInsets.fromLTRB(
+                                    0.w, 0.w, 0.w, 1.h),
+                                child: Text('more', textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                  ),),
                               ),
                               Padding(
-                                padding: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.h),
+                                padding: EdgeInsets.fromLTRB(
+                                    0.w, 0.w, 0.w, 0.h),
                                 child: Icon(Icons.chevron_right, size: 18.sp,
                                   color: Colors.black,
                                 ),
@@ -328,7 +334,7 @@ _loadData() {
             ),
 
             ///3번째 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
-            _isLoading ? ShimmerLoadingList():
+            _isLoading ? ShimmerLoadingList() :
             Container(
               margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
               height: 150.0.h,
@@ -352,9 +358,11 @@ _loadData() {
                               ),
                               Positioned(child: Text(
                                 restaurant_collection[restaurant_random_list[index]]['name'],
+                                maxLines: 2,
                                 style: TextStyle(color: Colors.white,
-                                    fontSize: 12.sp,
+                                    fontSize: 13.sp,
                                     fontWeight: FontWeight.bold),),
+
                                 bottom: 3.h,)
                             ],
                           ),

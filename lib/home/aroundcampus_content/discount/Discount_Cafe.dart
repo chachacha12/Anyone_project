@@ -89,7 +89,7 @@ class _Discount_CafeState extends State<Discount_Cafe> {
                                             fit: BoxFit.fill,)
                                       ),
                                       richtext(Icon(
-                                          Icons.add_box, size: 15.h),
+                                          Icons.label_important, size: 15.h),
                                           widget.collection[index]['category']),
 
                                     ],

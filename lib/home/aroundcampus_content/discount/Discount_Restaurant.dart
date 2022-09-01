@@ -80,6 +80,7 @@ class _Discount_RestaurantState extends State<Discount_Restaurant> {
                                   width: 110.w,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       //이미지
                                       Container(
@@ -91,7 +92,7 @@ class _Discount_RestaurantState extends State<Discount_Restaurant> {
                                             fit: BoxFit.fill,)
                                       ),
                                       richtext(Icon(
-                                          Icons.add_box, size: 15.h),
+                                          Icons.label_important, size: 15.h),
                                           widget.collection[index]['category']),
 
                                     ],
