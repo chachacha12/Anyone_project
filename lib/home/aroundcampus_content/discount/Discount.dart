@@ -97,7 +97,7 @@ class _DiscountState extends State<Discount>  {
                     labelColor: Colors.black,
                     unselectedLabelStyle: TextStyle(fontSize: 15.sp),
                     labelStyle: TextStyle(
-                        fontSize:21.sp, fontWeight: FontWeight.w700),
+                        fontSize:21.sp, fontWeight: FontWeight.w500),
 
                     ),
                 ),

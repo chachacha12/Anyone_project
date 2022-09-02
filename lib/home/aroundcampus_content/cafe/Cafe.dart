@@ -49,25 +49,15 @@ class _CafeState extends State<Cafe>  {
         slivers: [
           SliverAppBar(
             pinned: true,
-            expandedHeight: 250.0.h,
+            expandedHeight: 240.0.h,
             flexibleSpace: FlexibleSpaceBar(
               centerTitle: true,
-              title: Container(
-                //width: 200.w,
-                decoration: BoxDecoration(
+              title: Text('KU students'"'"'\nfavorite Cafes',
+                textAlign: TextAlign.center, style: TextStyle(
                   color: Colors.white,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(5.w),
-                  ),
-                ),
-                padding: EdgeInsets.fromLTRB(10.w,2.h, 10.w, 2.h),
-                child: Text('KU students'"'"'\nfavorite Cafes',
-                  textAlign: TextAlign.center, style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 15.sp,
-                    fontWeight: FontWeight.w500,
-                  ),),
-              ),
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),),
 
               background: Image.asset(
                   'assets/Cafe/cafe_background.jpg',

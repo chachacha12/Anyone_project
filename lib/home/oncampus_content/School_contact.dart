@@ -10,10 +10,10 @@ class Contact extends StatelessWidget {
 
    //학교 연락망들을 리스트속에 리스트로 저장.
   var contact_list =[
-      ['국제교류협력팀','02-2049-6212', '02-2049-6212'],
-      ['외국인학생센터', '02-2049-6213', '02-2049-6213'],
-      ['language institution','02-450-3075~6', '02-450-3075'],
-      ['KUL:HOUSE(Dormitory)','82-2-2024-5000~5003', '82-2-2024-5000'],
+      ['OIA, for exchange students\n(국제교류협력팀)\n','02-2049-6212', '02-2049-6212'],
+      ['OIA, for studying abroad\n(외국인학생센터)\n', '02-2049-6213', '02-2049-6213'],
+      ['language institution\n','02-450-3075~6', '02-450-3075'],
+      ['KUL:HOUSE(Dormitory)\n','02-2024-5000~5003', '82-2-2024-5000'],
   ];
 
     //이메일 보내기 위한 작업
@@ -59,7 +59,7 @@ class Contact extends StatelessWidget {
                       elevation: 2,
                       margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
                       child: ListTile(
-                        title: Text('< Anyone >', style: Theme.of(context).textTheme.titleMedium),
+                        title: Text('< Anyone >\n', style: Theme.of(context).textTheme.titleMedium),
                         subtitle: Text('exchangestudents0906@gmail.com'),
                         trailing: Icon(Icons.email),
                         onTap: (){

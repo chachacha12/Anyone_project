@@ -29,17 +29,17 @@ class Calender extends StatelessWidget {
                   bottom: TabBar(
                     isScrollable: true,
                     tabs: [
-                      Tab(text: 'Version 1',),
-                      Tab(text: 'Version 2',)
+                      Tab(text: 'Official Ver',),
+                      Tab(text: 'OIA Ver',)
                     ],
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2,
                     indicatorColor: Colors.green,
                     unselectedLabelColor: Colors.grey,
                     labelColor: Colors.black,
-                    unselectedLabelStyle: TextStyle(fontSize: 15.sp),
+                    unselectedLabelStyle: TextStyle(fontSize: 14.sp),
                     labelStyle: TextStyle(
-                        fontSize:21.sp, fontWeight: FontWeight.w700),
+                        fontSize:18.sp, fontWeight: FontWeight.w500),
 
                     ),
                 ),

@@ -88,7 +88,7 @@ _loadData() {
             ///1번째
             Container(
               height: 200.0.h,
-              margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 60.h),
+              margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 40.h),
               child: GridView.count(
                 crossAxisCount: 4,
                 children: [
@@ -284,7 +284,7 @@ _loadData() {
 
             ///2번째
             Container(
-                height: 60.0.h,
+                height: 50.0.h,
                 child: Container(
                   width: double.infinity,
                   margin: EdgeInsets.fromLTRB(20.w, 0.h, 10.w, 0.h),
