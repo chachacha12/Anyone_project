@@ -54,7 +54,7 @@ class _CultureState extends State<Culture> {
               crossAxisCount: 2,
               crossAxisSpacing: 0.h,
               mainAxisSpacing: 0.h,
-              childAspectRatio: 0.5.h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
+              childAspectRatio: 0.42.h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
             ),
 
             delegate: SliverChildBuilderDelegate(

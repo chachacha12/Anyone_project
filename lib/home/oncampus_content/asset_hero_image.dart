@@ -17,8 +17,8 @@ class Asset_hero_image extends StatelessWidget {
             imageProvider: AssetImage(Imagepath),
           ),
           Positioned(
-              top: 5.h,
-              right: 5.w,
+              top: 30.h,
+              right: 13.w,
               child: IconButton(
                 iconSize: 25.w,
                 color: Colors.white,

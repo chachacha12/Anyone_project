@@ -13,26 +13,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() async {
-
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();  //가로모드로 변경때 반응형사이즈에 에러생기는거 방지용. 회전을 방지.
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp( 
-      MultiProvider(providers: [        //store를 여러개 등록해둘 수 있음
+  runApp(
+      MultiProvider(providers: [ //store를 여러개 등록해둘 수 있음
         ChangeNotifierProvider(create: (c) => Store1()),
-        ChangeNotifierProvider(create: (c) =>  Store1()),
+        ChangeNotifierProvider(create: (c) => Store1()),
       ],
-        child:  ScreenUtilInit(   //화면 반응형앱을 위한 패키지로 만든 위젯
-            designSize: Size(360,690),
-          builder: (BuildContext context, Widget? child) {
-              return  MaterialApp(
+          child: ScreenUtilInit( //화면 반응형앱을 위한 패키지로 만든 위젯
+            designSize: Size(360, 690),
+            builder: (BuildContext context, Widget? child) {
+              return MaterialApp(
                   theme: style.theme, //Style.dart에 따로 빼둔 변수값을 가져와서 디자인에 씀
                   home: MyApp());
-          },
+            },
 
-        )
+          )
       ));
 }
 
