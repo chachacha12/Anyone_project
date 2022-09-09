@@ -137,7 +137,7 @@ class _MyState extends State<My> {
         //이름 보여줌
         SliverToBoxAdapter(
             child: Container(
-              //color: Colors.white,
+              color: Colors.white,
               child: Card(
                 margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 20.h),
                 elevation: 1,
@@ -147,7 +147,7 @@ class _MyState extends State<My> {
                     Container(
                       margin: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 40.w),
                       child: Text(
-                          'The time left before ${context.watch<Store1>().username} leaves for home country !',
+                          'Time left before returning home ',
                           textAlign: TextAlign.start,
                           style: TextStyle(color: Colors.black, fontSize: 16.sp)),
                     ),
@@ -182,6 +182,12 @@ class _MyState extends State<My> {
             )
         ),
 
+        SliverToBoxAdapter(
+          child: Container(
+            color: Colors.white,
+            height: 330.h,
+          ),
+        )
       ],
 
     );

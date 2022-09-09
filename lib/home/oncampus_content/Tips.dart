@@ -72,18 +72,15 @@ class _TipsState extends State<Tips> {
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(
                                         5.w))),
-                            child: Card(
-                              elevation: 2.h,
-                              child: SizedBox(
-                                child: Hero(
-                                  tag: tips_collection[index]['title'],
-                                  child: Image.network(
-                                      tips_collection[index]['imagepath'][0],
-                                      fit: BoxFit.cover),
-                                ),
-                                height: 150.h,
-                                width: 150.h,
+                            child: SizedBox(
+                              child: Hero(
+                                tag: tips_collection[index]['title'],
+                                child: Image.network(
+                                    tips_collection[index]['imagepath'][0],
+                                    fit: BoxFit.cover),
                               ),
+                              height: 150.h,
+                              width: 150.h,
                             ),
                           ),
                           //Spacer(flex: 2,),

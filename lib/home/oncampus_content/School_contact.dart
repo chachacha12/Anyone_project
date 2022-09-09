@@ -82,21 +82,31 @@ class Contact extends StatelessWidget {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
-                    Card(        //리스트 속 각각의 객체 하나하나임
-                      elevation: 2,
-                      margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
-                      child: ListTile(
-                        title: Text(contact_list[index][0], style: Theme.of(context).textTheme.titleMedium),
-                        subtitle: Text(contact_list[index][1], ),
-                        trailing: Icon(Icons.phone_forwarded),
-                        onTap: ()  {
-                          _makePhoneCall(contact_list[index][2]);
+                    Container(
+                      color: Colors.white,
+                      child: Card(        //리스트 속 각각의 객체 하나하나임
+                        elevation: 2,
+                        margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
+                        child: ListTile(
+                          title: Text(contact_list[index][0], style: Theme.of(context).textTheme.titleMedium),
+                          subtitle: Text(contact_list[index][1], ),
+                          trailing: Icon(Icons.phone_forwarded),
+                          onTap: ()  {
+                            _makePhoneCall(contact_list[index][2]);
 
-                        },
+                          },
+                        ),
                       ),
                     ),
                 childCount: 4),
           ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white,
+              height: 140.h,
+            ),
+          )
 
         ],
       ),

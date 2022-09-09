@@ -72,18 +72,15 @@ class _CultureState extends State<Culture> {
                               borderRadius: BorderRadius.all(
                                   Radius.circular(
                                       5.w))),
-                          child: Card(
-                            elevation: 2.h,
-                            child: SizedBox(
-                              child: Hero(
-                                tag: culture_collection[index]['title'],
-                                child: Image.network(
-                                    culture_collection[index]['imagepath'],
-                                    fit: BoxFit.cover),
-                              ),
-                              height: 150.h,
-                              width: 150.h,
+                          child:SizedBox(
+                            child: Hero(
+                              tag: culture_collection[index]['title'],
+                              child: Image.network(
+                                  culture_collection[index]['imagepath'],
+                                  fit: BoxFit.cover),
                             ),
+                            height: 150.h,
+                            width: 150.h,
                           ),
                         ),
                         //Spacer(flex: 2,),

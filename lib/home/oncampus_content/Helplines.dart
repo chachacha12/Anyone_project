@@ -92,8 +92,9 @@ class Helplines extends StatelessWidget {
           ),
 
           SliverToBoxAdapter(
-            child: SizedBox(
-              height: 40.h,
+            child: Container(
+              color: Colors.white,
+              height: 60.h,
             ),
           )
         ],
