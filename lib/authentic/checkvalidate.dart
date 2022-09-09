@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 
 class CheckValidate{
 
+
    validateEmail(FocusNode focusNode, String value){  //포커스받을 focusNode와 에러메시지 등의 내용
-    if(value.isEmpty){
+
+     if(value.isEmpty){
       //focusNode.requestFocus();
       return 'Enter your email.';
+
     }else {
       var pattern = r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
       RegExp regExp = RegExp(pattern);
@@ -21,6 +24,7 @@ class CheckValidate{
   }
 
   validatePassword(FocusNode focusNode, String value){
+
     if(value.isEmpty){        //아예 안썻을때
       return 'Enter your password.';
     }else {                    //뭔가 형식에 안맞을때
@@ -35,6 +39,7 @@ class CheckValidate{
   }
 
    validateName(FocusNode focusNode, String value){
+
      if(value.isEmpty){        //아예 안썻을때
        return 'Enter your name.';
      }else {                    //뭔가 형식에 안맞을때

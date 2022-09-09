@@ -44,13 +44,32 @@ class _authenticState extends State<authentic> {
     super.initState();
   }
 
+
   //각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
   Textfieldstyle(icon, labeltext){
     return InputDecoration(
-      prefixIcon: icon,
+
+      prefixIcon: Icon(icon, color: Colors.black45),
       labelText: labeltext,
-      helperStyle: TextStyle(color: Colors.red),
-      border: OutlineInputBorder(
+      helperStyle: TextStyle(color: Colors.black),
+
+      labelStyle: TextStyle(
+          color: Colors.black45
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.lightGreen),
+        borderRadius: BorderRadius.circular(10.w),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black),
+        borderRadius: BorderRadius.circular(10.w),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.red),
+        borderRadius: BorderRadius.circular(10.w),
+      ),
+      enabledBorder:  OutlineInputBorder(  //유효성검사 통과했을때 박스디자인
+        borderSide: BorderSide(color: Colors.lightGreen),
         borderRadius: BorderRadius.circular(10.w),
       ),
     );
@@ -64,7 +83,7 @@ class _authenticState extends State<authentic> {
         // Icon 위젯도 가능해용
         duration: Duration(seconds: 3), // 얼마큼 띄울지
         // Duration 으로 시간을 정할 수 있어요
-        backgroundColor: Colors.blue, // 색상 지정
+        backgroundColor: Colors.green, // 색상 지정
       ),
     );
   }
@@ -148,8 +167,7 @@ class _authenticState extends State<authentic> {
                             onFieldSubmitted: (_){  //이메일 입력후 다음칸 누르면 비번칸에 포커스 가주도록 세팅
                             FocusScope.of(context).requestFocus(_passwordFocusNode);
                             },
-
-                            decoration:Textfieldstyle(Icon(Icons.email), 'E-mail')
+                            decoration:Textfieldstyle(Icons.email, 'E-mail')
                         )
                     ),
 
@@ -166,11 +184,11 @@ class _authenticState extends State<authentic> {
                             },
                             validator: (value) => CheckValidate().validatePassword(
                                 _passwordFocusNode, value!.trim()),
-                            autovalidateMode: AutovalidateMode.always,
+                            autovalidateMode: AutovalidateMode.always,  //유효성 항상 검사
                             //textInputAction: TextInputAction.next,
                             focusNode: _passwordFocusNode,
 
-                            decoration: Textfieldstyle(Icon(Icons.lock), 'password')
+                            decoration: Textfieldstyle(Icons.lock, 'password')
                         )
                     ),
 
@@ -181,6 +199,9 @@ class _authenticState extends State<authentic> {
                       child: SizedBox(
                         height: 40.h,
                         child: ElevatedButton(
+                          style:  ElevatedButton.styleFrom(
+                            primary: Colors.green
+                           ),
                           child: Text(
                             "Sign In",
                             style: style.copyWith(
@@ -216,7 +237,7 @@ class _authenticState extends State<authentic> {
                               'Register',
                               style: TextStyle(
                                 //decoration: TextDecoration.underline,
-                                color: Colors.blueAccent,
+                                color: Colors.green,
                                 fontSize: 14.sp,
                               ),
                             ),
