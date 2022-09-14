@@ -78,7 +78,7 @@ class _DiscountState extends State<Discount>  {
                     title:
                     Text('Show your student ID,\nGet discount !\n\n',
                         textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.black),),
+                    style: TextStyle(color: Colors.black, fontSize: 16.sp),),
                     background: Image.asset(
                       'assets/Discount/Discount_background.jpg',
                       fit: BoxFit.cover,),

@@ -43,6 +43,7 @@ dependencies:
   carousel_slider: ^4.1.1
   logger: 1.1.0
   shimmer: 2.0.0
+  simple_animations: 5.0.0+2
 
   firebase_core: ^1.10.6
   firebase_auth: ^3.3.4
@@ -94,6 +95,7 @@ flutter:
     - assets/Discount_background.jpg
     # app icon
     - assets/app_icon.png
+    - assets/android_icon.png
 
 
     # oncampus ion
@@ -171,4 +173,4 @@ flutter_native_splash:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/app_icon.png"
+  image_path: "assets/android_icon.png"

@@ -1,4 +1,5 @@
 import 'package:anyone/Style.dart' as style;
+import 'package:anyone/splash/SplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -77,8 +78,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Main();
-    //return authentic();
+
+    return Splash();
   }
 }
 
@@ -92,36 +93,6 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-
-  //shared pref에 저장된 유저정보있는지보고 없으면 회원가입창으로 이동
-  getData() async {
-    var storage = await SharedPreferences.getInstance();
-
-    //storage.remove('name');
-    //storage.remove('email');
-
-    String? name = storage.getString('name');
-    //store에 있는 state를 변경해주는 메소드
-    context.read<Store1>().ChangeUserName(name);
-
-
-    //만약 sharedpref에 유저이름정보 없으면 로그인화면으로감
-    if(name ==null){   //sharedpref에 유저이름이 저장된값이 없다면
-      Navigator.pop(context);
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) =>
-          authentic() ));
-    }else{    //저장된값있으면 자동 로그인
-      Fluttertoast.showToast(
-        msg: 'Hello, $name !',
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        //fontSize: 20,
-        //textColor: Colors.white,
-        //backgroundColor: Colors.redAccent
-      );
-    }
-  }
 
   //스낵바 띄우기
   ShowSnackBar(text){
@@ -139,27 +110,8 @@ class _MainState extends State<Main> {
   @override
   void initState() {
     super.initState();
-    //initialization();
-    getData();
-  }
 
-  /*
-  void initialization() async {
-    // This is where you can initialize the resources needed by your app while
-    // the splash screen is displayed.  Remove the following example because
-    // delaying the user experience is a bad design practice!
-    // ignore_for_file: avoid_print
-    print('ready in 3...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 2...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('ready in 1...');
-    await Future.delayed(const Duration(seconds: 1));
-    print('go!');
-    FlutterNativeSplash.remove();
   }
-   */
-
 
   @override
   Widget build(BuildContext context) {

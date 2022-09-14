@@ -67,48 +67,51 @@ class _GroceryShopState extends State<GroceryShop> {
                     (context, index) =>
                     GestureDetector(
                       child: Card( //리스트 속 각각의 객체 하나하나임
-                          elevation: 3,
+                          elevation: 1,
                           margin: EdgeInsets.symmetric(
                               vertical: 10.h, horizontal: 20.w),
 
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SizedBox(
-                                width: 180.w,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, //스토어명, 영업시간, 주소, 휴무일정보
-                                  children: [
-                                    Text(' ' +
-                                        grocery_collection[index]['name'] +
-                                        '\n',
-                                        style: TextStyle(
-                                          fontSize: 16.sp,
-                                          fontWeight: FontWeight.bold,
-                                        )),
-                                    richtext(
-                                        Icon(Icons.access_time, size: 15.h),
-                                        grocery_collection[index]['time']),
-                                    richtext(Icon(
-                                        Icons.location_on_outlined, size: 15.h),
-                                        grocery_collection[index]['address']),
-                                    richtext(Icon(Icons.block, size: 15.h),
-                                        grocery_collection[index]['holiday']),
-                                  ],
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 5.h),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  width: 180.w,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly, //스토어명, 영업시간, 주소, 휴무일정보
+                                    children: [
+                                      Text(' ' +
+                                          grocery_collection[index]['name'] +
+                                          '\n',
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                          )),
+                                      richtext(
+                                          Icon(Icons.access_time, size: 13.h),
+                                          grocery_collection[index]['time']),
+                                      richtext(Icon(
+                                          Icons.location_on_outlined, size: 13.h),
+                                          grocery_collection[index]['address']),
+                                      richtext(Icon(Icons.block, size: 13.h),
+                                          grocery_collection[index]['holiday']),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(0.w, 3.h, 3.h, 3.h),
-                                width: 110.w,
-                                height: 110.w, //이미지
-                                child: Hero(
-                                    tag: grocery_collection[index]['name'],
-                                    child: Image.network(
-                                      grocery_collection[index]['imagepath'][0],
-                                      fit: BoxFit.cover,)),
-                              )
-                            ],
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(0.w, 3.h, 3.h, 3.h),
+                                  width: 110.w,
+                                  height: 110.w, //이미지
+                                  child: Hero(
+                                      tag: grocery_collection[index]['name'],
+                                      child: Image.network(
+                                        grocery_collection[index]['imagepath'][0],
+                                        fit: BoxFit.cover,)),
+                                )
+                              ],
+                            ),
                           )
                       ),
                       onTap: () {

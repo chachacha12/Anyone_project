@@ -75,9 +75,9 @@ class _SignUpPageState extends State<SignUpPage> {
       SnackBar(
         content: Text(text), // 필수!
         // Icon 위젯도 가능해용
-        duration: Duration(seconds: 3), // 얼마큼 띄울지
+        duration: Duration(seconds: 2), // 얼마큼 띄울지
         // Duration 으로 시간을 정할 수 있어요
-        backgroundColor: Colors.blue, // 색상 지정
+        backgroundColor: Colors.green, // 색상 지정
       ),
     );
   }

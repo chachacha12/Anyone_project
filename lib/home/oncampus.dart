@@ -315,7 +315,6 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
               ),
             ),
           ],
-
       ),
     );
   }

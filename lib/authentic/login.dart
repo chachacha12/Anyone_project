@@ -1,13 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
 import 'checkvalidate.dart';
 import 'signup.dart';
 import 'package:flutter/cupertino.dart';
-
-
 
 //로그인 화면
 class authentic extends StatefulWidget {
@@ -37,6 +36,7 @@ class _authenticState extends State<authentic> {
     var storage = await SharedPreferences.getInstance();
     storage.setString('name', name);
     storage.setString('email', email);
+    context.read<Store1>().ChangeUserName(name);
   }
 
   @override
@@ -81,7 +81,7 @@ class _authenticState extends State<authentic> {
       SnackBar(
         content: Text(text), // 필수!
         // Icon 위젯도 가능해용
-        duration: Duration(seconds: 3), // 얼마큼 띄울지
+        duration: Duration(seconds: 2), // 얼마큼 띄울지
         // Duration 으로 시간을 정할 수 있어요
         backgroundColor: Colors.green, // 색상 지정
       ),
@@ -103,7 +103,7 @@ class _authenticState extends State<authentic> {
         //sharedprfe에 유저정보 저장
         saveData(currentUser.displayName, currentUser.email);
       }
-      ShowSnackBar('Sign In Successful');
+      //ShowSnackBar('Sign In Successful');
       Navigator.pop(context);
 
       //메인창으로 페이지 이동

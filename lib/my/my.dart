@@ -171,7 +171,8 @@ class _MyState extends State<My> {
                             .watch<Store1>()
                             .date,
                             style: TextStyle(
-                                fontSize: 18.sp
+                                fontSize: 18.sp,
+                              color: Colors.greenAccent
                             ))
                         )
                       ],
@@ -185,7 +186,7 @@ class _MyState extends State<My> {
         SliverToBoxAdapter(
           child: Container(
             color: Colors.white,
-            height: 330.h,
+            height: 360.h,
           ),
         )
       ],

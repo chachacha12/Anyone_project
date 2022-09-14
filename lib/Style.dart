@@ -26,8 +26,11 @@ var theme = ThemeData(
         bodyText2: TextStyle(
             color: Colors.black,
           fontWeight: FontWeight.w400,
+          fontSize: 13.sp
         )
     ),
+
+    ///텍스트버튼 스타일
     textButtonTheme: TextButtonThemeData(
       style: ElevatedButton.styleFrom(
           textStyle: TextStyle(

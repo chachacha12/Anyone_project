@@ -41,17 +41,6 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
   var restaurant_random_list = []; //db에 있는 식당의 갯수에 맞춰서 0부터 n까지 값을 랜덤하게 저장해둘 리스트
   var i = 0;
 
-/*
-_loadData() {
-     _isLoading = true;
-     Future.delayed(const Duration(seconds: 1), () {
-       setState(() {
-         _isLoading = false;
-       });
-     });
-   }
- */
-
 
   getData() async {
     _isLoading = true; //여기서 로딩변수 초기화
@@ -84,13 +73,15 @@ _loadData() {
         color: Colors.white,
         child: Column(
           children: [
-
             ///1번째
             Container(
-              height: 200.0.h,
-              margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 40.h),
+              height: 190.h,
+              margin: EdgeInsets.fromLTRB(0.w, 25.h, 0.w, 30.h),
               child: GridView.count(
-                crossAxisCount: 4,
+                scrollDirection: Axis.horizontal,
+                crossAxisCount: 2,
+                //crossAxisSpacing: 40.0.w,
+                //mainAxisSpacing: 1.w,
                 children: [
                   Container(
                     color: Colors.transparent,
@@ -119,85 +110,7 @@ _loadData() {
                       },
                     ),
                   ),
-                  Container(
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset(
-                              'assets/Aroundcampus_icon/Fashion&Beauty.png',
-                              width: 35.w, height: 35.w,), //Icon(Icons.star),
-                            Text('Fashion'"\n"'&beauty', textAlign: TextAlign
-                                .center, style: TextStyle(
-                                color: Colors.black
-                            )),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Fashion())
-                        );
-                      },
-                    ),
-                  ),
-                  Container(
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset(
-                              'assets/Aroundcampus_icon/Cafe.png', width: 35.w,
-                              height: 35.w,), //Icon(Icons.star),
-                            Text('cafe', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>
-                                Cafe()) //식당정보더보기도 이 Cafe()커스텀위젯 쓸거라, 컬렉션 네임 각각 보내줌
-                        );
-                      },
-                    ),
-                  ),
-                  Container(
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Image.asset(
-                              'assets/Aroundcampus_icon/Pub.png', width: 35.w,
-                              height: 35.w,), //Icon(Icons.star),
-                            Text('pub', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Pub())
-                        );
-                      },
-                    ),
-                  ),
+
                   Container(
                     color: Colors.transparent,
                     margin: EdgeInsets.all(0.h),
@@ -225,6 +138,34 @@ _loadData() {
                       },
                     ),
                   ),
+
+                  Container(
+                    color: Colors.transparent,
+                    margin: EdgeInsets.all(0.h),
+                    child: GestureDetector(
+                      child: GridTile(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              'assets/Aroundcampus_icon/Fashion&Beauty.png',
+                              width: 35.w, height: 35.w,), //Icon(Icons.star),
+                            Text('Fashion'"\n"'&beauty', textAlign: TextAlign
+                                .center, style: TextStyle(
+                                color: Colors.black
+                            )),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Fashion())
+                        );
+                      },
+                    ),
+                  ),
+
                   Container(
                     color: Colors.transparent,
                     margin: EdgeInsets.all(0.h),
@@ -252,6 +193,35 @@ _loadData() {
                       },
                     ),
                   ),
+
+                  Container(
+                    color: Colors.transparent,
+                    margin: EdgeInsets.all(0.h),
+                    child: GestureDetector(
+                      child: GridTile(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              'assets/Aroundcampus_icon/Cafe.png', width: 35.w,
+                              height: 35.w,), //Icon(Icons.star),
+                            Text('cafe', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>
+                                Cafe()) //식당정보더보기도 이 Cafe()커스텀위젯 쓸거라, 컬렉션 네임 각각 보내줌
+                        );
+                      },
+                    ),
+                  ),
+
                   Container(
                     color: Colors.transparent,
                     margin: EdgeInsets.all(0.h),
@@ -275,6 +245,34 @@ _loadData() {
                             builder: (context) =>
                             //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
                             Discount()));
+                      },
+                    ),
+                  ),
+
+
+                  Container(
+                    color: Colors.transparent,
+                    margin: EdgeInsets.all(0.h),
+                    child: GestureDetector(
+                      child: GridTile(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Image.asset(
+                              'assets/Aroundcampus_icon/Pub.png', width: 35.w,
+                              height: 35.w,), //Icon(Icons.star),
+                            Text('pub', textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.black
+                                )),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Pub())
+                        );
                       },
                     ),
                   ),
@@ -323,11 +321,9 @@ _loadData() {
                               )
                             ],
                           ),
-
                           ),
                         ],
                       ))
-
                     ],
                   ),
                 )
@@ -378,9 +374,7 @@ _loadData() {
                     );
                   }),
             ),
-
           ],
-
         ),
       ),
     );
