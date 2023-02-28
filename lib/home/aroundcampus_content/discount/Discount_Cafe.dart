@@ -61,7 +61,8 @@ class _Discount_CafeState extends State<Discount_Cafe> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(widget.collection[index]['contents'],
+                                          //파베띄어쓰기
+                                          Text(widget.collection[index]['contents'].toString().replaceAll("\\n", "\n"),
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.normal,

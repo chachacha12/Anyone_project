@@ -61,7 +61,8 @@ class _Discount_OthersState extends State<Discount_Others> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(widget.collection[index]['contents'],
+                                          //파베 띄어쓰기해줌
+                                          Text(widget.collection[index]['contents'].toString().replaceAll("\\n", "\n"),
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.normal,

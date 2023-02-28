@@ -54,7 +54,7 @@ class _CultureState extends State<Culture> {
               crossAxisCount: 2,
               crossAxisSpacing: 0.h,
               mainAxisSpacing: 0.h,
-              childAspectRatio: 0.42.h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
+              childAspectRatio: 0.44.h //0.42.h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
             ),
 
             delegate: SliverChildBuilderDelegate(
@@ -62,7 +62,7 @@ class _CultureState extends State<Culture> {
                 return GestureDetector(
                   child: Container( //팁에 사용되는 구간임- 이미지랑 텍스트들
                     color: Colors.white,
-                    padding: EdgeInsets.fromLTRB(15.w, 20.h, 15.w, 0.h),
+                    padding: EdgeInsets.fromLTRB(15.w, 0.h, 15.w, 0.h),
                     child: Column(
                       children: [
                         Container(
@@ -85,27 +85,19 @@ class _CultureState extends State<Culture> {
                         ),
                         //Spacer(flex: 2,),
                         Card(
-                          elevation: 2.h,
+                          elevation: 0.h,
                           margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                          child: SizedBox(
-                            width: 150.h,
-                            height: 30.h,
-                            child: Text(culture_collection[index]['title'],
-                                textAlign: TextAlign.center,),
-                          ),
+                          child: Text(culture_collection[index]['title'],
+                            textAlign: TextAlign.center,),
                         ),
                         Card(
-                          elevation: 2.h,
+                          elevation: 0.h,
                           margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                          child: SizedBox(
-                            width: 150.h,
-                            height: 30.h,
-                            child:Text(culture_collection[index]['tag'],
-                                textAlign: TextAlign.center,
+                          child: Text(culture_collection[index]['tag'],
+                            textAlign: TextAlign.center,
                             style: TextStyle(
-                              color: Colors.black54
-                            ),),
-                          ),             //Text(tips_collection[index]['tag']
+                                color: Colors.black54
+                            ),),       //Text(tips_collection[index]['tag']
                         ),
                       ],
                     ),

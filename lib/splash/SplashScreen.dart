@@ -153,7 +153,7 @@ class _SplashState extends State<Splash> {
                       );
                     },
                     child: Text("Anyone can enjoy\nCampus life",
-                        style: TextStyle(color: Colors.green,
+                        style: TextStyle(color: Colors.black,
                             fontSize: screenWidth*( 20/360))
                     ),
                   ),

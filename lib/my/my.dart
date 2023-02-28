@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../authentic/login.dart';
+import '../authentic/signup.dart';
 import '../main.dart';
 import 'package:intl/intl.dart';
 
@@ -101,16 +104,23 @@ class _MyState extends State<My> {
     return dateTime;
   }
 
+  //sharedpref에 유저정보 삭제
+  deleteData(name) async {
+    var storage = await SharedPreferences.getInstance();
+    storage.remove('name');
+  }
+
+  //다이얼로그 보여줌
+
+
+
 
   @override
   void initState() {
     super.initState();
-
     //유저가 이전에 선택한 떠나는날짜값 있으면 가져와서 디데이값 계산해줌
     getData();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +142,104 @@ class _MyState extends State<My> {
           // AppBar가 하단 List 내렸을 때 바로 보여야 한다 -> true
           // List를 최상단으로 올렸을 때만 나와야 한다. -> false
           floating: true,
+
+
+            actions: [
+            //PopupMenu를 보여줌
+            PopupMenuButton<int>(
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  value: 1,
+                  child:  TextButton(child: Text('Sign out', style: TextStyle(
+                    color: Colors.black
+                  ),), onPressed: (){   //로그아웃로직
+                    //다이얼로그 띄우기
+                    showDialog(context: context, builder: (context){
+                      return AlertDialog(
+                        title: Text('Are you sure you want to sign out?',style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15.sp
+                        ),),
+                        actions: [
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextButton(onPressed: () async {
+                                await auth.signOut(); //파베에서 로그아웃
+                                var name = context.read<Store1>().username;
+                                deleteData(name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯. 이름만 보고 로그인됫는지 판별하니?
+
+                                //로그인으로 페이지 이동
+                                Navigator.push(context,
+                                    CupertinoPageRoute(builder: (c) => authentic())
+                                );
+
+                                //모든 스택값에 있는 페이지삭제
+                                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+
+                              }, child: Text('Yes', style: TextStyle(color: Colors.green),)),
+                              TextButton(onPressed: (){
+                                Navigator.of(context).pop();
+                              }, child: Text('No',style: TextStyle(color: Colors.green),)),
+
+                            ],)
+                        ],
+                      ) ;
+                    });  //다이얼로그
+                  })
+                ),
+                PopupMenuItem(
+                  value: 2,
+                  child:  TextButton(child: Text('Delete Account', style: TextStyle(
+                            color: Colors.black)), onPressed: (){  //계정삭제로직
+                    //다이얼로그 띄우기
+                    showDialog(context: context, builder: (context){
+                      return AlertDialog(
+                        title: Text('Are you sure you want to delete account?',style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15.sp
+                        ),),
+                        actions: [
+                          Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              TextButton(onPressed: () async {
+
+                                //현재 로그인된 파베유저 계정 삭제로직
+                                await FirebaseAuth.instance.currentUser?.delete();
+
+                                var name = context.read<Store1>().username;
+                                deleteData(name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯.
+
+                                //로그인으로 페이지 이동
+                                Navigator.push(context,
+                                    CupertinoPageRoute(builder: (c) => authentic())
+                                );
+
+                                //모든 스택값에 있는 페이지삭제
+                                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+
+                              }, child: Text('Yes', style: TextStyle(color: Colors.green),)),
+                              TextButton(onPressed: (){
+                                Navigator.of(context).pop();
+                              }, child: Text('No',style: TextStyle(color: Colors.green),)),
+
+                            ],)
+                        ],
+                      ) ;
+                    });
+                  })
+                ),
+              ],
+              offset: Offset(0, 50),
+              color: Colors.white,
+              elevation: 2,
+            ),
+          ],
+
+
+
+
+
+
         ),
         
         //이름 보여줌
@@ -172,7 +280,7 @@ class _MyState extends State<My> {
                             .date,
                             style: TextStyle(
                                 fontSize: 18.sp,
-                              color: Colors.greenAccent
+                              color: Colors.green
                             ))
                         )
                       ],

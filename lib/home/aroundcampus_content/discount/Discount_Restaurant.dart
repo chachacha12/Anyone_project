@@ -7,7 +7,6 @@ import '../../../various_widget.dart';
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
-
 class Discount_Restaurant extends StatefulWidget {
    Discount_Restaurant(this.collection, this.count,{Key? key}) : super(key: key);
    final collection;
@@ -62,7 +61,8 @@ class _Discount_RestaurantState extends State<Discount_Restaurant> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(widget.collection[index]['contents'],
+                                          //파베 띄어쓰기
+                                          Text(widget.collection[index]['contents'].toString().replaceAll("\\n", "\n"),
                                             style: TextStyle(
                                               color: Colors.black,
                                               fontWeight: FontWeight.normal,
@@ -70,7 +70,6 @@ class _Discount_RestaurantState extends State<Discount_Restaurant> {
                                             ),)
                                         ],
                                       )
-
 
                                     ],
                                   ),
@@ -94,9 +93,7 @@ class _Discount_RestaurantState extends State<Discount_Restaurant> {
                                       richtext(Icon(
                                           Icons.label_important, size: 15.h),
                                           widget.collection[index]['category']),
-
                                     ],
-
                                   ),
                                 ),
                               ],

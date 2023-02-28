@@ -282,7 +282,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
 
             ///2번째
             Container(
-                height: 50.0.h,
+                //height: 50.0.h, - 텍스트 잘리는 문제 해결을 위해
                 child: Container(
                   width: double.infinity,
                   margin: EdgeInsets.fromLTRB(20.w, 0.h, 10.w, 0.h),
@@ -340,6 +340,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                   itemBuilder: (context, index) {
                     return SizedBox(
                       width: 150.0.w,
+                      //height: 150.0.h,
                       child: Card(
                         child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
                           child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
@@ -352,7 +353,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
                                   restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
                                   fit: BoxFit.cover,),
                               ),
-                              Positioned(child: Text(
+                              Positioned(child: Text(' '+
                                 restaurant_collection[restaurant_random_list[index]]['name'],
                                 maxLines: 2,
                                 style: TextStyle(color: Colors.white,

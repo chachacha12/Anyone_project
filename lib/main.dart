@@ -8,8 +8,8 @@ import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'authentic/login.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
+
 
 
 
@@ -17,7 +17,10 @@ void main() async {
 
   //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  
+
+  //상태표시줄 색깔 변경해줌
+  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle( statusBarColor: Colors.white));
+
   WidgetsFlutterBinding.ensureInitialized();  //가로모드로 변경때 반응형사이즈에 에러생기는거 방지용. 회전을 방지.
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -32,6 +35,7 @@ void main() async {
             designSize: Size(360, 690),
             builder: (BuildContext context, Widget? child) {
               return MaterialApp(
+                  debugShowCheckedModeBanner: false,
                   theme: style.theme, //Style.dart에 따로 빼둔 변수값을 가져와서 디자인에 씀
                   home: MyApp());
             },

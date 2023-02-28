@@ -22,7 +22,7 @@ class Calender extends StatelessWidget {
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                 SliverAppBar(
-                  collapsedHeight: 50.h,
+                  //collapsedHeight: 50.h,
                   title: Text('Academic Calender'),
                   pinned: true,
                   floating: true,
