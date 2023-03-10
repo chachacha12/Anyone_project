@@ -1,10 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
+import 'package:path/path.dart' as Path;
 
 //캐러셀슬라이더위젯(이미지 스와이핑)의 옵션값에 넣어야할 이미지리스트를 반환하는 메소드
 Make_imagesliders(imgList){
@@ -48,6 +46,7 @@ Make_imagesliders(imgList){
 }
 
 
+//아이콘 + 텍스트 조합으로 만들때
 //RichText위젯을 반환해주는 메소드 - 여러스타일 문자를 하나의 Text위젯에 넣을때 사용
 richtext(icon, text2){
 
@@ -68,9 +67,42 @@ richtext(icon, text2){
             fontSize: 14.sp,
           ),
         ),
-
-
       ],
     ),
   );
 }
+
+/*
+//텍스트 + 텍스트 조합 - 음식점 명단
+richtext2(text1, text2){
+
+  return RichText(
+    text: TextSpan(
+      children: [
+        TextSpan(
+          text: '  '+text1,
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 16.sp,
+          ),
+        ),
+        TextSpan(
+          text: '\n   '+text2,
+          style: TextStyle(
+            color: Colors.green,
+            fontWeight: FontWeight.w400,
+            fontSize: 14.sp,
+          ),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () =>
+                  Navigator.push(Path.context, MaterialPageRoute(builder: (context) => My()))
+
+        ),
+      ],
+    ),
+  );
+}
+
+ */
+

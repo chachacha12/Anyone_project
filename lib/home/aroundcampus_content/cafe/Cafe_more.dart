@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../various_widget.dart';
 
-
+//식당 리스트, 카페 리스트 등 여러가지 장소리스트를 여기서 받아서 장소정보 자세히 보여주는 페이지임
 class Cafe_more extends StatefulWidget {
    Cafe_more(this.cafe_document, {Key? key}) : super(key: key);
    final cafe_document;
