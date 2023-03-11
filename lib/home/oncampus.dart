@@ -25,7 +25,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin{
     'https://kulhouse.konkuk.ac.kr/home/lan/eng/e_index_01.asp', //dormitory
     'http://kli.konkuk.ac.kr/', //language institution
     'https://sites.google.com/view/ku-student-guidebook/home', //Guide book
-    'https://library.konkuk.ac.kr/en/#/', //Library
+    'https://library.konkuk.ac.kr/', //Library
     'https://sites.google.com/view/ku-student-guidebook/helpful-information/around-campus?authuser=0', //campusmap
   ];
 

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../../various_widget.dart';
 import '../../webView.dart';
@@ -121,8 +122,16 @@ class _RestaurantState extends State<Restaurant> {
                                         var url = Uri.parse("nmap://search?query="+Restaurant_collection[index]['name']+" 건대점"+"&appname=com.leecha.anyone");
                                         if(await canLaunchUrl(url)){
                                           await launch("nmap://search?query="+Restaurant_collection[index]['name']+" 건대점"+"&appname=com.leecha.anyone");
-                                        }else{
-                                          //throw 'Could not launch url';
+                                        }else{ //네이버지도앱이 없을시
+                                          Fluttertoast.showToast(
+                                            msg: "Download <Naver Map> Application",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            //fontSize: 20,
+                                            //textColor: Colors.white,
+                                            //backgroundColor: Colors.redAccent
+                                          );
+                                         /*
                                           if (Platform.isAndroid) {
                                             print("이것은 안드로이드폰!");
                                             await launch("https://play.google.com/store/search?q=Naver Map");
@@ -130,9 +139,8 @@ class _RestaurantState extends State<Restaurant> {
                                             print("이것은 아이폰!");
                                             await launch("https://www.apple.com/kr/search/navermap?src=globalnav");
                                           }
-
+                                          */
                                         }
-
                                       },
                                     ),
                                     Text(Restaurant_collection[index]['tag'

@@ -68,16 +68,16 @@ class Helplines extends StatelessWidget {
                     Container(
                       color: Colors.white,
                       child: Card( //리스트 속 각각의 객체 하나하나임
-                        elevation: 2,
+                        elevation: 1,
                         margin: EdgeInsets.symmetric(
                             vertical: 10.h, horizontal: 20.w),
                         child: ListTile(
                           title: Text(contact_list[index][0], style: TextStyle(
-                            fontSize: 17.sp,
+                            fontSize: 15.sp,
                             fontWeight: FontWeight.w500,
                           )),
                           subtitle: Text(contact_list[index][1], style: TextStyle(
-                              fontSize: 15.sp,
+                              fontSize: 14.sp,
                             color: Colors.black45
                           ),),
                             trailing: Icon(Icons.phone_forwarded),
