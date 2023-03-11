@@ -117,12 +117,17 @@ class _RestaurantState extends State<Restaurant> {
                                       child: Text(' Naver Map', style:
                                       TextStyle(fontSize: 15.sp,
                                           color: Colors.green,
-                                          fontWeight: FontWeight.w500),),
-                                      onTap: () async { //네이버지도url scheme을 이용한 딥링크.?
-                                        var url = Uri.parse("nmap://search?query="+Restaurant_collection[index]['name']+" 건대점"+"&appname=com.leecha.anyone");
-                                        if(await canLaunchUrl(url)){
-                                          await launch("nmap://search?query="+Restaurant_collection[index]['name']+" 건대점"+"&appname=com.leecha.anyone");
-                                        }else{ //네이버지도앱이 없을시
+                                          fontWeight: FontWeight.w400),),
+                                      onTap: () async { //네이버지도url scheme을 이용한 딥링크임. 네이버지도앱 실행시켜줄.
+                                        var url = Uri.parse(
+                                            "nmap://search?query=" +
+                                                Restaurant_collection[index]['name'] +
+                                                " 건대점" +
+                                                "&appname=com.leecha.anyone");
+
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {  //네이버지도앱이 없을시
                                           Fluttertoast.showToast(
                                             msg: "Download <Naver Map> Application",
                                             toastLength: Toast.LENGTH_SHORT,
@@ -131,15 +136,30 @@ class _RestaurantState extends State<Restaurant> {
                                             //textColor: Colors.white,
                                             //backgroundColor: Colors.redAccent
                                           );
-                                         /*
-                                          if (Platform.isAndroid) {
+                                          //os기기별로 예외처리해줌
+                                          if (Platform.isAndroid) {  //안드로이드폰일때
                                             print("이것은 안드로이드폰!");
-                                            await launch("https://play.google.com/store/search?q=Naver Map");
-                                          } else if (Platform.isIOS) {
+                                            //구글플레이앱 바로 실행시켜서 네이버지도검색결과 보여줌
+                                            // market:// 이건 구글플레이앱의 url scheme값임 (메니페스트파일에 등록해줘야함 )
+                                            var url = Uri.parse("market://details?id=com.nhn.android.nmap");
+                                            if(await canLaunchUrl(url)){ //구글플레이 네이버지도링크로 이동가능할때
+                                              await launchUrl(url);
+                                            }else{
+                                              throw 'Cannot move to googleplay link !!';
+                                            }
+                                          } else if (Platform.isIOS) {   //아이폰일때
                                             print("이것은 아이폰!");
-                                            await launch("https://www.apple.com/kr/search/navermap?src=globalnav");
+                                            //앱스토어 바로가는 url schem값과 네이버지도 id값. 넣어서 앱스토어 바로 실행 후 네이버지도 다운로드페이지 보여줌
+                                            //itms-apps는 앱스토어의 url scheme값임 (info.plist에 등록해줘야함)
+                                            var url = Uri.parse("itms-apps://itunes.apple.com/app/id311867728");
+                                            if(await canLaunchUrl(url)){ //앱스토어 네이버지도링크로 이동가능할때
+                                              await launchUrl(url);
+                                            }else{
+                                              throw 'Cannot move to appstore link !!';
+                                            }
+                                          }else{   //안드, 아이폰 둘 다 아닐때
+                                            throw 'this is not aos, ios !!!!!';
                                           }
-                                          */
                                         }
                                       },
                                     ),
