@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../NaverMapDeepLink.dart';
 import '../../../various_widget.dart';
 import 'Entertainment_hero_image.dart';
 import 'Entertainment_more.dart';
@@ -110,6 +111,10 @@ class _EntertainmentState extends State<Entertainment> {
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
+                                  //인자값으로 각 컨텐츠의 풀네임값을 보내줌
+                                  NaverMapDeepLink( titlename :Entertainment_collection[index]['title'] ),
+
                                   Text(Entertainment_collection[index]['category'
                                   ],
                                     style: TextStyle(

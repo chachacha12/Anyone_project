@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../../NaverMapDeepLink.dart';
 import '../../../various_widget.dart';
 import 'GroceryShop_hero_second.dart';
 
@@ -89,6 +90,10 @@ class _GroceryShopState extends State<GroceryShop> {
                                             fontSize: 14.sp,
                                             fontWeight: FontWeight.bold,
                                           )),
+                                      //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
+                                      //인자값으로 각 컨텐츠의 풀네임값을 보내줌
+                                      NaverMapDeepLink( titlename : grocery_collection[index]['name'] ),
+
                                       richtext(
                                           Icon(Icons.access_time, size: 13.h),
                                           grocery_collection[index]['time']),

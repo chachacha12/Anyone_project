@@ -62,6 +62,8 @@ class _Discount_CafeState extends State<Discount_Cafe> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
+                                          //인자값으로 각 컨텐츠의 풀네임값을 보내줌
                                           NaverMapDeepLink( titlename :widget.collection[index]['name']),
                                           //파베띄어쓰기
                                           Text(widget.collection[index]['contents'].toString().replaceAll("\\n", "\n"),
