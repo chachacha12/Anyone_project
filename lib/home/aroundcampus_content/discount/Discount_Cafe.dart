@@ -2,6 +2,7 @@ import 'package:anyone/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../NaverMapDeepLink.dart';
 import '../../../various_widget.dart';
 
 //파베 파이어스토어 사용을 위한 객체
@@ -61,6 +62,7 @@ class _Discount_CafeState extends State<Discount_Cafe> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
+                                          NaverMapDeepLink( titlename :widget.collection[index]['name']),
                                           //파베띄어쓰기
                                           Text(widget.collection[index]['contents'].toString().replaceAll("\\n", "\n"),
                                             style: TextStyle(
