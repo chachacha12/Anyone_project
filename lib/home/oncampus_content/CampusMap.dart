@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 
-import 'asset_hero_image.dart';
+import 'Calender_hero_image.dart';
+import 'CampusMap_asset_hero.dart';
 
 class CampusMap extends StatelessWidget {
    CampusMap({Key? key}) : super(key: key);
@@ -59,7 +60,7 @@ class CampusMap extends StatelessWidget {
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) =>
-                                  Asset_hero_image(ImageList[0])  ));
+                                  CampusMap_asset_hero_image(ImageList[0])  ));
                         },
                       ),
                     ),
@@ -82,7 +83,7 @@ class CampusMap extends StatelessWidget {
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) =>
-                                  Asset_hero_image(ImageList[1])  ));
+                                  CampusMap_asset_hero_image(ImageList[1])  ));
                         },
                       ),
                     ),
@@ -110,7 +111,7 @@ class CampusMap extends StatelessWidget {
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) =>
-                                  Asset_hero_image(ImageList[2])  ));
+                                  CampusMap_asset_hero_image(ImageList[2])  ));
                         },
                       ),
                     ),
@@ -132,7 +133,7 @@ class CampusMap extends StatelessWidget {
                         onTap: (){
                           Navigator.push(context, MaterialPageRoute(
                               builder: (context) =>
-                                  Asset_hero_image(ImageList[3])  ));
+                                  CampusMap_asset_hero_image(ImageList[3])  ));
                         },
                       ),
                     ),

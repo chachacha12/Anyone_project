@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 
 
-class Asset_hero_image extends StatelessWidget {
-  Asset_hero_image(this.Imagepath, {Key? key}) : super(key: key);
+class CampusMap_asset_hero_image extends StatelessWidget {
+  CampusMap_asset_hero_image(this.Imagepath, {Key? key}) : super(key: key);
   final Imagepath;
 
   @override
@@ -14,7 +14,7 @@ class Asset_hero_image extends StatelessWidget {
         children: [
           PhotoView(
             heroAttributes: PhotoViewHeroAttributes(tag: Imagepath),
-            imageProvider: AssetImage(Imagepath),
+            imageProvider: AssetImage(Imagepath),  //에셋 이미지로 히어로위젯 띄워줌. 얘만.
           ),
           Positioned(
               top: 30.h,
@@ -33,21 +33,3 @@ class Asset_hero_image extends StatelessWidget {
     );
   }
 }
-
-/*
- IconButton(
-              iconSize: 10.w,
-              icon: Icon(Icons.cancel),
-              onPressed: (){
-
-              },
-            )
-
-
-            TextButton(
-              child: Text('aefaaefa'),
-              onPressed: (){
-
-              },
-            )
- */

@@ -12,8 +12,6 @@ import 'aroundcampus_content/fashion/Fashion_hero_image.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
 import 'aroundcampus_content/pub/Pub.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:logger/logger.dart';
-
 import 'aroundcampus_content/restaurant/Restaurant.dart';
 
 
