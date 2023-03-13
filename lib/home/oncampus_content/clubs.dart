@@ -61,7 +61,7 @@ class _ClubsState extends State<Clubs> {
                         fontSize: 25.sp
                     )),
                     Card(
-                      elevation: 2,
+                      elevation: 1,
                       margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -93,7 +93,7 @@ class _ClubsState extends State<Clubs> {
                     Container(
                       color: Colors.white,
                       child: Card(        //리스트 속 각각의 객체 하나하나임
-                        elevation: 3,
+                        elevation: 1,
                         color: Colors.white,
                         margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
 

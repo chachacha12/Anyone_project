@@ -56,7 +56,7 @@ class Contact extends StatelessWidget {
                         fontSize: 23.sp
                     )),
                     Card(
-                      elevation: 2,
+                      elevation: 1,
                       margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
                       child: ListTile(
                         title: Text('< Anyone >\n', style: Theme.of(context).textTheme.titleMedium),
@@ -85,7 +85,7 @@ class Contact extends StatelessWidget {
                     Container(
                       color: Colors.white,
                       child: Card(        //리스트 속 각각의 객체 하나하나임
-                        elevation: 2,
+                        elevation: 1,
                         margin: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w),
                         child: ListTile(
                           title: Text(contact_list[index][0], style: Theme.of(context).textTheme.titleMedium),
