@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../Extend_HeroImage.dart';
 import '../../../various_widget.dart';
-import 'Entertainment_hero_image.dart';
 
 
 class Entertainment_more extends StatefulWidget {
@@ -48,7 +48,7 @@ class _Entertainment_moreState extends State<Entertainment_more> {
              onTap: (){
                Navigator.push(context, MaterialPageRoute(
                    builder: (context) =>
-                       Entertainment_hero_image(widget.entertainment_document['textimage'])));
+                       Extend_HeroImage(widget.entertainment_document['textimage'])));
              },
            ),
          ),

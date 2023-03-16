@@ -1,14 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:url_launcher/url_launcher.dart';
+import '../../../Extend_HeroImage.dart';
 import '../../../NaverMapDeepLink.dart';
 import '../../../various_widget.dart';
-import '../../webView.dart';
-import '../cafe/Cafe_hero_image.dart';
 import '../cafe/Cafe_more.dart';
 
 //파베 파이어스토어 사용을 위한 객체
@@ -152,7 +147,7 @@ class _RestaurantState extends State<Restaurant> {
                                             Navigator.push(
                                                 context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Cafe_hero_image(
+                                                    Extend_HeroImage(
                                                         Restaurant_collection[index]['imagepath'][index2])));
                                           },
                                         ),

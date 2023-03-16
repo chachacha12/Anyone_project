@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'Calender_hero_image.dart';
+import '../../Extend_HeroImage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 //파베 파이어스토어 사용을 위한 객체
@@ -91,7 +91,7 @@ class _CalenderState extends State<Calender> {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
                             builder: (context) =>
-                                Calender_hero_image(
+                                Extend_HeroImage(
                                     calender_collection[0]['official ver'])));
                       },
                     ),
@@ -109,7 +109,7 @@ class _CalenderState extends State<Calender> {
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(
                             builder: (context) =>
-                                Calender_hero_image(
+                                Extend_HeroImage(
                                     calender_collection[0]['OIA ver'])));
                       },
                     ),

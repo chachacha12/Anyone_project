@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 
-class Pub_hero_image extends StatelessWidget {
-  Pub_hero_image(this.Imagepath, {Key? key}) : super(key: key);
+class Extend_HeroImage extends StatelessWidget {
+  Extend_HeroImage(this.Imagepath, {Key? key}) : super(key: key);
   final Imagepath;
 
   @override
@@ -30,5 +30,6 @@ class Pub_hero_image extends StatelessWidget {
         ],
       ),
     );
+
   }
 }

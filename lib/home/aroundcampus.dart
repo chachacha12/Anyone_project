@@ -4,11 +4,9 @@ import 'package:anyone/home/aroundcampus_content/entertainment/Entertainment.dar
 import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 import '../loading/shimmerloadinglist.dart';
 import 'aroundcampus_content/cafe/Cafe.dart';
 import 'aroundcampus_content/culture/Culture.dart';
-import 'aroundcampus_content/fashion/Fashion_hero_image.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
 import 'aroundcampus_content/pub/Pub.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

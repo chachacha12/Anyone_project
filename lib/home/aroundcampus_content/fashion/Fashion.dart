@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../Extend_HeroImage.dart';
 import '../../../NaverMapDeepLink.dart';
-import '../../../main.dart';
 import '../../../various_widget.dart';
-import 'Fashion_hero_image.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
@@ -172,7 +171,7 @@ class _FashionState extends State<Fashion> {
                                           onTap: (){
                                             Navigator.push(context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Fashion_hero_image(fashion_collection[index]['imagepath'][index2])));
+                                                    Extend_HeroImage(fashion_collection[index]['imagepath'][index2])));
                                           },
                                         ),
                                       ),

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:photo_view/photo_view.dart';
-
-import 'Calender_hero_image.dart';
 import 'CampusMap_asset_hero.dart';
 
 class CampusMap extends StatelessWidget {
