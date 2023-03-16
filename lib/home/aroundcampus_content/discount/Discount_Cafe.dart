@@ -39,7 +39,7 @@ class _Discount_CafeState extends State<Discount_Cafe> {
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
                     Card( //리스트 속 각각의 객체 하나하나임
-                          elevation: 3,
+                          elevation: 1,
                           margin: EdgeInsets.symmetric(
                               vertical: 10.h, horizontal: 15.w),
                           child: Padding(
