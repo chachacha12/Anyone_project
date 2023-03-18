@@ -1,3 +1,4 @@
+import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ class Pub_more extends StatefulWidget {
 class _Pub_moreState extends State<Pub_more> {
 
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
+  int currentIndex =0; //캐러셀 사진 슬라이더에 indicator를 달아주기위한 변수
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,8 @@ class _Pub_moreState extends State<Pub_more> {
 
     //various_widget.dart에 있는 캐러셀슬라이더위젯에 필요한 imageSliders옵션값(이미지리스트)
     List<Widget> imageSliders = Make_imagesliders(imgList);
+    //캐러셀 슬라이드로 이미지 하나 스와이프 할때마다 리스트에 이미지가 계속 추가되기 때문에..indicator갯수가 계속 많아지는 문제 발생. 그래서 이미지리스트 한번 비워줌
+    imgList.clear();
 
     return Scaffold(
       body: CustomScrollView(
@@ -45,14 +49,37 @@ class _Pub_moreState extends State<Pub_more> {
           SliverToBoxAdapter(
             child: Container(
               margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
-              child: CarouselSlider( //이미지슬라이드 해주는 위젯
-                  options: CarouselOptions(
-                    //autoPlay: true,
-                    aspectRatio: 2.0,
-                    enlargeCenterPage: true,
+              child:Column(  //캐러셀 슬라이드와 indicator 들어감
+                children: [
+                  CarouselSlider( //이미지슬라이드 해주는 위젯
+                    options: CarouselOptions(
+                        autoPlay: true,
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        height: 200.h,
+                        viewportFraction: 0.9,
+                        aspectRatio: 2.0,
+                        enlargeCenterPage: true,
+                        enableInfiniteScroll: true,
+                        onPageChanged: (index, reason){
+                          setState((){
+                            currentIndex = index;
+                          });
+                        }
+                    ),
+                    items: imageSliders,
                   ),
-                  items: imageSliders,
-                ),
+                  DotsIndicator(
+                    dotsCount: imageSliders.length,
+                    position: currentIndex.toDouble(),
+                    decorator: DotsDecorator(
+                      color: Colors.grey,  // Inactive color
+                      activeColor: Colors.greenAccent,
+                      size: const Size.square(6.0),
+                      activeSize: const Size(7.0, 7.0),
+                    ),
+                  )
+                ],
+              )
             ),
           ),
 
