@@ -30,6 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #막대or원 그래프로 남은기간 퍼센테이지 나타내주는 라이브러리
+  percent_indicator: ^4.2.3
   #이미지들 슬라이더밑에 indicator 만들어주기위한 라이브러리
   dots_indicator: 2.1.0
   # 로딩화면 만들어주는 라이브러리

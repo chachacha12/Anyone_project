@@ -63,9 +63,9 @@ class Store1 extends ChangeNotifier{
   }
 
   //my.dart에서 보여줄 출국날짜값
-  var date = 'Pick';
-  ChangeDate(i){
-    date = i;
+  var departure_date = 'Pick';
+  ChangeDepartureDate(i){
+    departure_date = i;
     notifyListeners();
   }
 
@@ -75,6 +75,15 @@ class Store1 extends ChangeNotifier{
     dday = i;
     notifyListeners();
   }
+
+  //my.dart에서 보여줄 한국도착날짜값
+  var arrival_date = 'Pick';
+  ChangeArrivalDate(i){
+    arrival_date = i;
+    notifyListeners();
+  }
+
+
 }
 
 class MyApp extends StatelessWidget {
