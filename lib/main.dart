@@ -45,7 +45,7 @@ void main() async {
 }
 
 
-//state 보관하는 클래스
+///state 보관하는 클래스
 class Store1 extends ChangeNotifier{
 
   //sharedpref에서 가져온 유저이름 저장
@@ -80,6 +80,13 @@ class Store1 extends ChangeNotifier{
   var arrival_date = 'Pick';
   ChangeArrivalDate(i){
     arrival_date = i;
+    notifyListeners();
+  }
+
+  //my.dart에서 보여줄 그래프 퍼센트값
+  var percent = 0.0;
+  ChangePercent(i){
+    percent = i;
     notifyListeners();
   }
 

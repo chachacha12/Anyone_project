@@ -24,7 +24,7 @@ class _MyState extends State<My> {
   saveArrivalData(arrivalDate) async {
     var storage = await SharedPreferences.getInstance();
     storage.setString('arrival_date', arrivalDate);
-    // 도착날짜값을 state에 넘겨줌
+    // 도착날짜값을 state에 넘겨줘서 바로 ui상에서 변경
     context.read<Store1>().ChangeArrivalDate(arrivalDate);
   }
 
@@ -33,24 +33,30 @@ class _MyState extends State<My> {
   saveDepartureData(departureDate) async {
     var storage = await SharedPreferences.getInstance();
     storage.setString('departure_date', departureDate);
-    //출국날짜값을 state에 넘겨줌
+    //출국날짜값을 state에 넘겨줘서 바로 ui상에서 변경
     context.read<Store1>().ChangeDepartureDate(departureDate);
   }
 
   //sharedpref에 유저가 저장해둔 도착일과 떠나는 날짜 가져오기 - initState()에서 실행
   getData() async {
     var storage = await SharedPreferences.getInstance();
+
+    //떠나는 날짜값 가져오기
     var departure_date = storage.getString('departure_date');
     if (departure_date != null) { //저장된 날짜값이 있다면
+      //출국날짜값을 state에 넘겨줘서 ui상에서 보여줌
+      context.read<Store1>().ChangeDepartureDate(departure_date);
       Dday_calculating(departure_date); //디데이를 계산하고 값을 변경해줌
     }
-
     var arrival_date = storage.getString('arrival_date');
     if (arrival_date != null) { //저장된 날짜값이 있다면
-      //도착날짜값을 state에 넘겨줌
+      //도착날짜값을 state에 넘겨줘서 ui상에서 보여줌
       context.read<Store1>().ChangeArrivalDate(arrival_date);
     }
 
+    if(departure_date != null && arrival_date != null){
+      Percent_Calculating(arrival_date, departure_date);  //그래프 퍼센트 계산해서 state에 저장. 즉 ui에 보여줌
+    }
   }
 
   //디데이값을 계산해주는 메소드
@@ -74,6 +80,58 @@ class _MyState extends State<My> {
     }
     //디데이 계산결과값 스트링을 state에 넘겨줌
     context.read<Store1>().ChangeDday(result);
+  }
+
+  //남은 체류기간 퍼센트 계산해주는 메소드
+  Percent_Calculating(arrival_date ,departure_date){
+    //유저가 출국일, 도착일 모두 선택한 경우
+    if(arrival_date !=null && departure_date != null ){
+      var formatter = DateFormat('yyyy-MM-dd');
+      //받아온 string날짜값들을 String에서 Date타입으로 바꿔줌. 그래야 계산때 가능
+      var arrivaldate = formatter.parse(arrival_date);
+      var departuredate = formatter.parse( departure_date);
+      ///한국에 머무는 총 일수 계산 (떠나는 날과 한국도착일 사이의 디데이를 계산)
+      var difference = departuredate
+          .difference(arrivaldate)
+          .inDays;
+
+      ///현재까지 머문 총 일수 계산 (오늘날짜와 한국도착일 사이의 디데이를 계산)
+       var difference2 = getToday()
+          .difference(arrivaldate)
+          .inDays;
+      var totalday = 0;  //totalday는 출국일과 도착일 사이의 총 일수 int 값
+      var livingday = 0;
+      ///한국에 머무는 총 일수 계산
+      if (difference > 0) {
+        totalday = difference;
+      } else if (difference < 0) {
+        totalday=1;
+      } else { //디데이일때
+        totalday=1;
+      }
+
+      ///한국도착일부터 오늘날까지 머문 총 일수 계산
+      if (difference2 > 0) {
+        livingday = difference2;
+      } else if (difference2 < 0) { //아직까지 한국에 안 도착한 상황임. 한국도착날이 오늘날보다 더 미래인경우
+        livingday=0;   //분자값을 0으로해서 계산때 퍼센트가 0이 나오게 함
+      } else { //디데이일때
+        livingday=1;
+      }
+
+      double percent=0.0;
+      //이미 한국 떠난 상태일경우의 예외처리임
+      if(livingday > totalday){
+        percent=100;
+      }else {
+        //소수점 둘째까지만 보여줌
+        percent = double.parse( (livingday / totalday * 100).toStringAsFixed(2)); //퍼센트 계산법 :    특정숫자 / 전체 * 100
+      }
+      context.read<Store1>().ChangePercent(percent);  //state를 통해 최종 퍼센트값을 저장해줌
+    }else{ //미선택인 날짜값이 있을때
+
+    }
+
   }
 
 
@@ -104,12 +162,15 @@ class _MyState extends State<My> {
 
         if(n==1){  //유저가 도착일 피커를 선택한것일때
           saveArrivalData(formatDate);
-
-        }else if(n==2){  //유저가 출국일 피커 선택일때
+          //그래프 퍼센트 계산시작
+          Percent_Calculating( formatDate, context.read<Store1>().departure_date);
+        }else{  //유저가 출국일 피커 선택일때
           //유저가 정한 출국날짜값String을 sharedpref에 저장
           saveDepartureData(formatDate);
           //디데이값을 계산해서 값을 변경해줌
           Dday_calculating(formatDate);
+          //그래프 퍼센트 계산시작
+          Percent_Calculating( context.read<Store1>().arrival_date, formatDate);
         }
       }
     });
@@ -315,8 +376,10 @@ class _MyState extends State<My> {
                         animation: true,
                         lineHeight: 20.0.h,
                         animationDuration: 1000,
-                        percent: 0.9,
-                        center: Text("90.0%"),
+                        percent: context
+                            .watch<Store1>().percent/100.0,
+                        center: Text(context
+                            .watch<Store1>().percent.toString() +'%'),
                         barRadius: const Radius.circular(16),
                         progressColor: Colors.greenAccent,
                       ),
@@ -324,7 +387,7 @@ class _MyState extends State<My> {
 
                     ///도착일, 출발일 picker
                     Container(
-                      margin: EdgeInsets.fromLTRB(20.w, 10.h, 0, 0),
+                      margin: EdgeInsets.fromLTRB(20.w, 15.h, 0, 0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
