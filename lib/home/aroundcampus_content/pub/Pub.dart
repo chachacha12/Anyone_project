@@ -153,7 +153,7 @@ class _PubState extends State<Pub> {
                                                 context, MaterialPageRoute(
                                                 builder: (context) =>
                                                     Extend_HeroImage(
-                                                        Pub_collection[index]['imagepath'][index2])));
+                                                        Pub_collection[index]['imagepath'], index2)));
                                           },
                                         ),
                                       ),

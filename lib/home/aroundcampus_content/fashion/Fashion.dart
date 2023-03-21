@@ -171,7 +171,7 @@ class _FashionState extends State<Fashion> {
                                           onTap: (){
                                             Navigator.push(context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Extend_HeroImage(fashion_collection[index]['imagepath'][index2])));
+                                                    Extend_HeroImage(fashion_collection[index]['imagepath'], index2)));
                                           },
                                         ),
                                       ),

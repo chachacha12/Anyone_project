@@ -92,7 +92,7 @@ class _CalenderState extends State<Calender> {
                         Navigator.push(context, MaterialPageRoute(
                             builder: (context) =>
                                 Extend_HeroImage(
-                                    calender_collection[0]['official ver'])));
+                                    calender_collection[0]['official ver'],0)));
                       },
                     ),
                   ),
@@ -110,7 +110,7 @@ class _CalenderState extends State<Calender> {
                         Navigator.push(context, MaterialPageRoute(
                             builder: (context) =>
                                 Extend_HeroImage(
-                                    calender_collection[0]['OIA ver'])));
+                                    calender_collection[0]['OIA ver'], 1)));
                       },
                     ),
                   ),

@@ -148,7 +148,7 @@ class _RestaurantState extends State<Restaurant> {
                                                 context, MaterialPageRoute(
                                                 builder: (context) =>
                                                     Extend_HeroImage(
-                                                        Restaurant_collection[index]['imagepath'][index2])));
+                                                        Restaurant_collection[index]['imagepath'], index2)));
                                           },
                                         ),
                                       ),

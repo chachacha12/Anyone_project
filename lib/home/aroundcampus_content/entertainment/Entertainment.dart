@@ -147,7 +147,7 @@ class _EntertainmentState extends State<Entertainment> {
                                           onTap: (){
                                             Navigator.push(context, MaterialPageRoute(
                                                 builder: (context) =>
-                                                    Extend_HeroImage(Entertainment_collection[index]['imagepath'][index2])));
+                                                    Extend_HeroImage(Entertainment_collection[index]['imagepath'], index2)));
                                           },
                                         ),
                                       ),
