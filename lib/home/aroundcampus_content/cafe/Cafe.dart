@@ -135,7 +135,7 @@ class _CafeState extends State<Cafe>  {
                                     return SizedBox(
                                       width: 150.0.w,
                                       child: Card(
-                                        child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                                        child: GestureDetector(   //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
                                           child: Hero(
                                            tag: Cafe_collection[index]['imagepath'][index2],
                                             child: Image.network(

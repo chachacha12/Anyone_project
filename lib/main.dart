@@ -1,5 +1,6 @@
 import 'package:anyone/Style.dart' as style;
 import 'package:anyone/splash/SplashScreen.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +20,7 @@ void main() async {
   //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   //상태표시줄 색깔 변경해줌
-  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle( statusBarColor: Colors.white));
+  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle( statusBarColor: Colors.transparent));
 
   WidgetsFlutterBinding.ensureInitialized();  //가로모드로 변경때 반응형사이즈에 에러생기는거 방지용. 회전을 방지.
   await Firebase.initializeApp(
@@ -115,7 +116,7 @@ class Main extends StatefulWidget {
 class _MainState extends State<Main> {
 
   //스낵바 띄우기
-  ShowSnackBar(text){
+  ShowSnackBar(text) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(text), // 필수!
@@ -130,13 +131,36 @@ class _MainState extends State<Main> {
   @override
   void initState() {
     super.initState();
-
   }
+
+  //하단 네비케이션바에 필요한 키인듯
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       //리스트안에 페이지들을 넣어서 유저가 바텀탭 누를때마다 각각을 붙여줌
+      bottomNavigationBar: CurvedNavigationBar(
+        key: _bottomNavigationKey,
+        height: 50.h,
+        backgroundColor: Colors.greenAccent,
+        items: <Widget>[
+          Icon(Icons.home_outlined, size: 30),
+          Icon(Icons.account_circle_rounded, size: 30),
+        ],
+        onTap: (index) {
+          context.read<Store1>().ChangeTab(index);
+        },
+      ),
+
+      body:  [
+        Info(), My()
+      ][context.watch<Store1>().tab],
+
+    );
+
+    /*
+    //원래 기존 평범한 바텀바임
       body: [
         Info(), My()
       ][context.watch<Store1>().tab],  //Store1안의 state를 가져옴
@@ -168,6 +192,8 @@ class _MainState extends State<Main> {
         },
       ),
     );
+       */
+
   }
 }
 
