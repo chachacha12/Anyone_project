@@ -41,7 +41,7 @@ class _InfoState extends State<Info>  {
                     ],
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 2,
-                    indicatorColor: Colors.green,
+                    indicatorColor: Colors.greenAccent,
                     unselectedLabelColor: Colors.grey,
                     labelColor: Colors.black,
                     unselectedLabelStyle: TextStyle(fontSize: 14.sp),

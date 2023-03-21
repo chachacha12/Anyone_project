@@ -123,7 +123,7 @@ class _MainState extends State<Main> {
         // Icon 위젯도 가능해용
         duration: Duration(seconds: 3), // 얼마큼 띄울지
         // Duration 으로 시간을 정할 수 있어요
-        backgroundColor: Colors.blue, // 색상 지정
+        backgroundColor: Colors.green, // 색상 지정
       ),
     );
   }
@@ -142,7 +142,7 @@ class _MainState extends State<Main> {
       //리스트안에 페이지들을 넣어서 유저가 바텀탭 누를때마다 각각을 붙여줌
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
-        height: 50.h,
+        height: 40.h,
         backgroundColor: Colors.greenAccent,
         items: <Widget>[
           Icon(Icons.home_outlined, size: 30),
