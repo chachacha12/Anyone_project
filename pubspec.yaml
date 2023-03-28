@@ -30,6 +30,14 @@ dependencies:
   flutter:
     sdk: flutter
 
+  syncfusion_flutter_calendar: ^20.3.60
+
+  #시간표 라이브러리
+  time_planner: ^0.1.1
+
+  # 이 라이브러리는 시간표 라이브러리인 syncfusion_flutter_calendar이것 사용을 위해 일단 제거해둠
+  flutter_local_notifications: ^13.0.0
+
   #물결치는 하단 네비게이션바 라이브러리
   curved_navigation_bar: ^1.0.3
   #막대or원 그래프로 남은기간 퍼센테이지 나타내주는 라이브러리
@@ -42,7 +50,6 @@ dependencies:
   image_picker: ^0.8.4+4
   shared_preferences: ^2.0.11
   provider: ^6.0.1
-  flutter_local_notifications: ^9.1.5
   # add flutter_screenutil
   flutter_screenutil: 5.5.3+2
   intl: ^0.17.0
@@ -59,6 +66,8 @@ dependencies:
   firebase_auth: ^3.3.4
   cloud_firestore: ^3.2.1
   firebase_storage: ^10.3.5
+  #
+  firebase_core_platform_interface: 4.5.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -89,46 +98,22 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/Calender_version_1.png
-    - assets/Calender_version_2.png
-    - assets/campusmap_number.png
-    - assets/campusmap.jpeg
-    - assets/Facilities_aroundcampus_dining.png
-    - assets/Facilities_aroundcampus_others.png
-    - assets/groceryshopping_background.jpg
-    - assets/fashion_background.jpg
-    - assets/cafe_background.jpg
-    - assets/pub_background.jpg
-    - assets/enter_background.jpg
-    - assets/restaurant_background.jpg
-    - assets/Instagram.png
-    - assets/Discount_background.jpg
+    - assets/Campusmap/
+    - assets/Aroundcampus_icon/
+    - assets/Cafe/
+    - assets/Discount/
+    - assets/Entertainment/
+    - assets/Fashion/
+    - assets/GroceryShop/
+    - assets/Oncampus_icon/
+    - assets/Pub/
+    - assets/Restaurant/
+
     # app icon
     - assets/app_icon.png
     - assets/android_icon.png
+    - assets/Instagram.png
 
-
-    # oncampus ion
-    - assets/Academic calendar 2.png
-    - assets/Campus Map.png
-    - assets/Clubs.png
-    - assets/Contact.png
-    - assets/dormitory.png
-    - assets/Guidebook.png
-    - assets/Helplines.png
-    - assets/Language Institution.png
-    - assets/Library.png
-    - assets/Official Site.png
-    - assets/OIA.png
-    - assets/Tips.png
-    # aroundcampus ion
-    - assets/Cafe.png
-    - assets/Culture.png
-    - assets/Discount.png
-    - assets/Entertainment.png
-    - assets/Fashion&Beauty.png
-    - assets/Grocery shopping.png
-    - assets/Pub.png
 
 
 

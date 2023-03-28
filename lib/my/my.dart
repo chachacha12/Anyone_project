@@ -338,10 +338,12 @@ class _MyState extends State<My> {
               offset: Offset(0, 50),
               color: Colors.white,
               elevation: 2,
+              icon: Icon(Icons.more_vert, color: Colors.black),
             ),
           ],
         ),
 
+        ///앱바 다음에 보여줄 박스
         SliverToBoxAdapter(
             child: Container(
               color: Colors.white,

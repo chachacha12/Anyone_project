@@ -1,10 +1,11 @@
 import 'package:anyone/Style.dart' as style;
 import 'package:anyone/splash/SplashScreen.dart';
+import 'package:anyone/timetable/Timetable.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'home/info.dart';
+import 'keeping/Keep.dart';
 import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -38,7 +39,8 @@ void main() async {
               return MaterialApp(
                   debugShowCheckedModeBanner: false,
                   theme: style.theme, //Style.dart에 따로 빼둔 변수값을 가져와서 디자인에 씀
-                  home: MyApp());
+                  home: MyApp()
+              );
             },
 
           )
@@ -139,30 +141,9 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //리스트안에 페이지들을 넣어서 유저가 바텀탭 누를때마다 각각을 붙여줌
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        height: 40.h,
-        backgroundColor: Colors.greenAccent,
-        items: <Widget>[
-          Icon(Icons.home_outlined, size: 30),
-          Icon(Icons.account_circle_rounded, size: 30),
-        ],
-        onTap: (index) {
-          context.read<Store1>().ChangeTab(index);
-        },
-      ),
-
-      body:  [
-        Info(), My()
-      ][context.watch<Store1>().tab],
-
-    );
-
-    /*
-    //원래 기존 평범한 바텀바임
+      //원래 기존 평범한 바텀바임
       body: [
-        Info(), My()
+        Info(),Timetable(), Keep(), My()
       ][context.watch<Store1>().tab],  //Store1안의 state를 가져옴
 
       bottomNavigationBar: BottomNavigationBar(
@@ -172,10 +153,10 @@ class _MainState extends State<Main> {
         showUnselectedLabels:false,
         iconSize: 25.sp,
         selectedIconTheme: IconThemeData(
-          color: Colors.green
+            color: Colors.green
         ),
         unselectedIconTheme: IconThemeData(
-          color: Colors.grey
+            color: Colors.grey
         ),
         elevation: 2,
         backgroundColor: Colors.white,
@@ -185,6 +166,10 @@ class _MainState extends State<Main> {
           BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined), label: ' Info'),
           BottomNavigationBarItem(
+              icon: Icon(Icons.schedule), label: ' Timetable'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_border), label: ' Keep'),
+          BottomNavigationBarItem(
               icon: Icon(Icons.account_circle_rounded), label: ' My'),
         ],
         onTap: (i){    //i는 바텀네비게이션에서 누르는 버튼 순서번호임. 첫번째 버튼 누르면 i는 0이됨.
@@ -192,7 +177,6 @@ class _MainState extends State<Main> {
         },
       ),
     );
-       */
 
   }
 }
