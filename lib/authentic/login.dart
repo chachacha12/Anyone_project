@@ -45,7 +45,7 @@ class _authenticState extends State<authentic> {
   }
 
 
-  //각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
+  ///각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
   Textfieldstyle(icon, labeltext){
     return InputDecoration(
 
@@ -75,7 +75,7 @@ class _authenticState extends State<authentic> {
     );
   }
 
-  //스낵바 띄우기
+  ///스낵바 띄우기
   ShowSnackBar(text){
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(

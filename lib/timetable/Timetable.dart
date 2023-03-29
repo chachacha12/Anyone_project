@@ -1,3 +1,4 @@
+import 'package:anyone/timetable/Addclass.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
@@ -12,13 +13,28 @@ class Timetable extends StatefulWidget {
 
 class _TimetableState extends State<Timetable> {
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-
+          title: Text('Time table'),
+          elevation: 0,
+          actions: [
+            ///클릭시 일정 추가하는 페이지로 이동
+            IconButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) =>
+                     Addclass()
+              ));
+            }, icon: Icon(Icons.add_box_outlined)),
+            ///지도 보여주는 페이지로 이동
+            IconButton(onPressed: (){}, icon: Icon(Icons.location_pin))
+          ],
         ),
         body: SfCalendar(
+            backgroundColor: Colors.white,
             allowAppointmentResize: true,
             allowDragAndDrop: true,
             viewNavigationMode: ViewNavigationMode.none,
@@ -49,7 +65,7 @@ class _TimetableState extends State<Timetable> {
     DateTime(today.year, today.month, today.day - (today.weekday - 1)+4, 13,0);
 
     meetings.add(
-        Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
+        Meeting('Conference', startTime, endTime, const Color(0xFF0F8644)));
     return meetings;
   }
 }
@@ -88,13 +104,12 @@ class MeetingDataSource extends CalendarDataSource {
 
 ///일정객체 하나를 만드는 클래스
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(this.eventName, this.from, this.to, this.background);
 
   String eventName;
   DateTime from;
   DateTime to;
   Color background;
-  bool isAllDay;
 }
 
 
