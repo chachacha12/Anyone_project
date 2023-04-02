@@ -38,6 +38,15 @@ class _TimetableState extends State<Timetable> {
             allowAppointmentResize: true,
             allowDragAndDrop: true,
             viewNavigationMode: ViewNavigationMode.none,
+
+            /*
+            //뷰를 스와이프해서 바꿀때 감지해서 이벤트처리해줌
+            onViewChanged: (viewChangedDetails) {
+              List<DateTime> dates = viewChangedDetails.visibleDates;
+              print('dates: '+ dates.toString());
+            },
+             */
+
             initialDisplayDate: DateTime.now(),
             showCurrentTimeIndicator: true,
             view: CalendarView.workWeek,
@@ -59,13 +68,15 @@ class _TimetableState extends State<Timetable> {
     /// 특정날짜가 속한 주의 월요일 날짜 구하는 방법: today.day - (today.weekday - 1)
     /// 즉, 특정요일에 일정을 표시할거면 위에서 구한 월요일날짜에 +1, +2 등을 해서 이번주의 화요일, 수요일 등을 구할 수 있음
     final DateTime startTime =
-    DateTime(today.year, today.month, today.day - (today.weekday - 1)+4, 11,0);
+    DateTime(today.year, today.month, today.day - (today.weekday - 1)+4, 10,0);
+    print('startTime: '+startTime.toString());
 
     final DateTime endTime =
     DateTime(today.year, today.month, today.day - (today.weekday - 1)+4, 13,0);
+    print('endTime: '+endTime.toString());
 
     meetings.add(
-        Meeting('Conference', startTime, endTime, const Color(0xFF0F8644)));
+        Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
     return meetings;
   }
 }
@@ -104,12 +115,13 @@ class MeetingDataSource extends CalendarDataSource {
 
 ///일정객체 하나를 만드는 클래스
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background);
+  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
 
   String eventName;
   DateTime from;
   DateTime to;
   Color background;
+  bool isAllDay;
 }
 
 
