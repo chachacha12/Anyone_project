@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import '../main.dart';
+import 'Timetable.dart';
 
 
-
+//store에 각각의 시간표 일정들을 map 형태로 저장해줄거임.  {'name': class, 'dayofweek': 0   ....등등}
+//sharedpref에만 List<String>으로 해줄거
 class Addclass extends StatefulWidget {
   const Addclass({Key? key}) : super(key: key);
 
@@ -15,17 +21,26 @@ class Addclass extends StatefulWidget {
 
 class _AddclassState extends State<Addclass> {
 
-  ///텍스트필드 값을 저장할 리스트. 순서대로:   수업제목+수업위치, 요일값(숫자로), starthour, startminute, endhour,endminute
-  List<dynamic> inputData = ['', 0, 0, 0, 0, 0];
+  ///새로운 수업의 내용을 저장할 map. 순서대로:   수업제목+(수업위치), 요일값(숫자로), starthour, startminute, endhour,endminute 이 들어갈거임
+  Map<String, dynamic> classContentMap = {};
 
-  ///타임피커 통해 start time과 end time 저장
+  ///화면에 보여줄 start time과 end time 저장
   var starttime_btn = 'Start time';
   var endtime_btn = 'End time';
 
 
-  ///요일선택 드롭박스를 위함
-  final daylist = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-  String selectedday = '';
+  ///수업제목+빌딩번호+방번호값, 요일값, 시작시간, 끝시간 저장해줄 변수 (이 변수들로 유저가 모든 값 입력했는지 확인해줄것임)
+  var className;  //수업이름
+  var selectedbuilding = '';  //빌딩
+  var roomNumber; //방번호
+  var selectedDay = '';  //요일
+  var startHour;
+  var startMinute;
+  var endHour;
+  var endMinute;
+
+  ///요일선택 드롭박스를 위한 map
+  final daylist = {'Monday':0, 'Tuesday':1, 'Wednesday':2, 'Thursday':3, 'Friday':4};
 
   ///빌딩선택 드롭박스를 위함
   final buildinglist = [
@@ -53,8 +68,32 @@ class _AddclassState extends State<Addclass> {
     'Chang-ui Bldg',
     'Gymnasium',
   ];
-  String selectedbuilding = '';
 
+
+  ///shared pref에 새로운 수업스케줄 저장
+  savePreference() async {
+    var storage = await SharedPreferences.getInstance();
+    storage.setString('name', 'john');
+  }
+
+  ///Provider의 store에 새 수업스케줄 저장
+  saveStore(){
+    //만약 방번호가 null값이면 '' string으로 바꿔줌
+    roomNumber ??= '';
+    //새 수업의 네임, 빌딩, 방번호 저장
+    classContentMap['name'] =
+        className + '\n' + '(' + selectedbuilding.toString() + ')' +
+            ' ' + roomNumber;
+    //요일값 저장 (ex. 월요일 = 0)
+    classContentMap['dayofweek'] = daylist[selectedDay];
+    //시작시간, 끝시간 유저가 선택한 값 int로 저장
+    classContentMap['starthour'] = startHour;
+    classContentMap['startminute'] = startMinute;
+    classContentMap['endhour'] = endHour;
+    classContentMap['endminute'] = endMinute;
+    //store에 새 수업정보 적힌 map값 저장
+    context.read<Store1>().addMeetingsData(classContentMap);
+  }
 
   /// TimePicker 띄워주는 함수
   void showTimePickerPop(int option) {
@@ -67,11 +106,14 @@ class _AddclassState extends State<Addclass> {
         if (timeOfDay?.hour != null) {
           if (option == 0) { //0이면 start time 선택했을때고 1이면 endtime 선택했을때임
             starttime_btn = '${timeOfDay?.hour}:${timeOfDay?.minute }';
+            startHour = timeOfDay?.hour;
+            startMinute = timeOfDay?.minute;
           } else {
             endtime_btn = '${timeOfDay?.hour}:${timeOfDay?.minute }';
+            endHour = timeOfDay?.hour;
+            endMinute = timeOfDay?.minute;
           }
-        } else {
-
+        } else { //시간 선택안하고 그냥 취소했을시 Text값에 null값 들어오는거 방지용
         }
       });
     });
@@ -83,7 +125,7 @@ class _AddclassState extends State<Addclass> {
     super.initState();
     setState(() {
       ///드롭다운박스 초기 선택된 아이템값
-      selectedday = daylist[0];
+      selectedDay = daylist.keys.first;
       selectedbuilding = buildinglist[0];
     });
   }
@@ -101,9 +143,26 @@ class _AddclassState extends State<Addclass> {
           Container(
             margin: EdgeInsets.fromLTRB(0.w, 15.h, 23.w, 15.h),
             width: 60.w,
+            /// 일정추가 완료 버튼 클릭시
             child: ElevatedButton(onPressed: () {
-              /// 일정추가 완료 버튼 클릭시
-
+              /// 드롭박스라 원래 초기화되어있는 요일과 빌딩값 빼고 다른값들이 null인지 체크함. 그리고 수업이름은 빈칸이면 안됨, 방번호는 빈칸이라도 괜찮음
+              if( className !=null && className!=''  && startHour  !=null   && endHour  !=null    ) {
+                //store에 새 수업스케줄 저장해서 화면에 바로 반영
+                saveStore();
+                Navigator.pop(context);
+                print('통과: '+'@@@@  className: $className +  roomNumber: $roomNumber+   startHour: $startHour +  endHour: $endHour +  selectedDay: $selectedDay +  selectedbuilding:  $selectedbuilding');
+           }else{
+                print('불통과: '+'@@@@  className: $className +  roomNumber: $roomNumber+   startHour: $startHour +  endHour: $endHour +  selectedDay: $selectedDay +  selectedbuilding:  $selectedbuilding');
+                //토스트메시지 띄우기
+                Fluttertoast.showToast(
+                  msg: 'please Fill in all the blanks',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  //fontSize: 20,
+                  //textColor: Colors.white,
+                  //backgroundColor: Colors.redAccent
+                );
+              }
             }, child: Text('Done'),
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -126,7 +185,7 @@ class _AddclassState extends State<Addclass> {
                 height: 45.h,
                 child: TextField(
                   onChanged: (text) {
-                    inputData[0] = text;
+                    className = text;
                   },
                   decoration: getTextFieldStyle('Class Name'),
                 ),
@@ -148,8 +207,8 @@ class _AddclassState extends State<Addclass> {
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     isExpanded: true,
                     //글씨길면 줄바꿈해줌
-                    value: selectedday,
-                    items: daylist
+                    value: selectedDay,
+                    items: daylist.keys
                         .map((e) =>
                         DropdownMenuItem(
                           value: e, // 선택 시 onChanged 를 통해 반환할 value
@@ -158,7 +217,7 @@ class _AddclassState extends State<Addclass> {
                         .toList(),
                     onChanged: (value) { // items 의 DropdownMenuItem 의 value 반환
                       setState(() {
-                        selectedday = value.toString();
+                        selectedDay = value.toString();
                       });
                     },
                   ),
@@ -232,7 +291,7 @@ class _AddclassState extends State<Addclass> {
                     height: 40.h,
                     child: TextField(
                       onChanged: (text) {
-                        inputData[5] = text;
+                        roomNumber = text;
                       },
                       decoration: getTextFieldStyle('Room number'),
                     ),

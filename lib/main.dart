@@ -11,6 +11,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 
 
@@ -50,6 +52,22 @@ void main() async {
 
 ///state 보관하는 클래스
 class Store1 extends ChangeNotifier{
+
+  //각각의 수업일정들 map을 리스트안에 저장
+   List<Map> unCompleteMeetings = [];
+   //일정추가해주는 함수
+   addMeetingsData(map){
+     unCompleteMeetings.add(map);
+     notifyListeners();
+   }
+   //일정삭제해주는 함수
+   deleteMeetingsData(){
+
+
+     notifyListeners();
+   }
+
+
 
   //sharedpref에서 가져온 유저이름 저장
   var username;

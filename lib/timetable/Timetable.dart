@@ -1,8 +1,14 @@
 import 'package:anyone/timetable/Addclass.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import '../main.dart';
 
-
+//store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'name': class, 'dayofweek': 0   ....등등}
+// sharedpref에는 List<string>으로 되어있고.. ['name', '1', '10','30', '13', '30'] 등..차례로 수업이름+빌딩+방번호, 요일, 시작hour, 시작minute, 끝hour, 끝minute
+//shared pref로부터 일정들의 리스트를 가져와서 map형태로 변환해서  store에 저장해주면 화면에 보여질것임
 
 class Timetable extends StatefulWidget {
   const Timetable({Key? key}) : super(key: key);
@@ -12,7 +18,6 @@ class Timetable extends StatefulWidget {
 }
 
 class _TimetableState extends State<Timetable> {
-
 
 
   @override
@@ -38,20 +43,11 @@ class _TimetableState extends State<Timetable> {
             allowAppointmentResize: true,
             allowDragAndDrop: true,
             viewNavigationMode: ViewNavigationMode.none,
-
-            /*
-            //뷰를 스와이프해서 바꿀때 감지해서 이벤트처리해줌
-            onViewChanged: (viewChangedDetails) {
-              List<DateTime> dates = viewChangedDetails.visibleDates;
-              print('dates: '+ dates.toString());
-            },
-             */
-
             initialDisplayDate: DateTime.now(),
             showCurrentTimeIndicator: true,
             view: CalendarView.workWeek,
             firstDayOfWeek: 1,
-            dataSource: MeetingDataSource(_getDataSource()), //일정들 표시해주는 역할
+            dataSource: MeetingDataSource(_getDataSource()), ///일정들 표시해주는 역할
             timeSlotViewSettings: TimeSlotViewSettings(
                 startHour: 8,
                 endHour: 21,),
@@ -64,24 +60,28 @@ class _TimetableState extends State<Timetable> {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
 
+    print('_getDataSource실행#@@@@@@@@@@@');
+    //store에서 수업스케줄 리스트 가져옴
+    var list = context.read<Store1>().unCompleteMeetings;
+    for(var i=0; i<list.length; i++){
+      /// 특정날짜가 속한 주의 월요일 날짜 구하는 방법: today.day - (today.weekday - 1)
+      /// 즉, 특정요일에 일정을 표시할거면 위에서 구한 월요일날짜에 +1, +2 등을 해서 이번주의 화요일, 수요일 등을 구할 수 있음
+      int dayofweek = list[i]['dayofweek'];
+      DateTime startTime =
+      DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek, list[i]['starthour'],list[i]['startminute']);
+      DateTime endTime =
+      DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek,  list[i]['endhour'],list[i]['endminute']  );
 
-    /// 특정날짜가 속한 주의 월요일 날짜 구하는 방법: today.day - (today.weekday - 1)
-    /// 즉, 특정요일에 일정을 표시할거면 위에서 구한 월요일날짜에 +1, +2 등을 해서 이번주의 화요일, 수요일 등을 구할 수 있음
-    final DateTime startTime =
-    DateTime(today.year, today.month, today.day - (today.weekday - 1)+4, 10,0);
-    print('startTime: '+startTime.toString());
+      meetings.add(
+        Meeting(list[i]['name'], startTime, endTime, const Color(0xFF0F8644), false)
+      );
+    }
 
-    final DateTime endTime =
-    DateTime(today.year, today.month, today.day - (today.weekday - 1)+4, 13,0);
-    print('endTime: '+endTime.toString());
-
-    meetings.add(
-        Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
     return meetings;
   }
 }
 
-///일정들 리스트를 인자로 받아서 SfCalendar위젯의 인자값으로 넣어주는 역할하는 객체 생성
+///일정들 리스트를 인자로 받아서 SfCalendar위젯의 인자값으로 넣어주는 역할하는 객체
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<Meeting> source){
     appointments = source;
