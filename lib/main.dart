@@ -53,13 +53,20 @@ void main() async {
 ///state 보관하는 클래스
 class Store1 extends ChangeNotifier{
 
-  //각각의 수업일정들 map을 리스트안에 저장
-   List<Map> unCompleteMeetings = [];
+  //각각의 수업일정들 map을 리스트안에 저장 - null도 저장할 수 있도록 허용하고 15개를 미리 null 초기화함,growable: true를 해서 크기 변할수있음
+   List<Map ?> unCompleteMeetings =List.filled(15, null, growable: true);
    //일정추가해주는 함수
    addMeetingsData(map){
      unCompleteMeetings.add(map);
      notifyListeners();
    }
+
+   //원하는 index안에 일정추가해주는 함수
+   addIndexMeetingsData(index, map){
+     unCompleteMeetings.insert(index, map);
+     notifyListeners();
+   }
+
    //일정삭제해주는 함수
    deleteMeetingsData(){
 

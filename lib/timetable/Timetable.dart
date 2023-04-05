@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:anyone/timetable/Addclass.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -6,8 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../main.dart';
 
-//store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'name': class, 'dayofweek': 0   ....등등}
-// sharedpref에는 List<string>으로 되어있고.. ['name', '1', '10','30', '13', '30'] 등..차례로 수업이름+빌딩+방번호, 요일, 시작hour, 시작minute, 끝hour, 끝minute
+//store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'index': 1 ,  'name': class, 'dayofweek': 0   ....등등}
+// sharedpref에는 List<string>으로 되어있고.. ['index': '1' ,'name', '1', '10','30', '13', '30'] 등..차례로 수업이름+빌딩+방번호, 요일, 시작hour, 시작minute, 끝hour, 끝minute
 //shared pref로부터 일정들의 리스트를 가져와서 map형태로 변환해서  store에 저장해주면 화면에 보여질것임
 
 class Timetable extends StatefulWidget {
@@ -19,6 +21,28 @@ class Timetable extends StatefulWidget {
 
 class _TimetableState extends State<Timetable> {
 
+  /// sharedpref에 저장된 수업일정 for문 통해 가져옴 - 15개 저장되는 배열속에서
+  getData() async {
+    var storage = await SharedPreferences.getInstance();
+
+    for(int i=0; i<15; i++){
+      //만약 i번째 key값이 있으면 그 List<String>값 가져옴
+      if(storage.containsKey('class'+i.toString()) ){
+        var list = storage.getStringList('class'+i.toString());
+        var map =  {'index': int.parse(list![0]) ,  'name':list[1], 'dayofweek': int.parse(list[2]), 'starthour': int.parse(list[3]) , 'startminute': int.parse(list[4]) , 'endthour': int.parse(list[5])  , 'endminute': int.parse(list[6]) };
+
+        //store에 있는 리스트의 특정 index에 새 수업정보 적힌 map값 저장
+        context.read<Store1>().addIndexMeetingsData(int.parse(list[0]), map);
+      }
+    }
+
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,17 +88,20 @@ class _TimetableState extends State<Timetable> {
     //store에서 수업스케줄 리스트 가져옴
     var list = context.read<Store1>().unCompleteMeetings;
     for(var i=0; i<list.length; i++){
-      /// 특정날짜가 속한 주의 월요일 날짜 구하는 방법: today.day - (today.weekday - 1)
-      /// 즉, 특정요일에 일정을 표시할거면 위에서 구한 월요일날짜에 +1, +2 등을 해서 이번주의 화요일, 수요일 등을 구할 수 있음
-      int dayofweek = list[i]['dayofweek'];
-      DateTime startTime =
-      DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek, list[i]['starthour'],list[i]['startminute']);
-      DateTime endTime =
-      DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek,  list[i]['endhour'],list[i]['endminute']  );
 
-      meetings.add(
-        Meeting(list[i]['name'], startTime, endTime, const Color(0xFF0F8644), false)
-      );
+      if(list[i] != null){
+        /// 특정날짜가 속한 주의 월요일 날짜 구하는 방법: today.day - (today.weekday - 1)
+        /// 즉, 특정요일에 일정을 표시할거면 위에서 구한 월요일날짜에 +1, +2 등을 해서 이번주의 화요일, 수요일 등을 구할 수 있음
+        int dayofweek = list[i]!['dayofweek'];
+        DateTime startTime =
+        DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek, list[i]!['starthour'],list[i]!['startminute']);
+        DateTime endTime =
+        DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek,  list[i]!['endhour'],list[i]!['endminute']  );
+
+        meetings.add(
+            Meeting(list[i]!['name'], startTime, endTime, const Color(0xFF0F8644), false)
+        );
+      }
     }
 
     return meetings;

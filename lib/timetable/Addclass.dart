@@ -73,7 +73,18 @@ class _AddclassState extends State<Addclass> {
   ///shared pref에 새로운 수업스케줄 저장
   savePreference() async {
     var storage = await SharedPreferences.getInstance();
-    storage.setString('name', 'john');
+
+    //classContentMap의 값들로 List<String> 타입으로 만듬 (sharedpref에 저장하기 위함)
+    List<String> classContentList = [
+      classContentMap['index'].toString(),
+      classContentMap['name'],
+      classContentMap['dayofweek'].toString(),
+      classContentMap['starthour'].toString(),
+      classContentMap['startminute'].toString(),
+      classContentMap['endthour'].toString(),
+      classContentMap['endminute'].toString(),
+    ];
+    //storage.setStringList(, classContentList);
   }
 
   ///Provider의 store에 새 수업스케줄 저장
@@ -82,8 +93,8 @@ class _AddclassState extends State<Addclass> {
     roomNumber ??= '';
     //새 수업의 네임, 빌딩, 방번호 저장
     classContentMap['name'] =
-        className + '\n' + '(' + selectedbuilding.toString() + ')' +
-            ' ' + roomNumber;
+        className + '\n' + '(' + selectedbuilding.toString() +
+            ' ' + roomNumber+')';
     //요일값 저장 (ex. 월요일 = 0)
     classContentMap['dayofweek'] = daylist[selectedDay];
     //시작시간, 끝시간 유저가 선택한 값 int로 저장
@@ -91,8 +102,20 @@ class _AddclassState extends State<Addclass> {
     classContentMap['startminute'] = startMinute;
     classContentMap['endhour'] = endHour;
     classContentMap['endminute'] = endMinute;
-    //store에 새 수업정보 적힌 map값 저장
-    context.read<Store1>().addMeetingsData(classContentMap);
+
+    var unCompleteMeetings = context.read<Store1>().unCompleteMeetings;
+    //store에 저장되어 있는 수업일정들 리스트의 길이만큼 반복
+    for(int i=0; i<= unCompleteMeetings.length; i++){
+      print('unCompleteMeetings.length만큼 반복: '+ i.toString());
+      //수업리스트들 중 빈 index가 있다면 거기에 새 수업을 넣어줌
+      if(unCompleteMeetings[i] == null){
+        print('unCompleteMeetings[i] == null 이라서 store에 저장되는 addIndexMeetingsData 실행@@@@');
+        classContentMap['index'] = i;
+        //store에 새 수업정보 적힌 map값 저장
+        context.read<Store1>().addIndexMeetingsData(i, classContentMap);
+        break;
+      }
+    }
   }
 
   /// TimePicker 띄워주는 함수
