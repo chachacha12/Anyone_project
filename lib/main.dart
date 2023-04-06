@@ -167,13 +167,17 @@ class _MainState extends State<Main> {
   Widget build(BuildContext context) {
     return Scaffold(
       //원래 기존 평범한 바텀바임
-      body: [
-        Info(),Timetable(), Keep(), My()
-      ][context.watch<Store1>().tab],  //Store1안의 state를 가져옴
+      body:
+        IndexedStack(
+          index: context.watch<Store1>().tab,
+          children: [
+            Info(),Timetable(), Keep(), My()
+          ],
+        ),
+      //Store1안의 state를 가져옴
 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: context.watch<Store1>().tab,
-
         showSelectedLabels: false,
         showUnselectedLabels:false,
         iconSize: 25.sp,

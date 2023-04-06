@@ -8,7 +8,7 @@ import '../main.dart';
 import 'Timetable.dart';
 
 
-//store에 각각의 시간표 일정들을 map 형태로 저장해줄거임.  {'name': class, 'dayofweek': 0   ....등등}
+//store에 각각의 시간표 일정들을 map 형태로 저장해줄거임.  {'index':1,  name': class, 'dayofweek': 0   ....등등}
 //sharedpref에만 List<String>으로 해줄거
 class Addclass extends StatefulWidget {
   const Addclass({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class Addclass extends StatefulWidget {
 
 class _AddclassState extends State<Addclass> {
 
-  ///새로운 수업의 내용을 저장할 map. 순서대로:   수업제목+(수업위치), 요일값(숫자로), starthour, startminute, endhour,endminute 이 들어갈거임
+  ///새로운 수업의 내용을 저장할 map. 순서대로:  저장된 리스트의 index번호, 수업제목+(수업위치), 요일값(숫자로), starthour, startminute, endhour,endminute 이 들어갈거임
   Map<String, dynamic> classContentMap = {};
 
   ///화면에 보여줄 start time과 end time 저장
@@ -77,19 +77,20 @@ class _AddclassState extends State<Addclass> {
     //classContentMap의 값들로 List<String> 타입으로 만듬 (sharedpref에 저장하기 위함)
     List<String> classContentList = [
       classContentMap['index'].toString(),
-      classContentMap['name'],
+      classContentMap['name'].toString(),
       classContentMap['dayofweek'].toString(),
       classContentMap['starthour'].toString(),
       classContentMap['startminute'].toString(),
-      classContentMap['endthour'].toString(),
+      classContentMap['endhour'].toString(),
       classContentMap['endminute'].toString(),
     ];
-    //storage.setStringList(, classContentList);
+    storage.setStringList('class'+classContentMap['index'].toString(), classContentList);
+    print('shared pref에 저장성공: '+'키값: '+'class'+classContentMap['index'].toString()+', value: '+classContentList.toString());
   }
 
   ///Provider의 store에 새 수업스케줄 저장
   saveStore(){
-    //만약 방번호가 null값이면 '' string으로 바꿔줌
+    //만약 방번호가 null값이면 ''으로 바꿔줌. 즉 방번호는 미작성해도됨
     roomNumber ??= '';
     //새 수업의 네임, 빌딩, 방번호 저장
     classContentMap['name'] =
@@ -104,12 +105,13 @@ class _AddclassState extends State<Addclass> {
     classContentMap['endminute'] = endMinute;
 
     var unCompleteMeetings = context.read<Store1>().unCompleteMeetings;
-    //store에 저장되어 있는 수업일정들 리스트의 길이만큼 반복
+    //store에 저장되어 있는 수업일정들 리스트의 길이인 15만큼 반복
     for(int i=0; i<= unCompleteMeetings.length; i++){
       print('unCompleteMeetings.length만큼 반복: '+ i.toString());
       //수업리스트들 중 빈 index가 있다면 거기에 새 수업을 넣어줌
       if(unCompleteMeetings[i] == null){
-        print('unCompleteMeetings[i] == null 이라서 store에 저장되는 addIndexMeetingsData 실행@@@@');
+        print('Addclass 중 unCompleteMeetings[i] == null 이라서 store에 저장되는 addIndexMeetingsData 실행@@@@');
+        print('Addclass 중 unCompleteMeetings[i] i번째에 저장:  '+i.toString());
         classContentMap['index'] = i;
         //store에 새 수업정보 적힌 map값 저장
         context.read<Store1>().addIndexMeetingsData(i, classContentMap);
@@ -172,6 +174,7 @@ class _AddclassState extends State<Addclass> {
               if( className !=null && className!=''  && startHour  !=null   && endHour  !=null    ) {
                 //store에 새 수업스케줄 저장해서 화면에 바로 반영
                 saveStore();
+                savePreference();
                 Navigator.pop(context);
                 print('통과: '+'@@@@  className: $className +  roomNumber: $roomNumber+   startHour: $startHour +  endHour: $endHour +  selectedDay: $selectedDay +  selectedbuilding:  $selectedbuilding');
            }else{
