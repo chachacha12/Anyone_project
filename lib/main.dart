@@ -68,13 +68,13 @@ class Store1 extends ChangeNotifier{
    }
 
    //일정삭제해주는 함수
-   deleteMeetingsData(){
-
-
+   deleteMeetingsData(index){
+     //unCompleteMeetings.removeAt(index);
+     unCompleteMeetings[index] = null;  //다시 null을 채워줌
+     print('index:'+index.toString()+'인 것 삭제하고 그 자리에 null값 다시 넣어줌');
      notifyListeners();
+     print('unCompleteMeetings: '+unCompleteMeetings.toString());
    }
-
-
 
   //sharedpref에서 가져온 유저이름 저장
   var username;

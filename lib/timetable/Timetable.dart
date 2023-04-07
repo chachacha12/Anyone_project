@@ -1,12 +1,12 @@
-import 'dart:ffi';
 
 import 'package:anyone/timetable/Addclass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 import '../main.dart';
 
 //store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'index': 1 ,  'name': class, 'dayofweek': 0   ....등등}
@@ -25,22 +25,33 @@ class _TimetableState extends State<Timetable> {
   /// sharedpref에 저장된 수업일정 for문 통해 가져옴 - 15개 저장되는 배열속에서
   getData() async {
     print('timetable getData실행');
-
     var storage = await SharedPreferences.getInstance();
+
+    //storage.remove('class0');
+
     //store에 있는 map타입 수업들 저장해두는 리스트 가져옴..앱 처음 실행하면 null값 15개가 초기화되어있음.
     var unCompleteMeetings = context.read<Store1>().unCompleteMeetings;
     for(int i=0; i<unCompleteMeetings.length; i++){
       //만약 i번째 key값이 있으면 그 List<String>값 가져옴
       if(storage.containsKey('class'+i.toString()) ){
         var list = storage.getStringList('class'+i.toString());
-        print('timetalbe 중 storage.getStringList 해서 가져온값: '+list.toString());
         var map =  {'index': int.parse(list![0]) ,  'name':list[1], 'dayofweek': int.parse(list[2]), 'starthour': int.parse(list[3]) , 'startminute': int.parse(list[4]) , 'endhour': int.parse(list[5])  , 'endminute': int.parse(list[6]) };
-        print('Timetable에서 getData로 sharedpref에서 가져오는 map의 순서: '+i.toString()+', map: '+map.toString());
+        print('getData로 sharedpref에서 가져오는 map의 순서: '+i.toString()+', map: '+map.toString());
         //store에 있는 리스트의 특정 index에 새 수업정보 적힌 map값 저장
         context.read<Store1>().addIndexMeetingsData(int.parse(list[0]), map);
       }
     }
-    print('timetable getData실행 완료');
+  }
+
+  //store와 sharedpref에서 수업 데이터 삭제하기
+  deleteData(index) async {
+    //shared pref에서 삭제
+    var storage = await SharedPreferences.getInstance();
+    storage.remove('class'+index.toString());
+    //store에서 삭제
+    context.read<Store1>().deleteMeetingsData(index);
+    Navigator.of(context).pop();
+    print('deleteData를 통해 shared pref에서 삭제:  class'+index.toString());
   }
 
   @override
@@ -68,9 +79,10 @@ class _TimetableState extends State<Timetable> {
           ],
         ),
         body: SfCalendar(
+             onTap: calendarTapped,
             backgroundColor: Colors.white,
             //allowAppointmentResize: true,
-            allowDragAndDrop: true,
+           // allowDragAndDrop: true,
             viewNavigationMode: ViewNavigationMode.none,
             initialDisplayDate: DateTime.now(),
             showCurrentTimeIndicator: true,
@@ -81,19 +93,64 @@ class _TimetableState extends State<Timetable> {
                 startHour: 8,
                 endHour: 21,),
         ),
+
     );
   }
+
+  ///특정 수업일정 클릭했을때 이벤트 주는 함수
+  void calendarTapped(CalendarTapDetails details) {
+    if (details.targetElement == CalendarElement.appointment ||
+        details.targetElement == CalendarElement.agenda) {
+     final Meeting _meeting = details.appointments![0];
+      //final Appointment appointmentDetails = details.appointments![0];
+
+      print('클릭함 _meeting.index.toString():'+_meeting.index.toString());
+
+      var _startTimeText =
+          DateFormat('hh:mm a').format(_meeting.from).toString();
+      var  _endTimeText =
+          DateFormat('hh:mm a').format(_meeting.to).toString();
+      var _timeDetails = '$_startTimeText - $_endTimeText';
+
+      //다이얼로그 띄워줌
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(_meeting.eventName),
+              content: Text(_timeDetails),
+              actions: <Widget>[
+                TextButton(
+                  ///일정 삭제해주는 로직 여기에 넣기 - store와 shared pref에서 삭제해주면됨
+                    onPressed: () {
+                        print('삭제할 _meeting.index: '+_meeting.index.toString());
+                        //index값을 통해 데이터 삭제해주는 함수
+                        deleteData(_meeting.index);
+                        Fluttertoast.showToast(
+                          msg: 'Deleted',
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.BOTTOM,
+                          //fontSize: 20,
+                          //textColor: Colors.white,
+                          //backgroundColor: Colors.redAccent
+                        );
+
+                    },
+                    child: Text('delete'))
+              ],
+            );
+          });
+    }
+  }
+
 
   ///일정들 여기서 생성해서 리스트형태로 반환해주는 함수
     List<Meeting> _getDataSource()  {
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
 
-    print('_getDataSource실행#@@@@@@@@@@@');
-    //store에서 수업스케줄 리스트 가져옴
+    //store에서 수업스케줄 map들의 리스트  가져옴
     var list = context.read<Store1>().unCompleteMeetings;
-
-    print('_getDataSource할때 store에서 가져온 list: '+list.toString());
 
     //저장된 수업들 리스트 가져와서 여기서 하나씩 생성해줌
     for(int i=0; i<list.length; i++){
@@ -106,7 +163,8 @@ class _TimetableState extends State<Timetable> {
         DateTime endTime =
         DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek,  list[i]!['endhour'],list[i]!['endminute'] );
         meetings.add(
-            Meeting(list[i]!['name'], startTime, endTime, const Color(0xFF0F8644), false)
+            //수업객체들 만들때 젤 앞에 인자로 index값도 넣어줌.. 이걸로 삭제로직때 사용할거임
+            Meeting(list[i]!['index'],list[i]!['name'], startTime, endTime, const Color(0xFF0F8644), false)
         );
       }
     }
@@ -118,6 +176,10 @@ class _TimetableState extends State<Timetable> {
 class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<Meeting> source){
     appointments = source;
+  }
+
+  DateTime getIndex(int index) {
+    return appointments![index].index;
   }
 
   @override
@@ -148,8 +210,9 @@ class MeetingDataSource extends CalendarDataSource {
 
 ///일정객체 하나를 만드는 클래스
 class Meeting {
-  Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
+  Meeting(this.index, this.eventName, this.from, this.to, this.background, this.isAllDay);
 
+  int index;
   String eventName;
   DateTime from;
   DateTime to;

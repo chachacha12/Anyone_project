@@ -18,7 +18,6 @@ class Addclass extends StatefulWidget {
 }
 
 
-
 class _AddclassState extends State<Addclass> {
 
   ///새로운 수업의 내용을 저장할 map. 순서대로:  저장된 리스트의 index번호, 수업제목+(수업위치), 요일값(숫자로), starthour, startminute, endhour,endminute 이 들어갈거임
@@ -73,7 +72,6 @@ class _AddclassState extends State<Addclass> {
   ///shared pref에 새로운 수업스케줄 저장
   savePreference() async {
     var storage = await SharedPreferences.getInstance();
-
     //classContentMap의 값들로 List<String> 타입으로 만듬 (sharedpref에 저장하기 위함)
     List<String> classContentList = [
       classContentMap['index'].toString(),
@@ -85,17 +83,12 @@ class _AddclassState extends State<Addclass> {
       classContentMap['endminute'].toString(),
     ];
     storage.setStringList('class'+classContentMap['index'].toString(), classContentList);
-    print('shared pref에 저장성공: '+'키값: '+'class'+classContentMap['index'].toString()+', value: '+classContentList.toString());
   }
 
   ///Provider의 store에 새 수업스케줄 저장
   saveStore(){
     //만약 방번호가 null값이면 ''으로 바꿔줌. 즉 방번호는 미작성해도됨
     roomNumber ??= '';
-    //새 수업의 네임, 빌딩, 방번호 저장
-    classContentMap['name'] =
-        className + '\n' + '(' + selectedbuilding.toString() +
-            ' ' + roomNumber+')';
     //요일값 저장 (ex. 월요일 = 0)
     classContentMap['dayofweek'] = daylist[selectedDay];
     //시작시간, 끝시간 유저가 선택한 값 int로 저장
@@ -107,17 +100,22 @@ class _AddclassState extends State<Addclass> {
     var unCompleteMeetings = context.read<Store1>().unCompleteMeetings;
     //store에 저장되어 있는 수업일정들 리스트의 길이인 15만큼 반복
     for(int i=0; i<= unCompleteMeetings.length; i++){
-      print('unCompleteMeetings.length만큼 반복: '+ i.toString());
       //수업리스트들 중 빈 index가 있다면 거기에 새 수업을 넣어줌
       if(unCompleteMeetings[i] == null){
-        print('Addclass 중 unCompleteMeetings[i] == null 이라서 store에 저장되는 addIndexMeetingsData 실행@@@@');
         print('Addclass 중 unCompleteMeetings[i] i번째에 저장:  '+i.toString());
         classContentMap['index'] = i;
+        //새 수업이름, 빌딩, 방번호 저장
+        // (젤 앞에 index값 하나 넣어줌.. Timetable에서 수업 삭제로직때 index필요한데 name값으로만 접근가능해서임..@기준으로 나중에 spit해줄거임)
+        classContentMap['name'] =
+            className + '\n' + '(' + selectedbuilding.toString() +
+                ' ' + roomNumber+')';
+
         //store에 새 수업정보 적힌 map값 저장
         context.read<Store1>().addIndexMeetingsData(i, classContentMap);
         break;
       }
     }
+    print('unCompleteMeetings: '+unCompleteMeetings.toString());
   }
 
   /// TimePicker 띄워주는 함수
