@@ -12,6 +12,8 @@ import '../main.dart';
 //store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'index': 1 ,  'name': class, 'dayofweek': 0   ....등등}
 // sharedpref에는 List<string>으로 되어있고.. ['index': '1' ,'name', '1', '10','30', '13', '30'] 등..차례로 index, 수업이름+빌딩+방번호, 요일, 시작hour, 시작minute, 끝hour, 끝minute
 //shared pref로부터 일정들의 리스트를 15번 쭉 돌면서 있는것들만 가져와서 map형태로 변환해줌. 그후 그 map을 store에 저장해주면 화면에 보여질것임
+//수업의 색깔값은 shared pref에는 저장안함. store에서만 map안에 저장해줘서 이곳에서 getData로 값 가져올때 색깔값만 map에 따로 넣고 그려주거나
+//Addclass에서 새로 생성할때, store에만 색깔값 추가해서 map에 넣어서 그려주는 방식임. - shared pref에 색깔값은 저장 안되는듯
 
 class Timetable extends StatefulWidget {
   const Timetable({Key? key}) : super(key: key);
@@ -24,10 +26,8 @@ class _TimetableState extends State<Timetable> {
 
   /// sharedpref에 저장된 수업일정 for문 통해 가져옴 - 15개 저장되는 배열속에서
   getData() async {
-    print('timetable getData실행');
+    print('timetable getData실행 @@@');
     var storage = await SharedPreferences.getInstance();
-
-    //storage.remove('class0');
 
     //store에 있는 map타입 수업들 저장해두는 리스트 가져옴..앱 처음 실행하면 null값 15개가 초기화되어있음.
     var unCompleteMeetings = context.read<Store1>().unCompleteMeetings;
@@ -35,8 +35,15 @@ class _TimetableState extends State<Timetable> {
       //만약 i번째 key값이 있으면 그 List<String>값 가져옴
       if(storage.containsKey('class'+i.toString()) ){
         var list = storage.getStringList('class'+i.toString());
-        var map =  {'index': int.parse(list![0]) ,  'name':list[1], 'dayofweek': int.parse(list[2]), 'starthour': int.parse(list[3]) , 'startminute': int.parse(list[4]) , 'endhour': int.parse(list[5])  , 'endminute': int.parse(list[6]) };
+        print('getData로 sharedpref에서 가져오는 list: '+list.toString());
+
+        var map =  {
+          'index': int.parse(list![0]) ,  'name':list[1], 'dayofweek': int.parse(list[2]),
+          'starthour': int.parse(list[3]) , 'startminute': int.parse(list[4]) , 'endhour': int.parse(list[5])  , 'endminute': int.parse(list[6]),
+          'color':  context.read<Store1>().colorList[i]
+        };
         print('getData로 sharedpref에서 가져오는 map의 순서: '+i.toString()+', map: '+map.toString());
+        print('지정된 map의 색깔: '+context.read<Store1>().colorList[i].toString());
         //store에 있는 리스트의 특정 index에 새 수업정보 적힌 map값 저장
         context.read<Store1>().addIndexMeetingsData(int.parse(list[0]), map);
       }
@@ -102,10 +109,7 @@ class _TimetableState extends State<Timetable> {
     if (details.targetElement == CalendarElement.appointment ||
         details.targetElement == CalendarElement.agenda) {
      final Meeting _meeting = details.appointments![0];
-      //final Appointment appointmentDetails = details.appointments![0];
-
       print('클릭함 _meeting.index.toString():'+_meeting.index.toString());
-
       var _startTimeText =
           DateFormat('hh:mm a').format(_meeting.from).toString();
       var  _endTimeText =
@@ -130,11 +134,7 @@ class _TimetableState extends State<Timetable> {
                           msg: 'Deleted',
                           toastLength: Toast.LENGTH_SHORT,
                           gravity: ToastGravity.BOTTOM,
-                          //fontSize: 20,
-                          //textColor: Colors.white,
-                          //backgroundColor: Colors.redAccent
                         );
-
                     },
                     child: Text('delete'))
               ],
@@ -143,13 +143,13 @@ class _TimetableState extends State<Timetable> {
     }
   }
 
-
   ///일정들 여기서 생성해서 리스트형태로 반환해주는 함수
     List<Meeting> _getDataSource()  {
+    print('_getDataSource 실행 @@@@ ');
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
 
-    //store에서 수업스케줄 map들의 리스트  가져옴
+    //store에서 수업스케줄 map들의 리스트 가져옴
     var list = context.read<Store1>().unCompleteMeetings;
 
     //저장된 수업들 리스트 가져와서 여기서 하나씩 생성해줌
@@ -164,7 +164,7 @@ class _TimetableState extends State<Timetable> {
         DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek,  list[i]!['endhour'],list[i]!['endminute'] );
         meetings.add(
             //수업객체들 만들때 젤 앞에 인자로 index값도 넣어줌.. 이걸로 삭제로직때 사용할거임
-            Meeting(list[i]!['index'],list[i]!['name'], startTime, endTime, const Color(0xFF0F8644), false)
+            Meeting(list[i]!['index'],list[i]!['name'], startTime, endTime, list[i]!['color'], false)
         );
       }
     }

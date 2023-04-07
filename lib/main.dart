@@ -53,6 +53,13 @@ void main() async {
 ///state 보관하는 클래스
 class Store1 extends ChangeNotifier{
 
+  //시간표의 수업요소들 색깔 15가지
+  var colorList = [
+    Colors.redAccent, Colors.deepPurpleAccent, Colors.green, Colors.blue, Colors.greenAccent,
+    Colors.cyan, Colors.deepOrangeAccent, Colors.brown, Colors.pink, Colors.grey,
+    Colors.amberAccent, Colors.blueGrey, Colors.purpleAccent, Colors.yellowAccent, Colors.lime
+  ];
+
   //각각의 수업일정들 map을 리스트안에 저장 - null도 저장할 수 있도록 허용하고 15개를 미리 null 초기화함,growable: true를 해서 크기 변할수있음
    List<Map ?> unCompleteMeetings =List.filled(15, null, growable: true);
    //일정추가해주는 함수
