@@ -29,7 +29,6 @@ class AroundCampus extends StatefulWidget {
 class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClientMixin {
 
   late bool _isLoading = false; //늦은 초기화 해줌
-
   var restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
