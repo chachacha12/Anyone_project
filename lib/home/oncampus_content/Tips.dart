@@ -107,7 +107,8 @@ class _TipsState extends State<Tips> {
                     tips_collection[index]; //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
                     //이미지사진 클릭했을시 hero위젯을 통해 페이지전환 / 선택한 컨텐츠 문서 하나 전체를 두번째 페이지에 보내줌
                     Navigator.push(context, MaterialPageRoute(
-                        builder: (context) => Tips_hero_second(tips_document)));
+                        builder: (context) => Tips_hero_second(tips_document))
+                    );
                   },
                 );
               },

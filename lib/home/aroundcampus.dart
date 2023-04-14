@@ -31,7 +31,6 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
   late bool _isLoading = false; //늦은 초기화 해줌
   var restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
-  var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
   var show_restaurant_num = 6; //수평리스트에서 보여줄 음식점 사진 갯수
   var restaurant_random_list = []; //db에 있는 식당의 갯수에 맞춰서 0부터 n까지 값을 랜덤하게 저장해둘 리스트
   var i = 0;
