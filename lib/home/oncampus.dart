@@ -130,7 +130,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                                 builder: (context) => Notice(notice_document))
                             );
                           },
-                          child: CarouselSlider( //이미지슬라이드 해주는 위젯
+                          child:  CarouselSlider( //이미지슬라이드 해주는 위젯
                             options: CarouselOptions(
                                 autoPlay: true,
                                 autoPlayAnimationDuration: Duration(

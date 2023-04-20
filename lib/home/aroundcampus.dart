@@ -1,16 +1,14 @@
-import 'package:anyone/home/aroundcampus_content/cafe/Cafe_more.dart';
 import 'package:anyone/home/aroundcampus_content/discount/Discount.dart';
 import 'package:anyone/home/aroundcampus_content/entertainment/Entertainment.dart';
 import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../loading/shimmerloadinglist.dart';
-import 'aroundcampus_content/cafe/Cafe.dart';
+import 'aroundcampus_content/Food & Drinks/restaurant/Restaurant.dart';
 import 'aroundcampus_content/culture/Culture.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
-import 'aroundcampus_content/pub/Pub.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'aroundcampus_content/restaurant/Restaurant.dart';
+import 'oncampus.dart';
 
 
 //파베 파이어스토어 사용을 위한 객체
@@ -34,6 +32,14 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
   var show_restaurant_num = 6; //수평리스트에서 보여줄 음식점 사진 갯수
   var restaurant_random_list = []; //db에 있는 식당의 갯수에 맞춰서 0부터 n까지 값을 랜덤하게 저장해둘 리스트
   var i = 0;
+  final choices = [
+    'Food & Drinks',
+    'Groceries',
+    'Entertainment',
+    'Discount',
+    'Fashion',
+    'Culture'
+  ]; //상단의 스와이핑되는 탭바들 리스트
 
 
   getData() async {
@@ -62,7 +68,47 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return DefaultTabController(
+      length: choices.length,
+      child: Scaffold(
+        appBar: AppBar(
+            toolbarHeight: 0.h,
+            bottom: TabBar(
+            isScrollable: true,
+            tabs: [
+            Tab(text: 'Food & Drinks',),
+            Tab(text: 'Groceries',),
+            Tab(text: 'Entertainment',),
+            Tab(text: 'Discount',),
+            Tab(text: 'Fashion',),
+            Tab(text: 'Culture',)
+            ],
+        indicatorSize: TabBarIndicatorSize.tab,
+        indicatorWeight: 5,
+        indicatorColor: Colors.blueAccent,
+        unselectedLabelColor: Colors.black,
+        labelColor: Colors.blueAccent,
+        unselectedLabelStyle: TextStyle(fontSize: 12.sp),
+        labelStyle: TextStyle(
+            fontSize: 16.sp, fontWeight: FontWeight.w500),
+      ),
+    ),
+    body: TabBarView(
+      children: [
+        Restaurant(),
+        GroceryShop(),
+        Entertainment(),
+        Discount(),
+        Fashion(),
+        Culture(),
+      ],
+    )
+    ),
+    );
+
+
+    /*
+        Scaffold(
       body: Container(
         color: Colors.white,
         child: Column(
@@ -373,6 +419,8 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
         ),
       ),
     );
+         */
+
   }
 
   @override

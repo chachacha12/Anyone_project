@@ -2,7 +2,6 @@ import 'package:anyone/home/aroundcampus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../../various_widget.dart';
 import 'Discount_Cafe.dart';
 import 'Discount_Others.dart';
 import 'Discount_Restaurant.dart';
