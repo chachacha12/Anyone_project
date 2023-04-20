@@ -1,3 +1,4 @@
+import 'package:anyone/home/aroundcampus_content/Food%20&%20Drinks/restaurant/Restaurant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,12 +58,75 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
            // height: 600.h,
             child: Column(
               children: [
+                Container(
+                  width: double.infinity,
+                  margin: EdgeInsets.fromLTRB(20.w, 30.h, 10.w, 0.h),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 170.h,
+                        padding: EdgeInsets.all(10.w),
+                        alignment: Alignment.centerLeft,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(topLeft:Radius.circular(20), bottomLeft:Radius.circular(20)),
+                          gradient: LinearGradient(
+                            colors: [
+                              Colors.green[500]!,
+                              Colors.green[400]!,
+                              Colors.green[400]!,
+                              Colors.green[300]!,
+                              Colors.green[200]!,
+                              Colors.green[100]!,
+                              Colors.green[50]!,
+                            ],
+                          ),
+                        ),
+                        child: Text('Local Restaurant',
+                            style: TextStyle(fontSize: 16.sp, color: Colors.white, fontWeight: FontWeight.w500)),
+                      ),
+                      Text(' 🍔', style: TextStyle(fontSize: 33.sp)),
 
+                      Expanded(child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(onPressed: () { //식당정보 더 보기 버튼
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) =>
+                                //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                                Restaurant()));
+                          }, child: Row(
+                            //mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    0.w, 0.w, 0.w, 1.h),
+                                child: Text('view all', textAlign: TextAlign.end,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                  ),),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.fromLTRB(
+                                    0.w, 0.w, 0.w, 0.h),
+                                child: Icon(Icons.chevron_right, size: 18.sp,
+                                  color: Colors.black,
+                                ),
+                              )
+                            ],
+                          ),
+                          ),
+                        ],
+                      ))
+                    ],
+                  ),
+                ),
 
                 ///3번째 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
                 _isLoading ? ShimmerLoadingList() :
                 Container(
-                  margin: EdgeInsets.fromLTRB(10.w, 20.h, 0.w, 0.w),
+                  margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 0.w),
                   height: 150.0.h,
                   child: ListView.builder( //이미지들 수평리스트로 보여줌
                       scrollDirection: Axis.horizontal,
@@ -106,12 +170,10 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
                       }),
                 ),
 
-
               ],
             ),
           ),
         )
-
 
       ],
     );

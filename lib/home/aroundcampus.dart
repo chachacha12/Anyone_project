@@ -73,7 +73,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
       length: choices.length,
       child: Scaffold(
         appBar: AppBar(
-            toolbarHeight: 0.h,
+            toolbarHeight: 0.h, ///탭바의 전체적인 길이를 조절
             bottom: TabBar(
             isScrollable: true,
             tabs: [
@@ -84,12 +84,13 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
             Tab(text: 'Fashion',),
             Tab(text: 'Culture',)
             ],
+
         indicatorSize: TabBarIndicatorSize.tab,
         indicatorWeight: 5,
         indicatorColor: Colors.blueAccent,
         unselectedLabelColor: Colors.black,
         labelColor: Colors.blueAccent,
-        unselectedLabelStyle: TextStyle(fontSize: 12.sp),
+        unselectedLabelStyle: TextStyle(fontSize: 13.sp),
         labelStyle: TextStyle(
             fontSize: 16.sp, fontWeight: FontWeight.w500),
       ),
