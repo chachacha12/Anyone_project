@@ -1,4 +1,3 @@
-
 import 'package:anyone/timetable/Addclass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,6 +13,7 @@ import '../main.dart';
 //shared pref로부터 일정들의 리스트를 15번 쭉 돌면서 있는것들만 가져와서 map형태로 변환해줌. 그후 그 map을 store에 저장해주면 화면에 보여질것임
 //수업의 색깔값은 shared pref에는 저장안함. store에서만 map안에 저장해줘서 이곳에서 getData로 값 가져올때 색깔값만 map에 따로 넣고 그려주거나
 //Addclass에서 새로 생성할때, store에만 색깔값 추가해서 map에 넣어서 그려주는 방식임. - shared pref에 색깔값은 저장 안되는듯
+
 
 class Timetable extends StatefulWidget {
   const Timetable({Key? key}) : super(key: key);
@@ -143,14 +143,15 @@ class _TimetableState extends State<Timetable> {
     }
   }
 
+
   ///일정들 여기서 생성해서 리스트형태로 반환해주는 함수
-    List<Meeting> _getDataSource()  {
+  List<Meeting> _getDataSource()  {
     print('_getDataSource 실행 @@@@ ');
     final List<Meeting> meetings = <Meeting>[];
     final DateTime today = DateTime.now();
 
     //store에서 수업스케줄 map들의 리스트 가져옴
-    var list = context.read<Store1>().unCompleteMeetings;
+     var list = context.read<Store1>().unCompleteMeetings;
 
     //저장된 수업들 리스트 가져와서 여기서 하나씩 생성해줌
     for(int i=0; i<list.length; i++){
@@ -163,14 +164,17 @@ class _TimetableState extends State<Timetable> {
         DateTime endTime =
         DateTime(today.year, today.month, today.day - (today.weekday - 1)+dayofweek,  list[i]!['endhour'],list[i]!['endminute'] );
         meetings.add(
-            //수업객체들 만들때 젤 앞에 인자로 index값도 넣어줌.. 이걸로 삭제로직때 사용할거임
+          //수업객체들 만들때 젤 앞에 인자로 index값도 넣어줌.. 이걸로 삭제로직때 사용할거임
             Meeting(list[i]!['index'],list[i]!['name'], startTime, endTime, list[i]!['color'], false)
         );
       }
     }
     return meetings;
   }
+
 }
+
+
 
 ///일정들 리스트를 인자로 받아서 SfCalendar위젯의 인자값으로 넣어주는 역할하는 객체
 class MeetingDataSource extends CalendarDataSource {

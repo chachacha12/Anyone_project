@@ -18,7 +18,7 @@ class Discount extends StatefulWidget {
 }
 
 
-class _DiscountState extends State<Discount>  {
+class _DiscountState extends State<Discount> with AutomaticKeepAliveClientMixin {
 
   //식당
   var discount_restaurant_collection;
@@ -114,5 +114,8 @@ class _DiscountState extends State<Discount>  {
           )),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 

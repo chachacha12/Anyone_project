@@ -18,7 +18,7 @@ class GroceryShop extends StatefulWidget {
   State<GroceryShop> createState() => _GroceryShopState();
 }
 
-class _GroceryShopState extends State<GroceryShop> {
+class _GroceryShopState extends State<GroceryShop> with AutomaticKeepAliveClientMixin {
 
   var grocery_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
@@ -133,6 +133,10 @@ class _GroceryShopState extends State<GroceryShop> {
 
     );
   }
+
+  //이 페이지 상태유지를 위한 함수
+  @override
+  bool get wantKeepAlive => true;
 }
 
 

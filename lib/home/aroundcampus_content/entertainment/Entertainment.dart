@@ -18,7 +18,7 @@ class Entertainment extends StatefulWidget {
 }
 
 
-class _EntertainmentState extends State<Entertainment> {
+class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveClientMixin {
 
   var Entertainment_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
@@ -169,4 +169,8 @@ class _EntertainmentState extends State<Entertainment> {
       ),
     );
   }
+
+  //이 페이지 상태유지를 위한 함수
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -14,7 +14,7 @@ class Culture extends StatefulWidget {
   State<Culture> createState() => _CultureState();
 }
 
-class _CultureState extends State<Culture> {
+class _CultureState extends State<Culture> with AutomaticKeepAliveClientMixin{
 
   var culture_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
@@ -118,4 +118,7 @@ class _CultureState extends State<Culture> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

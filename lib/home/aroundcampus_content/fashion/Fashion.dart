@@ -18,7 +18,7 @@ class Fashion extends StatefulWidget {
 
 
 
-class _FashionState extends State<Fashion> {
+class _FashionState extends State<Fashion> with AutomaticKeepAliveClientMixin {
 
   var fashion_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
@@ -193,6 +193,9 @@ class _FashionState extends State<Fashion> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 

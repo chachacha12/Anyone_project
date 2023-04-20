@@ -4,6 +4,7 @@ import 'package:anyone/home/aroundcampus_content/fashion/Fashion.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../loading/shimmerloadinglist.dart';
+import 'aroundcampus_content/Food & Drinks/Food_Drink_Pub.dart';
 import 'aroundcampus_content/Food & Drinks/restaurant/Restaurant.dart';
 import 'aroundcampus_content/culture/Culture.dart';
 import 'aroundcampus_content/groceryshop/GroceryShop.dart';
@@ -31,7 +32,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
   var count = 0;
   var show_restaurant_num = 6; //수평리스트에서 보여줄 음식점 사진 갯수
   var restaurant_random_list = []; //db에 있는 식당의 갯수에 맞춰서 0부터 n까지 값을 랜덤하게 저장해둘 리스트
-  var i = 0;
+  //var i = 0;
   final choices = [
     'Food & Drinks',
     'Groceries',
@@ -95,7 +96,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
     ),
     body: TabBarView(
       children: [
-        Restaurant(),
+        FoodDrinkPub(),
         GroceryShop(),
         Entertainment(),
         Discount(),
