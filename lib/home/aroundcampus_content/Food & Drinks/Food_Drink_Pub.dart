@@ -126,181 +126,172 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
 
   ///식당관련된것들을 다 띄워주는 함수 - 제목띠 + 사진 리스트
   getRestaurant(){
-    return Container(
-      // height: 600.h,
-      child: Column(
-        children: [
-          ///제목, 아이콘문자, 페이지이동 위젯을 인자로 받아서 사진리스트 위에 제목띠를 생성하는 함수
-          getTitle('Local Restaurant', ' 🍔', Restaurant() ),
+    return Column(
+      children: [
+        ///제목, 아이콘문자, 페이지이동 위젯을 인자로 받아서 사진리스트 위에 제목띠를 생성하는 함수
+        getTitle('Local Restaurant', ' 🍔', Restaurant() ),
 
-          ///식당사진리스트 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
-          _isLoading ? ShimmerLoadingList() :
-          Container(
-            margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 0.w),
-            height: 150.0.h,
-            child: ListView.builder( //이미지들 수평리스트로 보여줌
-                scrollDirection: Axis.horizontal,
-                itemCount: show_restaurant_num,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 150.0.w,
-                    //height: 150.0.h,
-                    child: Card(
-                      child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                        child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
-                          fit: StackFit.expand,
-                          children: [
-                            Hero(
-                              tag: restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
-                              //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
-                              child: Image.network(
-                                restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
-                                fit: BoxFit.cover,),
-                            ),
-                            Positioned(child: Text(' '+
-                                restaurant_collection[restaurant_random_list[index]]['name'],
-                              maxLines: 2,
-                              style: TextStyle(color: Colors.white,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.bold),),
+        ///식당사진리스트 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
+        _isLoading ? ShimmerLoadingList() :
+        Container(
+          margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 0.w),
+          height: 150.0.h,
+          child: ListView.builder( //이미지들 수평리스트로 보여줌
+              scrollDirection: Axis.horizontal,
+              itemCount: show_restaurant_num,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 150.0.w,
+                  //height: 150.0.h,
+                  child: Card(
+                    child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
+                        fit: StackFit.expand,
+                        children: [
+                          Hero(
+                            tag: restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
+                            //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
+                            child: Image.network(
+                              restaurant_collection[restaurant_random_list[index]]['imagepath'][0],
+                              fit: BoxFit.cover,),
+                          ),
+                          Positioned(child: Text(' '+
+                              restaurant_collection[restaurant_random_list[index]]['name'],
+                            maxLines: 2,
+                            style: TextStyle(color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold),),
 
-                              bottom: 3.h,)
-                          ],
-                        ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) =>
-                              //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
-                              Cafe_more(
-                                  restaurant_collection[restaurant_random_list[index]])));
-                        },
+                            bottom: 3.h,)
+                        ],
                       ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                            //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                            Cafe_more(
+                                restaurant_collection[restaurant_random_list[index]])));
+                      },
                     ),
-                  );
-                }),
-          ),
-        ],
-      ),
+                  ),
+                );
+              }),
+        ),
+      ],
     );
   }
 
   ///카페 관련된것들을 다 띄워주는 함수 - 제목띠 + 사진 리스트
   getCafe(){
-    return Container(
-      // height: 600.h,
-      child: Column(
-        children: [
-          ///제목, 아이콘문자, 페이지이동 위젯을 인자로 받아서 사진리스트 위에 제목띠를 생성하는 함수
-          getTitle('Go-to Cafes', ' ☕', Cafe() ),
+    return Column(
+      children: [
+        ///제목, 아이콘문자, 페이지이동 위젯을 인자로 받아서 사진리스트 위에 제목띠를 생성하는 함수
+        getTitle('Go-to Cafes', ' ☕', Cafe() ),
 
-          ///카페사진리스트 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
-          _isLoading2 ? ShimmerLoadingList() :
-          Container(
-            margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 0.w),
-            height: 150.0.h,
-            child: ListView.builder( //이미지들 수평리스트로 보여줌
-                scrollDirection: Axis.horizontal,
-                itemCount: show_cafe_num,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 150.0.w,
-                    //height: 150.0.h,
-                    child: Card(
-                      child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                        child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
-                          fit: StackFit.expand,
-                          children: [
-                            Hero(
-                              tag: cafe_collection[cafe_random_list[index]]['imagepath'][0],
-                              //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
-                              child: Image.network(
-                                cafe_collection[cafe_random_list[index]]['imagepath'][0],
-                                fit: BoxFit.cover,),
-                            ),
-                            Positioned(child: Text(' '+
-                                cafe_collection[cafe_random_list[index]]['name'],
-                              maxLines: 2,
-                              style: TextStyle(color: Colors.white,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.bold),),
+        ///카페사진리스트 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
+        _isLoading2 ? ShimmerLoadingList() :
+        Container(
+          margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 0.w),
+          height: 150.0.h,
+          child: ListView.builder( //이미지들 수평리스트로 보여줌
+              scrollDirection: Axis.horizontal,
+              itemCount: show_cafe_num,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 150.0.w,
+                  //height: 150.0.h,
+                  child: Card(
+                    child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
+                        fit: StackFit.expand,
+                        children: [
+                          Hero(
+                            tag: cafe_collection[cafe_random_list[index]]['imagepath'][0],
+                            //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
+                            child: Image.network(
+                              cafe_collection[cafe_random_list[index]]['imagepath'][0],
+                              fit: BoxFit.cover,),
+                          ),
+                          Positioned(child: Text(' '+
+                              cafe_collection[cafe_random_list[index]]['name'],
+                            maxLines: 2,
+                            style: TextStyle(color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold),),
 
-                              bottom: 3.h,)
-                          ],
-                        ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) =>
-                              //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
-                              Cafe_more(
-                                  cafe_collection[cafe_random_list[index]])));
-                        },
+                            bottom: 3.h,)
+                        ],
                       ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                            //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                            Cafe_more(
+                                cafe_collection[cafe_random_list[index]])));
+                      },
                     ),
-                  );
-                }),
-          ),
-        ],
-      ),
+                  ),
+                );
+              }),
+        ),
+      ],
     );
   }
 
   ///카페 관련된것들을 다 띄워주는 함수 - 제목띠 + 사진 리스트
   getPub(){
-    return  Container(
-      // height: 600.h,
-      child: Column(
-        children: [
-          ///제목, 아이콘문자, 페이지이동 위젯을 인자로 받아서 사진리스트 위에 제목띠를 생성하는 함수
-          getTitle('Recommended Pubs', ' 🍺', Pub() ),
+    return  Column(
+      children: [
+        ///제목, 아이콘문자, 페이지이동 위젯을 인자로 받아서 사진리스트 위에 제목띠를 생성하는 함수
+        getTitle('Recommended Pubs', ' 🍺', Pub() ),
 
-          ///카페사진리스트 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
-          _isLoading3 ? ShimmerLoadingList() :
-          Container(
-            margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 80.h),
-            height: 150.0.h,
-            child: ListView.builder( //이미지들 수평리스트로 보여줌
-                scrollDirection: Axis.horizontal,
-                itemCount: show_pub_num,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 150.0.w,
-                    //height: 150.0.h,
-                    child: Card(
-                      child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                        child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
-                          fit: StackFit.expand,
-                          children: [
-                            Hero(
-                              tag: pub_collection[pub_random_list[index]]['imagepath'][0],
-                              //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
-                              child: Image.network(
-                                pub_collection[pub_random_list[index]]['imagepath'][0],
-                                fit: BoxFit.cover,),
-                            ),
-                            Positioned(child: Text(' '+
-                                pub_collection[pub_random_list[index]]['name'],
-                              maxLines: 2,
-                              style: TextStyle(color: Colors.white,
-                                  fontSize: 13.sp,
-                                  fontWeight: FontWeight.bold),),
+        ///카페사진리스트 - 데이터요청 안끝났으면 로딩화면 보여주고있을거임
+        _isLoading3 ? ShimmerLoadingList() :
+        Container(
+          margin: EdgeInsets.fromLTRB(10.w, 5.h, 0.w, 80.h),
+          height: 150.0.h,
+          child: ListView.builder( //이미지들 수평리스트로 보여줌
+              scrollDirection: Axis.horizontal,
+              itemCount: show_pub_num,
+              itemBuilder: (context, index) {
+                return SizedBox(
+                  width: 150.0.w,
+                  //height: 150.0.h,
+                  child: Card(
+                    child: GestureDetector( //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+                      child: Stack( //이미지와 텍스트를 겹치게 할때 주로 사용
+                        fit: StackFit.expand,
+                        children: [
+                          Hero(
+                            tag: pub_collection[pub_random_list[index]]['imagepath'][0],
+                            //랜덤리스트의 0번째 인덱스값부터 넣음- 랜덤하게 보여줌
+                            child: Image.network(
+                              pub_collection[pub_random_list[index]]['imagepath'][0],
+                              fit: BoxFit.cover,),
+                          ),
+                          Positioned(child: Text(' '+
+                              pub_collection[pub_random_list[index]]['name'],
+                            maxLines: 2,
+                            style: TextStyle(color: Colors.white,
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.bold),),
 
-                              bottom: 3.h,)
-                          ],
-                        ),
-                        onTap: () {
-                          Navigator.push(context, MaterialPageRoute(
-                              builder: (context) =>
-                              //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
-                              Cafe_more(
-                                  pub_collection[pub_random_list[index]])));
-                        },
+                            bottom: 3.h,)
+                        ],
                       ),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                            builder: (context) =>
+                            //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
+                            Cafe_more(
+                                pub_collection[pub_random_list[index]])));
+                      },
                     ),
-                  );
-                }),
-          ),
-        ],
-      ),
+                  ),
+                );
+              }),
+        ),
+      ],
     );
   }
 

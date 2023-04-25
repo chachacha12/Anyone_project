@@ -166,6 +166,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
               ],
             ),
           ),
+
           ///아이콘들있는 박스를 커스텀위젯으로 빼둠
           OnCampusCategory(),
 
@@ -259,11 +260,24 @@ class OnCampusCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return
       Container(
-        color: Color(0xffEAEF9D),
+          //박스 테두리 주기
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: BorderSide( // POINT
+                color:  Colors.grey,
+                width: 1.0,
+              ),
+              top: BorderSide( // POINT
+                color:  Colors.grey,
+                width: 1.0,
+              ),
+            ),
+            color: Color(0xffEAEF9D),
+          ),
+
         // height:350.h,
         child: Column(
           children: [
-
             ///category 텍스트
             Container(
               margin: EdgeInsets.fromLTRB(25.w, 20.h, 0, 0),
@@ -443,7 +457,7 @@ class OnCampusCategory extends StatelessWidget {
                             Image.asset(
                               'assets/Oncampus_icon/Clubs.png', width: 35.w,
                               height: 35.w,), //Icon(Icons.star),
-                            Text('Clubs', textAlign: TextAlign.center,
+                            Text('School'"\n"'Clubs', textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.black
                                 )),

@@ -85,14 +85,15 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
             Tab(text: 'Culture',)
             ],
 
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicatorWeight: 5,
-        indicatorColor: Colors.blueAccent,
-        unselectedLabelColor: Colors.black,
-        labelColor: Colors.blueAccent,
+        indicatorPadding: EdgeInsets.fromLTRB(0, 0, 0, 7.h),
+        indicatorSize: TabBarIndicatorSize.label,
+        indicatorWeight: 3,
+        indicatorColor: Colors.green,
+        unselectedLabelColor: Colors.grey[600],
+        labelColor: Colors.black,
         unselectedLabelStyle: TextStyle(fontSize: 13.sp),
         labelStyle: TextStyle(
-            fontSize: 16.sp, fontWeight: FontWeight.w500),
+            fontSize: 17.sp, fontWeight: FontWeight.w500),
       ),
     ),
     body: TabBarView(
