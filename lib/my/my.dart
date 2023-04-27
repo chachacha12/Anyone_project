@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../authentic/login.dart';
 import '../authentic/signup.dart';
 import '../main.dart';
@@ -19,6 +20,12 @@ class My extends StatefulWidget {
 }
 
 class _MyState extends State<My> {
+
+  //이메일 보내기 위한 작업
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'exchangestudents0906@gmail.com',
+  );
 
   //sharedpref에 유저 한국 도착날짜 저장하기
   saveArrivalData(arrivalDate) async {
@@ -129,11 +136,8 @@ class _MyState extends State<My> {
       }
       context.read<Store1>().ChangePercent(percent);  //state를 통해 최종 퍼센트값을 저장해줌
     }else{ //미선택인 날짜값이 있을때
-
     }
-
   }
-
 
   ///도착일 or 출국일 피커를 클릭시 진행 (인자를 통해 어떤 날짜값 피커를 선택했는지 구분해줌. n==1이면 도착일, n==2이면 출국일)
   /* DatePicker 띄우기 */
@@ -218,232 +222,281 @@ class _MyState extends State<My> {
           // AppBar가 하단 List 내렸을 때 바로 보여야 한다 -> true
           // List를 최상단으로 올렸을 때만 나와야 한다. -> false
           floating: true,
-
           actions: [
-            //PopupMenu를 보여줌
-            PopupMenuButton<int>(
-              itemBuilder: (context) =>
-              [
-                PopupMenuItem(
-                    value: 1,
-                    child: GestureDetector( //사이즈박스에 클릭이벤트 주기위함
-                      child: SizedBox(
-                        width: double.infinity,
-                        //height: double.infinity,
-                        child: Text('Sign out', style: TextStyle(
-                            color: Colors.black
-                        )),
-                      ),
-                      onTap: () { //로그아웃 글씨가 있는 Sizedbox를 클릭했을시 이벤트 처리
-                        //다이얼로그 띄우기
-                        showDialog(context: context, builder: (context) {
-                          return AlertDialog(
-                            title: Text('Are you sure you want to sign out?',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15.sp
-                              ),),
-                            actions: [
-                              Row(mainAxisAlignment: MainAxisAlignment
-                                  .spaceAround,
-                                children: [
-                                  TextButton(onPressed: () async {
-                                    await auth.signOut(); //파베에서 로그아웃
-                                    var name = context
-                                        .read<Store1>()
-                                        .username;
-                                    deleteData(
-                                        name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯. 이름만 보고 로그인됫는지 판별하니?
-
-                                    //로그인으로 페이지 이동
-                                    Navigator.push(context,
-                                        CupertinoPageRoute(builder: (c) =>
-                                            authentic())
-                                    );
-
-                                    //모든 스택값에 있는 페이지삭제
-                                    Navigator.pushNamedAndRemoveUntil(
-                                        context, '/', (_) => false);
-                                  },
-                                      child: Text('Yes', style: TextStyle(
-                                          color: Colors.green),)),
-                                  TextButton(onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                      child: Text('No', style: TextStyle(
-                                          color: Colors.green),)),
-                                ],)
-                            ],
-                          );
-                        });
-                      },
-                    )
-                ),
-
-                PopupMenuItem(
-                    value: 2,
-                    child: GestureDetector(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Text('Delete Account', style: TextStyle(
-                            color: Colors.black)),
-                      ),
-                      onTap: () {
-                        //다이얼로그 띄우기
-                        showDialog(context: context, builder: (context) {
-                          return AlertDialog(
-                            title: Text(
-                              'Are you sure you want to delete account?',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 15.sp
-                              ),),
-                            actions: [
-                              Row(mainAxisAlignment: MainAxisAlignment
-                                  .spaceAround,
-                                children: [
-                                  TextButton(onPressed: () async {
-                                    //현재 로그인된 파베유저 계정 삭제로직
-                                    await FirebaseAuth.instance.currentUser
-                                        ?.delete();
-                                    var name = context
-                                        .read<Store1>()
-                                        .username;
-                                    deleteData(
-                                        name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯.
-                                    //로그인으로 페이지 이동
-                                    Navigator.push(context,
-                                        CupertinoPageRoute(builder: (c) =>
-                                            authentic())
-                                    );
-                                    //모든 스택값에 있는 페이지삭제
-                                    Navigator.pushNamedAndRemoveUntil(
-                                        context, '/', (_) => false);
-                                  },
-                                      child: Text('Yes', style: TextStyle(
-                                          color: Colors.green),)),
-                                  TextButton(onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                      child: Text('No', style: TextStyle(
-                                          color: Colors.green),)),
-                                ],)
-                            ],
-                          );
-                        });
-                      },
-                    )
-                ),
-              ],
-              offset: Offset(0, 50),
-              color: Colors.white,
-              elevation: 2,
-              icon: Icon(Icons.more_vert, color: Colors.black),
-            ),
+            popUpMenu()
           ],
         ),
 
         ///앱바 다음에 보여줄 박스
         SliverToBoxAdapter(
+            child: dDayPercent()
+        ),
+
+        SliverToBoxAdapter(
+          child:  Container(
+            color: Colors.white,
             child: Container(
-              color: Colors.white,
-              child: Card(
-                margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 20.h),
-                elevation: 1,
-                child: Column(
-                  //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 10.w),
-                      child: Text(
-                          'Time left before returning home ',
-                          textAlign: TextAlign.start,
+              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('  Contact Us', style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20.sp
+                   )),
+
+                  Card(
+                    elevation: 1,
+                    margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
+                    child: ListTile(
+                      //title: Text('Team <Anyone>\n', style: Theme.of(context).textTheme.titleMedium),
+                      subtitle: Text('Please send us new, or changed information!',
                           style: TextStyle(
-                              color: Colors.black, fontSize: 16.sp)),
+                            color: Colors.grey,
+                            fontSize: 15.sp
+                            )),
+                      trailing: Icon(Icons.email, size: 28.h),
+                      onTap: (){
+                        launchUrl(emailLaunchUri);    //이메일보내기
+                      },
                     ),
-
-                    ///디데이 계산
-                    SizedBox(
-                      height: 30.h,
-                      child: Text('D ' + context
-                          .watch<Store1>()
-                          .dday, style: TextStyle(fontSize: 25.sp,),),
-                    ),
-
-                    ///퍼센테이지 그래프
-                    Padding(
-                      padding:  EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 10.w),
-                      child: LinearPercentIndicator(
-                        width: 275.w,
-                        animation: true,
-                        lineHeight: 20.0.h,
-                        animationDuration: 1000,
-                        percent: context
-                            .watch<Store1>().percent/100.0,
-                        center: Text(context
-                            .watch<Store1>().percent.toString() +'%'),
-                        barRadius: const Radius.circular(16),
-                        progressColor: Colors.greenAccent,
-                      ),
-                    ),
-
-                    ///도착일, 출발일 picker
-                    Container(
-                      margin: EdgeInsets.fromLTRB(20.w, 15.h, 0, 0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            children: [
-                              Text('Arrival Date:       ', style: TextStyle(
-                                  fontSize: 16.sp
-                              )),
-                              TextButton(onPressed: () {
-                                showDatePickerPop(1); //날짜픽업위젯보여줌. 인자값 1을줘서 유저가 도착일을 세팅하려함을 전달
-                              }, child: Text(context
-                                  .watch<Store1>()
-                                  .arrival_date,
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: Colors.green
-                                  ))
-                              )
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text('Departure Date: ', style: TextStyle(
-                                  fontSize: 16.sp
-                              )),
-                              TextButton(onPressed: () {
-                                showDatePickerPop(2); //날짜픽업위젯보여줌. 인자값 2를 줘서 유저가 출국일을 세팅하려함을 전달
-                              }, child: Text(context
-                                  .watch<Store1>()
-                                  .departure_date,
-                                  style: TextStyle(
-                                      fontSize: 16.sp,
-                                      color: Colors.green
-                                  ))
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                  ),
+                ],
               ),
             )
-        ),
+          ),
+          ),
 
         SliverToBoxAdapter(
           child: Container(
             color: Colors.white,
-            height: 360.h,
+            height: 250.h,
           ),
         )
       ],
-
     );
   }
+
+
+  /// 디데이날짜와 퍼센테이지바와 도착일, 출발일 피커 등 있는 박스
+  dDayPercent() {
+    return Container(
+      color: Colors.white,
+      child: Card(
+        margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 20.h),
+        elevation: 1,
+        child: Column(
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 10.w),
+              child: Text(
+                  'Time left before returning home ',
+                  textAlign: TextAlign.start,
+                  style: TextStyle(
+                      color: Colors.black, fontSize: 16.sp)),
+            ),
+
+            ///디데이 계산
+            SizedBox(
+              height: 30.h,
+              child: Text('D ' + context
+                  .watch<Store1>()
+                  .dday, style: TextStyle(fontSize: 25.sp,),),
+            ),
+
+            ///퍼센테이지 그래프
+            Padding(
+              padding: EdgeInsets.fromLTRB(20.w, 20.w, 20.w, 10.w),
+              child: LinearPercentIndicator(
+                width: 275.w,
+                animation: true,
+                lineHeight: 20.0.h,
+                animationDuration: 1000,
+                percent: context
+                    .watch<Store1>()
+                    .percent / 100.0,
+                center: Text(context
+                    .watch<Store1>()
+                    .percent
+                    .toString() + '%'),
+                barRadius: const Radius.circular(16),
+                progressColor: Colors.greenAccent,
+              ),
+            ),
+
+            ///도착일, 출발일 picker
+            Container(
+              margin: EdgeInsets.fromLTRB(20.w, 15.h, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Text('Arrival Date:       ', style: TextStyle(
+                          fontSize: 16.sp
+                      )),
+                      TextButton(onPressed: () {
+                        showDatePickerPop(
+                            1); //날짜픽업위젯보여줌. 인자값 1을줘서 유저가 도착일을 세팅하려함을 전달
+                      }, child: Text(context
+                          .watch<Store1>()
+                          .arrival_date,
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.green
+                          ))
+                      )
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text('Departure Date: ', style: TextStyle(
+                          fontSize: 16.sp
+                      )),
+                      TextButton(onPressed: () {
+                        showDatePickerPop(
+                            2); //날짜픽업위젯보여줌. 인자값 2를 줘서 유저가 출국일을 세팅하려함을 전달
+                      }, child: Text(context
+                          .watch<Store1>()
+                          .departure_date,
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              color: Colors.green
+                          ))
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  ///팝업메뉴를 보여주는 함수
+  popUpMenu(){
+    return //PopupMenu를 보여줌
+      PopupMenuButton<int>(
+        itemBuilder: (context) =>
+        [
+          PopupMenuItem(
+              value: 1,
+              child: GestureDetector( //사이즈박스에 클릭이벤트 주기위함
+                child: SizedBox(
+                  width: double.infinity,
+                  //height: double.infinity,
+                  child: Text('Sign out', style: TextStyle(
+                      color: Colors.black
+                  )),
+                ),
+                onTap: () { //로그아웃 글씨가 있는 Sizedbox를 클릭했을시 이벤트 처리
+                  //다이얼로그 띄우기
+                  showDialog(context: context, builder: (context) {
+                    return AlertDialog(
+                      title: Text('Are you sure you want to sign out?',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15.sp
+                        ),),
+                      actions: [
+                        Row(mainAxisAlignment: MainAxisAlignment
+                            .spaceAround,
+                          children: [
+                            TextButton(onPressed: () async {
+                              await auth.signOut(); //파베에서 로그아웃
+                              var name = context
+                                  .read<Store1>()
+                                  .username;
+                              deleteData(
+                                  name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯. 이름만 보고 로그인됫는지 판별하니?
+
+                              //로그인으로 페이지 이동
+                              Navigator.push(context,
+                                  CupertinoPageRoute(builder: (c) =>
+                                      authentic())
+                              );
+
+                              //모든 스택값에 있는 페이지삭제
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/', (_) => false);
+                            },
+                                child: Text('Yes', style: TextStyle(
+                                    color: Colors.green),)),
+                            TextButton(onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                                child: Text('No', style: TextStyle(
+                                    color: Colors.green),)),
+                          ],)
+                      ],
+                    );
+                  });
+                },
+              )
+          ),
+          PopupMenuItem(
+              value: 2,
+              child: GestureDetector(
+                child: SizedBox(
+                  width: double.infinity,
+                  child: Text('Delete Account', style: TextStyle(
+                      color: Colors.black)),
+                ),
+                onTap: () {
+                  //다이얼로그 띄우기
+                  showDialog(context: context, builder: (context) {
+                    return AlertDialog(
+                      title: Text(
+                        'Are you sure you want to delete account?',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 15.sp
+                        ),),
+                      actions: [
+                        Row(mainAxisAlignment: MainAxisAlignment
+                            .spaceAround,
+                          children: [
+                            TextButton(onPressed: () async {
+                              //현재 로그인된 파베유저 계정 삭제로직
+                              await FirebaseAuth.instance.currentUser
+                                  ?.delete();
+                              var name = context
+                                  .read<Store1>()
+                                  .username;
+                              deleteData(
+                                  name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯.
+                              //로그인으로 페이지 이동
+                              Navigator.push(context,
+                                  CupertinoPageRoute(builder: (c) =>
+                                      authentic())
+                              );
+                              //모든 스택값에 있는 페이지삭제
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context, '/', (_) => false);
+                            },
+                                child: Text('Yes', style: TextStyle(
+                                    color: Colors.green),)),
+                            TextButton(onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                                child: Text('No', style: TextStyle(
+                                    color: Colors.green),)),
+                          ],)
+                      ],
+                    );
+                  });
+                },
+              )
+          ),
+        ],
+        offset: Offset(0, 50),
+        color: Colors.white,
+        elevation: 2,
+        icon: Icon(Icons.more_vert, color: Colors.black),
+      );
+  }
+
 }
