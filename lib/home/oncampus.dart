@@ -230,8 +230,6 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                         );
                       }),
                 ),
-
-
               ],
             ),
 
@@ -250,11 +248,48 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
 
 
 
+///아이콘 아래있는 텍스트들 스타일 통일
+var iconTitleTextstyle = TextStyle(
+    fontSize: 13.sp,
+    fontWeight: FontWeight.w500,
+    color: Color(0xff397D54)
+);
 
 
 ///Category 텍스트위젯 + 아이콘 gridView 위젯 2개가 Column으로 있는 박스를 커스텀위젯으로 만듬
 class OnCampusCategory extends StatelessWidget {
   const OnCampusCategory({Key? key}) : super(key: key);
+
+  ///모든 아이콘은 같은 디자인으로 만들어주기 위함. 안에 들어가는 icon모양등은 다르게 하기위해 인자값 전달
+  getIconBox(child){
+    return Container(
+      margin: EdgeInsets.fromLTRB(0, 0.h, 0, 6.h),
+      child: child,
+      width: 45.h,
+      height: 45.h,
+      padding: EdgeInsets.fromLTRB(9.w, 0, 0, 0),
+      alignment: Alignment.centerLeft,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Color(0xff73C088),
+            Color(0xffA8E0B7),
+          ],
+        ),
+        boxShadow: [
+          BoxShadow(  ///박스 그림자효과 주기 - 하단만
+            color: Colors.grey.withOpacity(0.7),
+            spreadRadius: 0,
+            blurRadius: 3.0,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -265,14 +300,14 @@ class OnCampusCategory extends StatelessWidget {
             border: Border(
               bottom: BorderSide( // POINT
                 color:  Colors.grey,
-                width: 1.0,
+                width: 0.0.w,
               ),
               top: BorderSide( // POINT
                 color:  Colors.grey,
-                width: 1.0,
+                width: 0.0.w,
               ),
             ),
-            color: Color(0xffEAEF9D),
+            color: Color(0xffF5FFF8),
           ),
 
         // height:350.h,
@@ -302,16 +337,13 @@ class OnCampusCategory extends StatelessWidget {
                           child: GridTile(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment
-                                  .spaceEvenly,
+                                  .start,
                               children: [
-                                Image.asset(
-                                  'assets/Oncampus_icon/Official Site.png',
-                                  width: 35.w, height: 35.w,),
-                                Text('official'"\n"'site',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black
-                                    )),
+                                getIconBox(Icon(Icons.public, size: 28.h,
+                                  color: Colors.white,)),
+
+                                Text('Portal',
+                                    style: iconTitleTextstyle),
                               ],
                             ),
                           ),
@@ -332,16 +364,13 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset('assets/Oncampus_icon/Contact.png',
-                              width: 35.w, height: 35.w,),
-                            //Icon(Icons.star),
+                            getIconBox(Icon(Icons.phone, size: 28.h,
+                            color: Colors.white,)),
                             Text('School'"\n"'Contact',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                                style: iconTitleTextstyle),
                           ],
                         ),
                       ),
@@ -361,17 +390,13 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/Oncampus_icon/Guidebook.png',
-                              width: 35.w, height: 35.w,),
-                            //Icon(Icons.star),
+                            getIconBox(Icon(Icons.menu_book, size: 28.h,
+                              color: Colors.white,)),
                             Text('Guide'"\n"'Book',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                                style: iconTitleTextstyle),
                           ],
                         ),
                       ),
@@ -392,15 +417,12 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/Oncampus_icon/OIA.png', width: 35.w,
-                              height: 35.w,), //Icon(Icons.star),
-                            Text('OIA', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                            getIconBox(Icon(Icons.question_mark, size: 28.h,
+                              color: Colors.white,)),
+                            Text('FAQ', textAlign: TextAlign.center,
+                                style:iconTitleTextstyle),
                           ],
                         ),
 
@@ -422,17 +444,13 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/Oncampus_icon/Academic calendar 2.png',
-                              width: 35.w, height: 35.w,),
-                            //Icon(Icons.star),
+                            getIconBox(Icon(Icons.calendar_month, size: 28.h,
+                              color: Colors.white,)),
                             Text('Academic'"\n"'Calender',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                                style: iconTitleTextstyle),
                           ],
                         ),
                       ),
@@ -452,15 +470,12 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/Oncampus_icon/Clubs.png', width: 35.w,
-                              height: 35.w,), //Icon(Icons.star),
+                            getIconBox(Icon(Icons.sports_baseball, size: 28.h,
+                              color: Colors.white,)),
                             Text('School'"\n"'Clubs', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                                style:iconTitleTextstyle),
                           ],
                         ),
                       ),
@@ -479,17 +494,13 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/Oncampus_icon/Campus Map.png',
-                              width: 35.w, height: 35.w,),
-                            //Icon(Icons.star),
+                            getIconBox(Icon(Icons.location_pin, size: 28.h,
+                              color: Colors.white,)),
                             Text('Campus'"\n"'Map',
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                                style: iconTitleTextstyle),
                           ],
                         ),
                       ),
@@ -509,16 +520,12 @@ class OnCampusCategory extends StatelessWidget {
                     child: GestureDetector(
                       child: GridTile(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Image.asset(
-                              'assets/Oncampus_icon/Helplines.png',
-                              width: 35.w, height: 35.w,),
-                            //Icon(Icons.star),
+                            getIconBox(Icon(Icons.local_hospital, size: 28.h,
+                              color: Colors.white,)),
                             Text('Helplines', textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black
-                                )),
+                                style:iconTitleTextstyle),
                           ],
                         ),
                       ),
