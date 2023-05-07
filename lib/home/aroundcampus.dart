@@ -80,7 +80,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
             Tab(text: 'Food & Drinks',),
             Tab(text: 'Groceries',),
             Tab(text: 'Entertainment',),
-            Tab(text: 'Discount',),
+            //Tab(text: 'Discount',),
             Tab(text: 'Fashion',),
             Tab(text: 'Culture',)
             ],
@@ -101,7 +101,7 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
         FoodDrinkPub(),
         GroceryShop(),
         Entertainment(),
-        Discount(),
+        //Discount(),
         Fashion(),
         Culture(),
       ],

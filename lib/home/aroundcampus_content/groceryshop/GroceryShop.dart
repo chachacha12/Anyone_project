@@ -45,6 +45,8 @@ class _GroceryShopState extends State<GroceryShop> with AutomaticKeepAliveClient
     return Scaffold( //fragment같은게 아닌 아예 새페이지를 띄울땐 Scaffold를 감싸서 띄워주어야 페이지 제대로 띄워지는듯
       body: CustomScrollView(
         slivers: [
+
+          /*
           SliverAppBar(
             pinned: true,
             expandedHeight: 240.0.h,
@@ -62,6 +64,7 @@ class _GroceryShopState extends State<GroceryShop> with AutomaticKeepAliveClient
                 fit: BoxFit.cover,),
             ),
           ),
+           */
 
           SliverList(
             delegate: SliverChildBuilderDelegate(
