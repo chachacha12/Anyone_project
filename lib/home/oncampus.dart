@@ -19,20 +19,15 @@ import 'oncampus_content/academic_calender.dart';
 final firestore = FirebaseFirestore.instance;
 //웹뷰띄울 링크들 리스트
 var linkList = [
+  //portal
   'https://www.konkuk.ac.kr/do/Eng/Index.do',
-  //official site
-  'http://abroad.konkuk.ac.kr/',
-  //OIA
-  'https://kulhouse.konkuk.ac.kr/home/lan/eng/e_index_01.asp',
-  //dormitory
-  'http://kli.konkuk.ac.kr/',
-  //language institution
-  'https://sites.google.com/view/ku-student-guidebook/home',
+
   //Guide book
-  'https://library.konkuk.ac.kr/',
-  //Library
-  'https://sites.google.com/view/ku-student-guidebook/helpful-information/around-campus?authuser=0',
-  //campusmap
+  'https://sites.google.com/view/ku-student-guidebook/home',
+
+  //FAQ - Guide book
+  'https://sites.google.com/view/student-guidebook-year-2022/faq?authuser=0'
+
 ];
 
 //on-campus 관련 정보들을 다 담고있는 박스위젯
@@ -352,7 +347,7 @@ class OnCampusCategory extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(builder: (context) =>
                                     MyWebView(link: linkList[0],
-                                        appbartext: 'official site'),)
+                                        appbartext: 'Portal'),)
                             );
                           }
                       )
@@ -404,7 +399,7 @@ class OnCampusCategory extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) =>
-                                MyWebView(link: linkList[4],
+                                MyWebView(link: linkList[1],
                                     appbartext: 'GuideBook'))
                         );
                       },
@@ -432,7 +427,7 @@ class OnCampusCategory extends StatelessWidget {
                             context,
                             MaterialPageRoute(builder: (context) =>
                                 MyWebView(
-                                    link: linkList[1], appbartext: 'OIA'))
+                                    link: linkList[2], appbartext: 'FAQ'))
                         );
                       },
                     ),
