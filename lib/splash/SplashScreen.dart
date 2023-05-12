@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../authentic/login.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-//젤 처음 실행되는 스플래쉬화면임. 여기서 자동로그인 여부 확인후 메인화면갈지 로그인화면 갈지 정함
+///젤 처음 실행되는 스플래쉬화면임. 여기서 자동로그인 여부 확인후 메인화면갈지 로그인화면 갈지 정함
+
 class Splash extends StatefulWidget {
    Splash({Key? key}) : super(key: key);
 
@@ -78,7 +79,10 @@ class _SplashState extends State<Splash> {
   @override
   Widget build(BuildContext context) {
 
-    const String imageLogoName = 'assets/android_icon.png';
+    //const String imageLogoName = 'assets/android_icon.png';
+    const String imageLogoName = 'assets/duck.PNG';
+
+
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
@@ -134,8 +138,8 @@ class _SplashState extends State<Splash> {
                   radius: 60.r,
                   child: Image.asset(
                     imageLogoName,
-                    width: screenWidth * 0.616666,
-                    height: screenHeight * 0.0859375,
+                    width: screenWidth * 2.916666,
+                    height: screenHeight * 2.9859375,
                   ),
                 ),
 
@@ -153,8 +157,8 @@ class _SplashState extends State<Splash> {
                       );
                     },
                     child: Text("Anyone can enjoy\nCampus life",
-                        style: TextStyle(color: Colors.black,
-                            fontSize: screenWidth*( 20/360))
+                        style: TextStyle(color: Color(0xff397D54),
+                            fontSize: screenWidth*( 23/360))
                     ),
                   ),
                 ),

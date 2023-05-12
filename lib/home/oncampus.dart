@@ -97,24 +97,50 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
 
           ///what's up 텍스트위젯 + 공지사항 카드들
           Container(
-            height: 300.h,
+            height: 320.h,
             child: Column(
               children: [
-                ///whats up 텍스트
-                Container(
-                  margin: EdgeInsets.fromLTRB(25.w, 20.h, 0, 0),
-                  alignment: Alignment.centerLeft,
-                  child: Text('What' + "'" + 's up', style: TextStyle(
-                      color: Color(0xff397D54),
-                      fontSize: 22.sp,
-                      fontWeight: FontWeight.w500
-                  ),),
+
+                Row(
+                  children: [
+                    Stack(
+                      children: [
+                        Positioned(
+                          //top: 50,
+                          child:    Container(
+                            //color: Colors.grey,
+                            margin: EdgeInsets.fromLTRB(25.w, 22.h, 0, 0),
+                            alignment: Alignment.centerLeft,
+                            child:Text('What' + "'" + 's up', style: TextStyle(
+                                color: Color(0xff397D54),
+                                fontSize: 22.sp,
+                                fontWeight: FontWeight.w500
+                            ),),
+                          ),
+                        ),
+                        Positioned(
+                          //top: 50,
+                          child:  Container(
+                            //color: Colors.red,
+                            margin: EdgeInsets.fromLTRB(107.w, 0.h, 0, 0),
+                            alignment: Alignment.centerLeft,
+                            child: Image.asset('assets/duck.PNG', width: 80.w,
+                              fit: BoxFit.fill,),
+                          )
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
+
+
+
+
 
                 ///공지사항 카드들 CarouselSlider위젯과 dotsindicator
                 _isNoticeLoading ? Container() :
                 Container(
-                    margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
+                    margin: EdgeInsets.fromLTRB(0.h, 0.h, 0.h, 0.h),
                     child: Column( //캐러셀 슬라이드와 indicator 들어감
                       children: [
                         GestureDetector(
