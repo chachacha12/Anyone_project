@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../Provider/Provider.dart';
 import '../main.dart';
 
 //store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'index': 1 ,  'name': class, 'dayofweek': 0   ....등등}

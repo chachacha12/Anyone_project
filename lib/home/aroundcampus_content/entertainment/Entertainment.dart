@@ -78,13 +78,14 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row( //가게명과 물음표 상세보기 버튼
+                            Row( //가게명과 more 상세보기 버튼
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Flexible(
                                     fit: FlexFit.tight,
-                                    flex: 4,
+                                    flex: 7,
                                     child: Container(
-                                      margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.h),
+                                      margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
                                       child: Text(
                                           Entertainment_collection[index]['title'],
                                       style: TextStyle(
@@ -93,39 +94,78 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
                                       ),),
                                     )
                                 ),
+                                /*
                                 Flexible(
+                                  //fit: FlexFit.loose,
                                   flex: 1,
-                                  child: OutlinedButton(onPressed: () {
-                                    entertainment_document = Entertainment_collection[index];
-                                    //페이지 이동
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) =>
-                                            Entertainment_more( entertainment_document )));
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
+                                    child:  Icon(Icons.favorite_border, size: 30.w, )
+                                  ),
 
-                                  }, child: Text('more'),),
                                 )
+                                 */
+
                               ],
                             ),
 
+                            /// 네이버맵, 카테고리, 시간 /  more버튼
                             Container(
-                              margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.w),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              margin: EdgeInsets.fromLTRB(10.w, 15.h, 0.w, 0.w),
+                              child:  Row(
                                 children: [
-                                  //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
-                                  //인자값으로 각 컨텐츠의 풀네임값을 보내줌
-                                  NaverMapDeepLink( titlename :Entertainment_collection[index]['title'] ),
+                                  Flexible(
+                                      fit: FlexFit.tight,
+                                      flex: 7,
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
+                                          //인자값으로 각 컨텐츠의 풀네임값을 보내줌
+                                          NaverMapDeepLink( titlename :Entertainment_collection[index]['title'] ),
 
-                                  Text(Entertainment_collection[index]['category'
-                                  ],
-                                    style: TextStyle(
-                                        fontSize: 15.sp
-                                    ),),
-                                  richtext(Icon(Icons.access_time_outlined, size: 15.h),
-                                      Entertainment_collection[index]['time']),
+                                          Text(Entertainment_collection[index]['category'
+                                          ],
+                                            style: TextStyle(
+                                                fontSize: 15.sp
+                                            ),),
+                                          Container(
+                                            //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
+                                            child:   richtext(Icon(Icons.access_time_outlined, size: 15.h),
+                                                Entertainment_collection[index]['time']),
+                                          )
+                                        ],
+                                      ),
+                                  ),
+
+
+                              Flexible(
+                                //fit: FlexFit.loose,
+                                flex: 1,
+                                child: Container(
+                                    margin: EdgeInsets.fromLTRB(0.w, 0.h, 5.w, 0.h),
+                                    child:  Icon(Icons.favorite_border, size: 25.w, )
+                                ),
+                              ),
+
+                                  Flexible(
+                                      fit: FlexFit.tight,
+                                      flex: 2,
+                                      child: Container(
+                                        //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
+                                        child:     OutlinedButton(onPressed: () {
+                                          entertainment_document = Entertainment_collection[index];
+                                          //페이지 이동
+                                          Navigator.push(context, MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Entertainment_more( entertainment_document )));
+                                        }, child: Text('more'),),
+                                      )
+                                  ),
                                 ],
-                              )
+                              ),
+
                             ),
 
                             Container(

@@ -15,7 +15,7 @@ class NaverMapDeepLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Text(' Naver Map', style:
+      child: Text('View Naver Map', style:
       TextStyle(fontSize: 15.sp,
           color: Colors.green,
           fontWeight: FontWeight.w400),),

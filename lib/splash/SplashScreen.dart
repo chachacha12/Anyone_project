@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../Provider/Provider.dart';
 import '../authentic/login.dart';
 import 'package:simple_animations/simple_animations.dart';
 

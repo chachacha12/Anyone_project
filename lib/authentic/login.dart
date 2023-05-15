@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../Provider/Provider.dart';
 import '../main.dart';
 import 'checkvalidate.dart';
 import 'signup.dart';

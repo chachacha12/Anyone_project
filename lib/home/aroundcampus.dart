@@ -37,7 +37,6 @@ class _AroundCampusState extends State<AroundCampus> with AutomaticKeepAliveClie
     'Food & Drinks',
     'Groceries',
     'Entertainment',
-    'Discount',
     'Fashion',
     'Culture'
   ]; //상단의 스와이핑되는 탭바들 리스트

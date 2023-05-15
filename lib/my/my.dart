@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../Provider/Provider.dart';
 import '../authentic/login.dart';
 import '../authentic/signup.dart';
 import '../main.dart';
