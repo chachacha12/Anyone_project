@@ -9,6 +9,9 @@ import 'checkvalidate.dart';
 import 'signup.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+final firestore = FirebaseFirestore.instance;
+
 //로그인 화면
 class authentic extends StatefulWidget {
   const authentic({Key? key}) : super(key: key);
@@ -40,11 +43,21 @@ class _authenticState extends State<authentic> {
     context.read<Store1>().ChangeUserName(name);
   }
 
+
+  ///직접 입력해서 하는 로그인할때마다 찜목록에 유저정보 저장
+  setUserInfoData() async {
+    try {
+      await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('UserInfo').doc(auth.currentUser?.displayName).set({'name':auth.currentUser?.displayName, 'email':auth.currentUser?.email});
+      print('저장 성공');
+    } catch (e) {
+      print('에러');
+    }
+  }
+
   @override
   void initState() {
     super.initState();
   }
-
 
   ///각각의 텍스트필드마다 같은 스타일을 주기위함.  아이콘과 라벨값 빼고
   Textfieldstyle(icon, labeltext){
@@ -98,12 +111,15 @@ class _authenticState extends State<authentic> {
       );
       //로그인 성공시
 
-       //현재 로그인된 사용자가 있다면
+       //파베에 현재 로그인된 사용자가 있다면 (즉, 파베 로그인 성공시 shared pref에 유저정보 저장)
       var currentUser = FirebaseAuth.instance.currentUser;
       if (currentUser != null) {
         //sharedprfe에 유저정보 저장
         saveData(currentUser.displayName, currentUser.email);
+        //파베 찜목록 컬렉션에 유저정보 저장
+        setUserInfoData();
       }
+
       //ShowSnackBar('Sign In Successful');
       Navigator.pop(context);
 
@@ -135,7 +151,6 @@ class _authenticState extends State<authentic> {
         title: Text('Sign In'), //APP BAR 만들기
 
       ),
-
 
       body: Container(
         color: Colors.white,

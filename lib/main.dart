@@ -1,4 +1,3 @@
-import 'package:anyone/Provider/ProviderManager.dart';
 import 'package:anyone/Style.dart' as style;
 import 'package:anyone/splash/SplashScreen.dart';
 import 'package:anyone/timetable/Timetable.dart';
@@ -6,6 +5,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'Provider/Provider.dart';
+import 'authentic/login.dart';
+import 'authentic/signup.dart';
 import 'home/info.dart';
 import 'keeping/Keep.dart';
 import 'my/my.dart';
@@ -32,7 +33,7 @@ void main() async {
   runApp(
       MultiProvider(providers: [ //store를 여러개 등록해둘 수 있음
         ChangeNotifierProvider(create: (c) => Store1()),
-        ChangeNotifierProvider(create: (c) => Store1()),
+        ChangeNotifierProvider(create: (c) => MyListStore()),
       ],
           child: ScreenUtilInit( //화면 반응형앱을 위한 패키지로 만든 위젯
             designSize: Size(360, 690),
@@ -47,8 +48,6 @@ void main() async {
           )
       ));
 }
-
-
 
 
 class MyApp extends StatelessWidget {
@@ -85,13 +84,25 @@ class _MainState extends State<Main> {
     );
   }
 
+  ///파베에서 필요한 데이터값들 가져와서 Provider안에 저장해줌
+  getFBData() async {
+    //내 찜목록 확인위해 가져오는 찜목록 데이터
+    var result = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('entertainment').get();
+
+    ///이렇게 해주는 이유는 유저가 새 컨텐츠를 찜 하거나 찜 삭제할때마다 파베에 접근해서 새로운 찜목록을 가져오지 않게 하기위함임.
+    ///즉 파베에 추가, 삭제 로직만 작동하도록 해주고 ui상에선 이걸로 보여주기 위함임
+    for(var doc in result.docs){
+      context.read<MyListStore>().addEntertainment(doc['doc_id']); // store 찜목록리스트에 파베에서 가져온 doc_id 필드값들을 저장
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
-    /// Provider관리하는 클래스객체 하나를 생성, 파베에서 몇몇 데이터 가져와서 provider에 저장
-    var pm = ProviderManager();
-    pm.getData();
+    /// Provider관리하는 함수실행, 파베에서 몇몇 데이터 가져와서 provider에 저장
+    getFBData();
+    print('main의 initState에서 파베의 찜목록 데이터 가져옴');
   }
 
   //하단 네비케이션바에 필요한 키인듯

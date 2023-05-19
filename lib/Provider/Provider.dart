@@ -1,6 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+///찜목록 관련 state들을 저장해주는 store
+class MyListStore extends ChangeNotifier{
+
+  List<String> entertainmentMyList=[];  //엔터 컨텐츠 내 찜목록. doc_id들만 저장된 리스트
+  addEntertainment(docId){
+    entertainmentMyList.add(docId);
+    notifyListeners();
+  }
+  deleteEntertainment(docId){
+    entertainmentMyList.remove(docId);
+    notifyListeners();
+  }
+
+}
+
+
+
 ///state 보관하는 클래스
 class Store1 extends ChangeNotifier{
 
