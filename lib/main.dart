@@ -91,9 +91,9 @@ class _MainState extends State<Main> {
 
     ///이렇게 해주는 이유는 유저가 새 컨텐츠를 찜 하거나 찜 삭제할때마다 파베에 접근해서 새로운 찜목록을 가져오지 않게 하기위함임.
     ///즉 파베에 추가, 삭제 로직만 작동하도록 해주고 ui상에선 이걸로 보여주기 위함임
-    for(var doc in result.docs){
-      context.read<MyListStore>().addEntertainment(doc['doc_id']); // store 찜목록리스트에 파베에서 가져온 doc_id 필드값들을 저장
-    }
+    //내 찜목록 문서들 리스트를 store에 저장해줌
+    context.read<MyListStore>().getEnterMyListCollection(result.docs);
+
   }
 
   @override

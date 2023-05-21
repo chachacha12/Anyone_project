@@ -5,13 +5,18 @@ import 'package:flutter/material.dart';
 ///찜목록 관련 state들을 저장해주는 store
 class MyListStore extends ChangeNotifier{
 
-  List<String> entertainmentMyList=[];  //엔터 컨텐츠 내 찜목록. doc_id들만 저장된 리스트
-  addEntertainment(docId){
-    entertainmentMyList.add(docId);
+  var entertainmentMyList;  //엔터 컨텐츠 내 찜목록 문서들 리스트임
+  getEnterMyListCollection(collection){ // main에서 이 함수 실행해서 문서들 리스트 저장해줌
+    entertainmentMyList = collection;
     notifyListeners();
   }
-  deleteEntertainment(docId){
-    entertainmentMyList.remove(docId);
+
+  addEntertainment(doc){
+    entertainmentMyList.add(doc);
+    notifyListeners();
+  }
+  deleteEntertainment(doc){
+    entertainmentMyList.remove(doc);
     notifyListeners();
   }
 

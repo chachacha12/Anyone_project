@@ -10,8 +10,9 @@ import '../../../various_widget.dart';
 import 'Entertainment_more.dart';
 /*
 찜목록리스트 로직:
-1. 앱실행하자마자 파베에서 찜목록 리스트들 가져와서 store에 저장해줌 - provider manager에서.
-2. 이 페이지 들어와서 새로운 찜을 추가하거나 삭제하면 store에만 doc_id를 추가하거나 삭제해주고 파베에는 추가, 삭제로직만 진행
+1. 앱실행하자마자 파베에서 찜목록 리스트들 가져와서 store에 저장해줌 - main에서.
+2. 이 페이지에서 내 찜목록과 이 페이지 컨텐츠를 for문 돌며 비교해서 내가 찜한목록들만 isMyList에 true로 표시
+3. 이 페이지에서 새로운 찜을 추가하거나 삭제하면 store의 state에만 doc_id를 추가하거나 삭제해주고 파베에는 추가, 삭제로직만 진행
  -> 이렇게 로직짜면 새로운 찜이 생기거나 삭제될때마다 파베에서 찜목록 다시 안가져오고 store에서만 참조하면 되므로.
 */
 //파베 파이어스토어 사용을 위한 객체
@@ -42,16 +43,6 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
     //컨텐츠 보여주기 위해 가져오는 데이터들
     var result = await firestore.collection('entertainment').get();
 
-    //내 찜목록 확인위해 가져오는 찜목록 데이터
-    var result2 = await firestore.collection('MyList').doc(
-        auth.currentUser?.uid).collection('entertainment').get();
-
-    ///이렇게 해주는 이유는 유저가 새 컨텐츠를 찜 하거나 찜 삭제할때마다 파베에 접근해서 새로운 찜목록을 가져오지 않게 하기위함임.
-    ///즉 파베에 추가, 삭제 로직만 작동하도록 해주고 ui상에선 이걸로 보여주기 위함임
-    for (var doc in result2.docs) {
-      context.read<MyListStore>().addEntertainment(
-          doc['doc_id']); // store 찜목록리스트에 파베에서 가져온 doc_id 필드값들을 저장
-    }
     setState(() {
       Entertainment_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴
@@ -66,12 +57,12 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
     print('@@@enter에서 모든 내찜문서들 도는 작업 진행');
     for (var doc in Entertainment_collection) {
       var exist = false;
-      //내 찜목록 문서id들 하나씩 확인
-      for (var docId in context
+      //내 찜목록 문서들 하나씩 확인
+      for (var myDoc in context
           .read<MyListStore>()
           .entertainmentMyList) {
         ///찜목록에 이미 존재
-        if (doc?.id == docId) {
+        if (doc['title'] == myDoc['title']) {
           exist = true;
           isMyList.add(true);
           break;
@@ -85,7 +76,7 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
   }
 
 
-  ///파베에서 문서 삭제해주는 함수
+  ///파베의 내찜리스트에서 문서 삭제해주는 함수
   deleteDoc(index) async {
     try {
       await firestore.collection(
@@ -97,16 +88,15 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
           .delete();
       print('삭제성공');
 
-      ///store에 새로운 찜목록 추가로직
+      ///store에 찜목록 삭제로직
       context.read<MyListStore>()
           .deleteEntertainment(
-          Entertainment_collection[index]
-              ?.id);
+          Entertainment_collection[index]);
     } catch (e) {
       print('에러');
     }
   }
-  ///파베에서 문서 추가해주는 함수
+  ///파베의 내찜리스트에 문서 추가해주는 함수
   addDoc(index) async {
     try {
       await firestore.collection(
@@ -116,16 +106,21 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
           .doc(
           Entertainment_collection[index]['title'])
           .set({
-        'doc_id': Entertainment_collection[index]
-            ?.id
+        'title': Entertainment_collection[index]['title'],
+        'time': Entertainment_collection[index]['time'],
+        'imagepath': Entertainment_collection[index]['imagepath'],
+        'text': Entertainment_collection[index]['text'],
+        'textimage': Entertainment_collection[index]['textimage'],
+        'address': Entertainment_collection[index]['address'],
+        'category': Entertainment_collection[index]['category'],
+        'holiday': Entertainment_collection[index]['holiday'],
       });
       print('저장 성공');
 
       ///store에 새로운 찜목록 추가로직
       context.read<MyListStore>()
           .addEntertainment(
-          Entertainment_collection[index]
-              ?.id);
+          Entertainment_collection[index]);
     } catch (e) {
       print('에러');
     }
