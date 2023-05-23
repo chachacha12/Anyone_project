@@ -4,11 +4,11 @@ import 'package:anyone/timetable/Timetable.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'MyList/MyList.dart';
 import 'Provider/Provider.dart';
 import 'authentic/login.dart';
 import 'authentic/signup.dart';
 import 'home/info.dart';
-import 'keeping/Keep.dart';
 import 'my/my.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -116,7 +116,7 @@ class _MainState extends State<Main> {
         IndexedStack(
           index: context.watch<Store1>().tab,
           children: [
-            Info(),Timetable(), Keep(), My()
+            Info(),Timetable(), MyList(), My()
           ],
         ),
 

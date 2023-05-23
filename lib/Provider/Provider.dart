@@ -10,16 +10,18 @@ class MyListStore extends ChangeNotifier{
     entertainmentMyList = collection;
     notifyListeners();
   }
-
   addEntertainment(doc){
     entertainmentMyList.add(doc);
+    print('provider에서 추가');
     notifyListeners();
+    print('entertainmentMyList:'+ entertainmentMyList.toString());
   }
   deleteEntertainment(doc){
     entertainmentMyList.remove(doc);
+    print('provider에서 삭제');
     notifyListeners();
+    print('entertainmentMyList:'+ entertainmentMyList.toString());
   }
-
 }
 
 
