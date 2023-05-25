@@ -7,6 +7,7 @@ import '../NaverMapDeepLink.dart';
 import '../Provider/Provider.dart';
 import '../authentic/login.dart';
 import '../authentic/signup.dart';
+import '../home/aroundcampus_content/CommonWidget.dart';
 import '../home/aroundcampus_content/entertainment/Entertainment_more.dart';
 import '../various_widget.dart';
 
@@ -27,7 +28,6 @@ class _EnterMyListState extends State<EnterMyList> {
   var entertainmentMyList; //내찜목록 컬렉션
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
-  dynamic entertainment_document; //Entertainment_more에 보내줄 문서 하나
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _EnterMyListState extends State<EnterMyList> {
   }
 
   ///이 페이지 들어올때마다 계속 store에서 값 받아서 내 찜목록 업뎃해줌
-  updateMyList(){
+  updateMyList() {
     setState(() {
       entertainmentMyList = context
           .read<MyListStore>()
@@ -43,11 +43,12 @@ class _EnterMyListState extends State<EnterMyList> {
 
       count = entertainmentMyList.length;
     });
-    print('makeMyList실행,  entertainmentMyList: '+entertainmentMyList.toString());
+    print('makeMyList실행,  entertainmentMyList: ' +
+        entertainmentMyList.toString());
   }
 
   ///찜목록을 정말 삭제할건지 확인차 띄워줄 다이얼로그
-  makeDialog(index){
+  makeDialog(index) {
     showDialog(context: context, builder: (context) {
       return AlertDialog(
         title: Text('Are you sure you want to delete it?',
@@ -59,10 +60,10 @@ class _EnterMyListState extends State<EnterMyList> {
           Row(mainAxisAlignment: MainAxisAlignment
               .spaceAround,
             children: [
-              TextButton(onPressed: ()  {
-                  ///삭제로직 적어줌
-                   deleteDoc(index);
-                   Navigator.of(context).pop();
+              TextButton(onPressed: () {
+                ///삭제로직 적어줌
+                deleteDoc(index);
+                Navigator.of(context).pop();
               },
                   child: Text('Yes', style: TextStyle(
                       color: Colors.green),)),
@@ -102,7 +103,6 @@ class _EnterMyListState extends State<EnterMyList> {
 
         count = entertainmentMyList.length;
       });
-
     } catch (e) {
       print('에러');
     }
@@ -111,7 +111,6 @@ class _EnterMyListState extends State<EnterMyList> {
 
   @override
   Widget build(BuildContext context) {
-
     updateMyList();
 
     return Scaffold( //fragment같은게 아닌 아예 새페이지를 띄울땐 Scaffold를 감싸서 띄워주어야 페이지 제대로 띄워지는듯
@@ -128,42 +127,26 @@ class _EnterMyListState extends State<EnterMyList> {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row( //가게명과 찜버튼
+                            Row( ///가게명과 찜버튼
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Flexible(
                                     fit: FlexFit.tight,
                                     flex: 7,
-                                    child: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          10.w, 0.h, 7.w, 0.h),
-                                      child: Text(
-                                        entertainmentMyList[index]['title'],
-                                        style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold
-                                        ),),
-                                    )
+                                    child:contentsName(  entertainmentMyList[index]['title']), //CommonWidget파일안에 있는 함수
                                 ),
 
+                                ///찜버튼
                                 Flexible(
                                   //fit: FlexFit.loose,
                                   flex: 1,
-                                  child: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          0.w, 0.h, 0.w, 0.h),
-                                      child: IconButton(
-                                        icon: Icon(Icons.favorite),
-                                        color: Colors.red,
-                                        iconSize: 30,
-                                        /// 파베 내 찜목록에서 제거
-                                        onPressed: () async {
-                                          ///정말 삭제할건지 다이얼로그 띄워주기
-                                          makeDialog(index);
-                                        },
-                                      )
+                                  child: GestureDetector(
+                                      child: myListButton(true),
+                                      onTap: () async {
+                                        ///정말 삭제할건지 다이얼로그 띄워주기
+                                        makeDialog(index);
+                                      }
                                   ),
-
                                 )
                               ],
                             ),
@@ -172,6 +155,7 @@ class _EnterMyListState extends State<EnterMyList> {
                             Container(
                               margin: EdgeInsets.fromLTRB(10.w, 15.h, 0.w, 0.w),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Flexible(
                                     fit: FlexFit.tight,
@@ -191,35 +175,33 @@ class _EnterMyListState extends State<EnterMyList> {
                                           entertainmentMyList[index]['category'
                                           ],
                                           style: TextStyle(
-                                              fontSize: 15.sp
+                                              color: Color(0xff706F6F),
+                                              fontSize: 14.sp
                                           ),),
                                         Container(
                                           //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
                                           child: richtext(Icon(
                                               Icons.access_time_outlined,
-                                              size: 15.h),
+                                              size: 14.h),
                                               entertainmentMyList[index]['time']),
                                         )
                                       ],
                                     ),
                                   ),
 
-                                  ///more버튼
+                                  ///view more버튼
                                   Flexible(
                                       fit: FlexFit.tight,
-                                      flex: 2,
-                                      child: Container(
-                                        //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
-                                        child: OutlinedButton(onPressed: () {
-                                          entertainment_document =
-                                          entertainmentMyList[index];
+                                      flex: 3,
+                                      child: TextButton(
+                                        onPressed: () { //식당정보 더 보기 버튼
                                           //페이지 이동
                                           Navigator.push(
                                               context, MaterialPageRoute(
                                               builder: (context) =>
                                                   Entertainment_more(
-                                                      entertainment_document)));
-                                        }, child: Text('more'),),
+                                                      entertainmentMyList[index])));
+                                        }, child: moreButton()
                                       )
                                   ),
                                 ],
@@ -227,37 +209,8 @@ class _EnterMyListState extends State<EnterMyList> {
 
                             ),
 
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
-                              height: 150.0.h,
-                              child: ListView.builder( //이미지들 수평리스트로 보여줌
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: entertainmentMyList[index]['imagepath']
-                                      .length,
-                                  itemBuilder: (context, index2) {
-                                    return SizedBox(
-                                      width: 150.0.w,
-                                      child: Card(
-                                        child: GestureDetector( //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                                          child: Hero(
-                                            tag: entertainmentMyList[index]['imagepath'][index2],
-                                            child: Image.network(
-                                              entertainmentMyList[index]['imagepath'][index2],
-                                              fit: BoxFit.cover,),
-                                          ),
-                                          onTap: () {
-                                            Navigator.push(
-                                                context, MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Extend_HeroImage(
-                                                        entertainmentMyList[index]['imagepath'],
-                                                        index2)));
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
+                            ///문서하나의 이미지들 수평리스트로 띄워주는 함수 - CommonWidget파일안에
+                            getImageList(entertainmentMyList[index]),
 
                           ],
                         )

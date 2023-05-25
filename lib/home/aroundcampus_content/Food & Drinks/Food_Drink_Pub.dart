@@ -300,31 +300,13 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
   getTitle(text, icon, viewAllWidget){
     return Container(
       width: double.infinity,
-      margin: EdgeInsets.fromLTRB(20.w, 30.h, 10.w, 0.h),
+      margin: EdgeInsets.fromLTRB(20.w, 25.h, 10.w, 0.h),
       child: Row(
         children: [
-          Container(
-            width: 170.h,
-            padding: EdgeInsets.all(10.w),
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(topLeft:Radius.circular(20), bottomLeft:Radius.circular(20)),
-              gradient: LinearGradient(
-                colors: [
-                  Colors.green[500]!,
-                  Colors.green[400]!,
-                  Colors.green[400]!,
-                  Colors.green[300]!,
-                  Colors.green[200]!,
-                  Colors.green[100]!,
-                  Colors.green[50]!,
-                ],
-              ),
-            ),
-            child: Text(text,
-                style: TextStyle(fontSize: 16.sp, color: Colors.white, fontWeight: FontWeight.w500)),
-          ),
-          Text(icon, style: TextStyle(fontSize: 33.sp)),
+          Text(text,
+              style: TextStyle(fontSize: 18.sp, color: Color(0xff235D3A), fontWeight: FontWeight.w500)),
+
+          Text(icon, style: TextStyle(fontSize: 27.sp)),
 
           Expanded(child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -340,17 +322,17 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
                     padding: EdgeInsets.fromLTRB(
                         0.w, 0.w, 0.w, 1.h),
                     child: Text('view all', textAlign: TextAlign.end,
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        color: Colors.black,
-                        fontWeight: FontWeight.w500,
-                      ),),
+                      style:  TextStyle(
+                        fontSize: 14.sp,
+                        color: Color(0xff397D54),
+                        fontWeight: FontWeight.w600,
+                      )),
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                         0.w, 0.w, 0.w, 0.h),
                     child: Icon(Icons.chevron_right, size: 18.sp,
-                      color: Colors.black,
+                      color: Color(0xff397D54),
                     ),
                   )
                 ],

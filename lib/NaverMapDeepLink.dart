@@ -15,9 +15,9 @@ class NaverMapDeepLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: Text('View Naver Map', style:
-      TextStyle(fontSize: 15.sp,
-          color: Colors.green,
+      child: Text('Naver Map', style:
+      TextStyle(fontSize: 14.sp,
+          color: Color(0xff73C088),
           fontWeight: FontWeight.w400),),
       onTap: () async { //네이버지도url scheme을 이용한 딥링크임. 네이버지도앱 실행시켜줄.
 

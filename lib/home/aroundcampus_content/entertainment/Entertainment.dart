@@ -7,6 +7,7 @@ import '../../../NaverMapDeepLink.dart';
 import '../../../Provider/Provider.dart';
 import '../../../authentic/signup.dart';
 import '../../../various_widget.dart';
+import '../CommonWidget.dart';
 import 'Entertainment_more.dart';
 /*
 찜목록리스트 로직:
@@ -30,8 +31,8 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
   var Entertainment_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
-  dynamic entertainment_document; //Cafe_more에 보내줄 문서 하나
   var isMyList = []; //어떤 index의 컨텐츠가 찜한 컨텐츠인지 확인해서 색상아이콘 넣어주기 위함
+
 
   @override
   void initState() {
@@ -47,7 +48,6 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
       Entertainment_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴
     });
-
     makeMyList();
   }
 
@@ -97,12 +97,6 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
           .deleteEntertainment(
           Entertainment_collection[index]);
 
-      ///아이콘 색상 바꾸기위함
-      setState(() {
-        isMyList[index] = !isMyList[index];
-      });
-
-
     } catch (e) {
       print('에러');
     }
@@ -132,12 +126,6 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
       context.read<MyListStore>()
           .addEntertainment(
           Entertainment_collection[index]);
-
-      ///아이콘 색상 바꾸기위함
-      setState(() {
-        isMyList[index] = !isMyList[index];
-      });
-
     } catch (e) {
       print('에러');
     }
@@ -146,6 +134,7 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
 
     return Scaffold( //fragment같은게 아닌 아예 새페이지를 띄울땐 Scaffold를 감싸서 띄워주어야 페이지 제대로 띄워지는듯
       body: CustomScrollView(
@@ -161,50 +150,40 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row( //가게명과 찜버튼
+                            Row( ///가게명과 찜버튼
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                ///가게명
                                 Flexible(
                                     fit: FlexFit.tight,
                                     flex: 7,
-                                    child: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          10.w, 0.h, 7.w, 0.h),
-                                      child: Text(
-                                        Entertainment_collection[index]['title'],
-                                        style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.bold
-                                        ),),
-                                    )
+                                    child: contentsName( Entertainment_collection[index]['title']) ///CommonWidget파일안에 있는 함수
                                 ),
 
+                                ///찜버튼
                                 Flexible(
                                   //fit: FlexFit.loose,
                                   flex: 1,
-                                  child: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          0.w, 0.h, 0.w, 0.h),
-                                      child: IconButton(
-                                        icon: isMyList[index] ? Icon(
-                                            Icons.favorite) : Icon(
-                                            Icons.favorite_border),
-                                        color: isMyList[index]
-                                            ? Colors.red
-                                            : Colors.black45,
-                                        iconSize: 30,
-                                        /// 파베 내 찜목록에 저장 or 제거
-                                        onPressed: () async {
-                                          ///이미 내찜목록에 이 컨텐츠가 존재할때 처리 - 파베에서 삭제 로직 진행 + store에서도 삭제
-                                          if (isMyList[index]) {
-                                            deleteDoc(index);
-                                          } else {
-                                            ///내 찜목록에 이 컨텐츠가 없을때 처리  - 파베에 찜목록 추가로직 진행 + store에도 추가
-                                            addDoc(index);
-                                          }
-                                        })
+                                  child: GestureDetector(
+                                    child: myListButton(isMyList[index]), ///CommonWidget파일안에 있는 함수
+                                      onTap: () async {
+                                        ///이미 내찜목록에 이 컨텐츠가 존재할때 처리 - 파베에서 삭제 로직 진행 + store에서도 삭제
+                                        if (isMyList[index]) {
+                                          ///아이콘 색상 바꾸기위함
+                                          setState(() {
+                                            isMyList[index] = !isMyList[index];
+                                          });
+                                          deleteDoc(index);
+                                        } else {
+                                          ///아이콘 색상 바꾸기위함
+                                          setState(() {
+                                            isMyList[index] = !isMyList[index];
+                                          });
+                                          ///내 찜목록에 이 컨텐츠가 없을때 처리  - 파베에 찜목록 추가로직 진행 + store에도 추가
+                                          addDoc(index);
+                                        }
+                                      }
                                   ),
-
                                 )
                               ],
                             ),
@@ -213,6 +192,7 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
                             Container(
                               margin: EdgeInsets.fromLTRB(10.w, 15.h, 0.w, 0.w),
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Flexible(
                                     fit: FlexFit.tight,
@@ -232,73 +212,40 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
                                           Entertainment_collection[index]['category'
                                           ],
                                           style: TextStyle(
-                                              fontSize: 15.sp
+                                            color: Color(0xff706F6F),
+                                              fontSize: 14.sp
                                           ),),
                                         Container(
                                           //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
                                           child: richtext(Icon(
                                               Icons.access_time_outlined,
-                                              size: 15.h),
+                                              size: 14.h),
                                               Entertainment_collection[index]['time']),
                                         )
                                       ],
                                     ),
                                   ),
 
-                                  ///more버튼
+                                  ///view more버튼
                                    Flexible(
                                       fit: FlexFit.tight,
-                                      flex: 2,
-                                      child: Container(
-                                        //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
-                                        child: OutlinedButton(onPressed: () {
-                                          entertainment_document =
-                                          Entertainment_collection[index];
-                                          //페이지 이동
-                                          Navigator.push(
-                                              context, MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Entertainment_more(
-                                                      entertainment_document)));
-                                        }, child: Text('more'),),
+                                      flex: 3,
+                                      child: TextButton(onPressed: () { //식당정보 더 보기 버튼
+                                        //페이지 이동
+                                        Navigator.push(
+                                            context, MaterialPageRoute(
+                                            builder: (context) =>
+                                                Entertainment_more(
+                                                    Entertainment_collection[index])));
+                                      }, child: moreButton(), ///CommonWidget파일안에 있는 view more버튼
                                       )
                                   ),
                                 ],
                               ),
-
                             ),
 
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
-                              height: 150.0.h,
-                              child: ListView.builder( //이미지들 수평리스트로 보여줌
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: Entertainment_collection[index]['imagepath']
-                                      .length,
-                                  itemBuilder: (context, index2) {
-                                    return SizedBox(
-                                      width: 150.0.w,
-                                      child: Card(
-                                        child: GestureDetector( //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                                          child: Hero(
-                                            tag: Entertainment_collection[index]['imagepath'][index2],
-                                            child: Image.network(
-                                              Entertainment_collection[index]['imagepath'][index2],
-                                              fit: BoxFit.cover,),
-                                          ),
-                                          onTap: () {
-                                            Navigator.push(
-                                                context, MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Extend_HeroImage(
-                                                        Entertainment_collection[index]['imagepath'],
-                                                        index2)));
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
+                            ///문서하나의 이미지들 수평리스트로 띄워주는 함수 - CommonWidget파일안에
+                            getImageList(Entertainment_collection[index]),
                           ],
                         )
                     ),
@@ -310,6 +257,8 @@ class _EntertainmentState extends State<Entertainment> with AutomaticKeepAliveCl
               height: 40.h,
             ),
           ),
+
+
         ],
       ),
     );

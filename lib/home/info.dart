@@ -38,8 +38,8 @@ class _InfoState extends State<Info>  {
                   bottom: TabBar(
                     isScrollable: true,
                     tabs: [
-                      Tab(text: '    on'+'\n'+'campus',),
-                      Tab(text: '    off'+'\n'+'campus',)
+                      Tab(text: '    ON'+'\n'+'campus',),
+                      Tab(text: '    OFF'+'\n'+'campus',)
                     ],
                     indicatorSize: TabBarIndicatorSize.tab,
                     indicatorWeight: 1,
