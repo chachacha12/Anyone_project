@@ -86,14 +86,25 @@ class _MainState extends State<Main> {
 
   ///파베에서 필요한 데이터값들 가져와서 Provider안에 저장해줌
   getFBData() async {
+    /// 엔터, 패션, 식료품, 식당, 카페, 펍
     //내 찜목록 확인위해 가져오는 찜목록 데이터
-    var result = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('entertainment').get();
+    var enterResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('entertainment').get();
+    var fashionResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('fashion').get();
+    var groceriesResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('groceries').get();
+    var restaurantResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('restaurant').get();
+    var cafeResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('cafe').get();
+    var pubResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('pub').get();
+
 
     ///이렇게 해주는 이유는 유저가 새 컨텐츠를 찜 하거나 찜 삭제할때마다 파베에 접근해서 새로운 찜목록을 가져오지 않게 하기위함임.
-    ///즉 파베에 추가, 삭제 로직만 작동하도록 해주고 ui상에선 이걸로 보여주기 위함임
-    //내 찜목록 문서들 리스트를 store에 저장해줌
-    context.read<MyListStore>().getEnterMyListCollection(result.docs);
-
+    ///즉 파베에 추가, 삭제 로직만 작동하도록 해주고 ui상에선 store에 저장해서 보여주기 위함임
+    //내 찜목록 문서들 리스트를 각각store에 저장해줌
+    context.read<MyListStore>().getEnterMyListCollection(enterResult.docs);
+    context.read<MyListStore>().getFashionMyListCollection(fashionResult.docs);
+    context.read<MyListStore>().getGroceriesMyListCollection(groceriesResult.docs);
+    context.read<MyListStore>().getRestaurantMyListCollection(restaurantResult.docs);
+    context.read<MyListStore>().getCafeMyListCollection(cafeResult.docs);
+    context.read<MyListStore>().getPubMyListCollection(pubResult.docs);
   }
 
   @override

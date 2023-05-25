@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 ///찜목록 관련 state들을 저장해주는 store
 class MyListStore extends ChangeNotifier{
 
+  ///main에서 현재 접속한 유저의 찜목록 컬렉션들을 전부 가져옴. 그후 컬렉션별로 저장해줌
+
+  /// 1.엔터 컬렉션
   var entertainmentMyList;  //엔터 컨텐츠 내 찜목록 문서들 리스트임
   getEnterMyListCollection(collection){ // main에서 이 함수 실행해서 문서들 리스트 저장해줌
     entertainmentMyList = collection;
@@ -22,8 +25,94 @@ class MyListStore extends ChangeNotifier{
     notifyListeners();
     print('entertainmentMyList:'+ entertainmentMyList.toString());
   }
-}
 
+  ///2.패션 컬렉션
+  var fashionMyList;
+  getFashionMyListCollection(collection){ // main에서 이 함수 실행해서 문서들 리스트 저장해줌
+    fashionMyList = collection;
+    notifyListeners();
+  }
+  addFashion(doc){
+    fashionMyList.add(doc);
+    print('provider에서 추가');
+    notifyListeners();
+  }
+  deleteFashion(doc){
+    fashionMyList.remove(doc);
+    print('provider에서 삭제');
+    notifyListeners();
+  }
+
+  ///3.groceries 컬렉션
+  var groceriesMyList;
+  getGroceriesMyListCollection(collection){
+    groceriesMyList = collection;
+    notifyListeners();
+  }
+  addGroceries(doc){
+    groceriesMyList.add(doc);
+    print('provider에서 추가');
+    notifyListeners();
+  }
+  deleteGroceries(doc){
+    groceriesMyList.remove(doc);
+    print('provider에서 삭제');
+    notifyListeners();
+  }
+
+  ///4.식당 컬렉션
+  var restaurantMyList;
+  getRestaurantMyListCollection(collection){
+    restaurantMyList = collection;
+    notifyListeners();
+  }
+  addRestaurant(doc){
+    restaurantMyList.add(doc);
+    print('provider에서 추가');
+    notifyListeners();
+  }
+  deleteRestaurant(doc){
+    restaurantMyList.remove(doc);
+    print('provider에서 삭제');
+    notifyListeners();
+  }
+
+  ///5.카페 컬렉션
+  var cafeMyList;
+  getCafeMyListCollection(collection){
+    cafeMyList = collection;
+    notifyListeners();
+  }
+  addCafe(doc){
+    cafeMyList.add(doc);
+    print('provider에서 추가');
+    notifyListeners();
+  }
+  deleteCafe(doc){
+    cafeMyList.remove(doc);
+    print('provider에서 삭제');
+    notifyListeners();
+  }
+
+
+  ///6.펍 컬렉션
+  var pubMyList;
+  getPubMyListCollection(collection){
+    pubMyList = collection;
+    notifyListeners();
+  }
+  addPub(doc){
+    pubMyList.add(doc);
+    print('provider에서 추가');
+    notifyListeners();
+  }
+  deletePub(doc){
+    pubMyList.remove(doc);
+    print('provider에서 삭제');
+    notifyListeners();
+  }
+
+}
 
 
 ///state 보관하는 클래스

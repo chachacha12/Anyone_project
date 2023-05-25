@@ -182,6 +182,7 @@ class _EnterMyListState extends State<EnterMyList> {
                                           //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
                                           child: richtext(Icon(
                                               Icons.access_time_outlined,
+                                              color:  Color(0xff706F6F),
                                               size: 14.h),
                                               entertainmentMyList[index]['time']),
                                         )
