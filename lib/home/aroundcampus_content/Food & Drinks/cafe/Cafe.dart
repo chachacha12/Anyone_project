@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import '../../../../Extend_HeroImage.dart';
 import '../../../../NaverMapDeepLink.dart';
+import '../../../../Provider/Provider.dart';
+import '../../../../authentic/signup.dart';
 import '../../../../various_widget.dart';
+import '../../CommonWidget.dart';
 import 'Cafe_more.dart';
 
 //파베 파이어스토어 사용을 위한 객체
@@ -18,21 +22,10 @@ class Cafe extends StatefulWidget {
 
 
 class _CafeState extends State<Cafe>  {
-
-  var Cafe_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임. 이건 식당이 될수도 있고 카페될수도
+  var Cafe_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
-  dynamic cafe_document;  //Cafe_more에 보내줄 카페 컨텐츠 문서 하나
-
-  getData() async {
-    var result = await firestore.collection('cafe').get();
-    setState(() {
-      Cafe_collection = result.docs; //컬랙션안의 문서리스트를 저장
-      count = result.size; //컬랙션안의 문서갯수를 가져옴
-
-    });
-
-  }
+  var isMyList = []; //어떤 index의 컨텐츠가 찜한 컨텐츠인지 확인해서 색상아이콘 넣어주기 위함
 
   @override
   void initState() {
@@ -40,9 +33,100 @@ class _CafeState extends State<Cafe>  {
     getData();
   }
 
+  getData() async {
+    //컨텐츠 보여주기 위해 가져오는 데이터들
+    var result = await firestore.collection('cafe').get();
+
+    setState(() {
+      Cafe_collection = result.docs; //컬랙션안의 문서리스트를 저장
+      count = result.size; //컬랙션안의 문서갯수를 가져옴
+    });
+    makeMyList();
+  }
+
+
+  ///isMyList 리스트에 값을 채워주는 함수.  어떤 index의 컨텐츠가 찜한 컨텐츠인지 확인해서 찜한컨텐츠만 색아이콘 보여주고, 클릭시 실시간으로 아이콘 색 변경해주기 위한작업
+  makeMyList() {
+    if (Cafe_collection != null) {
+      isMyList.clear();
+      // 전체 컨텐츠 문서 하나씩 확인
+      for (var doc in Cafe_collection) {
+        var exist = false;
+        //내 찜목록 문서들 하나씩 확인
+        for (var myDoc in context
+            .read<MyListStore>()
+            .cafeMyList) {
+          ///찜목록에 이미 존재
+          if (doc['name'] == myDoc['name']) {
+            exist = true;
+            isMyList.add(true);
+            break;
+          }
+        }
+        ///찜목록에 없음
+        if (!exist) {
+          isMyList.add(false);
+        }
+      }
+    }
+  }
+
+  ///파베의 내찜리스트에서 문서 삭제해주는 함수
+  deleteDoc(index) async {
+    try {
+      await firestore.collection(
+          'MyList')
+          .doc(auth.currentUser?.uid)
+          .collection('cafe')
+          .doc(
+          Cafe_collection[index]['name'])
+          .delete();
+      print('삭제성공');
+
+      ///store에 찜목록 삭제로직
+      context.read<MyListStore>()
+          .deleteCafe(
+          Cafe_collection[index]);
+    } catch (e) {
+      print('에러');
+    }
+  }
+
+  ///파베의 내찜리스트에 문서 추가해주는 함수
+  addDoc(index) async {
+    try {
+      await firestore.collection(
+          'MyList')
+          .doc(auth.currentUser?.uid)
+          .collection('cafe')
+          .doc(
+          Cafe_collection[index]['name'])
+          .set({
+        'name': Cafe_collection[index]['name'],
+        'time': Cafe_collection[index]['time'],
+        'imagepath': Cafe_collection[index]['imagepath'],
+        'text': Cafe_collection[index]['text'],
+        'address': Cafe_collection[index]['address'],
+        'holiday': Cafe_collection[index]['holiday'],
+        'contact': Cafe_collection[index]['contact'],
+        'tag': Cafe_collection[index]['tag'],
+        'price': Cafe_collection[index]['price'],
+      });
+      print('저장 성공');
+
+      ///store에 새로운 찜목록 추가로직
+      context.read<MyListStore>()
+          .addCafe(
+          Cafe_collection[index]);
+    } catch (e) {
+      print('에러');
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold( //fragment같은게 아닌 아예 새페이지를 띄울땐 Scaffold를 감싸서 띄워주어야 페이지 제대로 띄워지는듯
       body: CustomScrollView(
         slivers: [
@@ -75,81 +159,106 @@ class _CafeState extends State<Cafe>  {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row( //가게명과 물음표 상세보기 버튼
+
+                            Row(
+                              ///가게명과 찜버튼
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                ///가게명
                                 Flexible(
                                     fit: FlexFit.tight,
-                                    flex: 4,
-                                    child: Text('   '+
-                                        Cafe_collection[index]['name'],
-                                    style: TextStyle(
-                                      fontSize: 16.sp,
-                                      fontWeight: FontWeight.bold
-                                    ),)
+                                    flex: 7,
+                                    child: contentsName(  ///CommonWidget파일안에 있는 함수
+                                        Cafe_collection[index]['name'])
                                 ),
+                                ///찜버튼
                                 Flexible(
+                                  //fit: FlexFit.loose,
                                   flex: 1,
-                                  child: OutlinedButton(onPressed: () {
-                                    cafe_document = Cafe_collection[index];
-                                    //페이지 이동
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) =>
-                                            Cafe_more( cafe_document )));
-
-                                  }, child: Text('more'),),
+                                  child: GestureDetector(
+                                      child: myListButton(isMyList[index]),   ///CommonWidget파일안에 있는 함수
+                                      onTap: () async {
+                                        ///이미 내찜목록에 이 컨텐츠가 존재할때 처리 - 파베에서 삭제 로직 진행 + store에서도 삭제
+                                        if (isMyList[index]) {
+                                          ///아이콘 색상 바꾸기위함
+                                          setState(() {
+                                            isMyList[index] = !isMyList[index];
+                                          });
+                                          deleteDoc(index);
+                                        } else {
+                                          ///아이콘 색상 바꾸기위함
+                                          setState(() {
+                                            isMyList[index] = !isMyList[index];
+                                          });
+                                          ///내 찜목록에 이 컨텐츠가 없을때 처리  - 파베에 찜목록 추가로직 진행 + store에도 추가
+                                          addDoc(index);
+                                        }
+                                      }
+                                  ),
                                 )
                               ],
                             ),
 
+                            /// 네이버맵, 태그 /  more버튼
                             Container(
-                              margin: EdgeInsets.fromLTRB(10.w, 0.h, 10.w, 0.w),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              margin: EdgeInsets.fromLTRB(10.w, 15.h, 0.w, 0.w),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
-                                  //인자값으로 각 컨텐츠의 풀네임값을 보내줌
-                                  NaverMapDeepLink( titlename :Cafe_collection[index]['name'] ),
+                                  Flexible(
+                                    fit: FlexFit.tight,
+                                    flex: 7,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .spaceAround,
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      children: [
+                                        //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
+                                        //인자값으로 각 컨텐츠의 풀네임값을 보내줌
+                                        NaverMapDeepLink(
+                                            titlename: Cafe_collection[index]['name']),
 
-                                  Text(Cafe_collection[index]['tag'
-                                  ],
-                                    style: TextStyle(
-                                        fontSize: 15.sp
-                                    ),),
-                                  richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
-                                      Cafe_collection[index]['price']),
+                                        Text(Cafe_collection[index]['tag'
+                                        ],
+                                          style: TextStyle(
+                                              color: Color(0xff706F6F),
+                                              fontSize: 14.sp
+                                          ),),
+
+                                        Container(
+                                          //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
+                                          child: richtext(Icon(
+                                              Icons.monetization_on_outlined,
+                                              color: Color(0xff706F6F),
+                                              size: 14.h),
+                                              Cafe_collection[index]['price']),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+
+                                  ///view more버튼
+                                  Flexible(
+                                      fit: FlexFit.tight,
+                                      flex: 3,
+                                      child: TextButton(
+                                        onPressed: () { //식당정보 더 보기 버튼
+                                          //페이지 이동
+                                          Navigator.push(
+                                              context, MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Cafe_more(
+                                                      Cafe_collection[index])));
+                                        }, child: moreButton(),  ///CommonWidget파일안에 있는 view more버튼
+                                      )
+                                  ),
                                 ],
-                              )
+                              ),
                             ),
+                            ///문서하나의 이미지들 수평리스트로 띄워주는 함수 - CommonWidget파일안에
+                            getImageList(Cafe_collection[index]),
 
-                            Container(
-                              margin: EdgeInsets.fromLTRB(0.w, 5.h, 0.w, 0.w),
-                              height: 150.0.h,
-                              child: ListView.builder( //이미지들 수평리스트로 보여줌
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: Cafe_collection[index]['imagepath']
-                                      .length,
-                                  itemBuilder: (context, index2) {
-                                    return SizedBox(
-                                      width: 150.0.w,
-                                      child: Card(
-                                        child: GestureDetector(   //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
-                                          child: Hero(
-                                           tag: Cafe_collection[index]['imagepath'][index2],
-                                            child: Image.network(
-                                              Cafe_collection[index]['imagepath'][index2],
-                                              fit: BoxFit.cover,),
-                                          ),
-                                          onTap: (){
-                                            Navigator.push(context, MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Extend_HeroImage(Cafe_collection[index]['imagepath'], index2 )));
-                                          },
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ),
                           ],
                         )
                     ),
