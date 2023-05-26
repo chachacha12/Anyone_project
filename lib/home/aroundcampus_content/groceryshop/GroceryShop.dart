@@ -49,7 +49,6 @@ class _GroceryShopState extends State<GroceryShop> with AutomaticKeepAliveClient
     if(grocery_collection!=null){
       isMyList.clear();
       // 전체 컨텐츠 문서 하나씩 확인
-      print('@@@enter에서 모든 내찜문서들 도는 작업 진행');
       for (var doc in grocery_collection) {
         var exist = false;
         //내 찜목록 문서들 하나씩 확인
