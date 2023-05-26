@@ -2,30 +2,28 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import '../Extend_HeroImage.dart';
-import '../NaverMapDeepLink.dart';
-import '../Provider/Provider.dart';
-import '../authentic/login.dart';
-import '../authentic/signup.dart';
-import '../home/aroundcampus_content/CommonWidget.dart';
-import '../home/aroundcampus_content/entertainment/Entertainment_more.dart';
-import '../various_widget.dart';
+import '../../NaverMapDeepLink.dart';
+import '../../Provider/Provider.dart';
+import '../../authentic/signup.dart';
+import '../../home/aroundcampus_content/CommonWidget.dart';
+import '../../home/aroundcampus_content/Food & Drinks/cafe/Cafe_more.dart';
+import '../../home/aroundcampus_content/entertainment/Entertainment_more.dart';
+import '../../various_widget.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
-///엔터테인먼트 내 찜리스트
-class EnterMyList extends StatefulWidget {
-  const EnterMyList({Key? key}) : super(key: key);
+///내 찜리스트
+class RestaurantMyList extends StatefulWidget {
+  const RestaurantMyList({Key? key}) : super(key: key);
 
   @override
-  State<EnterMyList> createState() => _EnterMyListState();
+  State<RestaurantMyList> createState() => _RestaurantMyListState();
 }
 
 
-class _EnterMyListState extends State<EnterMyList> {
-
-  var entertainmentMyList; //내찜목록 컬렉션
+class _RestaurantMyListState extends State<RestaurantMyList> {
+  var restaurantMyList; //내찜목록 컬렉션
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
 
@@ -37,14 +35,12 @@ class _EnterMyListState extends State<EnterMyList> {
   ///이 페이지 들어올때마다 계속 store에서 값 받아서 내 찜목록 업뎃해줌
   updateMyList() {
     setState(() {
-      entertainmentMyList = context
+      restaurantMyList = context
           .read<MyListStore>()
-          .entertainmentMyList;
+          .restaurantMyList;
 
-      count = entertainmentMyList.length;
+      count = restaurantMyList.length;
     });
-    print('makeMyList실행,  entertainmentMyList: ' +
-        entertainmentMyList.toString());
   }
 
   ///찜목록을 정말 삭제할건지 확인차 띄워줄 다이얼로그
@@ -84,24 +80,24 @@ class _EnterMyListState extends State<EnterMyList> {
       await firestore.collection(
           'MyList')
           .doc(auth.currentUser?.uid)
-          .collection('entertainment')
+          .collection('restaurant')
           .doc(
-          entertainmentMyList[index]['title'])
+          restaurantMyList[index]['name'])
           .delete();
       print('삭제성공');
 
       ///store에 찜목록 삭제로직
       context.read<MyListStore>()
-          .deleteEntertainment(
-          entertainmentMyList[index]);
+          .deleteRestaurant(
+          restaurantMyList[index]);
 
-      ///이 페이지의 state인 entertainmentMyList값 업뎃
+      ///state도 업뎃
       setState(() {
-        entertainmentMyList = context
+        restaurantMyList = context
             .read<MyListStore>()
-            .entertainmentMyList;
+            .restaurantMyList;
 
-        count = entertainmentMyList.length;
+        count = restaurantMyList.length;
       });
     } catch (e) {
       print('에러');
@@ -131,9 +127,9 @@ class _EnterMyListState extends State<EnterMyList> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Flexible(
-                                    fit: FlexFit.tight,
-                                    flex: 7,
-                                    child:contentsName(  entertainmentMyList[index]['title']), //CommonWidget파일안에 있는 함수
+                                  fit: FlexFit.tight,
+                                  flex: 7,
+                                  child:contentsName(  restaurantMyList[index]['name']), //CommonWidget파일안에 있는 함수
                                 ),
 
                                 ///찜버튼
@@ -169,10 +165,10 @@ class _EnterMyListState extends State<EnterMyList> {
                                         //네이버맵 url scheme값을 이용해서 딥링크 연결하는 동작을 위한 커스텀위젯
                                         //인자값으로 각 컨텐츠의 풀네임값을 보내줌
                                         NaverMapDeepLink(
-                                            titlename: entertainmentMyList[index]['title']),
+                                            titlename: restaurantMyList[index]['name']),
 
                                         Text(
-                                          entertainmentMyList[index]['category'
+                                          restaurantMyList[index]['tag'
                                           ],
                                           style: TextStyle(
                                               color: Color(0xff706F6F),
@@ -181,10 +177,10 @@ class _EnterMyListState extends State<EnterMyList> {
                                         Container(
                                           //margin: EdgeInsets.fromLTRB(10.w, 0.h, 7.w, 0.h),
                                           child: richtext(Icon(
-                                              Icons.access_time_outlined,
+                                              Icons.monetization_on_outlined,
                                               color:  Color(0xff706F6F),
                                               size: 14.h),
-                                              entertainmentMyList[index]['time']),
+                                              restaurantMyList[index]['price']),
                                         )
                                       ],
                                     ),
@@ -195,14 +191,14 @@ class _EnterMyListState extends State<EnterMyList> {
                                       fit: FlexFit.tight,
                                       flex: 3,
                                       child: TextButton(
-                                        onPressed: () { //식당정보 더 보기 버튼
-                                          //페이지 이동
-                                          Navigator.push(
-                                              context, MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Entertainment_more(
-                                                      entertainmentMyList[index])));
-                                        }, child: moreButton()
+                                          onPressed: () { //식당정보 더 보기 버튼
+                                            //페이지 이동
+                                            Navigator.push(
+                                                context, MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Cafe_more(
+                                                        restaurantMyList[index])));
+                                          }, child: moreButton()
                                       )
                                   ),
                                 ],
@@ -211,7 +207,7 @@ class _EnterMyListState extends State<EnterMyList> {
                             ),
 
                             ///문서하나의 이미지들 수평리스트로 띄워주는 함수 - CommonWidget파일안에
-                            getImageList(entertainmentMyList[index]),
+                            getImageList(restaurantMyList[index]),
 
                           ],
                         )

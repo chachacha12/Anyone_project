@@ -9,7 +9,6 @@ import '../../../../authentic/signup.dart';
 import '../../../../various_widget.dart';
 import '../../CommonWidget.dart';
 import '../cafe/Cafe_more.dart';
-import 'Pub_more.dart';
 
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
