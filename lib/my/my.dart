@@ -312,7 +312,7 @@ class _MyState extends State<My> {
               child: LinearPercentIndicator(
                 width: 275.w,
                 animation: true,
-                lineHeight: 20.0.h,
+                lineHeight: 18.0.h,
                 animationDuration: 1000,
                 percent: context
                     .watch<Store1>()
@@ -321,8 +321,8 @@ class _MyState extends State<My> {
                     .watch<Store1>()
                     .percent
                     .toString() + '%'),
-                barRadius: const Radius.circular(16),
-                progressColor: Colors.greenAccent,
+                barRadius: const Radius.circular(8),
+                progressColor: Color(0xff73c088),
               ),
             ),
 
@@ -345,7 +345,7 @@ class _MyState extends State<My> {
                           .arrival_date,
                           style: TextStyle(
                               fontSize: 16.sp,
-                              color: Colors.green
+                              color: Color(0xff73c088),
                           ))
                       )
                     ],
@@ -363,7 +363,7 @@ class _MyState extends State<My> {
                           .departure_date,
                           style: TextStyle(
                               fontSize: 16.sp,
-                              color: Colors.green
+                              color: Color(0xff73c088)
                           ))
                       )
                     ],
