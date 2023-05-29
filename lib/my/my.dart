@@ -243,7 +243,7 @@ class _MyState extends State<My> {
                 children: [
                   Text('  Contact Us', style: TextStyle(
                   color: Colors.black,
-                  fontSize: 20.sp
+                  fontSize: 18.sp
                    )),
 
                   Card(
@@ -253,10 +253,10 @@ class _MyState extends State<My> {
                       //title: Text('Team <Anyone>\n', style: Theme.of(context).textTheme.titleMedium),
                       subtitle: Text('Please send us new, or changed information!',
                           style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15.sp
+                            color: Color(0xff706F6F),
+                            fontSize: 14.sp
                             )),
-                      trailing: Icon(Icons.email, size: 28.h),
+                      trailing: Icon(Icons.email, size: 25.h),
                       onTap: (){
                         launchUrl(emailLaunchUri);    //이메일보내기
                       },
@@ -335,7 +335,7 @@ class _MyState extends State<My> {
                   Row(
                     children: [
                       Text('Arrival Date:       ', style: TextStyle(
-                          fontSize: 16.sp
+                          fontSize: 15.sp
                       )),
                       TextButton(onPressed: () {
                         showDatePickerPop(
@@ -353,7 +353,7 @@ class _MyState extends State<My> {
                   Row(
                     children: [
                       Text('Departure Date: ', style: TextStyle(
-                          fontSize: 16.sp
+                          fontSize: 15.sp
                       )),
                       TextButton(onPressed: () {
                         showDatePickerPop(

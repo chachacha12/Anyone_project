@@ -26,6 +26,7 @@ class _PubMyListState extends State<PubMyList> {
   var pubMyList; //내찜목록 컬렉션
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
+  late bool exists; // 찜목록이 존재하는지 확인
 
   @override
   void initState() {
@@ -40,6 +41,11 @@ class _PubMyListState extends State<PubMyList> {
           .pubMyList;
 
       count = pubMyList.length;
+      if (count == 0) {
+        exists = false;
+      } else {
+        exists = true;
+      }
     });
   }
 
@@ -110,7 +116,7 @@ class _PubMyListState extends State<PubMyList> {
     updateMyList();
 
     return Scaffold( //fragment같은게 아닌 아예 새페이지를 띄울땐 Scaffold를 감싸서 띄워주어야 페이지 제대로 띄워지는듯
-      body: CustomScrollView(
+      body:  exists ? CustomScrollView(
         slivers: [
           //리스트 보여줌
           SliverList(
@@ -221,7 +227,10 @@ class _PubMyListState extends State<PubMyList> {
             ),
           ),
         ],
-      ),
+      ) :
+
+      ///목록이 아무것도 없을경우엔 해당 박스 보여줌 - CommonWidget안에 있음
+      getEmptyList()
     );
   }
 }

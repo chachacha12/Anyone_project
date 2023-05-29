@@ -169,7 +169,9 @@ class _AddclassState extends State<Addclass> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60.h,
-        title: Text('Create New Class'),
+        title: Text('Create New Class', style: TextStyle(
+          fontSize: 17.sp
+        ),),
         elevation: 0,
         centerTitle: false,
         actions: [
@@ -228,7 +230,7 @@ class _AddclassState extends State<Addclass> {
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.fromLTRB(3.w, 15.h, 0.w, 5.h),
                 child: Text('Class Time Info', style: TextStyle(
-                    color: Colors.green
+                    color: Color(0xff397D54)
                 ),),
               ),
 
@@ -290,7 +292,7 @@ class _AddclassState extends State<Addclass> {
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.fromLTRB(3.w, 15.h, 0.w, 5.h),
                 child: Text('Class Location Info', style: TextStyle(
-                    color: Colors.green
+                    color: Color(0xff397D54)
                 ),),
               ),
 

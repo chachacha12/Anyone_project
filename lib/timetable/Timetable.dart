@@ -82,8 +82,11 @@ class _TimetableState extends State<Timetable> {
                      Addclass()
               ));
             }, icon: Icon(Icons.add_box_outlined)),
+
+            /*
             ///지도 보여주는 페이지로 이동
             IconButton(onPressed: (){}, icon: Icon(Icons.location_pin))
+             */
           ],
         ),
         body: SfCalendar(

@@ -102,6 +102,21 @@ getImageList(doc){
   );
 }
 
+///찜목록페이지에서 쓰는 위젯. 찜목록 없을때는 이 박스 띄워줌
+getEmptyList(){
+  return Container(
+    alignment: Alignment.center,
+    child: Text(
+      'Press the Like button on the OFF campus,''\n''Try to make your own favorite list',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        fontSize: 13.sp,
+        color: Color(0xff706F6F),
+      ),
+    ),
+  );
+}
+
 
 
 
