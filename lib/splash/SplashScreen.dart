@@ -81,7 +81,7 @@ class _SplashState extends State<Splash> {
   Widget build(BuildContext context) {
 
     //const String imageLogoName = 'assets/android_icon.png';
-    const String imageLogoName = 'assets/duck.PNG';
+    const String imageLogoName = 'assets/iconDuck.png';
 
 
     var screenHeight = MediaQuery.of(context).size.height;

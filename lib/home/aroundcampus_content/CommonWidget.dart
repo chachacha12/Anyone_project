@@ -42,27 +42,15 @@ myListButton(isMyList){
 
 ///view more버튼
 moreButton(){
-  return Row(
-    //mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Padding(
-        padding: EdgeInsets.fromLTRB(
-            5.w,15.h, 0.w, 0.h),
-        child: Text('view more', textAlign: TextAlign.end,
-          style: TextStyle(
-            fontSize: 13.sp,
-            color: Color(0xff397D54),
-            fontWeight: FontWeight.w600,
-          ),),
-      ),
-      Padding(
-        padding: EdgeInsets.fromLTRB(
-            0.w, 15.h, 0.w, 0.h),
-        child: Icon(Icons.chevron_right, size: 18.sp,
-          color: Color(0xff397D54),
-        ),
-      )
-    ],
+  return  Padding(
+    padding: EdgeInsets.fromLTRB(
+        0.w,15.h, 0.w, 0.h),
+    child: Text('view more»', textAlign: TextAlign.start,
+      style: TextStyle(
+        fontSize: 13.sp,
+        color: Color(0xff397D54),
+        fontWeight: FontWeight.w600,
+      ),),
   );
 }
 
@@ -117,6 +105,14 @@ getEmptyList(){
   );
 }
 
+///컨텐츠 하나씩 보여주는 세부페이지에서 앱바 글씨 스타일
+getMorePageAppBarStyle(){
+  return  TextStyle(
+  color: Colors.black87,
+  fontSize: 16.sp,
+  fontWeight: FontWeight.bold
+  );
+}
 
 
 

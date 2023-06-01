@@ -40,7 +40,9 @@ class _FashionMyListState extends State<FashionMyList> {
           .read<MyListStore>()
           .fashionMyList;
 
-      count = fashionMyList.length;
+      if(fashionMyList != null){
+        count = fashionMyList?.length;
+      }
       if (count == 0) {
         exists = false;
       } else {

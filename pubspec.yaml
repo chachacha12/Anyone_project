@@ -90,6 +90,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^1.0.0
+
+  #앱 아이콘 변경해주는 패키지
   flutter_launcher_icons: ^0.10.0
 
 # For information on the generic Dart part of this file, see the
@@ -111,10 +113,8 @@ flutter:
 
     # app icon
     - assets/app_icon.png
-    - assets/android_icon.png
     - assets/Instagram.png
-    - assets/duckface.png
-    - assets/duck.PNG
+    - assets/iconDuck.png
 
 
 
@@ -177,4 +177,4 @@ flutter_native_splash:
 flutter_icons:
   android: "launcher_icon"
   ios: true
-  image_path: "assets/android_icon.png"
+  image_path: "assets/iconDuck.png"

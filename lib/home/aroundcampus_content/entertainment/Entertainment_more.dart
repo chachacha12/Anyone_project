@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Extend_HeroImage.dart';
 import '../../../various_widget.dart';
+import '../CommonWidget.dart';
 
 
 class Entertainment_more extends StatefulWidget {
@@ -67,7 +68,9 @@ class _Entertainment_moreState extends State<Entertainment_more> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.entertainment_document['title'],
+            widget.entertainment_document['title'].toString().replaceAll(
+                "\\n", "\n"),
+              style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
               //backgroundColor: Colors.transparent,
               centerTitle: true,
@@ -76,78 +79,97 @@ class _Entertainment_moreState extends State<Entertainment_more> {
 
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
-              child:Column(  //캐러셀 슬라이드와 indicator 들어감
-                children: [
-                  CarouselSlider( //이미지슬라이드 해주는 위젯
-                    options: CarouselOptions(
-                        autoPlay: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        height: 200.h,
-                        viewportFraction: 0.9,
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: true,
-                        onPageChanged: (index, reason){
-                          setState((){
-                            currentIndex = index;
-                          });
-                        }
+              color:Colors.white,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
+                child:Column(  //캐러셀 슬라이드와 indicator 들어감
+                  children: [
+                    CarouselSlider( //이미지슬라이드 해주는 위젯
+                      options: CarouselOptions(
+                          autoPlay: true,
+                          autoPlayAnimationDuration: Duration(milliseconds: 800),
+                          height: 200.h,
+                          viewportFraction: 0.9,
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: true,
+                          onPageChanged: (index, reason){
+                            setState((){
+                              currentIndex = index;
+                            });
+                          }
+                      ),
+                      items: imageSliders,
                     ),
-                    items: imageSliders,
-                  ),
-                  DotsIndicator(
-                    dotsCount: imageSliders.length,
-                    position: currentIndex.toDouble(),
-                    decorator: DotsDecorator(
-                      color: Colors.grey,  // Inactive color
-                      activeColor: Colors.greenAccent,
-                      size: const Size.square(6.0),
-                      activeSize: const Size(7.0, 7.0),
-                    ),
-                  )
-                ],
+                    DotsIndicator(
+                      dotsCount: imageSliders.length,
+                      position: currentIndex.toDouble(),
+                      decorator: DotsDecorator(
+                        color: Colors.grey,  // Inactive color
+                        activeColor: Color(0xff73c088),
+                        size: const Size.square(6.0),
+                        activeSize: const Size(7.0, 7.0),
+                      ),
+                    )
+                  ],
+                )
+              ),
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color:Colors.white,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(40.w, 10.h, 20.w, 0.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    richtext(null,
+                        widget.entertainment_document['category']),
+
+                    richtext(Icon(Icons.monetization_on_outlined, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.entertainment_document['time']),
+
+                    richtext(Icon(Icons.access_time, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.entertainment_document['address']),
+
+                    richtext(Icon(Icons.block, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.entertainment_document['holiday']),
+
+                    textimagebox,
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color:Colors.white,
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    //color: Colors.tealAccent
+                ),
+                margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
+                padding: EdgeInsets.all(15.w),
+                child: Text(text, style: TextStyle(
+                    fontSize: 15.sp
+                ),),
+              ),
+            ),
+          ),
+
+          SliverToBoxAdapter(
+              child: Container(
+                color: Colors.white,
+                height: 100.h,
               )
-            ),
-          ),
-
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.fromLTRB(40.w, 10.h, 20.w, 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  richtext(null,
-                      widget.entertainment_document['category']),
-
-                  richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
-                      widget.entertainment_document['time']),
-
-                  richtext(Icon(Icons.access_time, size: 15.h),
-                      widget.entertainment_document['address']),
-
-                  richtext(Icon(Icons.block, size: 15.h),
-                      widget.entertainment_document['holiday']),
-
-                  textimagebox,
-                ],
-              ),
-            ),
-          ),
-
-          SliverToBoxAdapter(
-            child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //color: Colors.tealAccent
-              ),
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
-              padding: EdgeInsets.all(15.w),
-              child: Text(text, style: TextStyle(
-                  fontSize: 15.sp
-              ),),
-            ),
           )
 
         ],

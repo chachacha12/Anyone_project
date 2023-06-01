@@ -43,17 +43,16 @@ class _CultureState extends State<Culture> with AutomaticKeepAliveClientMixin{
     return Scaffold( //fragment같은게 아닌 아예 새페이지를 띄울땐 Scaffold를 감싸서 띄워주어야 페이지 제대로 띄워지는듯
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(title: Text(
-            'Culture',
-          ),
+          SliverAppBar(
+            toolbarHeight: 30.h,
           ),
 
           SliverGrid(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               //mainAxisExtent: 2,
               crossAxisCount: 2,
-              crossAxisSpacing: 0.h,
-              mainAxisSpacing: 0.h,
+              //crossAxisSpacing: 20.h,
+              //mainAxisSpacing: 120.h,
               childAspectRatio: 0.44.h //0.42.h, //요소하나당 가로세로 비율값임. 공간 침범해서 에러나면 이값을 높이거나 낮춰보기.
             ),
 
@@ -63,16 +62,10 @@ class _CultureState extends State<Culture> with AutomaticKeepAliveClientMixin{
                   child: Container( //팁에 사용되는 구간임- 이미지랑 텍스트들
                     color: Colors.white,
                     padding: EdgeInsets.fromLTRB(15.w, 0.h, 15.w, 0.h),
-                    child: Column(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black,
-                                  width: 2.w),
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                      5.w))),
-                          child:SizedBox(
+                    child: Expanded(
+                      child: Column(
+                        children: [
+                          SizedBox(
                             child: Hero(
                               tag: culture_collection[index]['title'],
                               child: Image.network(
@@ -80,26 +73,26 @@ class _CultureState extends State<Culture> with AutomaticKeepAliveClientMixin{
                                   fit: BoxFit.cover),
                             ),
                             height: 150.h,
-                            width: 150.h,
+                            //width: 150.h,
                           ),
-                        ),
-                        //Spacer(flex: 2,),
-                        Card(
-                          elevation: 0.h,
-                          margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                          child: Text(culture_collection[index]['title'],
-                            textAlign: TextAlign.center,),
-                        ),
-                        Card(
-                          elevation: 0.h,
-                          margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
-                          child: Text(culture_collection[index]['tag'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.black54
-                            ),),       //Text(tips_collection[index]['tag']
-                        ),
-                      ],
+                          //Spacer(flex: 2,),
+                          Card(
+                            elevation: 0.h,
+                            margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
+                            child: Text(culture_collection[index]['title'],
+                              textAlign: TextAlign.center,),
+                          ),
+                          Card(
+                            elevation: 0.h,
+                            margin: EdgeInsets.fromLTRB(0.h, 5.h, 0.h, 5.h),
+                            child: Text(culture_collection[index]['tag'],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.black54
+                              ),),       //Text(tips_collection[index]['tag']
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   onTap: () {             //누르면 히어로위젯 작동하며 페이지이동

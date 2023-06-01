@@ -321,20 +321,13 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                         0.w, 0.w, 0.w, 1.h),
-                    child: Text('view all', textAlign: TextAlign.end,
+                    child: Text('view all»', textAlign: TextAlign.end,
                       style:  TextStyle(
                         fontSize: 14.sp,
                         color: Color(0xff397D54),
                         fontWeight: FontWeight.w600,
                       )),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        0.w, 0.w, 0.w, 0.h),
-                    child: Icon(Icons.chevron_right, size: 18.sp,
-                      color: Color(0xff397D54),
-                    ),
-                  )
                 ],
               ),
               ),

@@ -40,7 +40,9 @@ class _PubMyListState extends State<PubMyList> {
           .read<MyListStore>()
           .pubMyList;
 
-      count = pubMyList.length;
+      if(pubMyList != null){
+        count = pubMyList?.length;
+      }
       if (count == 0) {
         exists = false;
       } else {

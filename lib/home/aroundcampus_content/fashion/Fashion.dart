@@ -129,26 +129,38 @@ class _FashionState extends State<Fashion> with AutomaticKeepAliveClientMixin {
   getFashionDialog(index){
     showDialog(context: context, builder: (context){
       return AlertDialog(
-        title: Text(fashion_collection[index]['name']),
+        title: Text(fashion_collection[index]['name'].toString().replaceAll(
+            "\\n", "\n"),
+            style:TextStyle(
+                color: Color(0xff397D54),
+                fontSize: 14.sp,
+                fontWeight: FontWeight.bold
+            )
+        ), ///CommonWidget안에 있는 앱바스타일),
         content: SingleChildScrollView(
           child: ListBody(
             children: [
-              richtext(Icon(Icons.access_time, size: 15.h),
+              richtext(Icon(Icons.access_time, color: Color(0xff706F6F),
+                  size: 14.h),
                   fashion_collection[index]['time']),
-              richtext(Icon(Icons.block, size: 15.h),
+              richtext(Icon(Icons.block,color: Color(0xff706F6F),
+                  size: 14.h),
                   fashion_collection[index]['holiday']),
-              richtext(Icon(Icons.location_on_outlined, size: 15.h),
+              richtext(Icon(Icons.location_on_outlined, color: Color(0xff706F6F),
+                  size: 14.h),
                   fashion_collection[index]['address']),
-              richtext(Icon(Icons.phone, size: 15.h),
+              richtext(Icon(Icons.phone, color: Color(0xff706F6F),
+                  size: 14.h),
                   fashion_collection[index]['call']),
               richtext( Container(
-                //color: Colors.red,
-                  width: 14.w, height: 14.w,
-                  margin: EdgeInsets.fromLTRB(0.w, 0.w, 0.w, 0.w),
+                  color: Color(0xff706F6F),
+                  width: 12.w, height: 12.w,
+                  margin: EdgeInsets.fromLTRB(2.w, 0.w, 0.w, 0.w),
                   child: Image.asset(
                     'assets/Instagram.png', fit: BoxFit.fill, )),
                   fashion_collection[index]['contact']),
-              richtext(Icon(Icons.wb_incandescent_outlined, size: 15.h),
+              richtext(Icon(Icons.wb_incandescent_outlined, color: Color(0xff706F6F),
+                  size: 14.h),
                   fashion_collection[index]['others']),
             ],
           ),

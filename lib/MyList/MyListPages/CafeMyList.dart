@@ -41,7 +41,9 @@ class _CafeMyListState extends State<CafeMyList> {
           .read<MyListStore>()
           .cafeMyList;
 
-      count = cafeMyList.length;
+      if(cafeMyList != null){
+        count = cafeMyList?.length;
+      }
       if (count == 0) {
         exists = false;
       } else {

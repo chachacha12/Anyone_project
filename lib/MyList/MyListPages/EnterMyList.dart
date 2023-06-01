@@ -103,7 +103,14 @@ class _EnterMyListState extends State<EnterMyList> {
             .read<MyListStore>()
             .entertainmentMyList;
 
-        count = entertainmentMyList.length;
+        if(entertainmentMyList != null){
+          count = entertainmentMyList?.length;
+        }
+        if (count == 0) {
+          exists = false;
+        } else {
+          exists = true;
+        }
       });
     } catch (e) {
       print('에러');

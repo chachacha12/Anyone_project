@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../various_widget.dart';
+import '../CommonWidget.dart';
 
 
 class GroceryShop_hero_second extends StatefulWidget {
@@ -41,6 +42,7 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
         slivers: [
           SliverAppBar(title: Text(
             widget.grocery_document['name'],
+            style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
               //backgroundColor: Colors.transparent,
               centerTitle: true,
@@ -49,76 +51,96 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
 
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
-              child: Hero( //Hero위젯
-                tag: widget.grocery_document['name'],
-                child: SingleChildScrollView(
-                  child: Column(  //캐러셀 슬라이드와 indicator 들어감
-                    children: [
-                      CarouselSlider( //이미지슬라이드 해주는 위젯
-                        options: CarouselOptions(
-                            autoPlay: true,
-                            autoPlayAnimationDuration: Duration(milliseconds: 800),
-                            height: 200.h,
-                            viewportFraction: 0.9,
-                            aspectRatio: 2.0,
-                            enlargeCenterPage: true,
-                            enableInfiniteScroll: true,
-                            onPageChanged: (index, reason){
-                              setState((){
-                                currentIndex = index;
-                              });
-                            }
+              color: Colors.white,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
+                child: Hero( //Hero위젯
+                  tag: widget.grocery_document['name'].toString().replaceAll(
+    "\\n", "\n"),
+                  child: SingleChildScrollView(
+                    child: Column(  //캐러셀 슬라이드와 indicator 들어감
+                      children: [
+                        CarouselSlider( //이미지슬라이드 해주는 위젯
+                          options: CarouselOptions(
+                              autoPlay: true,
+                              autoPlayAnimationDuration: Duration(milliseconds: 800),
+                              height: 200.h,
+                              viewportFraction: 0.9,
+                              aspectRatio: 2.0,
+                              enlargeCenterPage: true,
+                              enableInfiniteScroll: true,
+                              onPageChanged: (index, reason){
+                                setState((){
+                                  currentIndex = index;
+                                });
+                              }
+                          ),
+                          items: imageSliders,
                         ),
-                        items: imageSliders,
-                      ),
-                      DotsIndicator(
-                        dotsCount: imageSliders.length,
-                        position: currentIndex.toDouble(),
-                        decorator: DotsDecorator(
-                          color: Colors.grey,  // Inactive color
-                          activeColor: Colors.greenAccent,
-                          size: const Size.square(6.0),
-                          activeSize: const Size(7.0, 7.0),
-                        ),
-                      )
-                    ],
-                  ),
-                )
+                        DotsIndicator(
+                          dotsCount: imageSliders.length,
+                          position: currentIndex.toDouble(),
+                          decorator: DotsDecorator(
+                            color: Colors.grey,  // Inactive color
+                            activeColor: Color(0xff73c088),
+                            size: const Size.square(6.0),
+                            activeSize: const Size(7.0, 7.0),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ),
               ),
             ),
           ),
 
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.fromLTRB(40.w, 10.h, 20.w, 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  richtext(Icon(Icons.access_time, size: 15.h),
-                      widget.grocery_document['time']),
-                  richtext(Icon(Icons.location_on_outlined, size: 15.h),
-                      widget.grocery_document['address']),
-                  richtext(Icon(Icons.block, size: 15.h),
-                      widget.grocery_document['holiday']),
-                ],
+              color: Colors.white,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(40.w, 10.h, 20.w, 0.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    richtext(Icon(Icons.access_time, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.grocery_document['time']),
+                    richtext(Icon(Icons.location_on_outlined, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.grocery_document['address']),
+                    richtext(Icon(Icons.block,color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.grocery_document['holiday']),
+                  ],
+                ),
               ),
             ),
           ),
 
           SliverToBoxAdapter(
             child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //color: Colors.white
+              color: Colors.white,
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    //color: Colors.white
+                ),
+                margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
+                padding: EdgeInsets.all(15.w),
+                child: Text(text, style: TextStyle(
+                    fontSize: 15.sp
+                ),),
               ),
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
-              padding: EdgeInsets.all(15.w),
-              child: Text(text, style: TextStyle(
-                  fontSize: 15.sp
-              ),),
             ),
+          ),
+
+          SliverToBoxAdapter(
+              child: Container(
+                color: Colors.white,
+                height: 100.h,
+              )
           )
 
         ],

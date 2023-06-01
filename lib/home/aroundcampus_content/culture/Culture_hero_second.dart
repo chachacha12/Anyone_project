@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../various_widget.dart';
+import '../CommonWidget.dart';
 
 
 class Culture_hero_second extends StatefulWidget {
@@ -32,7 +33,9 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.culture_document['title'], maxLines: 3,textAlign: TextAlign.center,
+            widget.culture_document['title'].toString().replaceAll(
+          "\\n", "\n"), maxLines: 3,textAlign: TextAlign.center,
+              style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
             //backgroundColor: Colors.transparent,
               centerTitle: true,
@@ -41,9 +44,10 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
 
           SliverToBoxAdapter(
             child: Container(
-                  margin: EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.w),
+              color: Colors.white,
                   child: Hero(        //Hero위젯
-                    tag: widget.culture_document['title'],
+                    tag: widget.culture_document['title'].toString().replaceAll(
+    "\\n", "\n"),
                     child: Image.network(widget.culture_document['imagepath'], fit: BoxFit.cover,)
                   ),
                 ),
@@ -51,15 +55,18 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
 
           SliverToBoxAdapter(
             child: Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 30.h),
-              child: Text(widget.culture_document['tag'], style: TextStyle(
-                color: Colors.black45,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
+              color: Colors.white,
+              child: Container(
+                width: double.infinity,
+                alignment: Alignment.center,
+                margin: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 30.h),
+                child: Text(widget.culture_document['tag'], style: TextStyle(
+                  color: Color(0xff706F6F),
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500,
+                ),
+                textAlign: TextAlign.center,),
               ),
-              textAlign: TextAlign.center,),
             ),
           ),
 
@@ -68,33 +75,43 @@ class _Culture_hero_secondState extends State<Culture_hero_second> {
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
  
-                    Container( //컨텐츠 하나하나
-                        margin: EdgeInsets.symmetric(vertical: 0.h, horizontal: 10.w),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          //소주제 제목, 사진, 텍스트 순으로 넣어줌
-                          children: [
-                            Text(widget.culture_document['sub'][index]['title'],
-                              style: TextStyle(
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.bold,
-                              ),),
+                    Container(
+                      color: Colors.white,
+                      child: Container( //컨텐츠 하나하나
+                          margin: EdgeInsets.symmetric(vertical: 0.h, horizontal: 10.w),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            //소주제 제목, 사진, 텍스트 순으로 넣어줌
+                            children: [
+                              Text(widget.culture_document['sub'][index]['title'],
+                                style: TextStyle(
+                                    fontSize: 17.sp,
+                                    fontWeight: FontWeight.bold,
+                                ),),
 
-                            //소주제의 이미지가 있다면 이미지 보여줌.
-                            get_TextImageBox(widget.culture_document['sub'][index]['image']),
+                              //소주제의 이미지가 있다면 이미지 보여줌.
+                              get_TextImageBox(widget.culture_document['sub'][index]['image']),
 
-                            //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
-                            Text(widget.culture_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),
-                              style: TextStyle(
-                                fontSize: 14.sp,
-                                fontWeight: FontWeight.normal,
-                              ),)
-                          ],
-                          
-                        )
+                              //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
+                              Text(widget.culture_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),
+                                style: TextStyle(
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.normal,
+                                ),)
+                            ],
+
+                          )
+                      ),
                     ),
                 childCount: widget.culture_document['sub'].length),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white,
+              height: 120.h,
+            ),
           ),
 
         ],

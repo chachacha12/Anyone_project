@@ -39,7 +39,9 @@ class _RestaurantMyListState extends State<RestaurantMyList> {
       restaurantMyList = context
           .read<MyListStore>()
           .restaurantMyList;
-      count = restaurantMyList.length;
+      if(restaurantMyList != null){
+        count = restaurantMyList?.length;
+      }
       if (count == 0) {
         exists = false;
       } else {

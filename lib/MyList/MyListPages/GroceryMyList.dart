@@ -41,7 +41,9 @@ class _GroceryMyListState extends State<GroceryMyList> {
           .read<MyListStore>()
           .groceriesMyList;
 
-      count = groceryMyList.length;
+      if(groceryMyList != null){
+        count = groceryMyList?.length;
+      }
       if (count == 0) {
         exists = false;
       } else {

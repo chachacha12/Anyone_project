@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../various_widget.dart';
+import '../../CommonWidget.dart';
 
 //식당 리스트, 카페 리스트 등 여러가지 장소리스트를 여기서 받아서 장소정보 자세히 보여주는 페이지임
 class Cafe_more extends StatefulWidget {
@@ -40,101 +41,124 @@ class _Cafe_moreState extends State<Cafe_more> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.cafe_document['name'], maxLines: 3,
+            widget.cafe_document['name'].toString().replaceAll(
+          "\\n", "\n"), maxLines: 3,
+            style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
-              //backgroundColor: Colors.transparent,
               centerTitle: true,
               floating: true //밑으로 스크롤시 앱바 사라짐
           ),
 
           SliverToBoxAdapter(
             child: Container(
-              margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
-              child: Column(  //캐러셀 슬라이드와 indicator 들어감
-                children: [
-                  CarouselSlider( //이미지슬라이드 해주는 위젯
-                    options: CarouselOptions(
-                        autoPlay: true,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        height: 200.h,
-                        viewportFraction: 0.9,
-                        aspectRatio: 2.0,
-                        enlargeCenterPage: true,
-                        enableInfiniteScroll: true,
-                        onPageChanged: (index, reason){
-                          setState((){
-                            currentIndex = index;
-                          });
-                        }
+              color: Colors.white,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(0.h, 20.h, 0.h, 0.h),
+                child: Column(  //캐러셀 슬라이드와 indicator 들어감
+                  children: [
+                    CarouselSlider( //이미지슬라이드 해주는 위젯
+                      options: CarouselOptions(
+                          autoPlay: true,
+                          autoPlayAnimationDuration: Duration(milliseconds: 800),
+                          height: 200.h,
+                          viewportFraction: 0.9,
+                          aspectRatio: 2.0,
+                          enlargeCenterPage: true,
+                          enableInfiniteScroll: true,
+                          onPageChanged: (index, reason){
+                            setState((){
+                              currentIndex = index;
+                            });
+                          }
+                      ),
+                      items: imageSliders,
                     ),
-                    items: imageSliders,
-                  ),
-                  DotsIndicator(
-                    dotsCount: imageSliders.length,
-                    position: currentIndex.toDouble(),
-                    decorator: DotsDecorator(
-                      color: Colors.grey,  // Inactive color
-                      activeColor: Colors.greenAccent,
-                      size: const Size.square(6.0),
-                      activeSize: const Size(7.0, 7.0),
-                    ),
-                  )
-                ],
-              )
-            ),
-          ),
-
-          SliverToBoxAdapter(
-            child: Container(
-              margin: EdgeInsets.fromLTRB(40.w, 10.h, 20.w, 0.h),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  richtext(null,
-                      widget.cafe_document['tag']),
-
-                  richtext(Icon(Icons.monetization_on_outlined, size: 15.h),
-                      widget.cafe_document['price']),
-
-                  richtext(Icon(Icons.access_time, size: 15.h),
-                      widget.cafe_document['time']),
-
-                  richtext(Icon(Icons.block, size: 15.h),
-                      widget.cafe_document['holiday']),
-
-                  richtext(Icon(Icons.location_on_outlined, size: 15.h),
-                      widget.cafe_document['address']),
-
-                  /*
-                   richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
-                      widget.cafe_document['contact']),
-                   */
-                  richtext(Container(
-                      //color: Colors.red,
-                      width: 14.w, height: 14.w,
-                      margin: EdgeInsets.fromLTRB(1.5.w, 0.w, 0.w, 0.w),
-                      child: Image.asset(
-                    'assets/Instagram.png', fit: BoxFit.fill, )),
-                      widget.cafe_document['contact']),
-                ],
+                    DotsIndicator(
+                      dotsCount: imageSliders.length,
+                      position: currentIndex.toDouble(),
+                      decorator: DotsDecorator(
+                        color: Colors.grey,  // Inactive color
+                        activeColor: Color(0xff73c088),
+                        size: const Size.square(6.0),
+                        activeSize: const Size(7.0, 7.0),
+                      ),
+                    )
+                  ],
+                )
               ),
             ),
           ),
 
           SliverToBoxAdapter(
             child: Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  //color: Colors.white
+              color: Colors.white,
+              child: Container(
+                margin: EdgeInsets.fromLTRB(40.w, 10.h, 20.w, 0.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    richtext(null,
+                        widget.cafe_document['tag']),
+
+                    richtext(Icon(Icons.monetization_on_outlined, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.cafe_document['price']),
+
+                    richtext(Icon(Icons.access_time, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.cafe_document['time']),
+
+                    richtext(Icon(Icons.block, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.cafe_document['holiday']),
+
+                    richtext(Icon(Icons.location_on_outlined, color: Color(0xff706F6F),
+                        size: 14.h),
+                        widget.cafe_document['address']),
+
+                    /*
+                     richtext(Icon(Icons.contact_mail_outlined, size: 15.h),
+                        widget.cafe_document['contact']),
+                     */
+                    richtext(Container(
+                        color: Color(0xff706F6F),
+                        width: 12.w, height: 12.w,
+                        margin: EdgeInsets.fromLTRB(1.5.w, 0.w, 0.w, 0.w),
+                        child: Image.asset(
+                      'assets/Instagram.png', fit: BoxFit.fill, )),
+                        widget.cafe_document['contact']),
+                  ],
+                ),
               ),
-              margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
-              padding: EdgeInsets.all(15.w),
-              child: Text(text, style: TextStyle(
-                  fontSize: 15.sp
-              ),),
             ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    //color: Colors.white
+                ),
+                margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 50.h),
+                padding: EdgeInsets.all(15.w),
+                child: Text(text, style: TextStyle(
+                    fontSize: 15.sp
+                ),),
+              ),
+            ),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white,
+              height: 100.h,
+            )
           )
+
 
         ],
       ),

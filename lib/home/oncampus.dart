@@ -96,7 +96,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
         children: [
 
           ///what's up 텍스트위젯 + 공지사항 카드들
-          Container(
+          SizedBox(
             height: 320.h,
             child: Column(
               children: [
@@ -109,7 +109,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                           //top: 50,
                           child:    Container(
                             //color: Colors.grey,
-                            margin: EdgeInsets.fromLTRB(25.w, 22.h, 0, 0),
+                            margin: EdgeInsets.fromLTRB(25.w, 22.h, 0, 7.h),
                             alignment: Alignment.centerLeft,
                             child:Text('What' + "'" + 's up', style: TextStyle(
                                 color: Color(0xff397D54),
@@ -118,23 +118,10 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                             ),),
                           ),
                         ),
-                        Positioned(
-                          //top: 50,
-                          child:  Container(
-                            //color: Colors.red,
-                            margin: EdgeInsets.fromLTRB(107.w, 0.h, 0, 0),
-                            alignment: Alignment.centerLeft,
-                            child: Image.asset('assets/duck.PNG', width: 80.w,
-                              fit: BoxFit.fill,),
-                          )
-                        ),
                       ],
                     ),
                   ],
                 ),
-
-
-
 
 
                 ///공지사항 카드들 CarouselSlider위젯과 dotsindicator
@@ -176,7 +163,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                           position: currentIndex.toDouble(),
                           decorator: DotsDecorator(
                             color: Colors.grey, // Inactive color
-                            activeColor: Colors.greenAccent,
+                            activeColor: Color(0xff73c088),
                             size: const Size.square(6.0),
                             activeSize: const Size(7.0, 7.0),
                           ),
@@ -189,10 +176,12 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
           ),
 
           ///아이콘들있는 박스를 커스텀위젯으로 빼둠
-          OnCampusCategory(),
+          getCategory(context),
+
+          //OnCampusCategory(),
 
           ///Facility & CampusTip 있는 박스
-          Container(
+          SizedBox(
             height: 400.h,
             child: Column(
               children: [
@@ -260,13 +249,10 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
       ),
     );
   }
-
   //이 페이지 상태유지를 위한 함수
   @override
   bool get wantKeepAlive => true;
 }
-
-
 
 
 ///아이콘 아래있는 텍스트들 스타일 통일
@@ -277,412 +263,300 @@ var iconTitleTextstyle = TextStyle(
 );
 
 
-///Category 텍스트위젯 + 아이콘 gridView 위젯 2개가 Column으로 있는 박스를 커스텀위젯으로 만듬
-class OnCampusCategory extends StatelessWidget {
-  const OnCampusCategory({Key? key}) : super(key: key);
-
-  ///모든 아이콘은 같은 디자인으로 만들어주기 위함. 안에 들어가는 icon모양등은 다르게 하기위해 인자값 전달
-  getIconBox(child){
-    return Container(
-      margin: EdgeInsets.fromLTRB(0, 0.h, 0, 6.h),
+///모든 아이콘은 같은 디자인으로 만들어주기 위함. 안에 들어가는 icon모양등은 다르게 하기위해 인자값 전달
+getIconBox(child){
+  return Container(
+    margin: EdgeInsets.fromLTRB(0, 0.h, 0, 6.h),
+    child: Center(  //가운데로 정렬
       child: child,
-      width: 45.h,
-      height: 45.h,
-      padding: EdgeInsets.fromLTRB(9.w, 0, 0, 0),
-      alignment: Alignment.centerLeft,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            Color(0xff73C088),
-            Color(0xffA8E0B7),
-          ],
-        ),
-        boxShadow: [
-          BoxShadow(  ///박스 그림자효과 주기 - 하단만
-            color: Colors.grey.withOpacity(0.7),
-            spreadRadius: 0,
-            blurRadius: 3.0,
-            offset: Offset(0, 3), // changes position of shadow
-          ),
+    ),
+    width: 40.h,
+    height: 40.h,
+    alignment: Alignment.centerLeft,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: [
+          Color(0xff73C088),
+          Color(0xffA8E0B7),
         ],
       ),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return
-      Container(
-          //박스 테두리 주기
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: BorderSide( // POINT
-                color:  Colors.grey,
-                width: 0.0.w,
-              ),
-              top: BorderSide( // POINT
-                color:  Colors.grey,
-                width: 0.0.w,
-              ),
-            ),
-            color: Color(0xffF5FFF8),
-          ),
-
-        // height:350.h,
-        child: Column(
-          children: [
-            ///category 텍스트
-            Container(
-              margin: EdgeInsets.fromLTRB(25.w, 20.h, 0, 0),
-              alignment: Alignment.centerLeft,
-              child: Text('Category', style: TextStyle(
-                  color: Color(0xff397D54),
-                  fontSize: 22.sp,
-                  fontWeight: FontWeight.w500
-              ),),
-            ),
-
-            ///아이콘 gridView 박스
-            Container(
-              height: 220.0.h,
-              child: GridView.count(
-                crossAxisCount: 4,
-                children: [
-                  Container( //official site
-                      color: Colors.transparent,
-                      margin: EdgeInsets.all(0.h),
-                      child: GestureDetector( //터치기능을 넣기위해 감싸줌
-                          child: GridTile(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment
-                                  .start,
-                              children: [
-                                getIconBox(Icon(Icons.public, size: 28.h,
-                                  color: Colors.white,)),
-
-                                Text('Portal',
-                                    style: iconTitleTextstyle),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    MyWebView(link: linkList[0],
-                                        appbartext: 'Portal'),)
-                            );
-                          }
-                      )
-                  ),
-
-                  Container( //school contact
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.phone, size: 28.h,
-                            color: Colors.white,)),
-                            Text('School'"\n"'Contact',
-                                textAlign: TextAlign.center,
-                                style: iconTitleTextstyle),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Contact())
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container( //GuideBook
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.menu_book, size: 28.h,
-                              color: Colors.white,)),
-                            Text('Guide'"\n"'Book',
-                                textAlign: TextAlign.center,
-                                style: iconTitleTextstyle),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>
-                                MyWebView(link: linkList[1],
-                                    appbartext: 'GuideBook'))
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container( //OIA
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.question_mark, size: 28.h,
-                              color: Colors.white,)),
-                            Text('FAQ', textAlign: TextAlign.center,
-                                style:iconTitleTextstyle),
-                          ],
-                        ),
-
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>
-                                MyWebView(
-                                    link: linkList[2], appbartext: 'FAQ'))
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container( //academic calender
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.calendar_month, size: 28.h,
-                              color: Colors.white,)),
-                            Text('Academic'"\n"'Calender',
-                                textAlign: TextAlign.center,
-                                style: iconTitleTextstyle),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) =>
-                                Calender()) //Calender 커스텀위젯을 보여줌
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container( //clubs
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.sports_baseball, size: 28.h,
-                              color: Colors.white,)),
-                            Text('School'"\n"'Clubs', textAlign: TextAlign.center,
-                                style:iconTitleTextstyle),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Clubs())
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container( //Campus map
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.location_pin, size: 28.h,
-                              color: Colors.white,)),
-                            Text('Campus'"\n"'Map',
-                                textAlign: TextAlign.center,
-                                style: iconTitleTextstyle),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CampusMap())
-                        );
-                      },
-                    ),
-                  ),
-
-                  Container( //helplines
-                    color: Colors.transparent,
-                    margin: EdgeInsets.all(0.h),
-                    child: GestureDetector(
-                      child: GridTile(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            getIconBox(Icon(Icons.local_hospital, size: 28.h,
-                              color: Colors.white,)),
-                            Text('Helplines', textAlign: TextAlign.center,
-                                style:iconTitleTextstyle),
-                          ],
-                        ),
-                      ),
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Helplines())
-                        );
-                      },
-                    ),
-                  ),
-
-                  /*
-                      Container( //dormitory
-                        color: Colors.transparent,
-                        margin: EdgeInsets.all(0.h),
-                        child: GestureDetector(
-                          child: GridTile(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  'assets/Oncampus_icon/dormitory.png',
-                                  width: 35.w, height: 35.w,),
-                                //Icon(Icons.star),
-                                Text('Dormitory', textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black
-                                    )),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    MyWebView(link: linkList[2],
-                                        appbartext: 'Dormitory'))
-                            );
-                          },
-                        ),
-                      ),
-                      Container( //language institution
-                        color: Colors.transparent,
-                        margin: EdgeInsets.all(0.h),
-                        child: GestureDetector(
-                          child: GridTile(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  'assets/Oncampus_icon/Language Institution.png',
-                                  width: 35.w, height: 35.w,),
-                                //Icon(Icons.star),
-                                Text('Language'"\n"'Institution',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black
-                                    )),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    MyWebView(link: linkList[3],
-                                        appbartext: 'Language Institution'))
-                            );
-                          },
-                        ),
-                      ),
-
-                      Container( //Library
-                        color: Colors.transparent,
-                        margin: EdgeInsets.all(0.h),
-                        child: GestureDetector(
-                          child: GridTile(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset('assets/Oncampus_icon/Library.png',
-                                  width: 35.w, height: 35.w,),
-                                //Icon(Icons.star),
-                                Text('Library', textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black
-                                    )),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) =>
-                                    MyWebView(link: linkList[5],
-                                        appbartext: 'Library'))
-                            );
-                          },
-                        ),
-                      ),
-
-                      Container( //tips
-                        color: Colors.transparent,
-                        margin: EdgeInsets.all(0.h),
-                        child: GestureDetector(
-                          child: GridTile(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  'assets/Oncampus_icon/Tips.png', width: 35.w,
-                                  height: 35.w,), //Icon(Icons.star),
-                                Text('Tips', textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.black
-                                    )),
-                              ],
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Tips())
-                            );
-                          },
-                        ),
-                      ),
-                       */
-                ],
-              ),
-            )
-
-          ],
+      boxShadow: [
+        BoxShadow(  ///박스 그림자효과 주기 - 하단만
+          color: Colors.grey.withOpacity(0.7),
+          spreadRadius: 0,
+          blurRadius: 3.0,
+          offset: Offset(0, 3), // changes position of shadow
         ),
-      );
-  }
+      ],
+    ),
+  );
 }
+
+///온캠퍼스 Category에 있는 아이콘 들어있는 박스
+getCategory(context){
+  return Container(
+    //박스 테두리 주기
+    decoration: BoxDecoration(
+      border: Border(
+        bottom: BorderSide( // POINT
+          color:  Colors.grey,
+          width: 0.0.w,
+        ),
+        top: BorderSide( // POINT
+          color:  Colors.grey,
+          width: 0.0.w,
+        ),
+      ),
+      color: Color(0xffF5FFF8),
+    ),
+
+    // height:350.h,
+    child: Column(
+      children: [
+        ///category 텍스트
+        Container(
+          margin: EdgeInsets.fromLTRB(25.w, 20.h, 0, 0),
+          alignment: Alignment.centerLeft,
+          child: Text('Category', style: TextStyle(
+              color: Color(0xff397D54),
+              fontSize: 22.sp,
+              fontWeight: FontWeight.w500
+          ),),
+        ),
+
+        ///아이콘 gridView 박스
+        SizedBox(
+          height: 220.0.h,
+          child: GridView.count(
+            physics: ScrollPhysics(),
+            crossAxisCount: 4,
+            children: [
+              Container( //official site
+                  color: Colors.transparent,
+                  margin: EdgeInsets.all(0.h),
+                  child: GestureDetector( //터치기능을 넣기위해 감싸줌
+                      child: GridTile(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment
+                              .start,
+                          children: [
+                            getIconBox(Icon(Icons.public, size: 25.h,
+                              color: Colors.white,)),
+
+                            Text('Portal',
+                                style: iconTitleTextstyle),
+                          ],
+                        ),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) =>
+                                MyWebView(link: linkList[0],
+                                    appbartext: 'Portal'),)
+                        );
+                      }
+                  )
+              ),
+
+              Container( //school contact
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.phone, size: 25.h,
+                          color: Colors.white,)),
+                        Text('School'"\n"'Contact',
+                            textAlign: TextAlign.center,
+                            style: iconTitleTextstyle),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Contact())
+                    );
+                  },
+                ),
+              ),
+
+              Container( //GuideBook
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.menu_book, size: 25.h,
+                          color: Colors.white,)),
+                        Text('Guide'"\n"'Book',
+                            textAlign: TextAlign.center,
+                            style: iconTitleTextstyle),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            MyWebView(link: linkList[1],
+                                appbartext: 'GuideBook'))
+                    );
+                  },
+                ),
+              ),
+
+              Container( //OIA
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.question_mark, size: 25.h,
+                          color: Colors.white,)),
+                        Text('FAQ', textAlign: TextAlign.center,
+                            style:iconTitleTextstyle),
+                      ],
+                    ),
+
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            MyWebView(
+                                link: linkList[2], appbartext: 'FAQ'))
+                    );
+                  },
+                ),
+              ),
+
+              Container( //academic calender
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.calendar_month, size: 25.h,
+                          color: Colors.white,)),
+                        Text('Academic'"\n"'Calender',
+                            textAlign: TextAlign.center,
+                            style: iconTitleTextstyle),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) =>
+                            Calender()) //Calender 커스텀위젯을 보여줌
+                    );
+                  },
+                ),
+              ),
+
+              Container( //clubs
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.sports_baseball, size: 25.h,
+                          color: Colors.white,)),
+                        Text('School'"\n"'Clubs', textAlign: TextAlign.center,
+                            style:iconTitleTextstyle),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Clubs())
+                    );
+                  },
+                ),
+              ),
+
+              Container( //Campus map
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.location_pin, size: 25.h,
+                          color: Colors.white,)),
+                        Text('Campus'"\n"'Map',
+                            textAlign: TextAlign.center,
+                            style: iconTitleTextstyle),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CampusMap())
+                    );
+                  },
+                ),
+              ),
+
+              Container( //helplines
+                color: Colors.transparent,
+                margin: EdgeInsets.all(0.h),
+                child: GestureDetector(
+                  child: GridTile(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        getIconBox(Icon(Icons.local_hospital, size: 25.h,
+                          color: Colors.white,)),
+                        Text('Helplines', textAlign: TextAlign.center,
+                            style:iconTitleTextstyle),
+                      ],
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Helplines())
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        )
+
+      ],
+    ),
+  );
+}
+
+
+
+
+
+
+
+
+
+

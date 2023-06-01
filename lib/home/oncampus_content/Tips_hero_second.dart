@@ -4,6 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../various_widget.dart';
+import '../aroundcampus_content/CommonWidget.dart';
 
 class Tips_hero_second extends StatefulWidget {
    Tips_hero_second(this.tips_document, {Key? key}) : super(key: key);
@@ -40,7 +41,9 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.tips_document['title'],
+            widget.tips_document['title'].toString().replaceAll(
+          "\\n", "\n"),
+              style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
             //backgroundColor: Colors.transparent,
             centerTitle: true,
@@ -75,7 +78,7 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
                         position: currentIndex.toDouble(),
                         decorator: DotsDecorator(
                           color: Colors.grey,  // Inactive color
-                          activeColor: Colors.greenAccent,
+                          activeColor: Color(0xff73c088),
                           size: const Size.square(6.0),
                           activeSize: const Size(7.0, 7.0),
                         ),
@@ -90,9 +93,10 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
               color: Colors.white,
               alignment: Alignment.center,
               padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 0),
-              child: Text(widget.tips_document['tag'], style: TextStyle(
-                color: Colors.black45,
-                fontSize: 18.sp,
+              child: Text(widget.tips_document['tag'], textAlign: TextAlign.center,style: TextStyle(
+                color: Color(0xff706F6F),
+
+                fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
               ),),
             ),
@@ -112,20 +116,27 @@ class _Tips_hero_secondState extends State<Tips_hero_second> {
                           children: [
                             Text('${index+1}'+'. '+widget.tips_document['sub'][index]['title']+'\n',
                               style: TextStyle(
-                                fontSize: 18.sp,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.bold,
                               ),),
 
                             //파베 뛰어쓰기해줌. --> toString().replaceAll("\\n", "\n"
                             Text(widget.tips_document['sub'][index]['text'].toString().replaceAll("\\n", "\n"),
                               style: TextStyle(
-                                fontSize: 14.sp,
+                                fontSize: 15.sp,
                                 fontWeight: FontWeight.normal,
                               ),)
                           ],
                         )
                     ),
                 childCount: widget.tips_document['sub'].length),
+          ),
+
+          SliverToBoxAdapter(
+            child: Container(
+              color: Colors.white,
+              height: 140.h,
+            ),
           ),
 
         ],
