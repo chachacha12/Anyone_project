@@ -28,6 +28,7 @@ class _InfoState extends State<Info>  {
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return <Widget>[
                  SliverAppBar(
+                   automaticallyImplyLeading: false, ///자동으로 생기는 뒤로가기 키 삭제
                    //flexibleSpace: Image.asset('assets/duck.PNG',),
                    //leading: Icon(Icons.add_box, size: 40.h),
                    toolbarHeight: 20.h,

@@ -42,7 +42,7 @@ class _Entertainment_moreState extends State<Entertainment_more> {
        textimagebox = SizedBox(
          width: double.infinity,
          child: Card(
-           child: GestureDetector(   //클릭스 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
+           child: GestureDetector(   //클릭시 히어로위젯을 통해 이미지 하나만 확대해서 보여줌
              child: Hero(
                tag: widget.entertainment_document['textimage'],
                child: Image.network(

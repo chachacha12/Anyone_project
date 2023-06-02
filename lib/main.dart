@@ -15,6 +15,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'package:flutter/services.dart';
 
+///앱이 실행될때 진행되는 페이지 순서:
+/*
+  1. main에서 splashScreen
+  2. splash에서 유저가 로그인 되어있는지 여부에 따라(신규유저인지 기존유저인지) 앱소개페이지 이동 or main 이동
+       신규유저라면 -> 앱소개 페이지 간 후 로그인 페이지로 이동
+ */
+
 
 
 void main() async {
@@ -61,7 +68,7 @@ class MyApp extends StatelessWidget {
 }
 
 
-//로그인해서 들어왔을때 처음 메인화면임. 정보공유와 내정보 탭 둘다 볼 수 있는곳
+//로그인해서 들어왔을때 처음 메인화면임.
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
 
@@ -87,14 +94,13 @@ class _MainState extends State<Main> {
   ///파베에서 필요한 데이터값들 가져와서 Provider안에 저장해줌
   getFBData() async {
     /// 엔터, 패션, 식료품, 식당, 카페, 펍
-    //내 찜목록 확인위해 가져오는 찜목록 데이터
+    ///내 찜목록 확인위해 가져오는 찜목록 데이터
     var enterResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('entertainment').get();
     var fashionResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('fashion').get();
     var groceriesResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('groceries').get();
     var restaurantResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('restaurant').get();
     var cafeResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('cafe').get();
     var pubResult = await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('pub').get();
-
 
     ///이렇게 해주는 이유는 유저가 새 컨텐츠를 찜 하거나 찜 삭제할때마다 파베에 접근해서 새로운 찜목록을 가져오지 않게 하기위함임.
     ///즉 파베에 추가, 삭제 로직만 작동하도록 해주고 ui상에선 store에 저장해서 보여주기 위함임
@@ -119,8 +125,12 @@ class _MainState extends State<Main> {
   //하단 네비케이션바에 필요한 키인듯
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
+
   @override
   Widget build(BuildContext context) {
+    //모든 스택값에 있는 페이지삭제
+
+
     return Scaffold(
       //원래 기존 평범한 바텀바임
       body:

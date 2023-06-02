@@ -137,7 +137,7 @@ class _TimetableState extends State<Timetable> {
                   color: Color(0xff706F6F),
                   fontSize: 14.sp
               ) ,),
-              actionsAlignment: MainAxisAlignment.spaceBetween,
+              actionsAlignment: MainAxisAlignment.spaceAround,
               actions: <Widget>[
 
 

@@ -44,7 +44,7 @@ class _authenticState extends State<authentic> {
   }
 
 
-  ///직접 입력해서 하는 로그인할때마다 찜목록에 유저정보 저장
+  ///자동로그인 말고 직접 입력하는 로그인 때마다 찜목록에 유저정보 저장
   setUserInfoData() async {
     try {
       await firestore.collection('MyList').doc(auth.currentUser?.uid).collection('UserInfo').doc(auth.currentUser?.displayName).set({'name':auth.currentUser?.displayName, 'email':auth.currentUser?.email});
@@ -102,7 +102,7 @@ class _authenticState extends State<authentic> {
     );
   }
 
-  //로그인해주는 로직
+  ///로그인해주는 로직
   LogIn(var email, var pwd) async {
     try {
       await auth.signInWithEmailAndPassword(

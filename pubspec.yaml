@@ -110,6 +110,7 @@ flutter:
     - assets/Oncampus_icon/
     - assets/Pub/
     - assets/Restaurant/
+    - assets/AppExplain/
 
     # app icon
     - assets/app_icon.png

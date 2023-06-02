@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:anyone/main.dart';
+import 'package:anyone/splash/AppExplain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,7 +24,7 @@ class _SplashState extends State<Splash> {
   String? name;
   late bool auto_signin;
 
-  //shared pref에 저장된 유저정보있는지보고 없으면 회원가입창으로 이동
+  ///shared pref에 저장된 유저정보있는지보고 없으면 회원가입창으로 이동
   Is_SignIn_before() async {
     var storage = await SharedPreferences.getInstance();
     //storage.remove('name');
@@ -68,11 +69,19 @@ class _SplashState extends State<Splash> {
           //backgroundColor: Colors.redAccent
         );
 
+        ///이전에 로그인한 적없다면 (앱 첫실행일때) - 앱소개슬라이드 페이지로 이동
       } else {
         Navigator.pop(context);
         Navigator.push(context, MaterialPageRoute(
             builder: (context) =>
+                AppExplain()));
+
+        /*
+        Navigator.push(context, MaterialPageRoute(
+            builder: (context) =>
                 authentic()));
+         */
+
       }
     });
   }
