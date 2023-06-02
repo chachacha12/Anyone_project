@@ -72,37 +72,12 @@ richtext(icon, text2){
   );
 }
 
-/*
-//텍스트 + 텍스트 조합 - 음식점 명단
-richtext2(text1, text2){
-
-  return RichText(
-    text: TextSpan(
-      children: [
-        TextSpan(
-          text: '  '+text1,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-            fontSize: 16.sp,
-          ),
-        ),
-        TextSpan(
-          text: '\n   '+text2,
-          style: TextStyle(
-            color: Colors.green,
-            fontWeight: FontWeight.w400,
-            fontSize: 14.sp,
-          ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () =>
-                  Navigator.push(Path.context, MaterialPageRoute(builder: (context) => My()))
-
-        ),
-      ],
-    ),
+///온캠퍼스 컨텐츠들 앱바 스타일
+onCampusAppBarStyle(){
+  return TextStyle(
+      color: Colors.black87,
+      fontSize: 17.sp,
+      fontWeight: FontWeight.bold
   );
 }
-
- */
 

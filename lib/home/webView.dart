@@ -2,6 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+import '../various_widget.dart';
+
 //링크값과 앱바title문구 보낸걸 받아서 웹뷰로 띄워주는 커스텀위젯임
 class MyWebView extends StatelessWidget {
   MyWebView({Key? key, this.link, this.appbartext}) : super(key: key);
@@ -22,7 +24,8 @@ class MyWebView extends StatelessWidget {
           iconTheme: IconThemeData(
               color: Colors.black
           ),
-          title: Text(appbartext, style: TextStyle(color: Colors.black)),
+          ///various_widget 파일안에 있는 온캠퍼스 앱바 스타일 적용
+          title: Text(appbartext, style:onCampusAppBarStyle()),
           backgroundColor: Colors.white,
           elevation: 0.0,  //그림자 농도 설정임. 0넣어서 제거
         ),

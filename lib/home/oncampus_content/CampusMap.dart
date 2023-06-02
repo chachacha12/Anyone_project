@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../various_widget.dart';
 import 'CampusMap_asset_hero.dart';
 
 class CampusMap extends StatelessWidget {
@@ -19,7 +20,7 @@ class CampusMap extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            'Campus Map',
+            'Campus Map', style: onCampusAppBarStyle(),
           ),
           ),
 
@@ -29,18 +30,19 @@ class CampusMap extends StatelessWidget {
               color: Colors.white,
               child: Container(
                 color: Colors.white,
-                margin: EdgeInsets.fromLTRB(20.w, 30.h, 20.w, 30.h),
+                margin: EdgeInsets.fromLTRB(20.w, 40.h, 20.w, 30.h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Finding your way'"\n"'around campus', style: TextStyle(
                         color: Colors.black,
-                        fontSize: 25.sp
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18.sp
                     )),
                     Text("\n"' - Konkuk University uses a numbering system to easily identify the various buildings on campus.'
                         "\n\n"' - Please refer to the graph below to see where your classes are held.'"\n", style: TextStyle(
-                        color: Colors.black54,
-                        fontSize: 15.sp
+                        color: Color(0xff706F6F),
+                        fontSize: 14.sp
                     )),
 
                     //이미지 1

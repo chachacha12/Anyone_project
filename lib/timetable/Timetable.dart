@@ -1,6 +1,7 @@
 import 'package:anyone/timetable/Addclass.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +9,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Provider/Provider.dart';
 import '../main.dart';
+import '../various_widget.dart';
 
 //store에는 각각의 시간표 일정들이 map 형태로 저장되어 있음. {'index': 1 ,  'name': class, 'dayofweek': 0   ....등등}
 // sharedpref에는 List<string>으로 되어있고.. ['index': '1' ,'name', '1', '10','30', '13', '30'] 등..차례로 index, 수업이름+빌딩+방번호, 요일, 시작hour, 시작minute, 끝hour, 끝minute
@@ -72,7 +74,7 @@ class _TimetableState extends State<Timetable> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Time table'),
+          title: Text('Time table' ,style: onCampusAppBarStyle()),
           elevation: 0,
           actions: [
             ///클릭시 일정 추가하는 페이지로 이동
@@ -125,9 +127,20 @@ class _TimetableState extends State<Timetable> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(_meeting.eventName),
-              content: Text(_timeDetails),
+              title:  Text(_meeting.eventName, style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w500
+              )
+                ,),
+              content: Text(_timeDetails, style:TextStyle(
+                  color: Color(0xff706F6F),
+                  fontSize: 14.sp
+              ) ,),
+              actionsAlignment: MainAxisAlignment.spaceBetween,
               actions: <Widget>[
+
+
                 TextButton(
                   ///일정 삭제해주는 로직 여기에 넣기 - store와 shared pref에서 삭제해주면됨
                     onPressed: () {
@@ -140,7 +153,14 @@ class _TimetableState extends State<Timetable> {
                           gravity: ToastGravity.BOTTOM,
                         );
                     },
-                    child: Text('delete'))
+                    child: Text('Delete Class',style: TextStyle(color: Color(0xff73c088)), )),
+
+                TextButton(
+                  ///canel버튼
+                    onPressed: () {
+                    },
+                    child: Text('OK',style: TextStyle(color: Color(0xff73c088)), )),
+
               ],
             );
           });

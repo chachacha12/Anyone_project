@@ -4,6 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../Extend_HeroImage.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../../various_widget.dart';
+
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
@@ -48,7 +50,7 @@ class _CalenderState extends State<Calender> {
               return <Widget>[
                 SliverAppBar(
                   //collapsedHeight: 50.h,
-                  title: Text('Academic Calender'),
+                  title: Text('Academic Calender', style: onCampusAppBarStyle(),),
                   pinned: true,
                   floating: true,
                   bottom: TabBar(

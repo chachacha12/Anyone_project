@@ -4,6 +4,8 @@ import 'package:photo_view/photo_view.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../various_widget.dart';
+
 //파베 파이어스토어 사용을 위한 객체
 final firestore = FirebaseFirestore.instance;
 
@@ -42,7 +44,7 @@ class _ClubsState extends State<Clubs> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            'Clubs',
+            'Clubs', style: onCampusAppBarStyle(),
           ),
           ),
 
@@ -58,7 +60,8 @@ class _ClubsState extends State<Clubs> {
                   children: [
                     Text('How to join?', style: TextStyle(
                         color: Colors.black,
-                        fontSize: 25.sp
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18.sp
                     )),
                     Card(
                       elevation: 1,
@@ -78,7 +81,8 @@ class _ClubsState extends State<Clubs> {
 
                     Text("\n"'List', style: TextStyle(
                         color: Colors.black,
-                        fontSize: 25.sp
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18.sp
                     )),
                   ],
                 ),

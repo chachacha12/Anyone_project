@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../various_widget.dart';
+
 ///공지사항들 디테일하게 보여주는 위젯
 class Notice extends StatefulWidget {
   const Notice(this.notice_document, {Key? key}) : super(key: key);
@@ -24,6 +26,7 @@ class _NoticeState extends State<Notice> {
         slivers: [
           SliverAppBar(title: Text(
             widget.notice_document['title'], maxLines: 3,
+            style: onCampusAppBarStyle(),
           ),
               //backgroundColor: Colors.transparent,
               centerTitle: true,

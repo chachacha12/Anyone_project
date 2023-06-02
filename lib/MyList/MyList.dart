@@ -5,6 +5,7 @@ import 'package:anyone/MyList/MyListPages/RestaurantMyList.dart';
 import 'package:anyone/home/aroundcampus_content/Food%20&%20Drinks/restaurant/Restaurant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../various_widget.dart';
 import 'MyListPages/CafeMyList.dart';
 import 'MyListPages/GroceryMyList.dart';
 
@@ -23,7 +24,7 @@ class _MyListState extends State<MyList> {
       length: 6,
       child: Scaffold(
           appBar: AppBar(
-            title: Text('My List', style: TextStyle(color: Colors.black)),
+            title: Text('My List', style:onCampusAppBarStyle()),
            // toolbarHeight: 20.h, ///탭바의 전체적인 길이를 조절
             bottom: TabBar(
               isScrollable: true,

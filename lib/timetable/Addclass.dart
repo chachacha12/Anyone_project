@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../Provider/Provider.dart';
 import '../main.dart';
+import '../various_widget.dart';
 import 'Timetable.dart';
 
 
@@ -169,9 +170,7 @@ class _AddclassState extends State<Addclass> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 60.h,
-        title: Text('Create New Class', style: TextStyle(
-          fontSize: 17.sp
-        ),),
+        title: Text('Add your class', style: onCampusAppBarStyle(),),
         elevation: 0,
         centerTitle: false,
         actions: [
@@ -265,7 +264,7 @@ class _AddclassState extends State<Addclass> {
                     style: getButtonStyle(),
                     child: Text(starttime_btn, style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 15.sp,
+                      fontSize: 13.sp,
                     ),),
                     onPressed: () {
                       showTimePickerPop(0);
@@ -279,7 +278,7 @@ class _AddclassState extends State<Addclass> {
                     style: getButtonStyle(),
                     child: Text(endtime_btn, style: TextStyle(
                       fontWeight: FontWeight.w400,
-                      fontSize: 15.sp,
+                      fontSize: 13.sp,
                     ),),
                     onPressed: () {
                       showTimePickerPop(1);
@@ -347,7 +346,7 @@ class _AddclassState extends State<Addclass> {
 getTextFieldStyle(hint) {
   return InputDecoration(
     labelText: hint,
-    labelStyle: TextStyle(fontSize: 13.sp, color: Colors.black),
+    labelStyle: TextStyle(fontSize: 13.sp,  color: Color(0xff706F6F),),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4.w),
       borderSide: BorderSide(
@@ -368,7 +367,7 @@ getTextFieldStyle(hint) {
 ///start time과 end time 버튼의 스타일값 반환함수
 getButtonStyle() {
   return OutlinedButton.styleFrom(
-      primary: Colors.black, // 글자, 애니메이션 색상
+      primary: Color(0xff706F6F), // 글자, 애니메이션 색상
       backgroundColor: Colors.white, // 배경 색상
       side: BorderSide(
           color: Colors.black,

@@ -12,6 +12,8 @@ import '../main.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
+import '../various_widget.dart';
+
 //회원가입 및 로그인한 유저의 정보를 보여주는 페이지
 class My extends StatefulWidget {
   const My({Key? key}) : super(key: key);
@@ -217,7 +219,7 @@ class _MyState extends State<My> {
           //SliverAppBar title
           title: Text("Hello, ${context
               .watch<Store1>()
-              .username} !", style: TextStyle(color: Colors.black),),
+              .username} !", style: onCampusAppBarStyle(),),
           //SliverAppBar 영역을 고정시킨다. default false
           pinned: true,
           // AppBar가 하단 List 내렸을 때 바로 보여야 한다 -> true

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../various_widget.dart';
+
 
 
 //학교 연락망 리스트를 보여주는 커스텀 위젯 - customScrollView로 앱바포함 모두 자연스러운 스크롤 되도록 함
@@ -37,7 +39,7 @@ class Contact extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            'School Contact',
+            'School Contact', style: onCampusAppBarStyle(),
           ),
           ),
 
@@ -53,11 +55,12 @@ class Contact extends StatelessWidget {
                   children: [
                     Text('Contact Us', style: TextStyle(
                         color: Colors.black,
-                        fontSize: 23.sp
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18.sp
                     )),
                     Card(
                       elevation: 1,
-                      margin: EdgeInsets.fromLTRB(0, 10.h, 0, 0.h),
+                      margin: EdgeInsets.fromLTRB(0, 10.h, 0, 20.h),
                       child: ListTile(
                         title: Text('< Anyone >\n', style: Theme.of(context).textTheme.titleMedium),
                         subtitle: Text('exchangestudents0906@gmail.com'),
@@ -70,7 +73,8 @@ class Contact extends StatelessWidget {
 
                     Text("\n"'School Contact', style: TextStyle(
                         color: Colors.black,
-                        fontSize: 23.sp
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18.sp
                     )),
                   ],
                 ),

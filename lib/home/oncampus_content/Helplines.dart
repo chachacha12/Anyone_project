@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../various_widget.dart';
+
 
 class Helplines extends StatelessWidget {
   Helplines({Key? key}) : super(key: key);
@@ -57,7 +59,7 @@ class Helplines extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            'Helplines',
+            'Helplines', style: onCampusAppBarStyle(),
           ),
           ),
 
@@ -73,12 +75,13 @@ class Helplines extends StatelessWidget {
                             vertical: 10.h, horizontal: 20.w),
                         child: ListTile(
                           title: Text(contact_list[index][0], style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16.sp
                           )),
                           subtitle: Text(contact_list[index][1], style: TextStyle(
                               fontSize: 14.sp,
-                            color: Colors.black45
+                            color: Color(0xff706F6F),
                           ),),
                             trailing: Icon(Icons.phone_forwarded),
                           onTap: () {
