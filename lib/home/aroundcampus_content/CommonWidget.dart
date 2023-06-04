@@ -95,7 +95,7 @@ getEmptyList(){
   return Container(
     alignment: Alignment.center,
     child: Text(
-      'Press the Like button on the OFF campus,''\n''Try to make your own favorite list',
+      'Click the Like button on the OFF campus,''\n''Make your own favorite list',
       textAlign: TextAlign.center,
       style: TextStyle(
         fontSize: 13.sp,

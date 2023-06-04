@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Provider/Provider.dart';
 import '../main.dart';
+import '../various_widget.dart';
 import 'checkvalidate.dart';
 import 'signup.dart';
 import 'package:flutter/cupertino.dart';
@@ -145,10 +146,11 @@ class _authenticState extends State<authentic> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
 
+
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Sign In'), //APP BAR 만들기
+        title: Text('Sign In', style: onCampusAppBarStyle(),), //APP BAR 만들기
 
       ),
 
@@ -213,10 +215,10 @@ class _authenticState extends State<authentic> {
                       margin: EdgeInsets.fromLTRB(0.h, 15.h, 0.h, 7.h),
                       padding:  EdgeInsets.symmetric(horizontal: 60.0.h),
                       child: SizedBox(
-                        height: 40.h,
+                        height: 35.h,
                         child: ElevatedButton(
                           style:  ElevatedButton.styleFrom(
-                            primary: Colors.green
+                            primary:Color(0xff397D54)
                            ),
                           child: Text(
                             "Sign In",
@@ -253,7 +255,7 @@ class _authenticState extends State<authentic> {
                               'Register',
                               style: TextStyle(
                                 //decoration: TextDecoration.underline,
-                                color: Colors.green,
+                                color: Color(0xff397D54),
                                 fontSize: 14.sp,
                               ),
                             ),

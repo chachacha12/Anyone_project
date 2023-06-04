@@ -57,6 +57,7 @@ class _TimetableState extends State<Timetable> {
   deleteData(index) async {
     //shared pref에서 삭제
     var storage = await SharedPreferences.getInstance();
+
     storage.remove('class'+index.toString());
     //store에서 삭제
     context.read<Store1>().deleteMeetingsData(index);
@@ -153,11 +154,12 @@ class _TimetableState extends State<Timetable> {
                           gravity: ToastGravity.BOTTOM,
                         );
                     },
-                    child: Text('Delete Class',style: TextStyle(color: Color(0xff73c088)), )),
+                    child: Text('Delete Class',style: TextStyle(color: Colors.red), )),
 
                 TextButton(
                   ///canel버튼
                     onPressed: () {
+                      Navigator.of(context).pop();
                     },
                     child: Text('OK',style: TextStyle(color: Color(0xff73c088)), )),
 

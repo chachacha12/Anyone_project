@@ -156,7 +156,8 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
                               fit: BoxFit.cover,),
                           ),
                           Positioned(child: Text(' '+
-                              restaurant_collection[restaurant_random_list[index]]['name'],
+                              restaurant_collection[restaurant_random_list[index]]['name'].toString().replaceAll(
+                                  "\\n", "\n"),
                             maxLines: 2,
                             style: TextStyle(color: Colors.white,
                                 fontSize: 13.sp,
@@ -213,7 +214,8 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
                               fit: BoxFit.cover,),
                           ),
                           Positioned(child: Text(' '+
-                              cafe_collection[cafe_random_list[index]]['name'],
+                              cafe_collection[cafe_random_list[index]]['name'].toString().replaceAll(
+                                  "\\n", "\n"),
                             maxLines: 2,
                             style: TextStyle(color: Colors.white,
                                 fontSize: 13.sp,
@@ -270,7 +272,8 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
                               fit: BoxFit.cover,),
                           ),
                           Positioned(child: Text(' '+
-                              pub_collection[pub_random_list[index]]['name'],
+                              pub_collection[pub_random_list[index]]['name'].toString().replaceAll(
+                                  "\\n", "\n"),
                             maxLines: 2,
                             style: TextStyle(color: Colors.white,
                                 fontSize: 13.sp,

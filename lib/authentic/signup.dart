@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../various_widget.dart';
 import 'checkvalidate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
@@ -114,7 +115,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text("Register", style: onCampusAppBarStyle(),),
       ),
       body: Container(
         color: Colors.white,
@@ -236,10 +237,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     margin: EdgeInsets.fromLTRB(0.h, 15.h, 0.h, 10.h),
                     padding: EdgeInsets.symmetric(horizontal: 60.0.h),
                     child: SizedBox(
-                      height: 40.h,
+                      height: 35.h,
                       child: ElevatedButton(
                         style:  ElevatedButton.styleFrom(
-                            primary: Colors.green
+                            primary: Color(0xff397D54)
                         ),
                         child: Text(
                           "Register",
@@ -277,7 +278,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     'Go to Sign in page', textAlign: TextAlign.center,
                     style: TextStyle(
                       decoration: TextDecoration.underline,
-                      color: Colors.green,
+                      color: Color(0xff397D54),
                       fontSize: 14.sp,
                     ),
                   ),

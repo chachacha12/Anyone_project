@@ -452,7 +452,7 @@ getCategory(context){
                       children: [
                         getIconBox(Icon(Icons.calendar_month, size: 25.h,
                           color: Colors.white,)),
-                        Text('Academic'"\n"'Calender',
+                        Text('Academic'"\n"'Calendar',
                             textAlign: TextAlign.center,
                             style: iconTitleTextstyle),
                       ],

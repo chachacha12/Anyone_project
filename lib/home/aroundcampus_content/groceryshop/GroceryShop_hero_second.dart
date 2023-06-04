@@ -41,7 +41,8 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(title: Text(
-            widget.grocery_document['name'],
+            widget.grocery_document['name'].toString().replaceAll(
+          "\\n", "\n"),
             style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
               //backgroundColor: Colors.transparent,

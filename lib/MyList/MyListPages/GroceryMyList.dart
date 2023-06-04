@@ -66,16 +66,16 @@ class _GroceryMyListState extends State<GroceryMyList> {
               .spaceAround,
             children: [
               TextButton(onPressed: () {
+                Navigator.of(context).pop();
+              },
+                  child: Text('No', style: TextStyle(
+                      color: Colors.green),)),
+              TextButton(onPressed: () {
                 ///삭제로직 적어줌
                 deleteDoc(index);
                 Navigator.of(context).pop();
               },
                   child: Text('Yes', style: TextStyle(
-                      color: Colors.green),)),
-              TextButton(onPressed: () {
-                Navigator.of(context).pop();
-              },
-                  child: Text('No', style: TextStyle(
                       color: Colors.green),)),
             ],)
         ],

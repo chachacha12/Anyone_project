@@ -147,6 +147,7 @@ class _SplashState extends State<Splash> {
                   backgroundColor: Colors.white,
                   radius: 60.r,
                   child: Image.asset(
+                    alignment: Alignment.center,
                     imageLogoName,
                     width: screenWidth * 2.916666,
                     height: screenHeight * 2.9859375,
@@ -155,8 +156,18 @@ class _SplashState extends State<Splash> {
 
                 //Expanded(child: SizedBox()),
                 SizedBox( height: 20.h),
+
                 Align(
-                  child: LoopAnimationBuilder<double>(
+                  child: Text("ANYONE", textAlign: TextAlign.center,
+                      style: TextStyle(color: Color(0xff397D54),
+                          fontSize: screenWidth*( 21/360))
+                  ),
+                ),
+
+
+                /*
+                ///글자 점점 커지게 애니메이션
+                LoopAnimationBuilder<double>(
                     tween: Tween(begin: 0.0, end: 1.5),
                     duration: const Duration(seconds: 3),
                     curve: Curves.decelerate,
@@ -171,7 +182,7 @@ class _SplashState extends State<Splash> {
                             fontSize: screenWidth*( 23/360))
                     ),
                   ),
-                ),
+                 */
 
                 SizedBox( height: MediaQuery.of(context).size.height*0.0625,),
               ],

@@ -10,6 +10,8 @@ import '../authentic/login.dart';
 final List<String> imgList = [
   'assets/AppExplain/appExplain1.png',
   'assets/AppExplain/appExplain2.png',
+  'assets/AppExplain/appExplain3.png',
+  'assets/AppExplain/appExplain4.png',
   'assets/AppExplain/appExplain5.png',
 ];
 
@@ -19,7 +21,7 @@ final List<String> textList = [
   'Look around the local places around the school recommended by students.', //오프캠퍼스
   'Check your class schedule easily and quickly.', //시간표
   'Save the places you want to go and visit there anytime.', //찜페이지
-  'Check the D-Day left until the departure.', // 디데이 기능
+  'Check the D-Day left until the departure.\n', // 디데이 기능
 ];
 
 class AppExplain extends StatefulWidget {
@@ -92,7 +94,7 @@ class _AppExplainState extends State<AppExplain> {
                   Text(textList[currentIndex], textAlign: TextAlign.center,style: TextStyle(
                       color: Colors.black,
                       fontSize: 18.sp,
-                      fontWeight: FontWeight.bold
+                      fontWeight: FontWeight.w600
                   )
                     ,),
                 ],
@@ -106,8 +108,8 @@ class _AppExplainState extends State<AppExplain> {
               decorator: DotsDecorator(
                 color: Colors.grey,  // Inactive color
                 activeColor: Color(0xff73c088),
-                size: const Size.square(6.0),
-                activeSize: const Size(7.0, 7.0),
+                size: const Size.square(8.0),
+                activeSize: const Size(8.0, 8.0),
               ),
             ),
 
@@ -128,9 +130,7 @@ class _AppExplainState extends State<AppExplain> {
                         //child 정렬 - 아래의 Text('$test')
                         alignment: Alignment.center,
                     ),
-                    child: Text('pre', textAlign: TextAlign.center,style: TextStyle(
-                      fontSize: 15.sp
-                    ),),
+                    child: Icon(Icons.arrow_back),
                     onPressed: () {
                       buttonCarouselController.previousPage(
                           duration: Duration(milliseconds: 300), curve: Curves.linear);
@@ -148,10 +148,15 @@ class _AppExplainState extends State<AppExplain> {
                       //child 정렬 - 아래의 Text('$test')
                       alignment: Alignment.center,
                     ),
-                    child: Text('start', textAlign: TextAlign.center,style: TextStyle(
-                        fontSize: 16.sp
+                    child: Text('Start', textAlign: TextAlign.center,style: TextStyle(
+                        fontSize: 15.sp
                     ),),
                     onPressed: () {
+                      /*
+                      Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                      print('스택 다지우기 진행 ####');
+                       */
+
                       Navigator.push(context, MaterialPageRoute(
                           builder: (context) =>
                               authentic()));
@@ -167,9 +172,7 @@ class _AppExplainState extends State<AppExplain> {
                       //child 정렬 - 아래의 Text('$test')
                       alignment: Alignment.center,
                     ),
-                    child: Text('next', textAlign: TextAlign.center,style: TextStyle(
-                        fontSize: 15.sp
-                    ),),
+                    child:  Icon(Icons.arrow_forward),
                     onPressed: () {
                       buttonCarouselController.nextPage(
                           duration: Duration(milliseconds: 300), curve: Curves.linear);

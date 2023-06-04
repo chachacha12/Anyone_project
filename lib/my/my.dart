@@ -30,7 +30,7 @@ class _MyState extends State<My> {
     path: 'exchangestudents0906@gmail.com',
   );
 
-  //sharedpref에 유저 한국 도착날짜 저장하기
+  ///sharedpref에 유저 한국 도착날짜 저장하기
   saveArrivalData(arrivalDate) async {
     var storage = await SharedPreferences.getInstance();
     storage.setString('arrival_date', arrivalDate);
@@ -39,7 +39,7 @@ class _MyState extends State<My> {
   }
 
 
-  //sharedpref에 유저 떠나는 날짜 저장하기
+  ///sharedpref에 유저 떠나는 날짜 저장하기
   saveDepartureData(departureDate) async {
     var storage = await SharedPreferences.getInstance();
     storage.setString('departure_date', departureDate);
@@ -47,7 +47,7 @@ class _MyState extends State<My> {
     context.read<Store1>().ChangeDepartureDate(departureDate);
   }
 
-  //sharedpref에 유저가 저장해둔 도착일과 떠나는 날짜 가져오기 - initState()에서 실행
+  ///sharedpref에 유저가 저장해둔 도착일과 떠나는 날짜 가져오기 - initState()에서 실행
   getData() async {
     var storage = await SharedPreferences.getInstance();
 
@@ -191,11 +191,31 @@ class _MyState extends State<My> {
     return dateTime;
   }
 
-  //sharedpref에 유저정보 삭제
-  deleteData(name) async {
+  ///sharedpref에 유저정보 삭제
+  deleteUserData(name) async {
     var storage = await SharedPreferences.getInstance();
     storage.remove('name');
   }
+
+  ///sharedpref에서 시간표 정보 삭제
+  deleteScheduleData() async {
+    print('my 에서 시간표 삭제로직 진행 @@@@@');
+    var storage = await SharedPreferences.getInstance();
+
+    //총 저장가능한 수업의 갯수만큼 반복문
+    for (int index = 0; index < 15; index++) {
+      //만약 리스트의 특정 인덱스에 값이 있다면 shared pref에서 삭제진행
+      if (storage.containsKey('class' + index.toString())) {
+        storage.remove('class' + index.toString());
+
+        //store에서도 삭제
+        context.read<Store1>().deleteMeetingsData(index);
+        print('로그아웃 or 탈퇴할때 My.dar안의 deleteScheduleData 통해 shared pref에서 삭제:  class' + index.toString());
+      }
+    }
+   // Navigator.of(context).pop();
+  }
+
 
   @override
   void initState() {
@@ -409,14 +429,18 @@ class _MyState extends State<My> {
                             .spaceAround,
                           children: [
                             TextButton(onPressed: () async {
-                              await auth.signOut(); //파베에서 로그아웃
+                              ///로그아웃할때 로직 진행
+                              await auth.signOut(); /// 1.파베에서 로그아웃
                               var name = context
                                   .read<Store1>()
                                   .username;
-                              deleteData(
-                                  name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯. 이름만 보고 로그인됫는지 판별하니?
+                              deleteUserData(
+                                 name); /// 2.sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯. 이름만 보고 로그인됫는지 판별하니?
 
-                              //로그인으로 페이지 이동
+                              /// 3.shared pref에서 시간표 정보 삭제
+                              deleteScheduleData();
+
+                              ///로그인으로 페이지 이동
                               Navigator.push(context,
                                   CupertinoPageRoute(builder: (c) =>
                                       authentic())
@@ -463,15 +487,21 @@ class _MyState extends State<My> {
                             .spaceAround,
                           children: [
                             TextButton(onPressed: () async {
-                              //현재 로그인된 파베유저 계정 삭제로직
+                              /// 탈퇴로직
+                              ///1. 현재 로그인된 파베유저 계정 삭제로직
                               await FirebaseAuth.instance.currentUser
                                   ?.delete();
                               var name = context
                                   .read<Store1>()
                                   .username;
-                              deleteData(
-                                  name); //sharedpref에서도 유저 정보 삭제 - 이름값만 삭제해도 될듯.
-                              //로그인으로 페이지 이동
+                              /// 2.sharedpref에서 유저 정보 삭제 - 이름값만 삭제해도 될듯.
+                              deleteUserData(
+                                  name);
+
+                              /// 3.shared pref에서 시간표 정보 삭제
+                              deleteScheduleData();
+
+                              ///로그인으로 페이지 이동
                               Navigator.push(context,
                                   CupertinoPageRoute(builder: (c) =>
                                       authentic())
