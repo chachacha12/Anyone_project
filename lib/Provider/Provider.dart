@@ -2,6 +2,91 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
+
+/// 식당, 카페 등 파베에서 가져온 컨텐츠들을 보관하는 store
+class ContentsStore extends ChangeNotifier{
+
+  ///온캠퍼스 컨텐츠들  - 2가지
+  /// 1. whats up 컬렉션
+  var whatsUpCollection;
+  getWhatsUpCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    whatsUpCollection = collection;
+    notifyListeners();
+  }
+
+  /// 2. Facility 컬렉션
+  var facilityCollection;
+  getFacilityCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    facilityCollection = collection;
+    notifyListeners();
+  }
+
+
+  /// 오프캠퍼스 컨텐츠들 - 3가지
+  /// -> 식당, 카페, 펍은 tabBar에 있는게 아니라 따로 세부페이지에 존재해서 페이지 열때마다 파베 접근함. 그래서 store에 저장해서 써줌
+  /// 1.식당 컬렉션
+  var restaurantCollection;
+  getRestaurantCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    restaurantCollection = collection;
+    notifyListeners();
+  }
+
+  /// 2.카페 컬렉션
+  var cafeCollection;
+  getCafeCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    cafeCollection = collection;
+    notifyListeners();
+  }
+
+  /// 3.펍 컬렉션
+  var pubCollection;
+  getPubCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    pubCollection = collection;
+    notifyListeners();
+  }
+
+/*  ///아래의 3개 컨텐츠들은 tabBar로 이동하며 상태유지가 계속되기때문에 파베에서 데이터 계속 안가져옴. 그래서 store저장 일단 안함
+  /// 4.식료품 컬렉션
+  var groceryCollection;
+  getGroceryCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    groceryCollection = collection;
+    notifyListeners();
+  }
+
+  /// 5. 엔터 컬렉션
+  var enterCollection;
+  getEnterCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    enterCollection = collection;
+    notifyListeners();
+  }
+
+  /// 6. 패션 컬렉션
+  var fashionCollection;
+  getFashionCollection(collection){ // 푸드엔 드링크 페이지 에서 이 함수 실행해서 문서들 리스트 저장해줌
+    fashionCollection = collection;
+    notifyListeners();
+  }
+ */
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ///찜목록 관련 state들을 저장해주는 store
 class MyListStore extends ChangeNotifier{
 
@@ -111,11 +196,10 @@ class MyListStore extends ChangeNotifier{
     print('provider에서 삭제');
     notifyListeners();
   }
-
 }
 
 
-///state 보관하는 클래스
+///state 보관하는 클래스 - 시간표, 유저이름, 페이지전환탭, 출국일&도착일&퍼센트 값 등
 class Store1 extends ChangeNotifier{
 
   //시간표의 수업요소들 색깔 15가지

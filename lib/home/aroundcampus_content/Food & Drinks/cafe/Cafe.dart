@@ -33,13 +33,12 @@ class _CafeState extends State<Cafe>  {
     getData();
   }
 
+  ///식당, 카페, 펍 컨텐츠는 푸드앤드링크 페이지에서 이미 파베에서 값을 가져왔고 store에도 저장되어있으니 바로 store에서 가져오면됨
   getData() async {
-    //컨텐츠 보여주기 위해 가져오는 데이터들
-    var result = await firestore.collection('cafe').get();
-
+    print('store에서 카페데이터 가져옴 ####');
     setState(() {
-      Cafe_collection = result.docs; //컬랙션안의 문서리스트를 저장
-      count = result.size; //컬랙션안의 문서갯수를 가져옴
+      Cafe_collection = context.read<ContentsStore>().cafeCollection; //컬랙션안의 문서리스트를 저장
+      count =Cafe_collection.length; //컬랙션안의 문서갯수를 가져옴
     });
     makeMyList();
   }

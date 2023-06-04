@@ -36,9 +36,7 @@ class _FashionState extends State<Fashion> with AutomaticKeepAliveClientMixin {
   }
 
   getData() async {
-    //컨텐츠 보여주기 위해 가져오는 데이터들
     var result = await firestore.collection('fashion').get();
-
     setState(() {
       fashion_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴

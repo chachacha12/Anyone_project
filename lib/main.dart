@@ -39,6 +39,7 @@ void main() async {
 
   runApp(
       MultiProvider(providers: [ //store를 여러개 등록해둘 수 있음
+        ChangeNotifierProvider(create: (c) => ContentsStore()),
         ChangeNotifierProvider(create: (c) => Store1()),
         ChangeNotifierProvider(create: (c) => MyListStore()),
       ],

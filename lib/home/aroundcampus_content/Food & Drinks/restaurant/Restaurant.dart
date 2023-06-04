@@ -22,7 +22,7 @@ class Restaurant extends StatefulWidget {
 
 
 class _RestaurantState extends State<Restaurant> {
-  var Restaurant_collection; //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
+  var Restaurant_collection; //Store로 받아올 문서들 리스트를 여기에 넣어줄거임
   var count = 0;
   var imgList = []; //이미지들 주소 string값을 저장해줄 리스트
   var isMyList = []; //어떤 index의 컨텐츠가 찜한 컨텐츠인지 확인해서 색상아이콘 넣어주기 위함
@@ -33,13 +33,13 @@ class _RestaurantState extends State<Restaurant> {
     getData();
   }
 
+  ///식당, 카페, 펍 컨텐츠는 푸드앤드링크 페이지에서 이미 파베에서 값을 가져왔고 store에도 저장되어있으니 바로 store에서 가져오면됨
   getData() async {
     //컨텐츠 보여주기 위해 가져오는 데이터들
-    var result = await firestore.collection('restaurant').get();
-
+    print('store에서 식당데이터 가져옴 ####');
     setState(() {
-      Restaurant_collection = result.docs; //컬랙션안의 문서리스트를 저장
-      count = result.size; //컬랙션안의 문서갯수를 가져옴
+      Restaurant_collection =  context.read<ContentsStore>().restaurantCollection; //컬랙션안의 문서리스트를 저장
+      count = Restaurant_collection.length; //컬랙션안의 문서갯수를 가져옴
     });
     makeMyList();
   }

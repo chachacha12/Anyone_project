@@ -34,16 +34,16 @@ class _PubState extends State<Pub> {
     getData();
   }
 
+  ///식당, 카페, 펍 컨텐츠는 푸드앤드링크 페이지에서 이미 파베에서 값을 가져왔고 store에도 저장되어있으니 바로 store에서 가져오면됨
   getData() async {
-    //컨텐츠 보여주기 위해 가져오는 데이터들
-    var result = await firestore.collection('pub').get();
-
+    print('store에서 펍데이터 가져옴 ####');
     setState(() {
-      Pub_collection = result.docs; //컬랙션안의 문서리스트를 저장
-      count = result.size; //컬랙션안의 문서갯수를 가져옴
+      Pub_collection = context.read<ContentsStore>().pubCollection; //컬랙션안의 문서리스트를 저장
+      count =Pub_collection.length; //컬랙션안의 문서갯수를 가져옴
     });
     makeMyList();
   }
+
 
   ///isMyList 리스트에 값을 채워주는 함수.  어떤 index의 컨텐츠가 찜한 컨텐츠인지 확인해서 찜한컨텐츠만 색아이콘 보여주고, 클릭시 실시간으로 아이콘 색 변경해주기 위한작업
   makeMyList() {

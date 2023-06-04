@@ -4,6 +4,8 @@ import 'package:anyone/home/aroundcampus_content/Food%20&%20Drinks/restaurant/Re
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import '../../../Provider/Provider.dart';
 import '../../../loading/shimmerloadinglist.dart';
 import 'cafe/Cafe_more.dart';
 
@@ -19,6 +21,7 @@ class FoodDrinkPub extends StatefulWidget {
 }
 
 class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClientMixin {
+
 
   ///식당관련 state들
   late bool _isLoading = false; //늦은 초기화 해줌
@@ -42,11 +45,14 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
   var pub_random_list = [];
 
 
-  ///식당 데이터 받아오는 함수
+  ///식당 데이터 받아오는 함수. - AutomaticKeepAliveClientMixin 이걸로 상태유지시키기 때문에 한번 받아온 값 계속씀
   getData1() async {
-    print('식당데이터 getData실행됨 @@@');
+    print('푸드앤 드링크에서 식당데이터 파베에서 가져오고 store저장 @@@');
     _isLoading = true; //여기서 로딩변수 초기화
+    ///파베에서 데이터 가져옴, 그 후 store에 값 저장
     var result = await firestore.collection('restaurant').get();
+    //파베에서 가져온 값을 store에 저장
+    context.read<ContentsStore>().getRestaurantCollection(result.docs);
     setState(() {
       _isLoading = false; //데이터받기 끝나면 로딩화면 꺼줌
       restaurant_collection = result.docs; //컬랙션안의 문서리스트를 저장
@@ -56,14 +62,17 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
     for (int i = 0; i < count; i++) {
       restaurant_random_list.add(i);
     }
-    restaurant_random_list.shuffle(); //리스트를 랜덤하게 섞어줌
+    restaurant_random_list.shuffle(); //리스트를 랜덤하게
   }
 
   ///카페 데이터 받아오는 함수
   getData2() async {
-    print('카페데이터 getData실행됨 @@@');
+    print('푸드앤 드링크에서 카페데이터 파베에서 가져오고 store저장 @@@');
     _isLoading2 = true; //여기서 로딩변수 초기화
     var result = await firestore.collection('cafe').get();
+    //파베에서 가져온 값을 store에 저장
+    context.read<ContentsStore>().getCafeCollection(result.docs);
+
     setState(() {
       _isLoading2 = false; //데이터받기 끝나면 로딩화면 꺼줌
       cafe_collection = result.docs; //컬랙션안의 문서리스트를 저장
@@ -77,9 +86,12 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
 
   ///펍 데이터 받아오는 함수
   getData3() async {
-    print('펍데이터 getData실행됨 @@@');
+    print('푸드앤 드링크에서 펍데이터 파베에서 가져오고 store저장 @@@');
     _isLoading3 = true; //여기서 로딩변수 초기화
     var result = await firestore.collection('pub').get();
+    //파베에서 가져온 값을 store에 저장
+    context.read<ContentsStore>().getPubCollection(result.docs);
+
     setState(() {
       _isLoading3 = false; //데이터받기 끝나면 로딩화면 꺼줌
       pub_collection = result.docs; //컬랙션안의 문서리스트를 저장

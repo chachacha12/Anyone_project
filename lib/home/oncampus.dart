@@ -54,6 +54,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
 
 
   getData() async {
+    print('온캠 - 공지사항과 팁들 파베에서 가져옴@@');
     _isNoticeLoading = true; //여기서 공지사항 로딩화면뜸
     _isTipLoading = true; //여기서 데이터 로딩화면 뜸
     var result = await firestore.collection('notice').get();

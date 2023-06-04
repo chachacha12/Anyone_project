@@ -31,8 +31,8 @@ class _InfoState extends State<Info>  {
                    automaticallyImplyLeading: false, ///자동으로 생기는 뒤로가기 키 삭제
                    toolbarHeight:25.h,
                    backgroundColor: Color(0xff73c088),
-                   leadingWidth: 85.w,
-                   leading: Image.asset('assets/appBar.png', fit: BoxFit.fill,width: 50.w),
+                   leadingWidth: 90.w,
+                   leading: Image.asset('assets/appBar.png', fit: BoxFit.contain ,width: 40.w),
                   // title:   Text('Anyone', style: TextStyle(color: Colors.black)),
                    pinned: true,
                   floating: true,
