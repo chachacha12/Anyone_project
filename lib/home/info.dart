@@ -29,12 +29,12 @@ class _InfoState extends State<Info>  {
               return <Widget>[
                  SliverAppBar(
                    automaticallyImplyLeading: false, ///자동으로 생기는 뒤로가기 키 삭제
-                   //flexibleSpace: Image.asset('assets/duck.PNG',),
-                   //leading: Icon(Icons.add_box, size: 40.h),
-                   toolbarHeight: 20.h,
+                   toolbarHeight:25.h,
                    backgroundColor: Color(0xff73c088),
-                  //title: Text('Anyone', style: TextStyle(color: Colors.black)),
-                  pinned: true,
+                   leadingWidth: 85.w,
+                   leading: Image.asset('assets/appBar.png', fit: BoxFit.fill,width: 50.w),
+                  // title:   Text('Anyone', style: TextStyle(color: Colors.black)),
+                   pinned: true,
                   floating: true,
                   bottom: TabBar(
                     isScrollable: true,
@@ -43,14 +43,14 @@ class _InfoState extends State<Info>  {
                       Tab(text: '    OFF'+'\n'+'campus',)
                     ],
                     indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorWeight: 1,
+                    indicatorWeight: 0.1,
                     indicatorColor: Color(0xff73c088),
                     unselectedLabelColor: Color(0xff397D54),
                     labelColor: Colors.white,
-                    unselectedLabelStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500,
+                    unselectedLabelStyle: TextStyle(fontSize: 13.sp, fontWeight: FontWeight.w500,
                         fontFamily:'roboto'),
                     labelStyle: TextStyle(
-                        fontSize:16.sp, fontWeight: FontWeight.w500, fontFamily:'roboto'),
+                        fontSize:14.sp, fontWeight: FontWeight.w500, fontFamily:'roboto'),
                   ),
                 ),
               ];
