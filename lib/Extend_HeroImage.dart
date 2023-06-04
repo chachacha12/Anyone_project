@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
 
-//사진 이미지 클릭시 하나의 이미지 전체화면으로 나오고 줌인해서 볼 수 있게 해주는 위젯
+///사진 이미지 클릭시 하나의 이미지 전체화면으로 나오고 줌인해서 볼 수 있게 해주는 위젯
+///여러 이미지들의 주소값 받아서 옆으로 슬라이드 할 수 있게 해줌. 사진 하나면 하나만 보여줌
 class Extend_HeroImage extends StatefulWidget {
   Extend_HeroImage(this.ImagepathList, this.index, {Key? key}) : super(key: key);
   final ImagepathList;
