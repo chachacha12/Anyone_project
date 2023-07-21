@@ -2,6 +2,7 @@ import 'package:anyone/loading/shimmercard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///tips의 박스들 크기정도의 3개 박스들 로딩중일때
 class ShimmerLoadingList extends StatelessWidget {
   const ShimmerLoadingList({
     Key? key,

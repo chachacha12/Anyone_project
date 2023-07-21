@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:anyone/home/oncampus_content/CampusMap.dart';
 import 'package:anyone/home/oncampus_content/Helplines.dart';
 import 'package:anyone/home/oncampus_content/Notice.dart';
+import 'package:anyone/loading/shimmercard.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -47,10 +50,11 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
   int currentIndex = 0; //공지사항 캐러셀 사진 슬라이더에 indicator를 달아주기위한 변수
   late List<Widget> imageSliders;
   dynamic notice_document;
+
   ///팁 데이터를 위해 필요한 변수들
   late bool _isTipLoading = false; // 팁 데이터 가져올때 늦은 초기화
   var tipsCollection;
-  var tipsCount=0;  //팁 문서의 전체 갯수
+  var tipsCount = 0; //팁 문서의 전체 갯수
 
 
   getData() async {
@@ -61,10 +65,9 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
     var result2 = await firestore.collection('tips').get();
 
     setState(() {
-      _isNoticeLoading = false; //공지사항 데이터받기 끝나면 로딩화면 꺼줌
-      _isTipLoading = false; //팁 데이터
       noticeCollection = result.docs; //공지사항 컬랙션안의 문서리스트를 저장
       tipsCollection = result2.docs; //팁 컬렉션
+
     });
 
     //공지사항 컬렉션안의 문서값을 가져와서 첫번째 이미지들을 저장 (캐러셀슬라이드에 띄우기위함)
@@ -76,9 +79,17 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
     imageSliders = Make_imagesliders(noticeImgList);
 
     //팁 문서의 전체 갯수를 저장해줌. 리스트만들때 필요
-    for(var doc in tipsCollection){
+    for (var doc in tipsCollection) {
       tipsCount++;
     }
+
+    //몇초뒤에 동작 수행하도록 함
+    Future.delayed(const Duration(milliseconds: 1200), () {
+      setState(() {
+        _isNoticeLoading = false; //공지사항 데이터받기 끝나면 로딩화면 꺼줌
+        _isTipLoading = false; //팁 데이터
+      });
+    });
   }
 
   @override
@@ -98,7 +109,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
 
           ///what's up 텍스트위젯 + 공지사항 카드들
           SizedBox(
-            height: 320.h,
+            height: 280.h,
             child: Column(
               children: [
 
@@ -108,11 +119,11 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                       children: [
                         Positioned(
                           //top: 50,
-                          child:    Container(
+                          child: Container(
                             //color: Colors.grey,
                             margin: EdgeInsets.fromLTRB(25.w, 22.h, 0, 7.h),
                             alignment: Alignment.centerLeft,
-                            child:Text('What' + "'" + 's up', style: TextStyle(
+                            child: Text('What' + "'" + 's up', style: TextStyle(
                                 color: Color(0xff397D54),
                                 fontSize: 22.sp,
                                 fontWeight: FontWeight.w500
@@ -124,27 +135,27 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                   ],
                 ),
 
-
                 ///공지사항 카드들 CarouselSlider위젯과 dotsindicator
-                _isNoticeLoading ? Container() :
+                _isNoticeLoading ? ShimmerCard2() :
+
                 Container(
                     margin: EdgeInsets.fromLTRB(0.h, 0.h, 0.h, 0.h),
                     child: Column( //캐러셀 슬라이드와 indicator 들어감
                       children: [
                         GestureDetector(
-                          onTap: (){
+                          onTap: () {
                             notice_document =
                             noticeCollection[currentIndex]; //선택한 팁 컨텐츠 문서하나를 전환될 페이지에 보내주기위해 저장
                             Navigator.push(context, MaterialPageRoute(
                                 builder: (context) => Notice(notice_document))
                             );
                           },
-                          child:  CarouselSlider( //이미지슬라이드 해주는 위젯
+                          child: CarouselSlider( //이미지슬라이드 해주는 위젯
                             options: CarouselOptions(
                                 autoPlay: true,
                                 autoPlayAnimationDuration: Duration(
                                     milliseconds: 800),
-                                height: 200.h,
+                                height: 180.h,
                                 viewportFraction: 0.9,
                                 aspectRatio: 2.0,
                                 enlargeCenterPage: true,
@@ -163,10 +174,10 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                           dotsCount: imageSliders.length,
                           position: currentIndex.toDouble(),
                           decorator: DotsDecorator(
-                            color: Colors.grey, // Inactive color
+                            color: Colors.grey.shade300, // Inactive color
                             activeColor: Color(0xff73c088),
-                            size: const Size.square(6.0),
-                            activeSize: const Size(7.0, 7.0),
+                            size: const Size.square(5.0),
+                            activeSize: const Size(6.0, 6.0),
                           ),
                         )
                       ],
@@ -183,9 +194,10 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
 
           ///Facility & CampusTip 있는 박스
           SizedBox(
-            height: 400.h,
+            height: 350.h,
             child: Column(
               children: [
+
                 ///whats up 텍스트
                 Container(
                   margin: EdgeInsets.fromLTRB(25.w, 30.h, 0, 0),
@@ -222,7 +234,8 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                                       tipsCollection[index]['imagepath'][0],
                                       fit: BoxFit.cover,),
                                   ),
-                                  Positioned(child: Text('  '+tipsCollection[index]['title'],
+                                  Positioned(child: Text(
+                                    '  ' + tipsCollection[index]['title'],
                                     maxLines: 2,
                                     style: TextStyle(color: Colors.white,
                                         fontSize: 16.sp,
@@ -234,7 +247,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
                                 Navigator.push(context, MaterialPageRoute(
                                     builder: (context) =>
                                     //카페와 식당 db의 필드가 같아서 카페에서 갔다씀
-                                    Tips_hero_second( tipsCollection[index])));
+                                    Tips_hero_second(tipsCollection[index])));
                               },
                             ),
                           ),
@@ -250,6 +263,7 @@ class _OnCampusState extends State<OnCampus> with AutomaticKeepAliveClientMixin 
       ),
     );
   }
+
   //이 페이지 상태유지를 위한 함수
   @override
   bool get wantKeepAlive => true;

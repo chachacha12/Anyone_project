@@ -18,16 +18,16 @@ class _NoticeState extends State<Notice> {
   getRelatedLink(){
 
     if(widget.notice_document['link']=='' ){  ///링크가 없다면
-      return SizedBox(
+      return Container(
+        color: Colors.white,
         height: 10.h,
       );
-
     }else{  ///링크값이 있다면
       return Container(
         alignment: Alignment.centerLeft,
         color: Colors.white,
         child: TextButton(
-          child: Text('     Go to the link'
+          child: Text('     Go to the link',
           ),
           onPressed: (){
             launch(widget.notice_document['link']);
@@ -84,7 +84,6 @@ class _NoticeState extends State<Notice> {
                                             widget.notice_document['imagepath'],
                                             index)));
                               },
-
                             )
                         ),
                       ),
@@ -92,17 +91,12 @@ class _NoticeState extends State<Notice> {
                 childCount: widget.notice_document['imagepath'].length),
           ),
 
-
           SliverToBoxAdapter(
             child: Container(
               color: Colors.white,
               height: 120.h,
             ),
           ),
-
-
-
-
         ],
       ),
     );

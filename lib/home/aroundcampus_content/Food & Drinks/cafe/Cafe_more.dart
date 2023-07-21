@@ -43,9 +43,11 @@ class _Cafe_moreState extends State<Cafe_more> {
           SliverAppBar(title: Text(
             widget.cafe_document['name'].toString().replaceAll(
           "\\n", "\n"), maxLines: 3,
+
+              textAlign: TextAlign.center,
             style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
-              centerTitle: true,
+
               floating: true //밑으로 스크롤시 앱바 사라짐
           ),
 

@@ -43,6 +43,7 @@ class _GroceryShop_hero_secondState extends State<GroceryShop_hero_second> {
           SliverAppBar(title: Text(
             widget.grocery_document['name'].toString().replaceAll(
           "\\n", "\n"),
+              textAlign: TextAlign.center,
             style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
               //backgroundColor: Colors.transparent,

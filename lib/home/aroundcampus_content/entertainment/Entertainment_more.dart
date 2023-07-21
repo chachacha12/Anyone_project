@@ -70,6 +70,7 @@ class _Entertainment_moreState extends State<Entertainment_more> {
           SliverAppBar(title: Text(
             widget.entertainment_document['title'].toString().replaceAll(
                 "\\n", "\n"),
+              textAlign: TextAlign.center,
               style: getMorePageAppBarStyle()  ///CommonWidget안에 있는 앱바스타일
           ),
               //backgroundColor: Colors.transparent,

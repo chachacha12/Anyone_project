@@ -54,7 +54,7 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
     //파베에서 가져온 값을 store에 저장
     context.read<ContentsStore>().getRestaurantCollection(result.docs);
     setState(() {
-      _isLoading = false; //데이터받기 끝나면 로딩화면 꺼줌
+      //_isLoading = false; //데이터받기 끝나면 로딩화면 꺼줌
       restaurant_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count = result.size; //컬랙션안의 문서갯수를 가져옴
     });
@@ -63,6 +63,7 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
       restaurant_random_list.add(i);
     }
     restaurant_random_list.shuffle(); //리스트를 랜덤하게
+
   }
 
   ///카페 데이터 받아오는 함수
@@ -74,7 +75,7 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
     context.read<ContentsStore>().getCafeCollection(result.docs);
 
     setState(() {
-      _isLoading2 = false; //데이터받기 끝나면 로딩화면 꺼줌
+      //_isLoading2 = false; //데이터받기 끝나면 로딩화면 꺼줌
       cafe_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count2 = result.size; //컬랙션안의 문서갯수를 가져옴
     });
@@ -82,6 +83,7 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
       cafe_random_list.add(i);
     }
     cafe_random_list.shuffle();
+
   }
 
   ///펍 데이터 받아오는 함수
@@ -93,7 +95,7 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
     context.read<ContentsStore>().getPubCollection(result.docs);
 
     setState(() {
-      _isLoading3 = false; //데이터받기 끝나면 로딩화면 꺼줌
+      //_isLoading3 = false; //데이터받기 끝나면 로딩화면 꺼줌
       pub_collection = result.docs; //컬랙션안의 문서리스트를 저장
       count3 = result.size; //컬랙션안의 문서갯수를 가져옴
     });
@@ -101,6 +103,15 @@ class _FoodDrinkPubState extends State<FoodDrinkPub> with AutomaticKeepAliveClie
       pub_random_list.add(i);
     }
     pub_random_list.shuffle();
+
+    //몇초뒤에 동작 수행하도록 함
+    Future.delayed(const Duration(milliseconds: 1000), () {
+      setState(() {
+        _isLoading = false; //데이터받기 끝나면 로딩화면 꺼줌
+        _isLoading2 = false; //데이터받기 끝나면 로딩화면 꺼줌
+        _isLoading3 = false; //데이터받기 끝나면 로딩화면 꺼줌
+      });
+    });
   }
 
   @override

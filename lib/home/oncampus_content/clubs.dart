@@ -1,3 +1,4 @@
+import 'package:anyone/loading/shimmercard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:photo_view/photo_view.dart';
@@ -21,13 +22,22 @@ class _ClubsState extends State<Clubs> {
 
   var clubs_collection;  //파이어스토어로부터 받아올 문서들 리스트를 여기에 넣어줄거임
   var count=0;
+  late bool _isLoading = false; //데이터 가져올때 늦은 초기화 해줌
 
   getData() async {
+    _isLoading = true;
     var result = await firestore.collection('clubs').get();
 
     setState(() {
       clubs_collection = result.docs;   //컬랙션안의 문서리스트를 저장
       count = result.size;  //컬랙션안의 문서갯수를 가져옴
+    });
+
+    //몇초뒤에 동작 수행하도록 함
+    Future.delayed(const Duration(milliseconds: 1500), () {
+      setState(() {
+        _isLoading = false;
+      });
     });
   }
 
@@ -94,6 +104,8 @@ class _ClubsState extends State<Clubs> {
           SliverList(
             delegate: SliverChildBuilderDelegate(
                     (context, index) =>
+
+                    _isLoading? ShimmerCard4() :
                     Container(
                       color: Colors.white,
                       child: Card(        //리스트 속 각각의 객체 하나하나임

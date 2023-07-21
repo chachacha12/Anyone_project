@@ -218,6 +218,7 @@ class _AddclassState extends State<Addclass> {
               SizedBox(
                 height: 45.h,
                 child: TextField(
+                  cursorColor:  Color(0xff397D54),
                   onChanged: (text) {
                     className = text;
                   },
@@ -327,6 +328,7 @@ class _AddclassState extends State<Addclass> {
                     padding: EdgeInsets.fromLTRB(0, 5.h, 0, 0),
                     height: 40.h,
                     child: TextField(
+                      cursorColor:  Color(0xff397D54),
                       onChanged: (text) {
                         roomNumber = text;
                       },
@@ -346,18 +348,18 @@ class _AddclassState extends State<Addclass> {
 getTextFieldStyle(hint) {
   return InputDecoration(
     labelText: hint,
-    labelStyle: TextStyle(fontSize: 13.sp,  color: Color(0xff706F6F),),
+    labelStyle: TextStyle(fontSize: 13.sp,  color: Colors.grey.shade500,),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4.w),
       borderSide: BorderSide(
-        color: Colors.black,
+        color: Colors.grey.shade700,
         width: 1.0,
       ),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(4.w),
       borderSide: BorderSide(
-        color: Colors.black,
+        color: Colors.grey.shade700,
         width: 1.0,
       ),
     ),
@@ -367,10 +369,10 @@ getTextFieldStyle(hint) {
 ///start time과 end time 버튼의 스타일값 반환함수
 getButtonStyle() {
   return OutlinedButton.styleFrom(
-      primary: Color(0xff706F6F), // 글자, 애니메이션 색상
+      primary: Colors.grey.shade500, // 글자, 애니메이션 색상
       backgroundColor: Colors.white, // 배경 색상
       side: BorderSide(
-          color: Colors.black,
+          color:  Colors.grey.shade700,
           width: 1
       )
   );
