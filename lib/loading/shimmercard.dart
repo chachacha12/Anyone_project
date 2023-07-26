@@ -58,14 +58,14 @@ class ShimmerCard3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.fromLTRB(0.w, 0.h, 0.w, 0.h),
+      padding:  EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ShimmerComponent.rectangular(height: 150.h, width: 150.w),
-          SizedBox(height: 7.h,),
-          ShimmerComponent.rectangular(height: 10.w, width: 110.h,)
+          ShimmerComponent.rectangular(height: 250.h),
+          SizedBox(height: 5.h,),
+          ShimmerComponent.rectangular(height: 10.w, width: 180.h,)
         ],
       ),
     );

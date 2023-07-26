@@ -317,12 +317,12 @@ getCategory(context){
     decoration: BoxDecoration(
       border: Border(
         bottom: BorderSide( // POINT
-          color:  Colors.grey,
-          width: 0.0.w,
+          color: Color(0xffF5FFF8),
+          width: 2.0.w,
         ),
         top: BorderSide( // POINT
-          color:  Colors.grey,
-          width: 0.0.w,
+          color:  Color(0xffF5FFF8),
+          width: 2.0.w,
         ),
       ),
       color: Color(0xffF5FFF8),
